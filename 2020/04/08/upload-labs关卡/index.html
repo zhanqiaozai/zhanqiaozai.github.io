@@ -1,158 +1,304 @@
-<!DOCTYPE HTML>
-<html class="no-js" lang="zh-CN">
+<!DOCTYPE html>
+<html>
 <head>
-    <!--[if lte IE 9]>
-<meta http-equiv="refresh" content="0;url=https://zhanqiaozai.github.io/warn.html">
-<![endif]-->
-<meta charset="utf-8">
-<meta http-equiv="X-DNS-Prefetch-Control" content="on">
-<link rel="dns-prefetch" href="https://zhanqiaozai.github.io">
-<link rel="dns-prefetch" href="//www.google-analytics.com">
-<link rel="prefetch" href="https://zhanqiaozai.github.io">
-<link rel="prefetch" href="//www.google-analytics.com">
+  <meta charset="utf-8">
+  
+  <title>upload-labs关卡 | 栈桥仔</title>
+
+  <!-- keywords -->
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="upload-labs第一关upload-labs第一关有两种方法绕过第一种使用burpsuit 第二种F12将JS过滤源码删除 查看界面  上传php文件看看能否上传，弹出了对话框，这表名验证点在前端，而不是在服务端  代码分析判断了验证点在前端，查看JS判断代码，F12找到判断代码  把代码抠出来整理 123456789101112131415161718192021function chec">
+<meta property="og:type" content="article">
+<meta property="og:title" content="upload-labs关卡">
+<meta property="og:url" content="https://zhanqiaozai.github.io/2020/04/08/upload-labs%E5%85%B3%E5%8D%A1/index.html">
+<meta property="og:site_name" content="栈桥仔">
+<meta property="og:description" content="upload-labs第一关upload-labs第一关有两种方法绕过第一种使用burpsuit 第二种F12将JS过滤源码删除 查看界面  上传php文件看看能否上传，弹出了对话框，这表名验证点在前端，而不是在服务端  代码分析判断了验证点在前端，查看JS判断代码，F12找到判断代码  把代码抠出来整理 123456789101112131415161718192021function chec">
+<meta property="og:image" content="https://zhanqiaozai.github.io/2020/04/08/upload-labs%E5%85%B3%E5%8D%A1/upload%5Cimage-20200407135006062.png">
+<meta property="og:image" content="https://zhanqiaozai.github.io/2020/04/08/upload-labs%E5%85%B3%E5%8D%A1/upload%5Cimage-20200407135530806.png">
+<meta property="og:image" content="https://zhanqiaozai.github.io/2020/04/08/upload-labs%E5%85%B3%E5%8D%A1/upload%5Cimage-20200407140025900.png">
+<meta property="og:image" content="https://zhanqiaozai.github.io/2020/04/08/upload-labs%E5%85%B3%E5%8D%A1/upload%5Cimage-20200407140430474.png">
+<meta property="og:image" content="https://zhanqiaozai.github.io/2020/04/08/upload-labs%E5%85%B3%E5%8D%A1/upload%5Cimage-20200407140524961.png">
+<meta property="og:image" content="https://zhanqiaozai.github.io/2020/04/08/upload-labs%E5%85%B3%E5%8D%A1/upload%5Cimage-20200407140616118.png">
+<meta property="og:image" content="https://zhanqiaozai.github.io/2020/04/08/upload-labs%E5%85%B3%E5%8D%A1/upload%5Cimage-20200407141341729.png">
+<meta property="og:image" content="https://zhanqiaozai.github.io/2020/04/08/upload-labs%E5%85%B3%E5%8D%A1/upload%5Cimage-20200407141406254.png">
+<meta property="og:image" content="https://zhanqiaozai.github.io/2020/04/08/upload-labs%E5%85%B3%E5%8D%A1/upload%5Cimage-20200407141521547.png">
+<meta property="og:image" content="https://zhanqiaozai.github.io/2020/04/08/upload-labs%E5%85%B3%E5%8D%A1/upload%5Cimage-20200407141622318.png">
+<meta property="og:image" content="https://zhanqiaozai.github.io/2020/04/08/upload-labs%E5%85%B3%E5%8D%A1/upload%5Cimage-20200407142209535.png">
+<meta property="og:image" content="https://zhanqiaozai.github.io/2020/04/08/upload-labs%E5%85%B3%E5%8D%A1/upload%5Cimage-20200407142228744.png">
+<meta property="og:image" content="https://zhanqiaozai.github.io/2020/04/08/upload-labs%E5%85%B3%E5%8D%A1/upload%5Cimage-20200407142309837.png">
+<meta property="og:image" content="https://zhanqiaozai.github.io/2020/04/08/upload-labs%E5%85%B3%E5%8D%A1/upload%5Cimage-20200407143520423.png">
+<meta property="og:image" content="https://zhanqiaozai.github.io/2020/04/08/upload-labs%E5%85%B3%E5%8D%A1/upload%5Cimage-20200407145002372.png">
+<meta property="og:image" content="https://zhanqiaozai.github.io/2020/04/08/upload-labs%E5%85%B3%E5%8D%A1/upload%5Cimage-20200407145030124.png">
+<meta property="og:image" content="https://zhanqiaozai.github.io/2020/04/08/upload-labs%E5%85%B3%E5%8D%A1/upload%5Cimage-20200407145105478.png">
+<meta property="og:image" content="https://zhanqiaozai.github.io/2020/04/08/upload-labs%E5%85%B3%E5%8D%A1/upload%5Cimage-20200407145158676.png">
+<meta property="og:image" content="https://zhanqiaozai.github.io/2020/04/08/upload-labs%E5%85%B3%E5%8D%A1/upload%5Cimage-20200407151641458.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/1585720364221.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/1585719831410.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200407154104175.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200407154202446.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200407154604250.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200407154622841.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200407154646284.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200407154837626.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200407154923154.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/1585788531529.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200407155130449.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/1585786793204.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200407172124838.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200407172944247.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200407173101652.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200407173907933.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200407174027297.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200407174059887.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200407174419725.png">
+<meta property="og:image" content="https://zhanqiaozai.github.io/2020/04/08/upload-labs%E5%85%B3%E5%8D%A1/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200407174444629.png">
+<meta property="og:image" content="https://zhanqiaozai.github.io/2020/04/08/upload-labs%E5%85%B3%E5%8D%A1/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200407174456829.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200407174734363.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200407174757325.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200407174807082.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200407175030777.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200407175059266.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200407175128156.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200407200436602.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200406081237206.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200406083134693.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200406083446465.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200406083622923.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200406083751706.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200406083843607.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200406084954651.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200406085245844.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200406085344970.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200406085602285.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200406085759324.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200407210648001.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200407211550062.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200407211632706.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200407211720783.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200407211800092.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200407213647598.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200407213901204.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200407214334480.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200407214613459.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200407215126253.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200407222258037.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200408081053635.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200408085942785.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200408090025138.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200408090025138.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200408090541467.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200408090556017.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200408090816482.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200408090859802.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200408091006941.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200408091502290.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200408091704597.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200408092257532.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200408092529967.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200408092612457.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200408092657212.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200408092758617.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200408093537018.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200408093707249.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200408094417117.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200408100032030.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200408100802057.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200408101223834.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200408101414864.png">
+<meta property="article:published_time" content="2020-04-08T05:46:26.619Z">
+<meta property="article:modified_time" content="2020-04-08T05:43:28.000Z">
+<meta property="article:author" content="zhanqiaozai">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://zhanqiaozai.github.io/2020/04/08/upload-labs%E5%85%B3%E5%8D%A1/upload%5Cimage-20200407135006062.png">
+  
+    <link rel="alternative" href="/atom.xml" title="栈桥仔" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+
+  
+<script src="//cdn.bootcss.com/require.js/2.3.2/require.min.js"></script>
+
+  
+<script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
 
 
-<link rel="prerender" href="https://zhanqiaozai.github.io">
-
-<meta http-equiv="X-UA-Compatible" content="IE=Edge">
-<meta name="renderer" content="webkit">
-<meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
-<meta http-equiv="mobile-agent" content="format=html5; url=https://zhanqiaozai.github.io">
-<meta name="author" content="zhanqiaozai">
-
-<link rel="stylesheet" href="/css/JSimple.css">
-
-
-<link rel="shortcut icon" href="/images/favicon.png">
-
-
-<title>upload-labs关卡 - 栈桥仔</title>
-
-<meta name="keywords" content="">
-
-<meta name="description " content="">
-
-    <script type="text/x-mathjax-config">
-        MathJax.Hub.Config({
-            tex2jax: {
-                inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-                processEscapes: true
-            }
-        });
-    </script>
-
-
-    
-
-    
-
+  
 <meta name="generator" content="Hexo 4.2.0"></head>
 <body>
-<div id="nav">
-    <nav class="nav-menu">
-        <a class="site-name current" href="/" title="说">说</a>
-        <a class="site-index current" href="/"><i class="fa fa-home"></i><span>Home</span></a>
-        <a href="/archives" title="Archives"><i class="fa fa-archives"></i><span>Archives</span></a>
-        <a href="/tags" title="Tags"><i class="fa fa-tags"></i><span>Tags</span></a>
-        <!-- custom single page of menus -->
-        
-        
-        <a href="/help" title="帮助">
-            <i class="fa fa-question-circle"></i>
-            <span>帮助</span>
-        </a>
-        
-    </nav>
+  <div id="container">
+    <div id="particles-js"></div>
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">zhanqiaozai</a></h1>
+		</hgroup>
+
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="https://github.com/smackgg/hexo-theme-smackdown">smackdown</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+			</div>
+		</div>
+	</header>				
 </div>
-
-<div class="nav-user">
-    <a class="btn-search" href="#"><i class="fa fa-search"></i></a>
-    <a class="btn-read-mode" href="#"><i class="fa fa-sun-o"></i></a>
-    <a class="btn-sns-qr" href="javascript:"><i class="fa fa-telegram"></i></a>
-</div>
-
-<div id="wrapper" class="clearfix">
-    <div id="body">
-        <div class="main" id="main">
-            <div id="cover">
-    <div class="cover-img"></div>
-    <div class="cover-info">
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">zhanqiaozai</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">zhanqiaozai</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-upload-labs关卡" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/04/08/upload-labs%E5%85%B3%E5%8D%A1/" class="article-date">
+  	<time datetime="2020-04-08T05:46:26.619Z" itemprop="datePublished">2020-04-08</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
         
-        <h1 class="cover-siteName">说IT</h1>
-        <h3 class="cover-siteTitle">用代码摇滚这个世界</h3>
-        <p class="cover-siteDesc">一个关注技术与人文的IT博客</p>
-        <div class="cover-sns">
-            
-    &nbsp;&nbsp;<div class="btn btn-telegram">
-        <a href="http://t.me/kunyintang" target="_blank" title="telegram" ref="friend">
-            <i class="fa fa-telegram"></i>
-        </a>
-    </div>
+  
+    <h1 class="article-title" itemprop="name">
+      upload-labs关卡
+      
+    </h1>
+  
 
-    &nbsp;&nbsp;<div class="btn btn-instagram">
-        <a href="https://www.instagram.com/mtangsir/" target="_blank" title="instagram" ref="friend">
-            <i class="fa fa-instagram"></i>
-        </a>
-    </div>
-
-    &nbsp;&nbsp;<div class="btn btn-twitter">
-        <a href="https://twitter.com/tangkunyin" target="_blank" title="twitter" ref="friend">
-            <i class="fa fa-twitter"></i>
-        </a>
-    </div>
-
-    &nbsp;&nbsp;<div class="btn btn-github">
-        <a href="https://github.com/tangkunyin" target="_blank" title="github" ref="friend">
-            <i class="fa fa-github"></i>
-        </a>
-    </div>
-
-
-        </div>
-    </div>
-</div>
-
-            <div class="page-title">
-    <ul>
-        <li><a href="/">Recent Posts</a></li>
+      </header>
+      
+      <div class="article-info article-info-post">
         
         
-        
-        <li class="page-search">
-    <form id="search" class="search-form">
-        <input type="text"
-               readonly="readonly"
-               id="local-search-input-tip"
-               placeholder="click to search..." />
-        <button type="button" disabled="disabled" class="search-form-submit"><i class="fa fa-search"></i></button>
-    </form>
-</li>
 
-    </ul>
-</div>
-<div class="main-inner">
-    <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
-        <div class="post-header">
-            <div class="post-author clearfix">
-                <a class="avatar fleft" href="https://shuoit.net"
-                   target="_blank">
-                    <img width="48" src="/images/smile.jpg" alt="avatar"/>
-                </a>
-                <p><span class="label">Author</span>
-                    <a href="https://shuoit.net"
-                       target="_blank">纠结伦</a>
-                    <span title="Last edited at&nbsp;2020-04-08">2020-04-08</span>
-                </p>
-                <p>一个搬🧱的劳斯基😁️️</p>
-            </div>
-            <h2 class="post-title">upload-labs关卡</h2>
-            <div class="post-meta">
-                emm... 38135 words in the article |
-                you are the&nbsp;<span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span>th friend who reading now
-            </div>
-        </div>
-        <div class="post-content markdown-body">
-            <h4 id="upload-labs第一关"><a href="#upload-labs第一关" class="headerlink" title="upload-labs第一关"></a>upload-labs第一关</h4><h5 id="upload-labs第一关有两种方法绕过"><a href="#upload-labs第一关有两种方法绕过" class="headerlink" title="upload-labs第一关有两种方法绕过"></a>upload-labs第一关有两种方法绕过</h5><p>第一种使用burpsuit</p>
+        
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="upload-labs第一关"><a href="#upload-labs第一关" class="headerlink" title="upload-labs第一关"></a>upload-labs第一关</h4><h5 id="upload-labs第一关有两种方法绕过"><a href="#upload-labs第一关有两种方法绕过" class="headerlink" title="upload-labs第一关有两种方法绕过"></a>upload-labs第一关有两种方法绕过</h5><p>第一种使用burpsuit</p>
 <p>第二种F12将JS过滤源码删除</p>
 <p>查看界面</p>
 <p><img src="/2020/04/08/upload-labs%E5%85%B3%E5%8D%A1/upload%5Cimage-20200407135006062.png" alt="image-20200407135006062"></p>
@@ -472,102 +618,104 @@
 <p>在新的页面打开并查看</p>
 <p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200408101414864.png" alt="image-20200408101414864"></p>
 
-            
-                
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2020/04/07/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">文件上传</div>
+      <strong class="article-nav-caption">&gt;</strong>
+    </a>
+  
+</nav>
 
-            
-        </div>
-        <div class="post-tool">
-            <a class="btn-thumbs-up" href="javascript:void(0);" data-cid="52" title="95">
-                <i class="fa fa-thumbs-up" aria-hidden="true"></i> Donate
-            </a>
-        </div>
-        
-        <div class="post-tags">Tags：
-            
-        </div>
-        
-    </article>
-    
-        <p style="text-align: center">This article just represents my own viewpoint. If there is something wrong, please correct me.</p>
-    
-    
-    
+  
+</article>
+
+
+<div class="ds-share share" data-thread-key="upload-labs关卡" data-title="upload-labs关卡" data-url="https://zhanqiaozai.github.io/2020/04/08/upload-labs%E5%85%B3%E5%8D%A1/"  data-images="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg" data-content="upload-labs关卡">
+    <div class="ds-share-inline">
+      <ul  class="ds-share-icons-16">
+      	<li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+        <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+        <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+        <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+        <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+      </ul>
+      <div class="ds-share-icons-more">
+      </div>
+    </div>
+ </div>
+ 
+
+
+
+
 
 </div>
-
-<script src="/js/busuanzi.pure.mini.js"></script>
-
-
-
-        </div><!-- end #main-->
-    </div><!-- end #body -->
-    <footer class="footer">
-    <div class="footer-inner" style="text-align: center">
-        <p>
-            <a href="/about"  title="About">About</a>&nbsp;&nbsp<em>·</em>&nbsp;&nbsp
-            <!-- 自定义链接 -->
-            <a href="/help" title="Help" >Help</a>&nbsp;&nbsp<em>·</em>&nbsp;&nbsp
-            <a href="/links" title="Links">Links</a>&nbsp;&nbsp<em>·</em>&nbsp;&nbsp
-            <a href="/sitemap.xml" title="SiteMap">SiteMap</a>
-        </p>
-        <p>
-            Has been established&nbsp<a href="/timeline" id="siteBuildingTime"></a>&nbspDays，<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="licence">Based on Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)</a><br/>
-            ©2017-<span id="cpYear"></span> Based on&nbsp<a href="http://hexo.io" target="_blank" rel="nofollow">Hexo</a>
-            ，Theme by&nbsp&nbsp<a href="https://github.com/tangkunyin/hexo-theme-jsimple" target="_blank" rel="bookmark">JSimple</a>
-            ，Author&nbsp<a href="https://shuoit.net" target="_blank" rel="friend">纠结伦</a>
-            ，Hosted by <a href="https://pages.github.com/" target="_blank" rel="nofollow">GitHub Pages</a>
-        </p>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+      <div class="footer-left">
+        &copy; 2020 zhanqiaozai
+      </div>
+        <div class="footer-right">
+          <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/smackgg/hexo-theme-smackdown" target="_blank">Smackdown</a>
+        </div>
     </div>
+  </div>
 </footer>
-
-<script src="/js/SimpleCore.js"></script>
-
-
-</div>
-<!-- search pop -->
-<div class="popup search-popup local-search-popup">
-    <div class="local-search-header clearfix">
-        <span class="search-icon">
-            <i class="fa fa-search"></i>
-        </span>
-        <span class="popup-btn-close">
-            <i class="fa fa-times-circle"></i>
-        </span>
-        <div class="local-search-input-wrapper">
-            <input id="local-search-input"
-                   spellcheck="false"
-                   type="text"
-                   autocomplete="off"
-                   placeholder="Input query keywords here..."/>
-        </div>
     </div>
-    <div id="local-search-result"></div>
-</div>
-<div class="fixed-btn">
-    <a class="btn-gotop" href="javascript:"> <i class="fa fa-angle-up"></i></a>
-</div>
+    
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+
 <script>
-    $(function () {
-        var jsi_config = {
-            buildingTime: '04/07/2020',
-            current: $('.post-tags').length > 0 ? 'post' : 'archive',
-            snsQRCode: '/images/sns-qrcode.png',
-            donateImg: '/images/donate-qr.png',
-            localSearch: { dbPath: '' },
-            readMode: 'day'
-        };
-        
-            jsi_config.localSearch = {
-                dbPath: '/search.xml',
-                trigger: 'auto',
-                topN: '1',
-                unescape: 'false'
-            }
-        
-        SimpleCore.init(jsi_config);
-        
-    });
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
 </script>
+
+<script src="/js/main.js"></script>
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js"></script>
+
+
+  </div>
 </body>
 </html>
