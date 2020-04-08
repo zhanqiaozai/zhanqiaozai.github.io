@@ -152,7 +152,7 @@
             </div>
         </div>
         <div class="post-content markdown-body">
-            <p>介绍文件上传漏洞</p>
+            <p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200407160258571.png" alt="image-20200407160258571">介绍文件上传漏洞</p>
 <p>现在web应用程序，上传文件一种常见功能，为了提高效率，允许用户上传图片，视频，头像和许多其他的文件。然而向用户提供的功能越多，web应用受到攻击的风险就越大，如果web应用存在文件上传漏洞，那么恶意用户就可以利用文件上传漏洞将可执行脚本程序上传到服务器中，获得网站权限，或者进一步危害服务器</p>
 <h5 id="1、为什么文件上传存在漏洞"><a href="#1、为什么文件上传存在漏洞" class="headerlink" title="1、为什么文件上传存在漏洞"></a>1、为什么文件上传存在漏洞</h5><p>上传文件时，如果服务器代码没有对客户端上传的文件进行严格的验证和过滤，就容易造成可以上传任意文件的情况，包括上传脚本文件(asp、aspx、php、jsp等格式文件)</p>
 <h5 id="2、危害"><a href="#2、危害" class="headerlink" title="2、危害"></a>2、危害</h5><p>非法用户利用文件上传的恶意脚本控制整个网站，甚至控制服务器，这个恶意脚本文件被称为WebShell，也可以称之为”网页后门”，WebShell具有强大功能，比如查看服务器目录，服务器中的文件，执行系统命令等。</p>
@@ -325,7 +325,7 @@
 <h5 id="使用webacoo生成一个webshell"><a href="#使用webacoo生成一个webshell" class="headerlink" title="使用webacoo生成一个webshell"></a>使用webacoo生成一个webshell</h5><p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200407160104577.png" alt="image-20200407160104577"></p>
 <p>页面上传并拦截，在文件或加空格绕过</p>
 <p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200407160149272.png" alt="image-20200407160149272"></p>
-<h5 id="复制图片连接打开新的页面，将地址复制，查看。页面返回空白"><a href="#复制图片连接打开新的页面，将地址复制，查看。页面返回空白" class="headerlink" title="复制图片连接打开新的页面，将地址复制，查看。页面返回空白"></a>复制图片连接打开新的页面，将地址复制，查看。页面返回空白</h5><p><img src="/2020/04/07/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/upload%5Cimage-20200407160258571.png" alt="image-20200407160258571"></p>
+<h5 id="复制图片连接打开新的页面，将地址复制，查看。页面返回空白"><a href="#复制图片连接打开新的页面，将地址复制，查看。页面返回空白" class="headerlink" title="复制图片连接打开新的页面，将地址复制，查看。页面返回空白"></a>复制图片连接打开新的页面，将地址复制，查看。页面返回空白</h5><p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200407160258571.png" alt="image-20200407160258571"></p>
 <h5 id="win-r打开cmd，查看当前ip，然后将图片地址复制，将其中的127-0-0-1改为本地ip，并在kali中使用webacoo连接，返回乱码说明正确"><a href="#win-r打开cmd，查看当前ip，然后将图片地址复制，将其中的127-0-0-1改为本地ip，并在kali中使用webacoo连接，返回乱码说明正确" class="headerlink" title="win+r打开cmd，查看当前ip，然后将图片地址复制，将其中的127.0.0.1改为本地ip，并在kali中使用webacoo连接，返回乱码说明正确"></a>win+r打开cmd，查看当前ip，然后将图片地址复制，将其中的127.0.0.1改为本地ip，并在kali中使用webacoo连接，返回乱码说明正确</h5><p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200407160419396.png" alt="image-20200407160419396"></p>
 <p>可以使用cmd命令</p>
 <p>netstat -an命令式查看所有和本地计算机建立连接的IP</p>
