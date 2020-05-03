@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>CSRF_SSRF | 栈桥仔</title>
+
+  <!-- keywords -->
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="CSRF漏洞1、CSRF漏洞定义跨站请求伪造（英语：Cross-site request forgery），也被称为 one-click attack 或者 session riding，通常缩写为 CSRF 或者 XSRF， 是一种挟制用户在当前已登录的Web应用程序上执行非本意的操作的攻击方法。 它与XSS非常不同，XSS是利用站点内的信任用户，而CSRF则通过伪装成信任用户请求受信任网站。与">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CSRF_SSRF">
+<meta property="og:url" content="https://zhanqiaozai.github.io/2020/05/03/CSRF_SSRF/index.html">
+<meta property="og:site_name" content="栈桥仔">
+<meta property="og:description" content="CSRF漏洞1、CSRF漏洞定义跨站请求伪造（英语：Cross-site request forgery），也被称为 one-click attack 或者 session riding，通常缩写为 CSRF 或者 XSRF， 是一种挟制用户在当前已登录的Web应用程序上执行非本意的操作的攻击方法。 它与XSS非常不同，XSS是利用站点内的信任用户，而CSRF则通过伪装成信任用户请求受信任网站。与">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200430105902911.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200430110119970.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200430113712776.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200430113732750.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200430113957981.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200430114113340.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200430114153110.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200430114225884.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200430115745538.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200430120228504.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200430120436691.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200430120502980.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200430121112643.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200430121300333.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200430121326257.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200430123124772.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200430124537202.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200430133051417.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200430133157442.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200430133223761.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200430133324502.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200430133452407.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200430133623220.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200430133717157.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200430142101973.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200430141949387.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200430145441936.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200430145512344.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200430145532311.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200430145600654.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200430150614027.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200430154552126.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200430154635902.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200430155213159.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200430155222841.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200430155235926.png">
+<meta property="og:image" content="https://zhanqiaozai.github.io/2020/05/03/CSRF_SSRF/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200430161915623.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200430162134971.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200430162202451.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200430162220524.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200430162606761.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200430162657428.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200430194404169.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200430194441166.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200430220131544.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200430220220385.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200430220433453.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200430220743873.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200430221411622.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200430221527972.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200501191106058.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200501192508231.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200501195000134.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200501195351849.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200501195417245.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200501195656147.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200501195618215.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200501200632489.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200501201022138.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200501201116900.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200503155154844.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200503155403764.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200503155448181.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200503155657246.png">
+<meta property="article:published_time" content="2020-05-03T07:59:26.635Z">
+<meta property="article:modified_time" content="2020-05-03T07:58:14.000Z">
+<meta property="article:author" content="zhanqiaozai">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200430105902911.png">
+  
+    <link rel="alternative" href="/atom.xml" title="栈桥仔" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+
+  
+<script src="//cdn.bootcss.com/require.js/2.3.2/require.min.js"></script>
+
+  
+<script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+
+
+  
+<meta name="generator" content="Hexo 4.2.0"></head>
+<body>
+  <div id="container">
+    <div id="particles-js"></div>
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">zhanqiaozai</a></h1>
+		</hgroup>
+
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="https://github.com/smackgg/hexo-theme-smackdown">smackdown</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">zhanqiaozai</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">zhanqiaozai</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-CSRF_SSRF" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/05/03/CSRF_SSRF/" class="article-date">
+  	<time datetime="2020-05-03T07:59:26.635Z" itemprop="datePublished">2020-05-03</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      CSRF_SSRF
+      
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+        
+
+        
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="CSRF漏洞"><a href="#CSRF漏洞" class="headerlink" title="CSRF漏洞"></a>CSRF漏洞</h4><h5 id="1、CSRF漏洞定义"><a href="#1、CSRF漏洞定义" class="headerlink" title="1、CSRF漏洞定义"></a>1、CSRF漏洞定义</h5><p>跨站请求伪造（英语：Cross-site request forgery），也被称为 one-click attack 或者 session riding，通常缩写为 <em>CSRF</em> 或者 XSRF， 是一种挟制用户在当前已登录的Web应用程序上执行非本意的操作的攻击方法。</p>
+<p>它与XSS非常不同，XSS是利用站点内的信任用户，而CSRF则通过伪装成信任用户请求受信任网站。与XSS相比，CSRF攻击往往不大流行(因此对其进行防御资源也相对较少)也难以防范，所以被认为比XSS更具危害性。</p>
+<p>XSS与CSRF区别：</p>
+<p>1、XSS利用站点内的信任用户，盗取cookie；</p>
+<p>2、CSRF通过伪装成受信任用户请求信任的网站</p>
+<h5 id="2、CSRF漏洞原理"><a href="#2、CSRF漏洞原理" class="headerlink" title="2、CSRF漏洞原理"></a>2、CSRF漏洞原理</h5><p>利用目标用户的合法身份，以目标用户的名义执行某些非法操作。</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200430105902911.png" alt="image-20200430105902911"></p>
+<h5 id="3、CSRF漏洞代码分析"><a href="#3、CSRF漏洞代码分析" class="headerlink" title="3、CSRF漏洞代码分析"></a>3、CSRF漏洞代码分析</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">	&#x2F;&#x2F; 会话验证</span><br><span class="line">	$user &#x3D; $_GET[&quot;user&quot;];</span><br><span class="line">	$money&#x3D;$_GET[&quot;money&quot;];</span><br><span class="line">	&#x2F;&#x2F; 转账操作</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200430110119970.png" alt="image-20200430110119970"></p>
+<h5 id="CSRF成功利用条件"><a href="#CSRF成功利用条件" class="headerlink" title="CSRF成功利用条件:"></a>CSRF成功利用条件:</h5><ul>
+<li><h5 id="用户已经登陆系统"><a href="#用户已经登陆系统" class="headerlink" title="用户已经登陆系统"></a>用户已经登陆系统</h5></li>
+<li><h5 id="用户访问对应URL"><a href="#用户访问对应URL" class="headerlink" title="用户访问对应URL"></a>用户访问对应URL</h5></li>
+</ul>
+<h5 id="4、CSRF漏洞利用"><a href="#4、CSRF漏洞利用" class="headerlink" title="4、CSRF漏洞利用"></a>4、CSRF漏洞利用</h5><p>先修改密码</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200430113712776.png" alt="image-20200430113712776"></p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200430113732750.png" alt="image-20200430113732750"></p>
+<p>红线处是更改后的RUL，没有标记的URL是初始URL</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200430113957981.png" alt="image-20200430113957981"></p>
+<p>访问红线的URL，显示更改了密码</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200430114113340.png" alt="image-20200430114113340"></p>
+<p>尝试使用之前的hack登录，发现密码错误了</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200430114153110.png" alt="image-20200430114153110"></p>
+<p>使用123登录尝试一下，发现成功登录</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200430114225884.png" alt="image-20200430114225884"></p>
+<h4 id="无防护的CSRF"><a href="#无防护的CSRF" class="headerlink" title="无防护的CSRF"></a>无防护的CSRF</h4><h5 id="GET型CSRF利用"><a href="#GET型CSRF利用" class="headerlink" title="GET型CSRF利用"></a>GET型CSRF利用</h5><p>构造GET型URL，提交username和password参数，以此来新建对应的用户名和密码</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200430115745538.png" alt="image-20200430115745538"></p>
+<p>隐蔽利用img标签的src属性</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200430120228504.png" alt="image-20200430120228504"></p>
+<p>打开这个URL，显示中奖了</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200430120436691.png" alt="image-20200430120436691"></p>
+<p>在进行查看，成功添加进去了</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200430120502980.png" alt="image-20200430120502980"></p>
+<h5 id="POST型CSRF利用"><a href="#POST型CSRF利用" class="headerlink" title="POST型CSRF利用"></a>POST型CSRF利用</h5><p>设置表单用于提交。例如：<code>&lt;input type=&quot;hidden&quot; name=&quot;username&quot; value=&quot;111&quot;/&gt;</code></p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200430121112643.png" alt="image-20200430121112643"></p>
+<p>打开url</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200430121300333.png" alt="image-20200430121300333"></p>
+<p>点击我要中奖了，进行跳转并成功输出</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200430121326257.png" alt="image-20200430121326257"></p>
+<h4 id="CSRF漏洞自动化探测"><a href="#CSRF漏洞自动化探测" class="headerlink" title="CSRF漏洞自动化探测"></a>CSRF漏洞自动化探测</h4><h5 id="1、手动探测原理"><a href="#1、手动探测原理" class="headerlink" title="1、手动探测原理"></a>1、手动探测原理</h5><p>手动探测原理在于探测web应用程序具有防止CSRF的措施</p>
+<p>防御措施</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200430123124772.png" alt="image-20200430123124772"></p>
+<p>如果web应用程序的HTTP请求中没有对应的预防措施，那么很大程度上就确定存在CSRF漏洞</p>
+<p>手动修改需要修改很多东西。</p>
+<h5 id="2、自动化探测工具介绍"><a href="#2、自动化探测工具介绍" class="headerlink" title="2、自动化探测工具介绍"></a>2、自动化探测工具介绍</h5><p>CSRFTester是一款CSRF漏洞测试工具</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200430124537202.png" alt="image-20200430124537202"></p>
+<h5 id="3、自动化探测工具使用"><a href="#3、自动化探测工具使用" class="headerlink" title="3、自动化探测工具使用"></a>3、自动化探测工具使用</h5><p>1、设置浏览器代理：127.0.0.1:8008</p>
+<p>2、登录web应用程序，提交表单，在CSRF工具中修改表单内容，查看是否更改，如果更改表面存在CSRF漏洞</p>
+<p>3、生产POC代码</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200430133051417.png" alt="image-20200430133051417"></p>
+<p>点击截断</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200430133157442.png" alt="image-20200430133157442"></p>
+<p>确定修改</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200430133223761.png" alt="image-20200430133223761"></p>
+<p>抓取之后进行修改</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200430133324502.png" alt="image-20200430133324502"></p>
+<p>点击右下角Generate HTML 另存为生成一个POC</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200430133452407.png" alt="image-20200430133452407"></p>
+<p>打开index返回一个true</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200430133623220.png" alt="image-20200430133623220"></p>
+<p>再回到会员页面，成功创建了一个新的会员，由此可以判断页面存在CSRF漏洞，并成功利用这个漏洞添加了用户名</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200430133717157.png" alt="image-20200430133717157"></p>
+<h5 id="4、利用CSRF漏洞"><a href="#4、利用CSRF漏洞" class="headerlink" title="4、利用CSRF漏洞"></a>4、利用CSRF漏洞</h5><p>使用服务器搭建CSRF POC访问页面</p>
+<p>修改内容，上面还有一个地址也要修改</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200430142101973.png" alt="image-20200430142101973"></p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200430141949387.png" alt="image-20200430141949387"></p>
+<p>点击登录</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200430145441936.png" alt="image-20200430145441936"></p>
+<p>登录之后返回true</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200430145512344.png" alt="image-20200430145512344"></p>
+<p>查看会员列表</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200430145532311.png" alt="image-20200430145532311"></p>
+<p>如果再次重复提交的话，会报错</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200430145600654.png" alt="image-20200430145600654"></p>
+<h4 id="CSRF漏洞Token防御介绍"><a href="#CSRF漏洞Token防御介绍" class="headerlink" title="CSRF漏洞Token防御介绍"></a>CSRF漏洞Token防御介绍</h4><h5 id="1、漏洞修补逻辑分析"><a href="#1、漏洞修补逻辑分析" class="headerlink" title="1、漏洞修补逻辑分析"></a>1、漏洞修补逻辑分析</h5><p>CSRF漏洞实质：服务器无法准确判断当前请求是否是合法用户的自定义操作。</p>
+<p>原因：用户登录之后服务器就会生成对应的cookie进行身份验证，验证之后就可以进行对应操作，而存在CSRF时用户在点击了构造的CSRF POC那么点击之后发送对应的请求到服务器，服务器接收到cookie（因为用户已经登录），cookie会随着请求一起发送到服务器，服务器确定了他是一个合法用户，但是并不能确定，它是用户自己操作还是用户点击了POC进行操作，而使得这种情况下就存在了CSRF漏洞</p>
+<p>如果服务器在用户登录之后给予用户一个唯一合法令牌，每一次操作过程中，服务器都会验证令牌是否正确，如果正确那么执行操作。不正确不执行操作。</p>
+<p>一般情况下，给予的令牌会写入表单中隐藏域的value值中，随着表单内容进行提交。</p>
+<h5 id="2、简单代码模型分析"><a href="#2、简单代码模型分析" class="headerlink" title="2、简单代码模型分析"></a>2、简单代码模型分析</h5><p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200430150614027.png" alt="image-20200430150614027"></p>
+<p>1、首先要有个登录界面login.php，登录成功执行操作，执行登录后的（增删改查）</p>
+<p>这个过程中执行这些操作都需要提交对应身份验证的cookie值，有了cookie值才能进行操作，否则连第一步简单操作都无法进行</p>
+<p>如果没有登录而直接执行对应的操作，这时候就会自动跳回到登录界面，或者给出其他的提示</p>
+<p>远程构造CSRF利用POC，那么直接中招。如果利用在增删改中设置唯一令牌，执行操作时只有提交令牌才能操作的话，就可以有效防止CSRF。如果令牌不正确，那么不执行操作。并给出提示内容</p>
+<h5 id="3、生成Token代码分析"><a href="#3、生成Token代码分析" class="headerlink" title="3、生成Token代码分析"></a>3、生成Token代码分析</h5><p>Token作为识别操作是否是当前用户自己操作的唯一凭证，需要设置为复杂难以破解的内容。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">例如：</span><br><span class="line">function generateToken()&#123;</span><br><span class="line">&#x2F;&#x2F; 获取简单的日期（年、月、日）</span><br><span class="line">	$salt&#x3D;&quot;test&quot;.date(&quot;Y&#x2F;m&#x2F;d&quot;);</span><br><span class="line">&#x2F;&#x2F; 进行md5加密</span><br><span class="line">	$token&#x3D;md5($salt);</span><br><span class="line">&#x2F;&#x2F; 返回值</span><br><span class="line">	return $token;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>调用函数查看生成的token</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200430154552126.png" alt="image-20200430154552126"></p>
+<p>在浏览器打开，然后多次运行发现Token值不发生变化</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200430154635902.png" alt="image-20200430154635902"></p>
+<p>如果生成的Token值都一样就没有防御措施了</p>
+<p>为了这种唯一性设置对应的时间，不是年月日，而是<strong>时分秒</strong>，生成字符串不断变化，而且是唯一</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">例如：</span><br><span class="line">function generateToken()&#123;</span><br><span class="line">&#x2F;&#x2F; 获取简单的日期（年、月、日）</span><br><span class="line">	$salt&#x3D;&quot;test&quot;.date(&quot;h:i:s&quot;);</span><br><span class="line">&#x2F;&#x2F; 进行md5加密</span><br><span class="line">	$token&#x3D;md5($salt);</span><br><span class="line">&#x2F;&#x2F; 返回值</span><br><span class="line">	return $token;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>再次在刷新浏览器，发现每一秒的Token值都是不一样的</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200430155213159.png" alt="image-20200430155213159"></p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200430155222841.png" alt="image-20200430155222841"></p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200430155235926.png" alt="image-20200430155235926"></p>
+<p>当前可以将$salt中的test替换成任意的字符串，尽可能复杂而不容易被破解，这个test容易被破解</p>
+<p>这样生成的Token就不容易被破解出来，因为是加上当前的时间和字符串的话，如果简单很有可能被猜解</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">例如：</span><br><span class="line">function generateToken()&#123;</span><br><span class="line">&#x2F;&#x2F; 获取简单的日期（年、月、日）</span><br><span class="line">	$salt&#x3D;&quot;test&quot;.date(&quot;h:i:s&quot;);</span><br><span class="line">&#x2F;&#x2F; 进行md5加密</span><br><span class="line">	$token&#x3D;md5($salt);</span><br><span class="line">&#x2F;&#x2F; 返回值</span><br><span class="line">	return $token;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="4、使用Token进行CSRF漏洞防御"><a href="#4、使用Token进行CSRF漏洞防御" class="headerlink" title="4、使用Token进行CSRF漏洞防御"></a>4、使用Token进行CSRF漏洞防御</h5><p>1、登录验证成功之后，在会话SESSION[“user_token”]中保存Token。</p>
+<p>2、在后台操作中，增删改查表单中添加隐藏域hidden，设置value为Token</p>
+<p>3、提交之后进行验证Token是否正确。</p>
+<p>代码分析</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">	session_start();</span><br><span class="line">	function token_generate()&#123;</span><br><span class="line">		$salt&#x3D;&quot;test&quot;.date(&quot;h:i:s&quot;);</span><br><span class="line">		$token&#x3D;md5($salt);</span><br><span class="line">		return $token;</span><br><span class="line">	&#125;</span><br><span class="line">	$token&#x3D;token_generate();</span><br><span class="line">	$_SESSION[&quot;USER_TOKEN&quot;]&#x3D;$token;</span><br><span class="line">?&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">	&lt;head&gt;</span><br><span class="line">		&lt;meta charset&#x3D;&quot;utf-8&quot;&gt;</span><br><span class="line">		&lt;title&gt;CSRF_Token&lt;&#x2F;title&gt;</span><br><span class="line">	&lt;&#x2F;head&gt;</span><br><span class="line">	&lt;body&gt;</span><br><span class="line">		&lt;h1&gt;CSRF_Token&lt;&#x2F;h1&gt;</span><br><span class="line">			&lt;form action&#x3D;&quot;check.php&quot; method&#x3D;&quot;post&quot;&gt;</span><br><span class="line">				&lt;input type&#x3D;&quot;text&quot; value&#x3D;&quot;我提交了&quot; &#x2F;&gt;</span><br><span class="line">				&lt;input type&#x3D;&quot;hidden&quot; name&#x3D;&quot;user_token&quot; value&#x3D;&quot;&lt;?php echo $token;?&gt;&quot; &#x2F;&gt;</span><br><span class="line">				&lt;input type&#x3D;&quot;submit&quot; name&#x3D;&quot;submit&quot; value&#x3D;&quot;提交&quot; &#x2F;&gt;</span><br><span class="line">			&lt;&#x2F;form&gt;</span><br><span class="line">	&lt;&#x2F;body&gt;</span><br><span class="line">&lt;&#x2F;html&gt;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/05/03/CSRF_SSRF/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200430161915623.png" alt="image-20200430161915623"></p>
+<p>查看页面</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200430162134971.png" alt="image-20200430162134971"></p>
+<p>F12查看Ntwork</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200430162202451.png" alt="image-20200430162202451"></p>
+<p>点击提交返回successful</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200430162220524.png" alt="image-20200430162220524"></p>
+<p>复制URL和源码进行POC修改</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200430162606761.png" alt="image-20200430162606761"></p>
+<p>在源码中修改地址，这里的Token和原始的Token是不一样的</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200430162657428.png" alt="image-20200430162657428"></p>
+<h4 id="CSRF绕过Referer技巧"><a href="#CSRF绕过Referer技巧" class="headerlink" title="CSRF绕过Referer技巧"></a>CSRF绕过Referer技巧</h4><h5 id="1、Referer防御CSRF原理"><a href="#1、Referer防御CSRF原理" class="headerlink" title="1、Referer防御CSRF原理"></a>1、Referer防御CSRF原理</h5><p>HTTP Referer是header的一部分，当浏览器向web服务器发送请求的时候，一般会带上Referer，告诉服务器我是从哪个页面链接过来的，服务器基此可以获得一些信息用于处理。</p>
+<p>当用户点击被构造好的CSRF利用页面，那么执行用户对应操作时，提交的HTTP请求中就有对应的Referer值，此时服务器判断Referer值是否与服务器的域名信息有关。如果不相关则不执行操作</p>
+<h5 id="2、Referer防御代码编写"><a href="#2、Referer防御代码编写" class="headerlink" title="2、Referer防御代码编写"></a>2、Referer防御代码编写</h5><p>在PHP中使用$_SERVER[‘HTTP_REFERER’]获取页面提交请求中的Referer值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">&#x2F;&#x2F; 获取REFERER，用其与相关的字符串比较。例如当前域名xx.com,使用strpos进行包含验证，如果提交的REFERER包含了xx.com那么判断成功。返回True，如果为false，它请求的上一个页面不是xx.com当中的页面，这个时候判断失败。</span><br><span class="line">	if(strpos($_SERVER[&#39;HTTP_REFERER&#39;],&#39;XX.com&#39;)!&#x3D;&#x3D;false)</span><br><span class="line">	&#123;</span><br><span class="line">		判断成功</span><br><span class="line">	&#125;</span><br><span class="line">	else</span><br><span class="line">	&#123;</span><br><span class="line">		判断失败</span><br><span class="line">	&#125;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<h5 id="3、绕过Referer技巧"><a href="#3、绕过Referer技巧" class="headerlink" title="3、绕过Referer技巧"></a>3、绕过Referer技巧</h5><p>技巧：如果服务端只判断当前的Referer中是否具有域名，那么直接可以新建文件夹进行绕过。</p>
+<p>测试页面</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200430194404169.png" alt="image-20200430194404169"></p>
+<p>查看源码</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200430194441166.png" alt="image-20200430194441166"></p>
+<p>在站点目录下新建一个ip的文件夹，将CSRF放在这个文件夹中</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200430220131544.png" alt="image-20200430220131544"></p>
+<p>放进去后需要编辑index内容，这个链接连接到了一个CSRF的绕过，这个链接只判断了referer，这样我们就可以进行绕过</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200430220220385.png" alt="image-20200430220220385"></p>
+<p>打开这个ip的页面，有1这个超链接进行打开，可以看到burpsuite中抓取到的referer值包含对应的IP地址。</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200430220433453.png" alt="image-20200430220433453"></p>
+<p>请求的页面是csrf_test/referer_test.php，如果不包含对应的ip就不能进行对应的操作。将内容放过</p>
+<p>页面返回successful，成功触发了对应的操作</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200430220743873.png" alt="image-20200430220743873"></p>
+<h5 id="4、Burpsuite自动生成POC"><a href="#4、Burpsuite自动生成POC" class="headerlink" title="4、Burpsuite自动生成POC"></a>4、Burpsuite自动生成POC</h5><p>Burpsuite只有在专业版才能生成POC，社区版不能生成POC</p>
+<p>将当前页面提交，然后截断</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200430221411622.png" alt="image-20200430221411622"></p>
+<p>截断之后在burpsuite右键选择Engaenment tools中的最后一个G开头的，这样就会输出POC代码，复制在一个新文件当中保存进去就行，或者直接使用对应提示进行保存</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200430221527972.png" alt="image-20200430221527972"></p>
+<h4 id="GET型CSRF漏洞利用方法"><a href="#GET型CSRF漏洞利用方法" class="headerlink" title="GET型CSRF漏洞利用方法"></a>GET型CSRF漏洞利用方法</h4><h5 id="1、链接利用"><a href="#1、链接利用" class="headerlink" title="1、链接利用"></a>1、链接利用</h5><p>在HTML中，a标签代表链接，可以将当前的“页面位置”指引到其他位置。实现跳转的过程</p>
+<p>移动的“页面位置”需要发送对应的请求到链接所指向的地址，然后返回响应。</p>
+<p><code>&lt;a href=&quot;请求地址，会被http请求到的未知，可以携带GET型参数&quot;&gt;内容&lt;/a&gt;</code></p>
+<p><code>&lt;a href=&quot;http://127.0.0.1/csrf_test/get_csrf/new_user.php?username=Mars&amp;password=123456&quot;&gt;请点击我&lt;/a&gt;</code></p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200501191106058.png" alt="image-20200501191106058"></p>
+<h5 id="2、iframe利用"><a href="#2、iframe利用" class="headerlink" title="2、iframe利用"></a>2、iframe利用</h5><p>iframe标签内容将在页面加载 过程中自动进行加载，src指向的位置就是页面请求的位置</p>
+<p>注意：可以设置iframe的style -&gt; display:none，以此来不显示iframe加载的内容</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200501192508231.png" alt="image-20200501192508231"></p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200501195000134.png" alt="image-20200501195000134"></p>
+<h5 id="3、img标签利用"><a href="#3、img标签利用" class="headerlink" title="3、img标签利用"></a>3、img标签利用</h5><p>img标签的内容会随着页面加载而被请求，以此src只想的位置会在页面加载过程中进行请求。</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200501195351849.png" alt="image-20200501195351849"></p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200501195417245.png" alt="image-20200501195417245"></p>
+<h5 id="4、CSS-backgroud利用"><a href="#4、CSS-backgroud利用" class="headerlink" title="4、CSS-backgroud利用"></a>4、CSS-backgroud利用</h5><p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200501195656147.png" alt="image-20200501195656147"></p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200501195618215.png" alt="image-20200501195618215"></p>
+<h4 id="CSRF漏洞防御"><a href="#CSRF漏洞防御" class="headerlink" title="CSRF漏洞防御"></a>CSRF漏洞防御</h4><h5 id="1、验证码防御"><a href="#1、验证码防御" class="headerlink" title="1、验证码防御"></a>1、验证码防御</h5><p>验证码防御被认为是对抗CSRF最为简单而且有效的防御方法。</p>
+<p>CSRF在用户不知情的情况下弯沉个对应操作，而验证码强制用户与应用程序交互，才能最终完成操作，通常情况下，验证码能够很好地遏制CSRF。</p>
+<p>出于用户体验考虑，不可能每一个操作都加入验证码。所以验证码只作为辅助手段，不作为防御CSRF的主要解决方案。</p>
+<p>验证码防御也可以被认为是二次验证。</p>
+<h5 id="2、Referer-Check防御"><a href="#2、Referer-Check防御" class="headerlink" title="2、Referer Check防御"></a>2、Referer Check防御</h5><p>Referer Check主要用于防止盗链。同理也可以用来检查请求是否来自合法的“源”</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200501200632489.png" alt="image-20200501200632489"></p>
+<p>缺陷：服务器并非任何时候都可以取到Referer。例如HTTPS跳转到HTTP。</p>
+<h5 id="3、Anti-CSRF-Token防御"><a href="#3、Anti-CSRF-Token防御" class="headerlink" title="3、Anti CSRF Token防御"></a>3、Anti CSRF Token防御</h5><p>CSRF本质原因：重要操作的所有参数都是被恶意攻击者猜测到的</p>
+<p>防御措施就是生成一个随机且不被轻易猜测的参数。目前大多是防御都是采用token(不可预测)</p>
+<h5 id="4、Token泄露"><a href="#4、Token泄露" class="headerlink" title="4、Token泄露"></a>4、Token泄露</h5><p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200501201022138.png" alt="image-20200501201022138"></p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200501201116900.png" alt="image-20200501201116900"></p>
+<h4 id="SSRF漏洞"><a href="#SSRF漏洞" class="headerlink" title="SSRF漏洞"></a>SSRF漏洞</h4><h5 id="SSRF介绍"><a href="#SSRF介绍" class="headerlink" title="SSRF介绍"></a>SSRF介绍</h5><p>SSRF(Server-Side Request Forgery:服务器端请求伪造) 是一种由攻击者构造形成由服务端发起请求的一个安全漏洞。一般情况下，SSRF是要目标网站的内部系统（正因为请求是由服务端发起的，所以服务端能请求到自身相连而与外网隔离的内部系统）。</p>
+<h5 id="SSRF原理"><a href="#SSRF原理" class="headerlink" title="SSRF原理"></a>SSRF原理</h5><p>SSRF 形成的原因大都是由于服务端提供了从其他服务器应用获取数据的功能，且没有对目标地址做过滤与限制。比如黑客操作服务端从指定URL地址获取网页文本内容，加载指定地址的图片，文档，等，利用的是服务端的请求伪造。SSRF利用存在缺陷的WEB应用作为代理攻击远程和本地的服务器</p>
+<h5 id="主要攻击方法"><a href="#主要攻击方法" class="headerlink" title="主要攻击方法"></a>主要攻击方法</h5><ul>
+<li>对外网、服务器所在内网、本地进行端口扫描、获取一些服务的banner信息。</li>
+<li>攻击运行在内网或本地的应用程序上。</li>
+<li>对内网的Web应用进行指纹识别，识别企业内部的资产信息。</li>
+<li>攻击内外网的web应用，主要是使用HTTP GET请求就可以实现的攻击（比如：struts2、SQli等）。</li>
+<li>利用file协议读取本地文件等。</li>
+</ul>
+<h5 id="SSRF漏洞利用"><a href="#SSRF漏洞利用" class="headerlink" title="SSRF漏洞利用"></a>SSRF漏洞利用</h5><p>SSRF漏洞利用的测试地址：<a href="http://127.0.0.1/ssrf.php?url=http://127.0.0.1/2.php" target="_blank" rel="noopener">http://127.0.0.1/ssrf.php?url=http://127.0.0.1/2.php</a></p>
+<p>页面ssrf.php实现的功能是获取GET参数URL，然后将URL的内容返回网页上。如果将请求的网址篡改为<a href="http://www,baidu.com，则会显示http://www.baidu.com的页面内容" target="_blank" rel="noopener">http://www,baidu.com，则会显示http://www.baidu.com的页面内容</a></p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200503155154844.png" alt="image-20200503155154844"></p>
+<p>但是，当设置参数URL为内网地址是，则会泄露内网信息，例如，当URL=192.168.0.2:3306时页面返回“当前地址不允许连接到Mysql服务器”，说明192.168.0.2存在Mysql服务</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200503155403764.png" alt="image-20200503155403764"></p>
+<p>访问ssrf.php?url=file:///c:/Windows/win.ini即可读取本地文件。</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200503155448181.png" alt="image-20200503155448181"></p>
+<h5 id="SSRF漏洞代码分析"><a href="#SSRF漏洞代码分析" class="headerlink" title="SSRF漏洞代码分析"></a>SSRF漏洞代码分析</h5><p>​        在页面SSRF.php中，程序获取GET参数URL，通过curl_init()初始化curl组件后，将参数URL带入curl_setopt（$ch,CURLOPT_URL，$url），然后调用所以curl-exec请求该URL。由于服务端会将banner信息返回客户端，所以可以根据banner判断主机是否存在某些服务。</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200503155657246.png" alt="image-20200503155657246"></p>
+<h5 id="SSRF漏洞修复建议"><a href="#SSRF漏洞修复建议" class="headerlink" title="SSRF漏洞修复建议"></a>SSRF漏洞修复建议</h5><p>针对SSRF漏洞修复，有以下几点</p>
+<ul>
+<li>限制请求的端口只能为Web端口，只允许访问HTTP和HTTPS请求。</li>
+<li>限制不能访问内网的IP，以防止对内网进行攻击。</li>
+<li>屏蔽返回的详细信息。</li>
+</ul>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2020/04/22/xss-labs/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">xss-labs</div>
+      <strong class="article-nav-caption">&gt;</strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="ds-share share" data-thread-key="CSRF_SSRF" data-title="CSRF_SSRF" data-url="https://zhanqiaozai.github.io/2020/05/03/CSRF_SSRF/"  data-images="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg" data-content="CSRF_SSRF">
+    <div class="ds-share-inline">
+      <ul  class="ds-share-icons-16">
+      	<li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+        <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+        <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+        <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+        <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+      </ul>
+      <div class="ds-share-icons-more">
+      </div>
+    </div>
+ </div>
+ 
+
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+      <div class="footer-left">
+        &copy; 2020 zhanqiaozai
+      </div>
+        <div class="footer-right">
+          <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/smackgg/hexo-theme-smackdown" target="_blank">Smackdown</a>
+        </div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+
+<script src="/js/main.js"></script>
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js"></script>
+
+
+  </div>
+</body>
+</html>
