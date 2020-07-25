@@ -1,0 +1,1003 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>CTF赛前培训____杂项 | 栈桥仔</title>
+
+  <!-- keywords -->
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="信息安全信息安全介绍   CTF的目标是什么 CTF比赛形式 CTF解题模式的题目类型1、web安全：通过浏览器访问你题目服务器上的王炸你，寻找网站漏洞（sql注入，xss文件上传，包含漏洞，xxe，ssrf，命令执行，代码审计等），利用网站漏洞获得服务器的部分或全部权限，拿到flag，通常包含分值最大的web渗透题； 2、逆向工程（Reverse）：题目就是一个软件，但通常没有软件的源代码；需要">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CTF赛前培训____杂项">
+<meta property="og:url" content="https://zhanqiaozai.github.io/2020/07/25/CTF%E8%B5%9B%E5%89%8D%E5%9F%B9%E8%AE%AD____%E6%9D%82%E9%A1%B9/index.html">
+<meta property="og:site_name" content="栈桥仔">
+<meta property="og:description" content="信息安全信息安全介绍   CTF的目标是什么 CTF比赛形式 CTF解题模式的题目类型1、web安全：通过浏览器访问你题目服务器上的王炸你，寻找网站漏洞（sql注入，xss文件上传，包含漏洞，xxe，ssrf，命令执行，代码审计等），利用网站漏洞获得服务器的部分或全部权限，拿到flag，通常包含分值最大的web渗透题； 2、逆向工程（Reverse）：题目就是一个软件，但通常没有软件的源代码；需要">
+<meta property="og:image" content="https://zhanqiaozai.github.io/2020/07/25/CTF%E8%B5%9B%E5%89%8D%E5%9F%B9%E8%AE%AD____%E6%9D%82%E9%A1%B9/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200529075332068.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200529182253678.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200529182740768.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200529183542305.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200529202426037.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200530081831066.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200530174356083.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200530200204759.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200530202142688.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200530203703413.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200530204639638.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200530210037447.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200531090736137.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200531090846805.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200531091238559.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200531091335384.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200531091544496.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200531094100756.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200531094114315.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200531094816974.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200531100643431.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200531102208822.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200531102310903.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200531105530101.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200531160514147.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200531161047702.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200531164853335.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200531165346523.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200531170000062.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200531170822455.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200531171058683.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200531171248575.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200531171356277.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200531213025025.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200601220121589.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200601085301270.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200601085458522.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200601205608572.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200531215008490.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200601092142617.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200601092344186.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200601100325469.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200601104521983.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200601135421953.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200601135624879.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200601135720851.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200601135905546.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200601140821948.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200601141541276.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200601144401788.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200601144643501.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200601191302824.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200601191522264.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200601191728411.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200601191803366.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200601191830369.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200601193158635.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200601193245304.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200601193325132.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200601194534064.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200601194602784.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200601194700834.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200601195333388.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200601195451150.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200601195608474.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200601195807699.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200601202600053.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200601202612647.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200601202821052.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200601203803422.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200601204834103.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200601204839721.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200603141436078.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200603143127926.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200603150609122.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200603151244361.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200603153301226.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200603153936066.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200603154354537.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200603155107348.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200603155649565.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200603155926679.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200603155757624.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200603172317772.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200603173254349.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200603173850984.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200603191446662.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200604075738364.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200604080014248.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200604081346525.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200604094211391.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200604094511491.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200604105348978.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200604110757287.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200604152044165.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200605102927768.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200605111002987.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200605111056255.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200605111406012.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200606213030411.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200606213318200.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200606215013376.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200606221053278.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200606222850803.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200606225712699.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200606225949760.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200606230805565.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200606232137032.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200606232037932.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200606232356753.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200606232626017.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200606232750372.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200607102755666.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200607141505200.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200607144110784.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200607152252672.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200607154702904.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200607155222852.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200608230118116.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200608230408330.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200608231043595.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200608231125684.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200608231822951.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200608232120916.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200608232644522.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200609092657733.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200609102009198.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200609102040418.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200609102341778.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200609103242825.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200609103713600.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200609103747586.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200609105410884.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200609105851147.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200609110822988.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200609110837706.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200609111918870.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200609111940281.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200609112733121.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200609112850721.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200609113255514.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200609115245391.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200609134441300.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200609134659116.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200609135101423.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200609135152489.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200609140939827.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200609144039740.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200609144106842.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200609144930905.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200609144940562.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200609145305816.png">
+<meta property="og:image" content="https://zhanqiaozai.github.io/2020/07/25/CTF%E8%B5%9B%E5%89%8D%E5%9F%B9%E8%AE%AD____%E6%9D%82%E9%A1%B9/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200609152002615.png">
+<meta property="article:published_time" content="2020-07-25T01:17:19.098Z">
+<meta property="article:modified_time" content="2020-06-10T05:56:54.000Z">
+<meta property="article:author" content="zhanqiaozai">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://zhanqiaozai.github.io/2020/07/25/CTF%E8%B5%9B%E5%89%8D%E5%9F%B9%E8%AE%AD____%E6%9D%82%E9%A1%B9/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200529075332068.png">
+  
+    <link rel="alternative" href="/atom.xml" title="栈桥仔" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+
+  
+<script src="//cdn.bootcss.com/require.js/2.3.2/require.min.js"></script>
+
+  
+<script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+
+
+  
+<meta name="generator" content="Hexo 4.2.0"></head>
+<body>
+  <div id="container">
+    <div id="particles-js"></div>
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">zhanqiaozai</a></h1>
+		</hgroup>
+
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="https://github.com/smackgg/hexo-theme-smackdown">smackdown</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">zhanqiaozai</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">zhanqiaozai</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-CTF赛前培训____杂项" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/07/25/CTF%E8%B5%9B%E5%89%8D%E5%9F%B9%E8%AE%AD____%E6%9D%82%E9%A1%B9/" class="article-date">
+  	<time datetime="2020-07-25T01:17:19.098Z" itemprop="datePublished">2020-07-25</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      CTF赛前培训____杂项
+      
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+        
+
+        
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="信息安全"><a href="#信息安全" class="headerlink" title="信息安全"></a>信息安全</h4><p>信息安全介绍</p>
+<p><img src="/2020/07/25/CTF%E8%B5%9B%E5%89%8D%E5%9F%B9%E8%AE%AD____%E6%9D%82%E9%A1%B9/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200529075332068.png" alt="image-20200529075332068"></p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200529182253678.png" alt="image-20200529182253678"></p>
+<h5 id="CTF的目标是什么"><a href="#CTF的目标是什么" class="headerlink" title="CTF的目标是什么"></a>CTF的目标是什么</h5><p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200529182740768.png" alt="image-20200529182740768"></p>
+<h5 id="CTF比赛形式"><a href="#CTF比赛形式" class="headerlink" title="CTF比赛形式"></a>CTF比赛形式</h5><p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200529183542305.png" alt="image-20200529183542305"></p>
+<h5 id="CTF解题模式的题目类型"><a href="#CTF解题模式的题目类型" class="headerlink" title="CTF解题模式的题目类型"></a>CTF解题模式的题目类型</h5><p><strong>1、web安全</strong>：通过浏览器访问你题目服务器上的王炸你，寻找网站漏洞（sql注入，xss文件上传，包含漏洞，xxe，ssrf，命令执行，代码审计等），利用网站漏洞获得服务器的部分或全部权限，拿到flag，通常包含分值最大的web渗透题；</p>
+<p><strong>2、逆向工程（Reverse）</strong>：题目就是一个软件，但通常没有软件的源代码；需要利用工具对软件进行反编译甚至反汇编，从而理解软件内部逻辑和原理，找出flag计算相关的算法并破解这个算法，获取flag</p>
+<p><strong>3、漏洞挖掘与漏洞利用（PWN,EXPLOIT）</strong>：访问一个本地或远程的二进制服务程序，通过逆向工程找出程序存在的漏洞，并利用程序中的漏洞获取远程服务器的部分或全部权限，拿到flag；</p>
+<p><strong>4、密码学（Crypto）</strong>：分析提米中的密码算法与协议，利用算法或协议的弱点来计算秘钥或对密文进行解密，从而获取flag。</p>
+<p>对密码方式进行解码，比如：base64，或者一些加密算法。</p>
+<p>加密算法：凯撒密码等等</p>
+<p>摘要算法：MD5、SHA1等等，合起来就是密码学</p>
+<p><strong>5、调查取证（Misc）</strong>：也可以称为<strong>杂项</strong>。。。利用隐写术等保护技术将信息隐藏在图像、音频、视频、压缩包中，或者信息就在一段内存镜像或网络流量中，尝试将隐藏的信息恢复出来即可获得flag</p>
+<p><strong>6、移动安全（Mobile）</strong>：对安卓和IOS系统的理解，逆向工程等知识。</p>
+<p>难度排序从上往下：</p>
+<p>①   杂项（Misc）</p>
+<p>②   密码学（Crypto）</p>
+<p>③   web安全</p>
+<p>④   逆向（Reverse）</p>
+<p>⑤   二进制破解（PWN）</p>
+<p>第一个难度最低。</p>
+<h5 id="CTF攻防模式"><a href="#CTF攻防模式" class="headerlink" title="CTF攻防模式"></a>CTF攻防模式</h5><p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200529202426037.png" alt="image-20200529202426037"></p>
+<h5 id="CTF备战思路"><a href="#CTF备战思路" class="headerlink" title="CTF备战思路"></a>CTF备战思路</h5><p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200530081831066.png" alt="image-20200530081831066"></p>
+<h5 id="CTF真题演练场"><a href="#CTF真题演练场" class="headerlink" title="CTF真题演练场"></a>CTF真题演练场</h5><p>hackingLab实验室：<a href="http://hackinglab.cn" target="_blank" rel="noopener">http://hackinglab.cn</a></p>
+<p>实验吧：<a href="http://www.shiyanbar.com/ctf/practice" target="_blank" rel="noopener">http://www.shiyanbar.com/ctf/practice</a></p>
+<p>i春秋CTF大本营：<a href="https://www.ichunqiu.com/competition" target="_blank" rel="noopener">https://www.ichunqiu.com/competition</a></p>
+<p>合天实验室：<a href="http://www.hetianlab.com" target="_blank" rel="noopener">www.hetianlab.com</a></p>
+<p>UssLab Jarvis OJ Platform：<a href="https://www.jarvisoj.com" target="_blank" rel="noopener">https://www.jarvisoj.com</a></p>
+<p>XCTF实训平台：<a href="http://oj.xctf.org.cn" target="_blank" rel="noopener">http://oj.xctf.org.cn</a></p>
+<p>Capture the Flag：<a href="http://captf.com" target="_blank" rel="noopener">http://captf.com</a></p>
+<p>CTF Time：<a href="https://ctftime.org" target="_blank" rel="noopener">https://ctftime.org</a></p>
+<p>BugkuCTF：<a href="http://ctf.bugku.com/login" target="_blank" rel="noopener">http://ctf.bugku.com/login</a></p>
+<h5 id="Hackgame"><a href="#Hackgame" class="headerlink" title="Hackgame"></a>Hackgame</h5><p>SQL注入练习：<a href="http://redtiger.labs.overthewire.org" target="_blank" rel="noopener">http://redtiger.labs.overthewire.org</a></p>
+<p>Xss game：<a href="http://prompt.ml/0" target="_blank" rel="noopener">http://prompt.ml/0</a></p>
+<p>XSS challenges：<a href="http://xss-quiz.int21h.jp" target="_blank" rel="noopener">http://xss-quiz.int21h.jp</a></p>
+<p>红客闯关游戏：<a href="http://hkyx.myhack58.com" target="_blank" rel="noopener">http://hkyx.myhack58.com</a></p>
+<p>梦之光芒Hack游戏：<a href="http://monyer.com/game" target="_blank" rel="noopener">http://monyer.com/game</a></p>
+<h5 id="CTF-Writeup"><a href="#CTF-Writeup" class="headerlink" title="CTF-Writeup"></a>CTF-Writeup</h5><p>实验吧Writeup：<a href="http://hebin.me" target="_blank" rel="noopener">http://hebin.me</a></p>
+<p>360播报：<a href="http://bobao.360.cn/ctf" target="_blank" rel="noopener">http://bobao.360.cn/ctf</a></p>
+<p>安全脉搏：<a href="https://www.secpulse.com/archives/category/exclusive/ctf-writeup" target="_blank" rel="noopener">https://www.secpulse.com/archives/category/exclusive/ctf-writeup</a></p>
+<p>github上的writeup：</p>
+<p><a href="https://github.com/ctfs" target="_blank" rel="noopener">https://github.com/ctfs</a></p>
+<p><a href="https://github.com/VulnHub/ctf-writeups" target="_blank" rel="noopener">https://github.com/VulnHub/ctf-writeups</a></p>
+<h4 id="文件操作与隐写"><a href="#文件操作与隐写" class="headerlink" title="文件操作与隐写"></a>文件操作与隐写</h4><h5 id="文件类型识别"><a href="#文件类型识别" class="headerlink" title="文件类型识别"></a>文件类型识别</h5><p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200530174356083.png" alt="image-20200530174356083"></p>
+<h5 id="常见的文件头类型"><a href="#常见的文件头类型" class="headerlink" title="常见的文件头类型"></a>常见的文件头类型</h5><p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200530200204759.png" alt="image-20200530200204759"></p>
+<p>每个文件类型的文件头是不同的。</p>
+<p>可以使用文本软件来查看16进制，看看是否与文件头对应</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200530202142688.png" alt="image-20200530202142688"></p>
+<h5 id="文件头残缺-错误"><a href="#文件头残缺-错误" class="headerlink" title="文件头残缺/错误"></a>文件头残缺/错误</h5><p>​        通常文件无法正常打开有两种情况，一种是文件头部残缺，另一种是文件头部字段错误。winhex程序添加相应的文件头，针对头部字段错误，可以找一个相同类型的文件进行替换。</p>
+<p>格式：file 文件名</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200530203703413.png" alt="image-20200530203703413"></p>
+<p>如果文件头确实或者错误，我们就要进行修复</p>
+<p>当文件查看不了的时候显示这是一个data文件，告诉你这就是一串数据，它也不知道这是什么类型的文件，</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200530204639638.png" alt="image-20200530204639638"></p>
+<p>如果缺失了，可以用notpad++进行修改16进制，将正确的文件头输入</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200530210037447.png" alt="image-20200530210037447"></p>
+<h5 id="文件分离操作"><a href="#文件分离操作" class="headerlink" title="文件分离操作"></a>文件分离操作</h5><h5 id="1、Binwalk"><a href="#1、Binwalk" class="headerlink" title="1、Binwalk"></a>1、Binwalk</h5><p>​    Binwalk是linux下用来分析和分离文件的工具，可以快速分辨文件是否由多个文件合并而成，并将文件进行分离，如果分离成功会在目标文件的目录</p>
+<p>同目录下生成一个形如_ 文件名 _extracted的文件目录，目录中有分离后的文件</p>
+<p>用法：</p>
+<p>分析文件：<code>binwalk filename</code></p>
+<p>分离文件：<code>binwalk -e filename</code></p>
+<p>binwalk是linux下的一款工具。当你拿到一个文件的时候如果图片中没有任何隐藏文件那就会返回文件格式如果文件中隐藏了文件，使用binwalk的时候就会返回隐藏的文件</p>
+<p>这个图片是里面没有任何隐藏的文件所以只返回了文件格式</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200531090736137.png" alt="image-20200531090736137"></p>
+<p>如果是图片中隐藏了内容的话，会分析出其中的内容</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200531090846805.png" alt="image-20200531090846805"></p>
+<p>可以看到第二行的 0x596F后面是ZIP所以需要使用<code>binwalk -e 文件名</code>   来讲文件中的内容分离出来，可以看到这样就多出来一个文件</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200531091238559.png" alt="image-20200531091238559"></p>
+<p>打开文件原图片的文件可以看到多了一个文件夹</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200531091335384.png" alt="image-20200531091335384"></p>
+<p>打开这个文件夹发现里面还有一个压缩包和一个key.txt的文件，这个key.txt就是压缩包中的 文件，因为binwalk会自动将压缩包进行解压</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200531091544496.png" alt="image-20200531091544496"></p>
+<h5 id="2、foremost"><a href="#2、foremost" class="headerlink" title="2、foremost"></a>2、foremost</h5><p>还有一种就是，比如binwalk不能使用了，无法进行分离，</p>
+<p>可以使用<code>foremost 文件名 -o 自定义文件名</code></p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200531094100756.png" alt="image-20200531094100756"></p>
+<p>foremost并不能像binwalk一样进行压缩包解压，他会详细的将文件分类，jpg就在jpg文件夹中，压缩包就在zip文件夹中，而且还会生成一个日志</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200531094114315.png" alt="image-20200531094114315"></p>
+<p>要获取flag文件就要自行将zip进行解压。获取key值</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200531094816974.png" alt="image-20200531094816974"></p>
+<h5 id="3、dd"><a href="#3、dd" class="headerlink" title="3、dd"></a>3、dd</h5><p>​    当文件自动分离出错或者因为其他原因无法自动分离时，可以使用dd实现文件手动分离。</p>
+<p>格式：</p>
+<p><code>dd if=源文件 of=目标文件名 bs=1 skip= 开始分离的字节数</code></p>
+<p>参数说明：</p>
+<p><code>if=file            #输入文件名，缺省为标准输入</code></p>
+<p><code>of=file         #输出文件名，缺省为标准输出。</code></p>
+<p><code>bs=bytes        #同时设置读写块的大小为bytes，可代替ibs和obs。</code></p>
+<p><code>skip=blocks    #从输入文件开头跳过blocks个块后再开始复制</code></p>
+<p>小例子：</p>
+<p>这里的<code>bs=5</code>和<code>count=1</code>的意思就是将前面5个数保存到2.txt，剩下的去掉</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200531100643431.png" alt="image-20200531100643431"></p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200531102208822.png" alt="image-20200531102208822"></p>
+<p>skip的意思就是跳过多少块，因为设置的bs是5也就是前5个数，然后skip跳过第一块，就将1-5跳过了。</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200531102310903.png" alt="image-20200531102310903"></p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200531105530101.png" alt="image-20200531105530101"></p>
+<h5 id="4、手动"><a href="#4、手动" class="headerlink" title="4、手动"></a>4、手动</h5><p>除了使用dd外，还可以手进行文件分离，将目标文件放到Notepad++中打开后是乱码这是正常的，点开里面的插件选择HEX-Editor插件将其转换成16进制，找出分离的16进制，复制出来，将文件格式改为zip</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200531160514147.png" alt="image-20200531160514147"></p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200531161047702.png" alt="image-20200531161047702"></p>
+<h5 id="5、010Editor"><a href="#5、010Editor" class="headerlink" title="5、010Editor"></a>5、010Editor</h5><p>将16进制字符文件导入保存操作：</p>
+<p>比如获得一个文件将其打开发现是16进制的，这就说明让其把16进制变成一个压缩包</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200531164853335.png" alt="image-20200531164853335"></p>
+<p>使用010 Editor导入这个文件其实在这就能看到他是一个Rar文件，这样我们就进行另存为将其存为Rar文件。</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200531165346523.png" alt="image-20200531165346523"></p>
+<p>发现桌面已经确实存为了rar后缀的压缩包</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200531170000062.png" alt="image-20200531170000062"></p>
+<h4 id="文件合并"><a href="#文件合并" class="headerlink" title="文件合并"></a>文件合并</h4><h5 id="1、Linux下文件合并"><a href="#1、Linux下文件合并" class="headerlink" title="1、Linux下文件合并"></a>1、Linux下文件合并</h5><p>linux下，通常对文件名相似的文件要进行批量合并</p>
+<p>格式：<code>cat 合并的文件 &gt; 输出的文件</code></p>
+<p>这两种方法都可以，*代表了多个</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200531170822455.png" alt="image-20200531170822455"></p>
+<p>完整性检测：linux下计算文件md5</p>
+<p>格式：md5sum 文件名</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200531171058683.png" alt="image-20200531171058683"></p>
+<h5 id="2、Windows下的文件合并"><a href="#2、Windows下的文件合并" class="headerlink" title="2、Windows下的文件合并"></a>2、Windows下的文件合并</h5><p>Windows下，通常需要对文件名相似的文件进行批量合并</p>
+<p>格式：copy /B 合并的文件输出的文件命令</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200531171248575.png" alt="image-20200531171248575"></p>
+<p>完整性检测：windows下计算文件md5：</p>
+<p>格式：<code>certutil -hashfile 文件名 md5</code></p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200531171356277.png" alt="image-20200531171356277"></p>
+<h4 id="文件内容隐写"><a href="#文件内容隐写" class="headerlink" title="文件内容隐写"></a>文件内容隐写</h4><p>文件内容隐写，就是直接将KEY以十六进制的形式卸载文件中，通常在文件的开头或结尾部分，<strong>分析时通常重点观察文件开头和结尾部分</strong>。如果在文件中间部分，通常<strong>搜索关键字KEY或者flag来查找隐藏内容（每个工具都有查找功能使用查找功能进行查找）。</strong></p>
+<p>Windows下，搜索隐写的文件内容</p>
+<h5 id="1、Winhex-010Eidtor"><a href="#1、Winhex-010Eidtor" class="headerlink" title="1、Winhex / 010Eidtor"></a>1、Winhex / 010Eidtor</h5><p>​    将要识别的文件拖入010Eidtor(十六进制)，查找具有关键字或明显与文件内容不和谐的部分，通常优先观察文件首部和尾部，搜索flag或key等关键字，最后拖动滚轮寻找。</p>
+<h5 id="2、Notepad"><a href="#2、Notepad" class="headerlink" title="2、Notepad++"></a>2、Notepad++</h5><p>​    使用notepad++打开文件，查看文件头尾是否有含有关键字的字符串，搜索flag或key等关键字，最后拖动滚轮寻找。</p>
+<p>另外通过安装插件HEX-Editor可以实现010Editor</p>
+<h4 id="图片隐写"><a href="#图片隐写" class="headerlink" title="图片隐写"></a>图片隐写</h4><h5 id="图片隐写的一些常见隐写方法"><a href="#图片隐写的一些常见隐写方法" class="headerlink" title="图片隐写的一些常见隐写方法"></a>图片隐写的一些常见隐写方法</h5><ol>
+<li>细微的颜色差别</li>
+<li>GIF图多帧隐藏<ol>
+<li>颜色通道隐藏</li>
+<li>不同帧图信息隐藏</li>
+<li>不同帧对比隐写</li>
+</ol>
+</li>
+<li>EXIF信息隐藏</li>
+<li>图片修复<ol>
+<li>图片头修复</li>
+<li>图片尾修复</li>
+<li>CRC校验修复</li>
+<li>长、宽、高度修复</li>
+</ol>
+</li>
+<li>最低有效位LSB隐写</li>
+<li>图片加密<ol>
+<li>Stegdetect</li>
+<li>outguess</li>
+<li>Jphide</li>
+<li>F5</li>
+</ol>
+</li>
+</ol>
+<h5 id="图片文件隐写"><a href="#图片文件隐写" class="headerlink" title="图片文件隐写"></a>图片文件隐写</h5><h5 id="1、firework"><a href="#1、firework" class="headerlink" title="1、firework"></a>1、firework</h5><p>使用winhex打开文件时会看到文件头部中包含firework的标识，通过 firework / <strong>ps</strong> 可以找到<strong>隐藏图片</strong>。</p>
+<p>使用场景：查看隐写的图片文件</p>
+<p>最底下是每一帧的图片</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200531213025025.png" alt="image-20200531213025025"></p>
+<h5 id="2、Exif"><a href="#2、Exif" class="headerlink" title="2、Exif"></a>2、Exif</h5><p>​    Exif按照JPEG的规格在JPEG中插入一些图像 / 数字相机的信息数据以及缩略图像，可以通过与JPEG兼容的互联网浏览器 / 图片浏览器 / 图像处理等一些软件来查看Exif格式的图像文件，就跟浏览器通常的JPEG图像文件一样。</p>
+<p>图片右键属性，查看详细信息，在相关选项卡中查找flag信息</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200601220121589.png" alt="image-20200601220121589"></p>
+<h5 id="3、Stegsolve"><a href="#3、Stegsolve" class="headerlink" title="3、Stegsolve"></a>3、Stegsolve</h5><p>​    当两张jpg图片外观、大小、像素都基本相同时，可以考虑进行结合分析，即将两个文件的像素RGB值进行XOR、ADD、SUB等操作，看能否得到有用的信息，StegSolve可以方便的进行这些操作。</p>
+<p>1、打开一张图片，点击analyse中的image combiner</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200601085301270.png" alt="image-20200601085301270"></p>
+<p>筛选有用的图片进行save保存，这里显示的二维码是错误的，黑白颜色相反，所以需要进行取反处理，直接在画图中选中二维码右键取反就可以</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200601085458522.png" alt="image-20200601085458522"></p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200601205608572.png" alt="image-20200601205608572"></p>
+<p>如果是二维码GIF的话会看到一直动，就可以使用Stegsolve工具将二维码没帧都给截取下来</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200531215008490.png" alt="image-20200531215008490"></p>
+<h4 id="图片文件隐写-LSB"><a href="#图片文件隐写-LSB" class="headerlink" title="图片文件隐写-LSB"></a>图片文件隐写-LSB</h4><h5 id="4、LSB-最低有效位-Least-Significant-Bit"><a href="#4、LSB-最低有效位-Least-Significant-Bit" class="headerlink" title="4、LSB(最低有效位 Least Significant Bit)"></a>4、LSB(最低有效位 Least Significant Bit)</h5><p>​    LSB替换隐写基本思想是用嵌入的秘密信息取代载体图像的最低比特位，原来的7个高位平面与替代秘密信息的最低位平面组合成隐藏信息的新图形。</p>
+<ol>
+<li>像素三原色（RGB）</li>
+<li>通过修改像素中最低位的1bit来达到隐藏的效果</li>
+<li>工具：stegsolve、zsteg、wbstego4、python脚本</li>
+</ol>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200601092142617.png" alt="image-20200601092142617"></p>
+<h5 id="1、Stegsolve-jar工具"><a href="#1、Stegsolve-jar工具" class="headerlink" title="1、Stegsolve.jar工具"></a>1、Stegsolve.jar工具</h5><p>使用的时候这个是需要有顺序的，有可能是RGB有可能是GBR等等</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200601092344186.png" alt="image-20200601092344186"></p>
+<h5 id="2、zsteg工具"><a href="#2、zsteg工具" class="headerlink" title="2、zsteg工具"></a>2、zsteg工具</h5><p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200601100325469.png" alt="image-20200601100325469"></p>
+<h5 id="3、wbstego4"><a href="#3、wbstego4" class="headerlink" title="3、wbstego4"></a>3、wbstego4</h5><p>解密通过lsb加密的图片</p>
+<p>这个不止针对图片的最低有效位，还可能针对PDF的或者其他一些文件格式的最低有效位。它针对图片的最低有效位一般是针对 <code>.bmp</code> 的图片</p>
+<p>这是wbstego4支持的4中文件格式</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200601104521983.png" alt="image-20200601104521983"></p>
+<p>因为是bmp文件所以将jpg的文件可以使用画图等工具另存为bmp格式的文件，使用wbStego4进行选择打开。</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200601135421953.png" alt="image-20200601135421953"></p>
+<p>文件解密后存放的另外一个位置，一直下一步就OK</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200601135624879.png" alt="image-20200601135624879"></p>
+<p>可以看到保存到了这样一 个文件</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200601135720851.png" alt="image-20200601135720851"></p>
+<p>打开后是乱码，然后会发现其中有flag，这只是这个工具的使用方法，当然也可以不用这个工具，直接使用zsteg就可以</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200601135905546.png" alt="image-20200601135905546"></p>
+<h5 id="4、python脚本"><a href="#4、python脚本" class="headerlink" title="4、python脚本"></a>4、python脚本</h5><p>将脚本放在kali中运行，将目标文件放在脚本同目录下，将脚本中的文件名修改为文件名，运行脚本即可。</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200601140821948.png" alt="image-20200601140821948"></p>
+<p>如果不用脚本的话，需要将这个图片转为PNG格式使用Stegsolve查看图片的通道</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200601141541276.png" alt="image-20200601141541276"></p>
+<h5 id="5、TweakPNG"><a href="#5、TweakPNG" class="headerlink" title="5、TweakPNG"></a>5、TweakPNG</h5><p>​    TweakPNG是一款简单易用的PNG图像浏览工具，它允许查看和修改一些PNG图像文件的元信息存储。</p>
+<p>使用场景：文件头正常却无法打开文件，利用TweakPNG修改CRC</p>
+<p>例：</p>
+<p>1、当PNG文件头正常但无法打开文件，可能是CRC校验出错，可以尝试通过TweakPNG打开PNG，会弹出校验错误的提示，这里显示CRC是fe1a5ab6，正确的是b0a7a9f1。打开010Editor搜索fe1a5ab6将其改为b0a7a9f1</p>
+<p>例：</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200601144401788.png" alt="image-20200601144401788"></p>
+<p>2、文件头正常却无法打开，利用TweakPNG修改CRC….</p>
+<p>又是CRC没有错误，但是图片的高度或者宽度发生了错误，需要通过CRC计算出正确的高度或者宽度</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200601144643501.png" alt="image-20200601144643501"></p>
+<p>例：</p>
+<p>使用tweakpng打开图片，查看crc</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200601191302824.png" alt="image-20200601191302824"></p>
+<p>使用010Editor打开查看16进制，然后看看CRC是否相等，如果不同，进行修改，可以看到CRC是不同的，然后进行修改</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200601191522264.png" alt="image-20200601191522264"></p>
+<p>可以直接替换将全部的cbd6df8a进行替换</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200601191728411.png" alt="image-20200601191728411"></p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200601191803366.png" alt="image-20200601191803366"></p>
+<p>查看图片，发现并没有生效，所以判断不是CRC造成的，然后将crc改回原来的值。因为不是crc造成的，所以这样就要计算它的高度和宽度了</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200601191830369.png" alt="image-20200601191830369"></p>
+<p>可以看到python计算出的宽度和高度和图片本身是不同的，所以将A4改为F4</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200601193158635.png" alt="image-20200601193158635"></p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200601193245304.png" alt="image-20200601193245304"></p>
+<p>保存，再次进行查看图片。</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200601193325132.png" alt="image-20200601193325132"></p>
+<h5 id="6、Bftools"><a href="#6、Bftools" class="headerlink" title="6、Bftools"></a>6、Bftools</h5><p>​    Bftools用于解密图片信息。</p>
+<p>使用场景：在Windows的cmd下，对加密过的图片文件进行解密。</p>
+<p>格式：</p>
+<p>Btfools.exe decode braincopter 要解密的图片名称 -output 输出文件名</p>
+<p>Bftools.exe run 上一步输出的文件。</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200601194534064.png" alt="image-20200601194534064"></p>
+<p>ls 或者 dir 查看一下</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200601194602784.png" alt="image-20200601194602784"></p>
+<p>在使用bftools.exe run 123.png</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200601194700834.png" alt="image-20200601194700834"></p>
+<h5 id="7、SilentEye"><a href="#7、SilentEye" class="headerlink" title="7、SilentEye"></a>7、SilentEye</h5><p>​    silenteye是一款可以将文字或者文件隐藏到图片的解密工具</p>
+<p>使用场景：windows下打开silentEye工具，对加密的图片进行解密</p>
+<p>例：</p>
+<p>1、使用silentEye程序打开目标图片，点击image —&gt; decode，点击decode，可以查看隐藏文件，点击保存即可</p>
+<p>原始界面</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200601195333388.png" alt="image-20200601195333388"></p>
+<p>打开文件</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200601195451150.png" alt="image-20200601195451150"></p>
+<p>点击decode进行解密，再次点击decode会出现flag.txt，这是选择保存文件的目录，按照自己进行选择路径</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200601195608474.png" alt="image-20200601195608474"></p>
+<p>查看保存路径，成功生成flag文件，打开里面你也有flag值</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200601195807699.png" alt="image-20200601195807699"></p>
+<h5 id="8-JPG图像加密"><a href="#8-JPG图像加密" class="headerlink" title="8.JPG图像加密"></a>8.JPG图像加密</h5><p>1）Stegdetect 工具探测加密方式</p>
+<p>​    stegdetect程序主要分析JPEG文件。因此用stegdetect可以检测到通过JSteg、JPHide、OutGuess、Invisible Secrets、F5、appendX和Camouflage等这些隐写工具隐藏的信息。</p>
+<p>stegdetect xxx.jpg</p>
+<p>stegdetect -s 敏感度 xxx.jpgexi</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200601202600053.png" alt="image-20200601202600053"></p>
+<p>2）Jphide</p>
+<p>​    Jphide是基于最低有效位LSB的JPEG格式图像隐写算法。</p>
+<p>例：</p>
+<p>​    Stegdetect提示jphide加密时，可以用Jphs工具进行解密，打开jphswin.exe，使用open jpeg打开图片，点击seek，输入密码和确认密码，在弹出文件框中选择要保存的解密文件位置即可，结果保存成txt文件</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200601202612647.png" alt="image-20200601202612647"></p>
+<p>3）Outguess</p>
+<p>​    outguess一般用于解密文件信息</p>
+<p>使用场景：stegdetect识别出来或者题目提示是outguess加密的图片</p>
+<p>该工具需要编译使用：./configure &amp;&amp; make &amp;&amp; make install</p>
+<p>格式：outguess -r 要解密的文件名   输出结果文件名</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200601202821052.png" alt="image-20200601202821052"></p>
+<p>4）F5</p>
+<p>​    F5一般一用解密文件信息</p>
+<p>使用场景：stegdetect识别出来或者题目提示是F5加密的图片</p>
+<p>进入F5-steganography_F5目录，将图片文件拷贝至该目录下，从CMD进入该目录</p>
+<p>格式：java Exrtact 要解密的文件名 -p 密码</p>
+<p>运行结束后，我们可以直接在目录下的output.txt中看到结果</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200601203803422.png" alt="image-20200601203803422"></p>
+<h5 id="9、二维码处理"><a href="#9、二维码处理" class="headerlink" title="9、二维码处理"></a>9、二维码处理</h5><p>1、使用二维码扫描工具CQR.exe打开图片，找到内容没买过字段</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200601204834103.png" alt="image-20200601204834103"></p>
+<p>2、如果二维码某个定位角被覆盖了，该工具有时候也可以自动识别，如果识别失败，需要使用PS或者画图工具将另外几个叫的定位符移动到相应的位置，补全二维码</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200601204839721.png" alt="image-20200601204839721"></p>
+<p>3、如果某个二维码的定位点中间是白色的，可能被反色了，使用画图工具吧颜色反色回来在扫描即可。</p>
+<h4 id="压缩文件分析"><a href="#压缩文件分析" class="headerlink" title="压缩文件分析"></a>压缩文件分析</h4><h5 id="1、伪加密"><a href="#1、伪加密" class="headerlink" title="1、伪加密"></a>1、伪加密</h5><p>​    如果压缩文件时加密的，或文件头正常但解压缩错误，首先尝试文件是否为伪加密。zip文件是否加密是通过标识符来显示的，在每个文件的文件目录字段有以为专门表示了文件是否加密，将其设置为00表示改文件未加密，如果成功解压则表示文件为伪加密，如果解压出错说明文件为真加密。</p>
+<p>使用场景：伪加密文件</p>
+<p>操作方法：使用010Editor打开压缩文件，找到文件头第九第十个字符，将其修改为0000</p>
+<p>1、使用010Editor打开文件搜索16进制504B0102，可以看到每个加密文件的文件头字段。</p>
+<p>为什么是504B0102？    因为504B0102是文件头</p>
+<p>从50开始数，第九第十个字符为加密字段将其改为0000.</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200603141436078.png" alt="20200603141436078.png">志位后如报错消失且正常解压，说明是伪加密。使用010Editor打开RAR文件，找到第24个字节，该字节尾数为4表示加密，0表示无加密，将尾数改为0即可破解伪加密。</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200603143127926.png" alt="image-20200603143127926"></p>
+<h5 id="2、暴力破解"><a href="#2、暴力破解" class="headerlink" title="2、暴力破解"></a>2、暴力破解</h5><p>​    通常我们可以使用ARCHPR.exe工具来破解zip文件</p>
+<p>使用场景：windows下加密过的zip文件</p>
+<p>现在ARCHPR不支持高版本解密。选择 压缩包时会出现错误</p>
+<p>​    1、攻击类型选择暴力破解，在范围位置根据提示选择暴力破解范围选项设置暴力破解包含的类型、开始于和结束于选项具体范围，如果没有定于则全范围暴力破解。点击打开选择要破解的文件，点击开始进行破解。建议使用1~9位的数字密码，以及系统自带的英文字典作为密码字典。</p>
+<p>2、攻击类型选择掩码可以进行复杂的暴力破解，比如知道密码前三位是abc，后三位为数字，则在攻击类型选择掩码，再掩码处输入abc???，暴力范围选项选择所有数字，打开要破解的点击，点击破解。时???的部分会被我们选择的暴力破解范围中的字符代替。</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200603150609122.png" alt="image-20200603150609122"></p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200603151244361.png" alt="image-20200603151244361"></p>
+<h5 id="3、明文攻击"><a href="#3、明文攻击" class="headerlink" title="3、明文攻击"></a>3、明文攻击</h5><p>​    明文攻击指知道加密的ZIP中部分文件的明文内容，利用这些内容推测出秘钥并解密ZIP文件的攻击方法，相比于暴力破解，这种方法在破解密码较为复杂的压缩包时效率更高。</p>
+<p>使用场景：<strong>已知加密的zip部分文件明文内容</strong></p>
+<p>例：假设一个加密的压缩包中有两个文件readme.txt和flag.ext，其中flag.txt的内容使我们希望知道的内容，而我们拥有readme.txt的明文文件，使用上述两个文件即可进行明文攻击</p>
+<p>操作：</p>
+<p>1、将readme.txt的明文文件进行压缩，变成readme1.zip(即将明文文件不加密压缩后的文件)，加密的文件</p>
+<p>选择要破解的文件，点击开始，破解成功后会获得密码。</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200603153301226.png" alt="image-20200603153301226"></p>
+<p>有时不一定能破解出文件口令，但是能够找到加密秘钥等信息，可以直接将文件解密，点击确定保存解密后的文件即可。</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200603153936066.png" alt="image-20200603153936066"></p>
+<p>使用该方法需要注意两个关键点：</p>
+<p>1、有一个明文文件，压缩后CRC值与加密压缩包中的文件一致。</p>
+<p>2、明文文件的压缩算法需要与加密压缩文件的压缩算法一致。</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200603154354537.png" alt="image-20200603154354537"></p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200603155107348.png" alt="image-20200603155107348"></p>
+<h5 id="RAR文件格式"><a href="#RAR文件格式" class="headerlink" title="RAR文件格式"></a>RAR文件格式</h5><p>有时候给出的RAR文件的头部各个字块会故意给错导致无法识别。</p>
+<p>正常情况下是没有0x7A这个文件头的，所以这是错误的，那么我们就要修改0x7A将其改为74，0x74是文件头类型。</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200603155649565.png" alt="image-20200603155649565"></p>
+<p>更改后显示了两个文件</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200603155926679.png" alt="image-20200603155926679"></p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200603155757624.png" alt="image-20200603155757624"></p>
+<h4 id="流量取证"><a href="#流量取证" class="headerlink" title="流量取证"></a>流量取证</h4><h5 id="流量包文件分析"><a href="#流量包文件分析" class="headerlink" title="流量包文件分析"></a>流量包文件分析</h5><p>CTF比赛中，流量包的取证分析时另一项重要的考察方向。</p>
+<h6 id="通常比赛中会提供一个包含流量数据的PCAP文件，有时也会需要选手们先进行修复或重构传输文件后，在进行分析。"><a href="#通常比赛中会提供一个包含流量数据的PCAP文件，有时也会需要选手们先进行修复或重构传输文件后，在进行分析。" class="headerlink" title="通常比赛中会提供一个包含流量数据的PCAP文件，有时也会需要选手们先进行修复或重构传输文件后，在进行分析。"></a><em>通常比赛中会提供一个包含流量数据的PCAP文件，有时也会需要选手们先进行修复或重构传输文件后，在进行分析。</em></h6><ul>
+<li>总体把握<ul>
+<li>协议分级</li>
+<li>端点统计</li>
+</ul>
+</li>
+<li>过滤筛选<ul>
+<li>过滤语法</li>
+<li>Host，Protocol，contains，特征值</li>
+</ul>
+</li>
+<li>发现异常<ul>
+<li>特殊字符串</li>
+<li>协议某字段</li>
+<li>flag位于服务器中</li>
+</ul>
+</li>
+<li>数据提取<ul>
+<li>字符串取</li>
+<li>文件提取</li>
+</ul>
+</li>
+</ul>
+<p>总体来说比赛中的流量分析可以概括一下三个方向</p>
+<ul>
+<li>流量包修复</li>
+<li>协议分析</li>
+<li>数据提取 、</li>
+</ul>
+<h5 id="Wireshark工具"><a href="#Wireshark工具" class="headerlink" title="Wireshark工具"></a>Wireshark工具</h5><p>使用Wireshark网络分析器进行流量分析</p>
+<p>Wireshark的过滤器和过滤规则能够帮助我们迅速定位到要分析的报文。</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200603172317772.png" alt="image-20200603172317772"></p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200603173254349.png" alt="image-20200603173254349"></p>
+<h5 id="Wireshark过滤器"><a href="#Wireshark过滤器" class="headerlink" title="Wireshark过滤器"></a>Wireshark过滤器</h5><p>五元组</p>
+<ul>
+<li>源IP地址</li>
+<li>源端口</li>
+<li>目的IP地址</li>
+<li>目的端口</li>
+<li>传输层协议 </li>
+</ul>
+<p>利用Wireshark本身强大的报文过滤器，帮助我们筛选出想要的报文。</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200603173850984.png" alt="image-20200603173850984"></p>
+<p>常用的过滤命令：</p>
+<h5 id="1、过滤IP，如源IP或者目标x-x-x-x"><a href="#1、过滤IP，如源IP或者目标x-x-x-x" class="headerlink" title="1、过滤IP，如源IP或者目标x.x.x.x"></a>1、过滤IP，如源IP或者目标x.x.x.x</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ip.src eq x.x.x.x or ip.dst eq x.x.x.x 或者 ip.addr eq x.x.x.x</span><br></pre></td></tr></table></figure>
+
+<h5 id="2、过滤端口"><a href="#2、过滤端口" class="headerlink" title="2、过滤端口"></a>2、过滤端口</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">tcp.port eq 80 or udp.port eq 80</span><br><span class="line"></span><br><span class="line">tcp.dstport &#x3D;&#x3D; 80 只显示tcp协议的目标端口为80</span><br><span class="line"></span><br><span class="line">tcp.srcport &#x3D;&#x3D; 80 只显示tcp协议的源端口为80</span><br><span class="line"></span><br><span class="line">tcp.port &gt;&#x3D; 1 and tcp port &lt;&#x3D; 80</span><br></pre></td></tr></table></figure>
+
+<h5 id="3、过滤协议"><a href="#3、过滤协议" class="headerlink" title="3、过滤协议"></a>3、过滤协议</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tcp&#x2F;udp&#x2F;arp&#x2F;icmp&#x2F;http&#x2F;ftp&#x2F;dns&#x2F;ip......</span><br></pre></td></tr></table></figure>
+
+<h5 id="4、过滤MAC"><a href="#4、过滤MAC" class="headerlink" title="4、过滤MAC"></a>4、过滤MAC</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">eth.dst &#x3D;&#x3D; A0:00:00:04:C5:84过滤目标mac</span><br></pre></td></tr></table></figure>
+
+<h5 id="5、包长度过滤"><a href="#5、包长度过滤" class="headerlink" title="5、包长度过滤"></a>5、包长度过滤</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">upd.length &#x3D;&#x3D; 26 	这个长度是指udp本身固定长度8加上udp下面那块数据包之和。</span><br><span class="line"></span><br><span class="line">tcp.len &gt;&#x3D; 7 		指的是ip数据包（tcp下面那块数据），不包括tcp本身</span><br><span class="line"></span><br><span class="line">ip.len &#x3D;&#x3D; 94		除了以太网头固定长度14，其他都算是ip.len，即从ip本身到最后</span><br><span class="line"></span><br><span class="line">frame.len &#x3D;&#x3D; 119 	整个数据包长度，从eth开始到最后</span><br></pre></td></tr></table></figure>
+
+<h5 id="6、Http模式过滤"><a href="#6、Http模式过滤" class="headerlink" title="6、Http模式过滤"></a>6、Http模式过滤</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">http.request.method &#x3D;&#x3D; &quot;GET&quot;</span><br><span class="line"></span><br><span class="line">http.request.method &#x3D;&#x3D; &quot;POST&quot;</span><br><span class="line"></span><br><span class="line">http.request.uri &#x3D;&#x3D; &quot;&#x2F;img&#x2F;logo-edu.gif&quot;</span><br><span class="line"></span><br><span class="line">http contains &quot;GET&quot;</span><br><span class="line"></span><br><span class="line">http contains &quot;HTTP&#x2F;1.&quot;</span><br><span class="line"></span><br><span class="line">http.request.method &#x3D;&#x3D; &quot;GET&quot; &amp;&amp; http contains &quot;User-Agent:&quot;</span><br><span class="line"></span><br><span class="line">http contains &quot;flag&quot;</span><br><span class="line"></span><br><span class="line">http contains &quot;key&quot;</span><br><span class="line"></span><br><span class="line">tcp contains &quot;flag&quot;</span><br></pre></td></tr></table></figure>
+
+<h5 id="WireShark协议分析"><a href="#WireShark协议分析" class="headerlink" title="WireShark协议分析"></a>WireShark协议分析</h5><p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200603191446662.png" alt="image-20200603191446662"></p>
+<p>根据数据包特征进行筛选</p>
+<p>比如查看数据包的时候，有的数据包有某种特征，比如有http(80)，就可以筛选出这种特征出来。</p>
+<p>右键 —&gt; 作为过滤器应用 —&gt; 选中</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200604075738364.png" alt="image-20200604075738364"></p>
+<h5 id="WireShark-流汇聚"><a href="#WireShark-流汇聚" class="headerlink" title="WireShark 流汇聚"></a>WireShark 流汇聚</h5><p>​    在关注的http数据包或cp数据包中选择流汇聚，可以将<strong>HTTP流</strong>或<strong>TCP流</strong>汇聚或还原成数据，在弹出的框中可以看到数据内容。</p>
+<p>flag值就有可能存在TCP / HTTP流中</p>
+<h5 id="常见的HTTP流关键内容："><a href="#常见的HTTP流关键内容：" class="headerlink" title="常见的HTTP流关键内容："></a><em>常见的HTTP流关键内容：</em></h5><h6 id="1、HTML中直接包含重要信息。"><a href="#1、HTML中直接包含重要信息。" class="headerlink" title="1、HTML中直接包含重要信息。"></a>1、HTML中直接包含重要信息。</h6><h6 id="2、上传或下载文件内容，通常包含文件名，hash值相等关键信息，常用POST请求上传"><a href="#2、上传或下载文件内容，通常包含文件名，hash值相等关键信息，常用POST请求上传" class="headerlink" title="2、上传或下载文件内容，通常包含文件名，hash值相等关键信息，常用POST请求上传"></a>2、上传或下载文件内容，通常包含文件名，hash值相等关键信息，常用POST请求上传</h6><h6 id="3、一句话木马，POST请求，内容包含eval，内容使用base64加密"><a href="#3、一句话木马，POST请求，内容包含eval，内容使用base64加密" class="headerlink" title="3、一句话木马，POST请求，内容包含eval，内容使用base64加密"></a>3、一句话木马，POST请求，内容包含eval，内容使用base64加密</h6><p>HTTP流：</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200604080014248.png" alt="image-20200604080014248"></p>
+<p>也可以保存成另一种格式</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200604081346525.png" alt="image-20200604081346525"></p>
+<p>例如：</p>
+<p>打开事先准备好的题，找到对应的流，然后进行数据流追踪，筛选值里面就有可能有flag值</p>
+<p>如果当流很多的时候可以使用数据流筛选里面的命令进行删选。</p>
+<p>这个题里面就有一个base64加密得值，进行解密即可</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200604094211391.png" alt="image-20200604094211391"></p>
+<h5 id="WireShark-数据提取"><a href="#WireShark-数据提取" class="headerlink" title="WireShark 数据提取"></a>WireShark 数据提取</h5><p>1、使用wireshark可以自动提取通过http传输的文件内容。</p>
+<p>文件 —&gt; 导出对象 —&gt; HTTP</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200604094511491.png" alt="image-20200604094511491"></p>
+<p>可以看到一个eval，说明这是以一个一句话木马存储的文件，第一段是base64加密的文件</p>
+<p>89504E47是png的图片的文件头，将下面的16进制全部复制到一个文本，使用010Editor打开</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200604105348978.png" alt="image-20200604105348978"></p>
+<p>2、wireshark手动提取文件内容。</p>
+<p>点击想要的数据包，选定media type的位置</p>
+<p>右键 —&gt; 导出分组字节流 或者 点击菜单栏  文件 —&gt; 导出分组字节流，快捷键Ctrl+H在弹出的框中将文件保存成二进制文件。</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200604110757287.png" alt="image-20200604110757287"></p>
+<h5 id="无线wifi流量包"><a href="#无线wifi流量包" class="headerlink" title="无线wifi流量包"></a>无线wifi流量包</h5><p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200604152044165.png" alt="image-20200604152044165"></p>
+<p>aircrack-ng工具进行wifi密码破解</p>
+<p>1、用aircrack-ng检查cap包：arcrack-ng xxx.cap</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200605102927768.png" alt="image-20200605102927768"></p>
+<p>2、用aircrack-ng跑字典进行握手包破解：aircrack-ng xxx.cap -w pass.txt</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200605111002987.png" alt="image-20200605111002987"></p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200605111056255.png" alt="image-20200605111056255"></p>
+<h4 id="USB流量包文件分析"><a href="#USB流量包文件分析" class="headerlink" title="USB流量包文件分析"></a>USB流量包文件分析</h4><h5 id="USB流量"><a href="#USB流量" class="headerlink" title="USB流量"></a>USB流量</h5><h6 id="USB流量也是流量分析题的考察点，一般考察的流量涉及键盘击键，鼠标移动与点击，存储设备的明文传输通信，USB无线网卡网络传输内容等。"><a href="#USB流量也是流量分析题的考察点，一般考察的流量涉及键盘击键，鼠标移动与点击，存储设备的明文传输通信，USB无线网卡网络传输内容等。" class="headerlink" title="USB流量也是流量分析题的考察点，一般考察的流量涉及键盘击键，鼠标移动与点击，存储设备的明文传输通信，USB无线网卡网络传输内容等。"></a>USB流量也是流量分析题的考察点，一般考察的流量涉及键盘击键，鼠标移动与点击，存储设备的明文传输通信，USB无线网卡网络传输内容等。</h6><p>USB协议的数据部分在Leftover Capture Data域之中。</p>
+<p>右键leftover capture data —&gt; 应用为例。</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200605111406012.png" alt></p>
+<h5 id="USB键盘流量抓取分析"><a href="#USB键盘流量抓取分析" class="headerlink" title="USB键盘流量抓取分析"></a>USB键盘流量抓取分析</h5><p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200606213030411.png" alt="image-20200606213030411"></p>
+<p>Leftover Capture Data数据提取方式1：</p>
+<p>文件 —&gt; 导出分组解析结构 —&gt; 为CSV，导出保存成一个.csv文件。</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200606213318200.png" alt="image-20200606213318200"></p>
+<p>Leftover Capture Data数据提取方式 2：</p>
+<p>使用wireshark提供的命令工具 tshark，可以将Leftover Capture Data数据单独复制出来。</p>
+<p><code>tshark -r 流量包名 -T flelds -e usb.capdata &gt; 要保存的文件</code></p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200606215013376.png" alt="image-20200606215013376"></p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200606221053278.png" alt="image-20200606221053278"></p>
+<h5 id="USB鼠标流量抓取分析"><a href="#USB鼠标流量抓取分析" class="headerlink" title="USB鼠标流量抓取分析"></a>USB鼠标流量抓取分析</h5><h6 id="鼠标流量与键盘流量不同，-鼠标移动时表现为连续性，与键盘的离散型不一样。但是实际鼠标产生的数据是离散的。所以同样可以把数据抓取出来，构成二维坐标画出轨迹。"><a href="#鼠标流量与键盘流量不同，-鼠标移动时表现为连续性，与键盘的离散型不一样。但是实际鼠标产生的数据是离散的。所以同样可以把数据抓取出来，构成二维坐标画出轨迹。" class="headerlink" title="鼠标流量与键盘流量不同， 鼠标移动时表现为连续性，与键盘的离散型不一样。但是实际鼠标产生的数据是离散的。所以同样可以把数据抓取出来，构成二维坐标画出轨迹。"></a>鼠标流量与键盘流量不同， 鼠标移动时表现为连续性，与键盘的离散型不一样。但是实际鼠标产生的数据是离散的。所以同样可以把数据抓取出来，构成二维坐标画出轨迹。</h6><p><strong>鼠标数据包</strong>的数据长度为<strong>4个字节</strong>，<strong>第一个字节代表按键</strong>，当去<strong>oxoo</strong>时，代表<strong>没有按键</strong>；<strong>oxo1时</strong>，代表<strong>按左键</strong>，为<strong>oxo2时</strong>，代表当前<strong>按键为右键</strong>。</p>
+<p><strong>第二个字节</strong>代表<strong>左右偏移</strong>；当值为<strong>正</strong>时，代表<strong>右移多少像素</strong>。当值为<strong>负</strong>时，代表<strong>左移多少像素</strong>。同理，<strong>第三个字节</strong>代表<strong>上下偏移</strong>。</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200606222850803.png" alt="image-20200606222850803"></p>
+<p>土脚本</p>
+<p>if btn_flag需要自行调整0,1,2</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200606225712699.png" alt="image-20200606225712699"></p>
+<p>第一张是没有将其导入一个文件，第二张 加上一个导出符 <code>&gt; 文件名</code>将信息保存到这个文档中</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200606225949760.png" alt="image-20200606225949760"></p>
+<p>用gnuplot工具把坐标画出来。</p>
+<p>输入<code>gnuplot</code>进入到gnuplot命令行</p>
+<p>使用<code>plot &quot;xy.txt&quot;</code>命令根据这个文件坐标画一张图 </p>
+<p>可以看到这张图是倒过来的，只需要将其复制，旋转一下就可以。。</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200606230805565.png" alt="image-20200606230805565"></p>
+<h5 id="HTTPS流量包文件分析"><a href="#HTTPS流量包文件分析" class="headerlink" title="HTTPS流量包文件分析"></a>HTTPS流量包文件分析</h5><h6 id="HTTPS流量是经过TLS协议加密过的，需要导入key才能看到原始的HTTP流量。"><a href="#HTTPS流量是经过TLS协议加密过的，需要导入key才能看到原始的HTTP流量。" class="headerlink" title="HTTPS流量是经过TLS协议加密过的，需要导入key才能看到原始的HTTP流量。"></a>HTTPS流量是经过TLS协议加密过的，需要导入key才能看到原始的HTTP流量。</h6><p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200606232137032.png" alt="image-20200606232137032"></p>
+<p>如果看到TLS和HTTPS(443)就可以判断出他是加密之后的</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200606232037932.png" alt="image-20200606232037932"></p>
+<p>英文版：Preferences —&gt; Protocols —&gt; SSL —&gt; Edit RSA keys list</p>
+<p>中文版：编辑 —&gt; 首选项 —&gt; Protocols —&gt; SSL —&gt; Edit RSA keys list</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200606232356753.png" alt="image-20200606232356753"></p>
+<h6 id="导入Key后出现原始的HTTP流量。"><a href="#导入Key后出现原始的HTTP流量。" class="headerlink" title="导入Key后出现原始的HTTP流量。"></a>导入Key后出现原始的HTTP流量。</h6><p>右键 —&gt; 追踪流 —&gt; SSL流/HTTP流</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200606232626017.png" alt="image-20200606232626017"></p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200606232750372.png" alt="image-20200606232750372"></p>
+<h4 id="密码学"><a href="#密码学" class="headerlink" title="密码学"></a>密码学</h4><h5 id="密码编码学"><a href="#密码编码学" class="headerlink" title="密码编码学"></a>密码编码学</h5><p>（1）<strong>密码编码学</strong>是密码学的一个分支，研究与信息安全（例如：机密性、完整性、可鉴别性）有关的数学技术。</p>
+<p>（2）<strong>密码编码学</strong>时包含数据变换的原 理、工具和方法的一门学科，这种数据变换的目的是为了隐藏数据的信息内容，阻止对数据的篡改以及防止未经认可使用数据。</p>
+<p>（3）<strong>密码编码学</strong>是论述使明文变得不可懂的密文，以及把已加密的消息变换成可懂形式的艺术和技巧。</p>
+<h5 id="对称加密不对称加密"><a href="#对称加密不对称加密" class="headerlink" title="对称加密不对称加密"></a>对称加密不对称加密</h5><ul>
+<li>对称密码算法：<strong>解密秘钥和加密秘钥相同</strong>，或实质上等同，即从一个易于推出另一个。又称传统密码算法、密码秘钥算法或单秘钥算法。<ul>
+<li><strong>DES、3DES、IDEA、AES</strong></li>
+</ul>
+</li>
+<li>非对称密码算法：<strong>加密秘钥和解密秘钥不同</strong>，从一个很难推出另一个。又叫公钥密码算法。<strong>其中的加密秘钥可以公开，称为公开密钥</strong>，简称<strong>公钥</strong>；<strong>解密秘钥必须比保密，称为私人秘钥</strong>，简称<strong>私钥</strong>。<ul>
+<li><strong>RSA、ECC、EIGamal</strong></li>
+</ul>
+</li>
+</ul>
+<h5 id="摘要算法"><a href="#摘要算法" class="headerlink" title="摘要算法"></a>摘要算法</h5><p>​        数据摘要算法是密码学算法中非常重要的一个分支，他通过对所有数据提取指纹信息以实现数据签名、数据完整性校验等功能，由于其不可逆性，有时候会被用作敏感信息的加密。数据摘要算法也被称为<strong>哈希（Hash）算法</strong>、<strong>散列算法</strong>，常见的摘要算法有<strong>MD5</strong>和<strong>SHA</strong></p>
+<p>​        在互联网上进行大文件传输时，都要得用MD5算法产生一个与文件匹配的、存储MD5值得文本文件（后缀名为<strong>.md5</strong>或<strong>.mdsum</strong>），这样接受者在接收到文件后，就可以利用与SFV类似的方法来检查文件完整性，对大多数大型软件公司或开源组织都是以这种方式来校验数据完整性，而且部分操作系统也使用此算法来对用户密码进行加密，另外，他也是目前计算机犯罪中数据取证最常用的算法。</p>
+<p>​        SHA中SHA1的应用范围较为广泛，主要用于CA个数字证书中，另外在互联网中流行的BT软件中，也是使用SHA1来进行文件校验的，由于SHA系列算法的数据摘要长度较长，因此其运算速度与MD5相比，也相对较慢。</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200607102755666.png" alt="image-20200607102755666"></p>
+<h5 id="ASCII编码"><a href="#ASCII编码" class="headerlink" title="ASCII编码"></a>ASCII编码</h5><p>​        ASCII码使用指定的7位或8位二进制数组来表示128或256种可能的字符。标准ASCII码也叫基础ASCII码，使用7位二进制数（剩下的1位二进制为0）来表示所有的大写和小写字母，数字0到9、标点符号，以及在美式英语中使用的特殊控制字符</p>
+<p>如果要进行ASCII吗转换，直接在百度搜索ASCII在线转换就可以</p>
+<p><a href="http://ctf.ssleye.com/这里面有各种" target="_blank" rel="noopener">http://ctf.ssleye.com/这里面有各种</a> 转换工具</p>
+<p>或者下载一个  <strong>小葵多功能转换工具</strong>。 </p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200607141505200.png" alt="image-20200607141505200"></p>
+<h5 id="Base64编码"><a href="#Base64编码" class="headerlink" title="Base64编码"></a>Base64编码</h5><p>​        Base64顾名思义就是用64个可显示字符表示所有ASC字符，64也就是6Bits，而ASC字符一共有256个，也就是8Bits。Base64编码要求把3个8为字节（38=24）转化为4个6位的字节（46=24），之后在6位的前面补两个0，形成8位一个字节的形式。如果剩下的字符不足3个字节，则用0填充，输出字符使用’    =’，因此编码后输出的文本末尾<strong>可能出现1或2个’     =’</strong></p>
+<p>解密地址可以百度搜索在线工具，活着使用小葵，或者使用上面的网址里面的工具，都可以。</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200607144110784.png" alt="image-20200607144110784"></p>
+<h5 id="URL编码"><a href="#URL编码" class="headerlink" title="URL编码"></a>URL编码</h5><p>​        url编码就是一个字符ascii码的十六进制。不过稍微有些变动，需要在前面加上“%”，比如“\”，它的ascii码是92，92的十六进制是5c，所以“\”的url编码就是%5c。</p>
+<p>解码地址，百度搜在线解密</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200607152252672.png" alt="image-20200607152252672"></p>
+<h5 id="Unicode编码"><a href="#Unicode编码" class="headerlink" title="Unicode编码"></a>Unicode编码</h5><p>​        Unicode码扩展自ASCII字元集。在严格的ASCII中，每个字元用7位元表示，或者电脑上普遍使用的没字元有8位元宽；而Unicode使用全16位元字元集。这使得Unicode能够表示世界上所有的书写语言中可能与电脑通讯的字元、象形文字和其他符号。</p>
+<p>特点：密文中有多个\uxxx</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200607154702904.png" alt="image-20200607154702904"></p>
+<h5 id="JS混淆"><a href="#JS混淆" class="headerlink" title="JS混淆"></a>JS混淆</h5><p>​        有些时候开发者为了保护劳动成果可以通过对javascript的变量名称和过程名称进行编码，从而起到混淆JS代码的作用，通常使用eval函数进行混淆处理，该函数可以计算字符串，并执行其中的JS代码。</p>
+<p>​        如：对<code>&lt;script&gt;alert(&#39;xss&#39;);&lt;/script&gt;</code>进行16进制转换，然后使用eval函数进行读取</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    eval(&quot;\x61\x6c\x65\x72\x74\x28\x27\x58\x53\x53\x27\x29\x3b&quot;);</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>特点：通常在JS脚本里使用eval与function函数进行混淆</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200607155222852.png" alt="image-20200607155222852"></p>
+<h4 id="网络基础"><a href="#网络基础" class="headerlink" title="网络基础"></a>网络基础</h4><p>简单过一下</p>
+<h5 id="网络起源"><a href="#网络起源" class="headerlink" title="网络起源"></a>网络起源</h5><p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200608230118116.png" alt="image-20200608230118116"></p>
+<h5 id="家庭网络"><a href="#家庭网络" class="headerlink" title="家庭网络"></a>家庭网络</h5><p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200608230408330.png" alt="image-20200608230408330"></p>
+<h5 id="企业网路基本构架"><a href="#企业网路基本构架" class="headerlink" title="企业网路基本构架"></a>企业网路基本构架</h5><p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200608231043595.png" alt="image-20200608231043595"></p>
+<h5 id="网络的组成和结构"><a href="#网络的组成和结构" class="headerlink" title="网络的组成和结构"></a>网络的组成和结构</h5><p><strong>终端设备</strong>：PC、iphone、ATM等等。</p>
+<p><strong>网络互连设备</strong>：集线器、交换机、路由器、防火墙、IDS、IPS、ICG、AP、基站</p>
+<p><strong>用于连接设备的链接  /  介质：</strong>：同轴电缆，双绞线，光纤，无线</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200608231125684.png" alt="image-20200608231125684">   </p>
+<h4 id="通信模型介绍"><a href="#通信模型介绍" class="headerlink" title="通信模型介绍"></a>通信模型介绍</h4><h5 id="协议的必要性"><a href="#协议的必要性" class="headerlink" title="协议的必要性"></a>协议的必要性</h5><p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200608231822951.png" alt="image-20200608231822951"></p>
+<h5 id="OSI七层模型"><a href="#OSI七层模型" class="headerlink" title="OSI七层模型"></a>OSI七层模型</h5><p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200608232120916.png" alt="image-20200608232120916"></p>
+<h5 id="分层模型-TCP-IP标准模型与对等模型"><a href="#分层模型-TCP-IP标准模型与对等模型" class="headerlink" title="分层模型-TCP/IP标准模型与对等模型"></a>分层模型-TCP/IP标准模型与对等模型</h5><p>4层模型和5层模型，将7层模型进行合并。</p>
+<ul>
+<li>应用层：APP产生的数据</li>
+<li>表示层：格式转换</li>
+<li>会话层：区分不同会话</li>
+<li>传输层：端到端连接；通过端口号识别上层协议；比如443识别https；80-http；<ul>
+<li>端口号：小于1023的是知名端口，一些应用层协议都是默认为知名端口</li>
+</ul>
+</li>
+<li>网络层：IP寻址</li>
+<li>数据链路层：MAC寻址   —-物理地址（每台设备都有唯一的地址）</li>
+<li>物理层：决定数据在不同介质的传输方式</li>
+</ul>
+<ul>
+<li>报文五元组：<ul>
+<li>应用层：协议</li>
+<li>传输层：源端口、目的端口</li>
+<li>网络层：源IP、目的IP</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200608232644522.png" alt="image-20200608232644522"></p>
+<h4 id="web基础-sql注入"><a href="#web基础-sql注入" class="headerlink" title="web基础+sql注入"></a>web基础+sql注入</h4><h5 id="WEB应用的基础架构"><a href="#WEB应用的基础架构" class="headerlink" title="WEB应用的基础架构"></a>WEB应用的基础架构</h5><p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200609092657733.png" alt="image-20200609092657733"></p>
+<h5 id="HTTP协议"><a href="#HTTP协议" class="headerlink" title="HTTP协议"></a>HTTP协议</h5><p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200609102009198.png" alt="image-20200609102009198"></p>
+<h5 id="HTTP请求报文"><a href="#HTTP请求报文" class="headerlink" title="HTTP请求报文"></a>HTTP请求报文</h5><p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200609102040418.png" alt="image-20200609102040418"></p>
+<h5 id="HTTP请求报文—请求行"><a href="#HTTP请求报文—请求行" class="headerlink" title="HTTP请求报文—请求行"></a>HTTP请求报文—请求行</h5><p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200609102341778.png" alt="image-20200609102341778"></p>
+<h5 id="HTTP请求报文—请求头"><a href="#HTTP请求报文—请求头" class="headerlink" title="HTTP请求报文—请求头"></a>HTTP请求报文—请求头</h5><p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200609103242825.png" alt="image-20200609103242825"></p>
+<h5 id="HTTP响应报文"><a href="#HTTP响应报文" class="headerlink" title="HTTP响应报文"></a>HTTP响应报文</h5><p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200609103713600.png" alt="image-20200609103713600"></p>
+<h5 id="HTTP响应报文——状态行"><a href="#HTTP响应报文——状态行" class="headerlink" title="HTTP响应报文——状态行"></a>HTTP响应报文——状态行</h5><p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200609103747586.png" alt="image-20200609103747586"></p>
+<h5 id="信息收集类解题"><a href="#信息收集类解题" class="headerlink" title="信息收集类解题"></a>信息收集类解题</h5><p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200609105410884.png" alt="image-20200609105410884"></p>
+<h5 id="例题1，解题步骤"><a href="#例题1，解题步骤" class="headerlink" title="例题1，解题步骤"></a>例题1，解题步骤</h5><p>这是简单的信息收集</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200609105851147.png" alt="image-20200609105851147"></p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200609110822988.png" alt="image-20200609110822988"></p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200609110837706.png" alt="image-20200609110837706"></p>
+<h5 id="前端代码类解题"><a href="#前端代码类解题" class="headerlink" title="前端代码类解题"></a>前端代码类解题</h5><p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200609111918870.png" alt="image-20200609111918870"></p>
+<p>例：</p>
+<p>解析：F12，找到maxlength修改字符最大长度</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200609111940281.png" alt="image-20200609111940281"></p>
+<h5 id="HTTP协议类"><a href="#HTTP协议类" class="headerlink" title="HTTP协议类"></a>HTTP协议类</h5><p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200609112733121.png" alt="image-20200609112733121"></p>
+<p>例：</p>
+<p>页面返回你是来自谷歌吗？</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200609112850721.png" alt="image-20200609112850721"></p>
+<p>这里一看就知道要是用referer来伪造访问网址，只需要是用burp抓包，然后添加referer就可以，然后将谷歌网址输入即可</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200609113255514.png" alt="image-20200609113255514"></p>
+<h4 id="sql注入原理"><a href="#sql注入原理" class="headerlink" title="sql注入原理"></a>sql注入原理</h4><h5 id="数据库系统的基本概念"><a href="#数据库系统的基本概念" class="headerlink" title="数据库系统的基本概念"></a>数据库系统的基本概念</h5><p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200609115245391.png" alt="image-20200609115245391"></p>
+<h5 id="关系型数据库系统特点"><a href="#关系型数据库系统特点" class="headerlink" title="关系型数据库系统特点"></a>关系型数据库系统特点</h5><p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200609134441300.png" alt="image-20200609134441300"></p>
+<h5 id="结构化查询语言sql"><a href="#结构化查询语言sql" class="headerlink" title="结构化查询语言sql"></a>结构化查询语言sql</h5><p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200609134659116.png" alt="image-20200609134659116"></p>
+<h5 id="SELECT语句——基本查询"><a href="#SELECT语句——基本查询" class="headerlink" title="SELECT语句——基本查询"></a>SELECT语句——基本查询</h5><p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200609135101423.png" alt="image-20200609135101423"></p>
+<h5 id="SELECT语句——AND和OR运算"><a href="#SELECT语句——AND和OR运算" class="headerlink" title="SELECT语句——AND和OR运算"></a>SELECT语句——AND和OR运算</h5><p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200609135152489.png" alt="image-20200609135152489"></p>
+<h5 id="SQL注入攻击"><a href="#SQL注入攻击" class="headerlink" title="SQL注入攻击"></a>SQL注入攻击</h5><p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200609140939827.png" alt="image-20200609140939827"></p>
+<h5 id="经典的万能密码"><a href="#经典的万能密码" class="headerlink" title="经典的万能密码"></a>经典的万能密码</h5><p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200609144039740.png" alt="image-20200609144039740"></p>
+<p>使用正常语句查询，返回错误</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200609144106842.png" alt="image-20200609144106842"></p>
+<p>使用万能密码进行查询</p>
+<p>成功返回，</p>
+<p><strong>原理</strong>：or和and都有的时候先判断and也就是”1” and “123456”判断，这肯定是错的，错的就等于0</p>
+<p>俺就判断 “1”=”0”，因为1不等于0所以也是错了，username=”admin”是正确的所以正确。</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200609144930905.png" alt="image-20200609144930905"></p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200609144940562.png" alt="image-20200609144940562"></p>
+<p>因为是三种万能密码，所以还有两种，原理相同</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200609145305816.png" alt="image-20200609145305816"></p>
+<p>可以使用工具来进行扫描，sqlmap，椰树都可以</p>
+<p><img src="/2020/07/25/CTF%E8%B5%9B%E5%89%8D%E5%9F%B9%E8%AE%AD____%E6%9D%82%E9%A1%B9/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200609152002615.png" alt="image-20200609152002615"></p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/07/25/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F%E6%80%9D%E8%B7%AF/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">&lt;</strong>
+      <div class="article-nav-title">
+        
+          内网渗透思路
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/07/25/BUUCTF%E9%A2%98/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">BUUCTF题</div>
+      <strong class="article-nav-caption">&gt;</strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="ds-share share" data-thread-key="CTF赛前培训____杂项" data-title="CTF赛前培训____杂项" data-url="https://zhanqiaozai.github.io/2020/07/25/CTF%E8%B5%9B%E5%89%8D%E5%9F%B9%E8%AE%AD____%E6%9D%82%E9%A1%B9/"  data-images="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg" data-content="CTF赛前培训____杂项">
+    <div class="ds-share-inline">
+      <ul  class="ds-share-icons-16">
+      	<li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+        <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+        <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+        <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+        <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+      </ul>
+      <div class="ds-share-icons-more">
+      </div>
+    </div>
+ </div>
+ 
+
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+      <div class="footer-left">
+        &copy; 2020 zhanqiaozai
+      </div>
+        <div class="footer-right">
+          <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/smackgg/hexo-theme-smackdown" target="_blank">Smackdown</a>
+        </div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+
+<script src="/js/main.js"></script>
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js"></script>
+
+
+  </div>
+</body>
+</html>

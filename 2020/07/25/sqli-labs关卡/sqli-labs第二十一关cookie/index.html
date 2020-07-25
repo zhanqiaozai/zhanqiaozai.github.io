@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>sqli-labs关卡/sqli-labs第二十一关cookie | 栈桥仔</title>
+
+  <!-- keywords -->
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="抓取cookie包发送的repeater模块运行，返回这种结果  查看cookie值，发现是经过加密的  解密工具进行解密 12345%3D是&#x3D;等于号的意思YWRtaW4%3D将%30改为&#x3D;YWRtaW4&#x3D;解密之后发现是admin   1这样就可以在这个基础上将输入的sql语句进行加密执行   1查看字段数，回显正常，正确   1查看当前数据库   1返回正确   1">
+<meta property="og:type" content="article">
+<meta property="og:title" content="sqli-labs关卡&#x2F;sqli-labs第二十一关cookie">
+<meta property="og:url" content="https://zhanqiaozai.github.io/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%B8%80%E5%85%B3cookie/index.html">
+<meta property="og:site_name" content="栈桥仔">
+<meta property="og:description" content="抓取cookie包发送的repeater模块运行，返回这种结果  查看cookie值，发现是经过加密的  解密工具进行解密 12345%3D是&#x3D;等于号的意思YWRtaW4%3D将%30改为&#x3D;YWRtaW4&#x3D;解密之后发现是admin   1这样就可以在这个基础上将输入的sql语句进行加密执行   1查看字段数，回显正常，正确   1查看当前数据库   1返回正确   1">
+<meta property="og:image" content="https://zhanqiaozai.github.io/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%B8%80%E5%85%B3cookie/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1584584013031.png">
+<meta property="og:image" content="https://zhanqiaozai.github.io/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%B8%80%E5%85%B3cookie/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1584584032324.png">
+<meta property="og:image" content="https://zhanqiaozai.github.io/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%B8%80%E5%85%B3cookie/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1584584103583.png">
+<meta property="og:image" content="https://zhanqiaozai.github.io/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%B8%80%E5%85%B3cookie/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1584584671580.png">
+<meta property="og:image" content="https://zhanqiaozai.github.io/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%B8%80%E5%85%B3cookie/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1584584749973.png">
+<meta property="og:image" content="https://zhanqiaozai.github.io/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%B8%80%E5%85%B3cookie/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1584584795279.png">
+<meta property="og:image" content="https://zhanqiaozai.github.io/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%B8%80%E5%85%B3cookie/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1584584821451.png">
+<meta property="og:image" content="https://zhanqiaozai.github.io/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%B8%80%E5%85%B3cookie/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1584584902605.png">
+<meta property="og:image" content="https://zhanqiaozai.github.io/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%B8%80%E5%85%B3cookie/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1584584921052.png">
+<meta property="og:image" content="https://zhanqiaozai.github.io/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%B8%80%E5%85%B3cookie/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1584584981933.png">
+<meta property="og:image" content="https://zhanqiaozai.github.io/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%B8%80%E5%85%B3cookie/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1584584993309.png">
+<meta property="og:image" content="https://zhanqiaozai.github.io/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%B8%80%E5%85%B3cookie/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1584585054649.png">
+<meta property="og:image" content="https://zhanqiaozai.github.io/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%B8%80%E5%85%B3cookie/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1584585049444.png">
+<meta property="article:published_time" content="2020-07-25T01:18:02.448Z">
+<meta property="article:modified_time" content="2020-03-19T02:31:01.795Z">
+<meta property="article:author" content="zhanqiaozai">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://zhanqiaozai.github.io/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%B8%80%E5%85%B3cookie/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1584584013031.png">
+  
+    <link rel="alternative" href="/atom.xml" title="栈桥仔" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+
+  
+<script src="//cdn.bootcss.com/require.js/2.3.2/require.min.js"></script>
+
+  
+<script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+
+
+  
+<meta name="generator" content="Hexo 4.2.0"></head>
+<body>
+  <div id="container">
+    <div id="particles-js"></div>
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">zhanqiaozai</a></h1>
+		</hgroup>
+
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="https://github.com/smackgg/hexo-theme-smackdown">smackdown</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">zhanqiaozai</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">zhanqiaozai</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-sqli-labs关卡/sqli-labs第二十一关cookie" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%B8%80%E5%85%B3cookie/" class="article-date">
+  	<time datetime="2020-07-25T01:18:02.448Z" itemprop="datePublished">2020-07-25</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      sqli-labs关卡/sqli-labs第二十一关cookie
+      
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+        
+
+        
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>抓取cookie包发送的repeater模块运行，返回这种结果</p>
+<p><img src="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%B8%80%E5%85%B3cookie/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1584584013031.png" alt="1584584013031"></p>
+<p>查看cookie值，发现是经过加密的</p>
+<p><img src="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%B8%80%E5%85%B3cookie/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1584584032324.png" alt="1584584032324"></p>
+<p>解密工具进行解密</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">%3D是&#x3D;等于号的意思</span><br><span class="line">YWRtaW4%3D</span><br><span class="line">将%30改为&#x3D;</span><br><span class="line">YWRtaW4&#x3D;</span><br><span class="line">解密之后发现是admin</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%B8%80%E5%85%B3cookie/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1584584103583.png" alt="1584584103583"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">这样就可以在这个基础上将输入的sql语句进行加密执行</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%B8%80%E5%85%B3cookie/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1584584671580.png" alt="1584584671580"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">查看字段数，回显正常，正确</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%B8%80%E5%85%B3cookie/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1584584749973.png" alt="1584584749973"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">查看当前数据库</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%B8%80%E5%85%B3cookie/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1584584795279.png" alt="1584584795279"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">返回正确</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%B8%80%E5%85%B3cookie/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1584584821451.png" alt="1584584821451"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">查看表</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%B8%80%E5%85%B3cookie/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1584584902605.png" alt="1584584902605"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">查看结果</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%B8%80%E5%85%B3cookie/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1584584921052.png" alt="1584584921052"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">查看users表字段</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%B8%80%E5%85%B3cookie/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1584584981933.png" alt="1584584981933"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">查看结果</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%B8%80%E5%85%B3cookie/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1584584993309.png" alt="1584584993309"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">查看username字段</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%B8%80%E5%85%B3cookie/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1584585054649.png" alt="1584585054649"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">查看结果</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%B8%80%E5%85%B3cookie/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1584585049444.png" alt="1584585049444"></p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%B8%83%E5%85%B3%E8%BF%87%E6%BB%A4%E7%A9%BA%E6%A0%BC%E7%BB%95%E8%BF%87/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">&lt;</strong>
+      <div class="article-nav-title">
+        
+          sqli-labs关卡/sqli-labs第二十七关过滤空格绕过
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%8C%E5%85%B3GET%E8%81%94%E5%90%88/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">sqli-labs关卡/sqli-labs第二关GET联合</div>
+      <strong class="article-nav-caption">&gt;</strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="ds-share share" data-thread-key="sqli-labs关卡/sqli-labs第二十一关cookie" data-title="sqli-labs关卡/sqli-labs第二十一关cookie" data-url="https://zhanqiaozai.github.io/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%B8%80%E5%85%B3cookie/"  data-images="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg" data-content="sqli-labs关卡/sqli-labs第二十一关cookie">
+    <div class="ds-share-inline">
+      <ul  class="ds-share-icons-16">
+      	<li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+        <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+        <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+        <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+        <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+      </ul>
+      <div class="ds-share-icons-more">
+      </div>
+    </div>
+ </div>
+ 
+
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+      <div class="footer-left">
+        &copy; 2020 zhanqiaozai
+      </div>
+        <div class="footer-right">
+          <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/smackgg/hexo-theme-smackdown" target="_blank">Smackdown</a>
+        </div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+
+<script src="/js/main.js"></script>
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js"></script>
+
+
+  </div>
+</body>
+</html>

