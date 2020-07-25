@@ -9,12 +9,12 @@
   
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="sql注入sql注入SQL注入就是指Web应用程序对用户输入数据的合法性没有判断，前端传入后端的参数是攻击者可控的，并且参数代入数据库查询，攻击者可以通过构造不同的sql语句来实现对数据库的任意操作 SQL注入原理SQL注入的而产生的需要满足两个条件：  参数用户可控：前端传给后端的参数内容是用户可以控制的 参数代入数据库查询：传入的参数拼接到SQL语句查询，且带入数据库查询  当传入的参数为1’">
+  <meta name="description" content="[TOC] sql注入sql注入SQL注入就是指Web应用程序对用户输入数据的合法性没有判断，前端传入后端的参数是攻击者可控的，并且参数代入数据库查询，攻击者可以通过构造不同的sql语句来实现对数据库的任意操作 SQL注入原理SQL注入的而产生的需要满足两个条件：  参数用户可控：前端传给后端的参数内容是用户可以控制的 参数代入数据库查询：传入的参数拼接到SQL语句查询，且带入数据库查询  当传入">
 <meta property="og:type" content="article">
 <meta property="og:title" content="sql注入">
-<meta property="og:url" content="https://zhanqiaozai.github.io/2020/04/03/sql%E6%B3%A8%E5%85%A5/index.html">
+<meta property="og:url" content="https://zhanqiaozai.github.io/2020/07/20/sql%E6%B3%A8%E5%85%A5/index.html">
 <meta property="og:site_name" content="栈桥仔">
-<meta property="og:description" content="sql注入sql注入SQL注入就是指Web应用程序对用户输入数据的合法性没有判断，前端传入后端的参数是攻击者可控的，并且参数代入数据库查询，攻击者可以通过构造不同的sql语句来实现对数据库的任意操作 SQL注入原理SQL注入的而产生的需要满足两个条件：  参数用户可控：前端传给后端的参数内容是用户可以控制的 参数代入数据库查询：传入的参数拼接到SQL语句查询，且带入数据库查询  当传入的参数为1’">
+<meta property="og:description" content="[TOC] sql注入sql注入SQL注入就是指Web应用程序对用户输入数据的合法性没有判断，前端传入后端的参数是攻击者可控的，并且参数代入数据库查询，攻击者可以通过构造不同的sql语句来实现对数据库的任意操作 SQL注入原理SQL注入的而产生的需要满足两个条件：  参数用户可控：前端传给后端的参数内容是用户可以控制的 参数代入数据库查询：传入的参数拼接到SQL语句查询，且带入数据库查询  当传入">
 <meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/1583897216762.png">
 <meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/1583897341992.png">
 <meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/1583897462676.png">
@@ -83,8 +83,8 @@
 <meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/1584189398751.png">
 <meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/1584189864602.png">
 <meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200403142025653.png">
-<meta property="article:published_time" content="2020-04-03T06:09:55.917Z">
-<meta property="article:modified_time" content="2020-04-03T06:21:11.370Z">
+<meta property="article:published_time" content="2020-07-20T05:09:29.626Z">
+<meta property="article:modified_time" content="2020-07-25T01:59:23.842Z">
 <meta property="article:author" content="zhanqiaozai">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/1583897216762.png">
@@ -242,8 +242,8 @@
       <div class="body-wrap"><article id="post-sql注入" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2020/04/03/sql%E6%B3%A8%E5%85%A5/" class="article-date">
-  	<time datetime="2020-04-03T06:09:55.917Z" itemprop="datePublished">2020-04-03</time>
+      <a href="/2020/07/20/sql%E6%B3%A8%E5%85%A5/" class="article-date">
+  	<time datetime="2020-07-20T05:09:29.626Z" itemprop="datePublished">2020-07-20</time>
 </a>
     </div>
   
@@ -274,7 +274,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="sql注入"><a href="#sql注入" class="headerlink" title="sql注入"></a>sql注入</h3><h4 id="sql注入-1"><a href="#sql注入-1" class="headerlink" title="sql注入"></a>sql注入</h4><p>SQL注入就是指Web应用程序对用户输入数据的合法性没有判断，前端传入后端的参数是攻击者可控的，并且参数代入数据库查询，攻击者可以通过构造不同的sql语句来实现对数据库的任意操作</p>
+        <p>[TOC]</p>
+<h3 id="sql注入"><a href="#sql注入" class="headerlink" title="sql注入"></a>sql注入</h3><h4 id="sql注入-1"><a href="#sql注入-1" class="headerlink" title="sql注入"></a>sql注入</h4><p>SQL注入就是指Web应用程序对用户输入数据的合法性没有判断，前端传入后端的参数是攻击者可控的，并且参数代入数据库查询，攻击者可以通过构造不同的sql语句来实现对数据库的任意操作</p>
 <h4 id="SQL注入原理"><a href="#SQL注入原理" class="headerlink" title="SQL注入原理"></a>SQL注入原理</h4><p>SQL注入的而产生的需要满足两个条件：</p>
 <ul>
 <li>参数用户可控：前端传给后端的参数内容是用户可以控制的</li>
@@ -567,15 +568,20 @@
     
 <nav id="article-nav">
   
-    <a href="/2020/04/03/MySQL%E6%95%B0%E6%8D%AE%E5%BA%93/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2020/07/20/xss-labs/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">&lt;</strong>
       <div class="article-nav-title">
         
-          MySQL数据库
+          xss-labs
         
       </div>
     </a>
   
+  
+    <a href="/2020/07/20/php/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">php</div>
+      <strong class="article-nav-caption">&gt;</strong>
+    </a>
   
 </nav>
 
@@ -583,7 +589,7 @@
 </article>
 
 
-<div class="ds-share share" data-thread-key="sql注入" data-title="sql注入" data-url="https://zhanqiaozai.github.io/2020/04/03/sql%E6%B3%A8%E5%85%A5/"  data-images="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg" data-content="sql注入">
+<div class="ds-share share" data-thread-key="sql注入" data-title="sql注入" data-url="https://zhanqiaozai.github.io/2020/07/20/sql%E6%B3%A8%E5%85%A5/"  data-images="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg" data-content="sql注入">
     <div class="ds-share-inline">
       <ul  class="ds-share-icons-16">
       	<li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>

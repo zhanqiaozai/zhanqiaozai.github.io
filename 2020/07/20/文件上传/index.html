@@ -9,12 +9,12 @@
   
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="介绍文件上传漏洞现在web应用程序，上传文件一种常见功能，为了提高效率，允许用户上传图片，视频，头像和许多其他的文件。然而向用户提供的功能越多，web应用受到攻击的风险就越大，如果web应用存在文件上传漏洞，那么恶意用户就可以利用文件上传漏洞将可执行脚本程序上传到服务器中，获得网站权限，或者进一步危害服务器 1、为什么文件上传存在漏洞上传文件时，如果服务器代码没有对客户端上传的文件进行严格的验证和">
+  <meta name="description" content="[TOC] 介绍文件上传漏洞现在web应用程序，上传文件一种常见功能，为了提高效率，允许用户上传图片，视频，头像和许多其他的文件。然而向用户提供的功能越多，web应用受到攻击的风险就越大，如果web应用存在文件上传漏洞，那么恶意用户就可以利用文件上传漏洞将可执行脚本程序上传到服务器中，获得网站权限，或者进一步危害服务器 1、为什么文件上传存在漏洞上传文件时，如果服务器代码没有对客户端上传的文件进行">
 <meta property="og:type" content="article">
 <meta property="og:title" content="文件上传">
-<meta property="og:url" content="https://zhanqiaozai.github.io/2020/04/07/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/index.html">
+<meta property="og:url" content="https://zhanqiaozai.github.io/2020/07/20/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/index.html">
 <meta property="og:site_name" content="栈桥仔">
-<meta property="og:description" content="介绍文件上传漏洞现在web应用程序，上传文件一种常见功能，为了提高效率，允许用户上传图片，视频，头像和许多其他的文件。然而向用户提供的功能越多，web应用受到攻击的风险就越大，如果web应用存在文件上传漏洞，那么恶意用户就可以利用文件上传漏洞将可执行脚本程序上传到服务器中，获得网站权限，或者进一步危害服务器 1、为什么文件上传存在漏洞上传文件时，如果服务器代码没有对客户端上传的文件进行严格的验证和">
+<meta property="og:description" content="[TOC] 介绍文件上传漏洞现在web应用程序，上传文件一种常见功能，为了提高效率，允许用户上传图片，视频，头像和许多其他的文件。然而向用户提供的功能越多，web应用受到攻击的风险就越大，如果web应用存在文件上传漏洞，那么恶意用户就可以利用文件上传漏洞将可执行脚本程序上传到服务器中，获得网站权限，或者进一步危害服务器 1、为什么文件上传存在漏洞上传文件时，如果服务器代码没有对客户端上传的文件进行">
 <meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200407135006062.png">
 <meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200407135530806.png">
 <meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200407140025900.png">
@@ -112,7 +112,7 @@
 <meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200406131948511.png">
 <meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200406170739475.png">
 <meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200406170957931.png">
-<meta property="og:image" content="https://zhanqiaozai.github.io/2020/04/07/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/upload%5Cimage-20200407164143221.png">
+<meta property="og:image" content="https://zhanqiaozai.github.io/2020/07/20/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/upload%5Cimage-20200407164143221.png">
 <meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200406173056947.png">
 <meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200406173400254.png">
 <meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200406173242871.png">
@@ -124,11 +124,11 @@
 <meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200406204342863.png">
 <meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200406204447988.png">
 <meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200406204520970.png">
-<meta property="og:image" content="https://zhanqiaozai.github.io/2020/04/07/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/upload%5Cimage-20200407165220436.png">
+<meta property="og:image" content="https://zhanqiaozai.github.io/2020/07/20/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/upload%5Cimage-20200407165220436.png">
 <meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200406213544157.png">
 <meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200406213837106.png">
 <meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200406214030356.png">
-<meta property="og:image" content="https://zhanqiaozai.github.io/2020/04/07/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/upload%5Cimage-20200407165452805.png">
+<meta property="og:image" content="https://zhanqiaozai.github.io/2020/07/20/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/upload%5Cimage-20200407165452805.png">
 <meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200406215120458.png">
 <meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200406215207644.png">
 <meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200406215305346.png">
@@ -141,8 +141,8 @@
 <meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200407090357703.png">
 <meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200407090628805.png">
 <meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200407091010103.png">
-<meta property="article:published_time" content="2020-04-07T09:08:02.642Z">
-<meta property="article:modified_time" content="2020-04-08T08:50:33.461Z">
+<meta property="article:published_time" content="2020-07-20T05:09:29.641Z">
+<meta property="article:modified_time" content="2020-07-25T02:00:15.687Z">
 <meta property="article:author" content="zhanqiaozai">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200407135006062.png">
@@ -300,8 +300,8 @@
       <div class="body-wrap"><article id="post-文件上传" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2020/04/07/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" class="article-date">
-  	<time datetime="2020-04-07T09:08:02.642Z" itemprop="datePublished">2020-04-07</time>
+      <a href="/2020/07/20/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" class="article-date">
+  	<time datetime="2020-07-20T05:09:29.641Z" itemprop="datePublished">2020-07-20</time>
 </a>
     </div>
   
@@ -332,7 +332,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h4 id="介绍文件上传漏洞"><a href="#介绍文件上传漏洞" class="headerlink" title="介绍文件上传漏洞"></a>介绍文件上传漏洞</h4><p>现在web应用程序，上传文件一种常见功能，为了提高效率，允许用户上传图片，视频，头像和许多其他的文件。然而向用户提供的功能越多，web应用受到攻击的风险就越大，如果web应用存在文件上传漏洞，那么恶意用户就可以利用文件上传漏洞将可执行脚本程序上传到服务器中，获得网站权限，或者进一步危害服务器</p>
+        <p>[TOC]</p>
+<h4 id="介绍文件上传漏洞"><a href="#介绍文件上传漏洞" class="headerlink" title="介绍文件上传漏洞"></a>介绍文件上传漏洞</h4><p>现在web应用程序，上传文件一种常见功能，为了提高效率，允许用户上传图片，视频，头像和许多其他的文件。然而向用户提供的功能越多，web应用受到攻击的风险就越大，如果web应用存在文件上传漏洞，那么恶意用户就可以利用文件上传漏洞将可执行脚本程序上传到服务器中，获得网站权限，或者进一步危害服务器</p>
 <h5 id="1、为什么文件上传存在漏洞"><a href="#1、为什么文件上传存在漏洞" class="headerlink" title="1、为什么文件上传存在漏洞"></a>1、为什么文件上传存在漏洞</h5><p>上传文件时，如果服务器代码没有对客户端上传的文件进行严格的验证和过滤，就容易造成可以上传任意文件的情况，包括上传脚本文件(asp、aspx、php、jsp等格式文件)</p>
 <h5 id="2、危害"><a href="#2、危害" class="headerlink" title="2、危害"></a>2、危害</h5><p>非法用户利用文件上传的恶意脚本控制整个网站，甚至控制服务器，这个恶意脚本文件被称为WebShell，也可以称之为”网页后门”，WebShell具有强大功能，比如查看服务器目录，服务器中的文件，执行系统命令等。</p>
 <h4 id="文件上传导致的常见安全问题"><a href="#文件上传导致的常见安全问题" class="headerlink" title="文件上传导致的常见安全问题"></a>文件上传导致的常见安全问题</h4><ul>
@@ -719,7 +720,7 @@
 <p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200406170957931.png" alt="image-20200406170912193"></p>
 <p>在kali中进行对应的上传</p>
 <p>wireshark下查看可以看到不断地请求webshell.php</p>
-<p><img src="/2020/04/07/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/upload%5Cimage-20200407164143221.png" alt="image-20200407164143221"></p>
+<p><img src="/2020/07/20/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/upload%5Cimage-20200407164143221.png" alt="image-20200407164143221"></p>
 <p>查看webshell.php中的代码，写入的shell.php和一句话木马</p>
 <p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200406173056947.png" alt="image-20200406171117818"></p>
 <p>页面选择webshell.php进行提交</p>
@@ -775,7 +776,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-nikto -h IP地址</span><br></pre></td></tr></table></figure>
 
 <p>例如：</p>
-<p><img src="/2020/04/07/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/upload%5Cimage-20200407165220436.png" alt="image-20200407165220436"></p>
+<p><img src="/2020/07/20/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/upload%5Cimage-20200407165220436.png" alt="image-20200407165220436"></p>
 <p>因为支持这几个方法所以可以确定存在IIS漏洞</p>
 <h5 id="4、IIS6-0-PUT上传利用"><a href="#4、IIS6-0-PUT上传利用" class="headerlink" title="4、IIS6.0 PUT上传利用"></a>4、IIS6.0 PUT上传利用</h5><h5 id="以下内容中的asp写错了多加了一个括号和-符号"><a href="#以下内容中的asp写错了多加了一个括号和-符号" class="headerlink" title="以下内容中的asp写错了多加了一个括号和@符号"></a>以下内容中的asp写错了多加了一个括号和@符号</h5><p>正确格式</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;% eval request(&quot;cmd&quot;)%&gt;</span><br></pre></td></tr></table></figure>
@@ -792,7 +793,7 @@
 <p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200406214030356.png" alt="image-20200406214030356"></p>
 <p>在根目录查看是否有一个123.txt，如果有查看123.txt中的内容</p>
 <p>发现确实凡在，并且内容也是asp脚本内容</p>
-<p><img src="/2020/04/07/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/upload%5Cimage-20200407165452805.png" alt="image-20200407165452805"></p>
+<p><img src="/2020/07/20/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/upload%5Cimage-20200407165452805.png" alt="image-20200407165452805"></p>
 <p>上传完成之后就需要进行MOVE重命名或者COPY拷贝</p>
 <p>打开网址输入网址的URL进行抓包，将其配置信息修改</p>
 <p>将GET修改为COPY，拷贝的内容是123.txt，可以将Host以下的内容全部删除</p>
@@ -859,18 +860,18 @@
     
 <nav id="article-nav">
   
-    <a href="/2020/04/08/upload-labs%E5%85%B3%E5%8D%A1/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2020/07/25/docker/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">&lt;</strong>
       <div class="article-nav-title">
         
-          upload-labs关卡
+          docker
         
       </div>
     </a>
   
   
-    <a href="/2020/04/03/python%E7%88%AC%E8%99%AB/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">python爬虫</div>
+    <a href="/2020/07/20/XSS/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">XSS</div>
       <strong class="article-nav-caption">&gt;</strong>
     </a>
   
@@ -880,7 +881,7 @@
 </article>
 
 
-<div class="ds-share share" data-thread-key="文件上传" data-title="文件上传" data-url="https://zhanqiaozai.github.io/2020/04/07/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/"  data-images="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg" data-content="文件上传">
+<div class="ds-share share" data-thread-key="文件上传" data-title="文件上传" data-url="https://zhanqiaozai.github.io/2020/07/20/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/"  data-images="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg" data-content="文件上传">
     <div class="ds-share-inline">
       <ul  class="ds-share-icons-16">
       	<li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>

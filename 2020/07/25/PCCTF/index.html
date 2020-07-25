@@ -9,12 +9,12 @@
   
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="WEBWEB 1打开页面 发现红框处有变量覆盖漏洞  这样就可以构造payload，其中的哈希值必须和key值相等， 1?action&#x3D;auth&amp;hashed_key&#x3D;4e07408562bedb8b60ce05c1decfe3ad16b72230967de01f640b7e4729b49fce&amp;key&#x3D;3  页面返回flag，提交即可  Web 2打">
+  <meta name="description" content="[TOC] WEBWEB 1打开页面 发现红框处有变量覆盖漏洞  这样就可以构造payload，其中的哈希值必须和key值相等， 1?action&#x3D;auth&amp;hashed_key&#x3D;4e07408562bedb8b60ce05c1decfe3ad16b72230967de01f640b7e4729b49fce&amp;key&#x3D;3  页面返回flag，提交即可">
 <meta property="og:type" content="article">
 <meta property="og:title" content="PCCTF">
 <meta property="og:url" content="https://zhanqiaozai.github.io/2020/07/25/PCCTF/index.html">
 <meta property="og:site_name" content="栈桥仔">
-<meta property="og:description" content="WEBWEB 1打开页面 发现红框处有变量覆盖漏洞  这样就可以构造payload，其中的哈希值必须和key值相等， 1?action&#x3D;auth&amp;hashed_key&#x3D;4e07408562bedb8b60ce05c1decfe3ad16b72230967de01f640b7e4729b49fce&amp;key&#x3D;3  页面返回flag，提交即可  Web 2打">
+<meta property="og:description" content="[TOC] WEBWEB 1打开页面 发现红框处有变量覆盖漏洞  这样就可以构造payload，其中的哈希值必须和key值相等， 1?action&#x3D;auth&amp;hashed_key&#x3D;4e07408562bedb8b60ce05c1decfe3ad16b72230967de01f640b7e4729b49fce&amp;key&#x3D;3  页面返回flag，提交即可">
 <meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200623185822894.png">
 <meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200623190004841.png">
 <meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200623190247326.png">
@@ -74,7 +74,7 @@
 <meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200625192702483.png">
 <meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200625192824329.png">
 <meta property="article:published_time" content="2020-07-25T01:17:06.969Z">
-<meta property="article:modified_time" content="2020-06-25T11:28:26.616Z">
+<meta property="article:modified_time" content="2020-07-25T01:58:53.863Z">
 <meta property="article:author" content="zhanqiaozai">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200623185822894.png">
@@ -264,7 +264,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="WEB"><a href="#WEB" class="headerlink" title="WEB"></a>WEB</h2><h4 id="WEB-1"><a href="#WEB-1" class="headerlink" title="WEB 1"></a>WEB 1</h4><p>打开页面</p>
+        <p>[TOC]</p>
+<h2 id="WEB"><a href="#WEB" class="headerlink" title="WEB"></a>WEB</h2><h4 id="WEB-1"><a href="#WEB-1" class="headerlink" title="WEB 1"></a>WEB 1</h4><p>打开页面</p>
 <p>发现红框处有变量覆盖漏洞</p>
 <p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200623185822894.png" alt="image-20200623185822894"></p>
 <p>这样就可以构造payload，其中的哈希值必须和key值相等，</p>

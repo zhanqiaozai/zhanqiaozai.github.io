@@ -9,12 +9,12 @@
   
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="upload-labs第一关upload-labs第一关有两种方法绕过第一种使用burpsuit 第二种F12将JS过滤源码删除 查看界面  上传php文件看看能否上传，弹出了对话框，这表名验证点在前端，而不是在服务端  代码分析判断了验证点在前端，查看JS判断代码，F12找到判断代码  把代码抠出来整理 123456789101112131415161718192021function chec">
+  <meta name="description" content="[TOC] upload-labs第一关upload-labs第一关有两种方法绕过第一种使用burpsuit 第二种F12将JS过滤源码删除 查看界面  上传php文件看看能否上传，弹出了对话框，这表名验证点在前端，而不是在服务端  代码分析判断了验证点在前端，查看JS判断代码，F12找到判断代码  把代码抠出来整理 123456789101112131415161718192021functio">
 <meta property="og:type" content="article">
 <meta property="og:title" content="upload-labs关卡">
-<meta property="og:url" content="https://zhanqiaozai.github.io/2020/04/08/upload-labs%E5%85%B3%E5%8D%A1/index.html">
+<meta property="og:url" content="https://zhanqiaozai.github.io/2020/07/20/upload-labs%E5%85%B3%E5%8D%A1/index.html">
 <meta property="og:site_name" content="栈桥仔">
-<meta property="og:description" content="upload-labs第一关upload-labs第一关有两种方法绕过第一种使用burpsuit 第二种F12将JS过滤源码删除 查看界面  上传php文件看看能否上传，弹出了对话框，这表名验证点在前端，而不是在服务端  代码分析判断了验证点在前端，查看JS判断代码，F12找到判断代码  把代码抠出来整理 123456789101112131415161718192021function chec">
+<meta property="og:description" content="[TOC] upload-labs第一关upload-labs第一关有两种方法绕过第一种使用burpsuit 第二种F12将JS过滤源码删除 查看界面  上传php文件看看能否上传，弹出了对话框，这表名验证点在前端，而不是在服务端  代码分析判断了验证点在前端，查看JS判断代码，F12找到判断代码  把代码抠出来整理 123456789101112131415161718192021functio">
 <meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200407135006062.jpg">
 <meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200407135530806.jpg">
 <meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200407140025900.jpg">
@@ -53,8 +53,8 @@
 <meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200407174027297.png">
 <meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200407174059887.png">
 <meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200407174419725.png">
-<meta property="og:image" content="https://zhanqiaozai.github.io/2020/04/08/upload-labs%E5%85%B3%E5%8D%A1/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200407174444629.png">
-<meta property="og:image" content="https://zhanqiaozai.github.io/2020/04/08/upload-labs%E5%85%B3%E5%8D%A1/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200407174456829.png">
+<meta property="og:image" content="https://zhanqiaozai.github.io/2020/07/20/upload-labs%E5%85%B3%E5%8D%A1/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200407174444629.png">
+<meta property="og:image" content="https://zhanqiaozai.github.io/2020/07/20/upload-labs%E5%85%B3%E5%8D%A1/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200407174456829.png">
 <meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200407174734363.png">
 <meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200407174757325.png">
 <meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200407174807082.png">
@@ -107,8 +107,8 @@
 <meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200408100802057.png">
 <meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200408101223834.png">
 <meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200408101414864.png">
-<meta property="article:published_time" content="2020-04-08T05:46:26.619Z">
-<meta property="article:modified_time" content="2020-04-08T11:19:30.000Z">
+<meta property="article:published_time" content="2020-07-20T05:09:29.626Z">
+<meta property="article:modified_time" content="2020-07-25T01:59:34.959Z">
 <meta property="article:author" content="zhanqiaozai">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200407135006062.jpg">
@@ -266,8 +266,8 @@
       <div class="body-wrap"><article id="post-upload-labs关卡" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2020/04/08/upload-labs%E5%85%B3%E5%8D%A1/" class="article-date">
-  	<time datetime="2020-04-08T05:46:26.619Z" itemprop="datePublished">2020-04-08</time>
+      <a href="/2020/07/20/upload-labs%E5%85%B3%E5%8D%A1/" class="article-date">
+  	<time datetime="2020-07-20T05:09:29.626Z" itemprop="datePublished">2020-07-20</time>
 </a>
     </div>
   
@@ -298,7 +298,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h4 id="upload-labs第一关"><a href="#upload-labs第一关" class="headerlink" title="upload-labs第一关"></a>upload-labs第一关</h4><h5 id="upload-labs第一关有两种方法绕过"><a href="#upload-labs第一关有两种方法绕过" class="headerlink" title="upload-labs第一关有两种方法绕过"></a>upload-labs第一关有两种方法绕过</h5><p>第一种使用burpsuit</p>
+        <p>[TOC]</p>
+<h4 id="upload-labs第一关"><a href="#upload-labs第一关" class="headerlink" title="upload-labs第一关"></a>upload-labs第一关</h4><h5 id="upload-labs第一关有两种方法绕过"><a href="#upload-labs第一关有两种方法绕过" class="headerlink" title="upload-labs第一关有两种方法绕过"></a>upload-labs第一关有两种方法绕过</h5><p>第一种使用burpsuit</p>
 <p>第二种F12将JS过滤源码删除</p>
 <p>查看界面</p>
 <p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200407135006062.jpg" alt="image-20200407135006062"></p>
@@ -438,9 +439,9 @@
 <p><em>注:仅windows适用</em></p>
 <h5 id="更改文件名"><a href="#更改文件名" class="headerlink" title="更改文件名"></a>更改文件名</h5><p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200407174419725.png" alt="image-20200407174419725"></p>
 <p>上传</p>
-<p><img src="/2020/04/08/upload-labs%E5%85%B3%E5%8D%A1/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200407174444629.png" alt="image-20200407174444629"></p>
+<p><img src="/2020/07/20/upload-labs%E5%85%B3%E5%8D%A1/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200407174444629.png" alt="image-20200407174444629"></p>
 <p>查看根目录</p>
-<p><img src="/2020/04/08/upload-labs%E5%85%B3%E5%8D%A1/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200407174456829.png" alt="image-20200407174456829"></p>
+<p><img src="/2020/07/20/upload-labs%E5%85%B3%E5%8D%A1/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200407174456829.png" alt="image-20200407174456829"></p>
 <h4 id="upload-labs第九关"><a href="#upload-labs第九关" class="headerlink" title="upload-labs第九关"></a>upload-labs第九关</h4><h5 id="代码分析-6"><a href="#代码分析-6" class="headerlink" title="代码分析"></a>代码分析</h5><p>可以看到，这里代码的安全性比之前的都要更高，黑名单类型全，大小写经过转换，去除了文件名末尾的点，去除了文件名尾空格，还去除了::$DATA。。但是，这里还是可以绕过的。<strong>这里的代码逻辑是先删除文件名末尾的点，再进行首尾去空。</strong>都只进行一次。故可以构造点空格点进行绕过，也就是后缀名改为<code>xx.php. .</code>，也是利用了Windows的特性。<br> 也就是说，如果从第三关到第九关，如果目标服务器是windows系统的话，均可用点空格点绕过。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">$is_upload &#x3D; false;</span><br><span class="line">$msg &#x3D; null;</span><br><span class="line">if (isset($_POST[&#39;submit&#39;])) &#123;</span><br><span class="line">    if (file_exists($UPLOAD_ADDR)) &#123;</span><br><span class="line">        $deny_ext &#x3D; array(&quot;.php&quot;,&quot;.php5&quot;,&quot;.php4&quot;,&quot;.php3&quot;,&quot;.php2&quot;,&quot;.html&quot;,&quot;.htm&quot;,&quot;.phtml&quot;,&quot;.pHp&quot;,&quot;.pHp5&quot;,&quot;.pHp4&quot;,&quot;.pHp3&quot;,&quot;.pHp2&quot;,&quot;.Html&quot;,&quot;.Htm&quot;,&quot;.pHtml&quot;,&quot;.jsp&quot;,&quot;.jspa&quot;,&quot;.jspx&quot;,&quot;.jsw&quot;,&quot;.jsv&quot;,&quot;.jspf&quot;,&quot;.jtml&quot;,&quot;.jSp&quot;,&quot;.jSpx&quot;,&quot;.jSpa&quot;,&quot;.jSw&quot;,&quot;.jSv&quot;,&quot;.jSpf&quot;,&quot;.jHtml&quot;,&quot;.asp&quot;,&quot;.aspx&quot;,&quot;.asa&quot;,&quot;.asax&quot;,&quot;.ascx&quot;,&quot;.ashx&quot;,&quot;.asmx&quot;,&quot;.cer&quot;,&quot;.aSp&quot;,&quot;.aSpx&quot;,&quot;.aSa&quot;,&quot;.aSax&quot;,&quot;.aScx&quot;,&quot;.aShx&quot;,&quot;.aSmx&quot;,&quot;.cEr&quot;,&quot;.sWf&quot;,&quot;.swf&quot;,&quot;.htaccess&quot;);</span><br><span class="line">        $file_name &#x3D; trim($_FILES[&#39;upload_file&#39;][&#39;name&#39;]);</span><br><span class="line">        $file_name &#x3D; deldot($file_name);&#x2F;&#x2F;删除文件名末尾的点</span><br><span class="line">        $file_ext &#x3D; strrchr($file_name, &#39;.&#39;);</span><br><span class="line">        $file_ext &#x3D; strtolower($file_ext); &#x2F;&#x2F;转换为小写</span><br><span class="line">        $file_ext &#x3D; str_ireplace(&#39;::$DATA&#39;, &#39;&#39;, $file_ext);&#x2F;&#x2F;去除字符串::$DATA</span><br><span class="line">        $file_ext &#x3D; trim($file_ext); &#x2F;&#x2F;首尾去空</span><br><span class="line">        </span><br><span class="line">        if (!in_array($file_ext, $deny_ext)) &#123;</span><br><span class="line">            if (move_uploaded_file($_FILES[&#39;upload_file&#39;][&#39;tmp_name&#39;], $UPLOAD_ADDR . &#39;&#x2F;&#39; . $_FILES[&#39;upload_file&#39;][&#39;name&#39;])) &#123;</span><br><span class="line">                $img_path &#x3D; $UPLOAD_ADDR . &#39;&#x2F;&#39; . $file_name;</span><br><span class="line">                $is_upload &#x3D; true;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            $msg &#x3D; &#39;此文件不允许上传&#39;;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        $msg &#x3D; $UPLOAD_ADDR . &#39;文件夹不存在,请手工创建！&#39;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -626,18 +627,18 @@
     
 <nav id="article-nav">
   
-    <a href="/2020/04/12/Html/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2020/07/20/php/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">&lt;</strong>
       <div class="article-nav-title">
         
-          Html
+          php
         
       </div>
     </a>
   
   
-    <a href="/2020/04/07/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">文件上传</div>
+    <a href="/2020/07/20/python%E7%88%AC%E8%99%AB/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">python爬虫</div>
       <strong class="article-nav-caption">&gt;</strong>
     </a>
   
@@ -647,7 +648,7 @@
 </article>
 
 
-<div class="ds-share share" data-thread-key="upload-labs关卡" data-title="upload-labs关卡" data-url="https://zhanqiaozai.github.io/2020/04/08/upload-labs%E5%85%B3%E5%8D%A1/"  data-images="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg" data-content="upload-labs关卡">
+<div class="ds-share share" data-thread-key="upload-labs关卡" data-title="upload-labs关卡" data-url="https://zhanqiaozai.github.io/2020/07/20/upload-labs%E5%85%B3%E5%8D%A1/"  data-images="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg" data-content="upload-labs关卡">
     <div class="ds-share-inline">
       <ul  class="ds-share-icons-16">
       	<li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>

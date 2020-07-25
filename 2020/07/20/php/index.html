@@ -9,12 +9,12 @@
   
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="什么是PHP12345678910111213141516171819	超文本预处理器运行原理		运行在服务器端的，内嵌在html中的脚本语言		集成环境有哪些					wampserver  xmapp  phpstudy  appserver					php引擎(7.0)  mysql(数据库 database)  apache(服务)		为什么学习的时候用集成环境			学习入门访问：	loc">
+  <meta name="description" content="[TOC] 什么是PHP12345678910111213141516171819	超文本预处理器运行原理		运行在服务器端的，内嵌在html中的脚本语言		集成环境有哪些					wampserver  xmapp  phpstudy  appserver					php引擎(7.0)  mysql(数据库 database)  apache(服务)		为什么学习的时候用集成环境			学习入门访">
 <meta property="og:type" content="article">
 <meta property="og:title" content="php">
-<meta property="og:url" content="https://zhanqiaozai.github.io/2020/04/03/php/index.html">
+<meta property="og:url" content="https://zhanqiaozai.github.io/2020/07/20/php/index.html">
 <meta property="og:site_name" content="栈桥仔">
-<meta property="og:description" content="什么是PHP12345678910111213141516171819	超文本预处理器运行原理		运行在服务器端的，内嵌在html中的脚本语言		集成环境有哪些					wampserver  xmapp  phpstudy  appserver					php引擎(7.0)  mysql(数据库 database)  apache(服务)		为什么学习的时候用集成环境			学习入门访问：	loc">
+<meta property="og:description" content="[TOC] 什么是PHP12345678910111213141516171819	超文本预处理器运行原理		运行在服务器端的，内嵌在html中的脚本语言		集成环境有哪些					wampserver  xmapp  phpstudy  appserver					php引擎(7.0)  mysql(数据库 database)  apache(服务)		为什么学习的时候用集成环境			学习入门访">
 <meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/1582175685530.png">
 <meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/1582356332678.png">
 <meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/1582178905188.png">
@@ -32,8 +32,8 @@
 <meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/1582796508013.png">
 <meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/1582958832868.png">
 <meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/1582260055891.png">
-<meta property="article:published_time" content="2020-04-03T06:34:28.041Z">
-<meta property="article:modified_time" content="2020-04-03T06:34:16.000Z">
+<meta property="article:published_time" content="2020-07-20T05:09:29.626Z">
+<meta property="article:modified_time" content="2020-07-25T01:59:03.039Z">
 <meta property="article:author" content="zhanqiaozai">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/1582175685530.png">
@@ -191,8 +191,8 @@
       <div class="body-wrap"><article id="post-php" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2020/04/03/php/" class="article-date">
-  	<time datetime="2020-04-03T06:34:28.041Z" itemprop="datePublished">2020-04-03</time>
+      <a href="/2020/07/20/php/" class="article-date">
+  	<time datetime="2020-07-20T05:09:29.626Z" itemprop="datePublished">2020-07-20</time>
 </a>
     </div>
   
@@ -223,7 +223,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h4 id="什么是PHP"><a href="#什么是PHP" class="headerlink" title="什么是PHP"></a>什么是PHP</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">	超文本预处理器</span><br><span class="line">运行原理</span><br><span class="line">		运行在服务器端的，内嵌在html中的脚本语言</span><br><span class="line">		集成环境有哪些</span><br><span class="line">					wampserver  xmapp  phpstudy  appserver</span><br><span class="line">					php引擎(7.0)  mysql(数据库 database)  apache(服务)</span><br><span class="line">		为什么学习的时候用集成环境</span><br><span class="line">			学习入门</span><br><span class="line">访问：</span><br><span class="line">	localhost  本机服务器名字&#x2F;php文件</span><br><span class="line">	127.0.0.1  你本机的ip地址&#x2F;php文件</span><br><span class="line">注意：</span><br><span class="line">	在写php代码的时候统统写在www目录下</span><br><span class="line">【开发工具】</span><br><span class="line">vim  subline 【notepad++】 phpstrom webstrom dw NetBeans</span><br><span class="line">【php信息】 </span><br><span class="line">	phpinfo();显示所有的php信息</span><br><span class="line">	他是模块化的，你需要什么，你必须给我开启那个模块</span><br><span class="line">	php.ini</span><br></pre></td></tr></table></figure>
+        <p>[TOC]</p>
+<h4 id="什么是PHP"><a href="#什么是PHP" class="headerlink" title="什么是PHP"></a>什么是PHP</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">	超文本预处理器</span><br><span class="line">运行原理</span><br><span class="line">		运行在服务器端的，内嵌在html中的脚本语言</span><br><span class="line">		集成环境有哪些</span><br><span class="line">					wampserver  xmapp  phpstudy  appserver</span><br><span class="line">					php引擎(7.0)  mysql(数据库 database)  apache(服务)</span><br><span class="line">		为什么学习的时候用集成环境</span><br><span class="line">			学习入门</span><br><span class="line">访问：</span><br><span class="line">	localhost  本机服务器名字&#x2F;php文件</span><br><span class="line">	127.0.0.1  你本机的ip地址&#x2F;php文件</span><br><span class="line">注意：</span><br><span class="line">	在写php代码的时候统统写在www目录下</span><br><span class="line">【开发工具】</span><br><span class="line">vim  subline 【notepad++】 phpstrom webstrom dw NetBeans</span><br><span class="line">【php信息】 </span><br><span class="line">	phpinfo();显示所有的php信息</span><br><span class="line">	他是模块化的，你需要什么，你必须给我开启那个模块</span><br><span class="line">	php.ini</span><br></pre></td></tr></table></figure>
 
 <p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/1582175685530.png" alt="1582175685530"></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">http:&#x2F;&#x2F;localhost&#x2F;</span><br><span class="line">http:&#x2F;&#x2F;localhost&#x2F;index.php</span><br><span class="line">同样效果</span><br><span class="line">访问某个文件夹 默认会去访问这个文件夹下面的index.php 或者也会访问 index.html</span><br><span class="line">		文件夹下既有index.php也有index.html在我们的环境变量里，默认会去访问index.php</span><br><span class="line">		如果都没有，会将目录下的文件或文件夹列举出来</span><br><span class="line"></span><br><span class="line">文件或者目录只有放在www目录下面的文件才会被我们能访问的到</span><br><span class="line">我们写的PHP代码，放在根目录下面的文件夹胡总和文件里面，后对名是.php</span><br></pre></td></tr></table></figure>
@@ -329,18 +330,18 @@
     
 <nav id="article-nav">
   
-    <a href="/2020/04/03/python%E7%88%AC%E8%99%AB/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2020/07/20/sql%E6%B3%A8%E5%85%A5/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">&lt;</strong>
       <div class="article-nav-title">
         
-          python爬虫
+          sql注入
         
       </div>
     </a>
   
   
-    <a href="/2020/04/03/JavaScript/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">JavaScript</div>
+    <a href="/2020/07/20/upload-labs%E5%85%B3%E5%8D%A1/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">upload-labs关卡</div>
       <strong class="article-nav-caption">&gt;</strong>
     </a>
   
@@ -350,7 +351,7 @@
 </article>
 
 
-<div class="ds-share share" data-thread-key="php" data-title="php" data-url="https://zhanqiaozai.github.io/2020/04/03/php/"  data-images="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg" data-content="php">
+<div class="ds-share share" data-thread-key="php" data-title="php" data-url="https://zhanqiaozai.github.io/2020/07/20/php/"  data-images="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg" data-content="php">
     <div class="ds-share-inline">
       <ul  class="ds-share-icons-16">
       	<li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>

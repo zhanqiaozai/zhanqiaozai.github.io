@@ -9,12 +9,12 @@
   
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="XSS介绍跨站脚本(Cross-Site Scripting跨域脚本攻击，简称为XSS)是一种针对网站应用程序的安全漏洞攻击技术，是代码注入的一种。他允许恶意用户将代码注入网页，其他用户在浏览网页时就会受到影响。恶意用户利用XSS代码攻击成功后，可能得到很高的权限(如执行一些操作)、私密网页内容、会话和cookie等各种内容 XSS原因：过于信任客户端提交的数据  XSS攻击可分为三种：反射性，存">
+  <meta name="description" content="[TOC] XSS介绍跨站脚本(Cross-Site Scripting跨域脚本攻击，简称为XSS)是一种针对网站应用程序的安全漏洞攻击技术，是代码注入的一种。他允许恶意用户将代码注入网页，其他用户在浏览网页时就会受到影响。恶意用户利用XSS代码攻击成功后，可能得到很高的权限(如执行一些操作)、私密网页内容、会话和cookie等各种内容 XSS原因：过于信任客户端提交的数据  XSS攻击可分为三种">
 <meta property="og:type" content="article">
 <meta property="og:title" content="XSS">
-<meta property="og:url" content="https://zhanqiaozai.github.io/2020/04/20/XSS/index.html">
+<meta property="og:url" content="https://zhanqiaozai.github.io/2020/07/20/XSS/index.html">
 <meta property="og:site_name" content="栈桥仔">
-<meta property="og:description" content="XSS介绍跨站脚本(Cross-Site Scripting跨域脚本攻击，简称为XSS)是一种针对网站应用程序的安全漏洞攻击技术，是代码注入的一种。他允许恶意用户将代码注入网页，其他用户在浏览网页时就会受到影响。恶意用户利用XSS代码攻击成功后，可能得到很高的权限(如执行一些操作)、私密网页内容、会话和cookie等各种内容 XSS原因：过于信任客户端提交的数据  XSS攻击可分为三种：反射性，存">
+<meta property="og:description" content="[TOC] XSS介绍跨站脚本(Cross-Site Scripting跨域脚本攻击，简称为XSS)是一种针对网站应用程序的安全漏洞攻击技术，是代码注入的一种。他允许恶意用户将代码注入网页，其他用户在浏览网页时就会受到影响。恶意用户利用XSS代码攻击成功后，可能得到很高的权限(如执行一些操作)、私密网页内容、会话和cookie等各种内容 XSS原因：过于信任客户端提交的数据  XSS攻击可分为三种">
 <meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200409091025553.png">
 <meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200408195920593.png">
 <meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200408200115396.png">
@@ -142,7 +142,7 @@
 <meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200416101131762.png">
 <meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200416101232606.png">
 <meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200416101257277.png">
-<meta property="og:image" content="https://zhanqiaozai.github.io/2020/04/20/XSS/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200416101920286.png">
+<meta property="og:image" content="https://zhanqiaozai.github.io/2020/07/20/XSS/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200416101920286.png">
 <meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200416105305914.png">
 <meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200416111001365.png">
 <meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200416110923115.png">
@@ -188,8 +188,8 @@
 <meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200417095550503.png">
 <meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200417095751376.png">
 <meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200417101428690.png">
-<meta property="article:published_time" content="2020-04-20T01:00:48.651Z">
-<meta property="article:modified_time" content="2020-04-20T00:59:46.000Z">
+<meta property="article:published_time" content="2020-07-20T05:09:29.641Z">
+<meta property="article:modified_time" content="2020-07-25T01:59:43.062Z">
 <meta property="article:author" content="zhanqiaozai">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200409091025553.png">
@@ -347,8 +347,8 @@
       <div class="body-wrap"><article id="post-XSS" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2020/04/20/XSS/" class="article-date">
-  	<time datetime="2020-04-20T01:00:48.651Z" itemprop="datePublished">2020-04-20</time>
+      <a href="/2020/07/20/XSS/" class="article-date">
+  	<time datetime="2020-07-20T05:09:29.641Z" itemprop="datePublished">2020-07-20</time>
 </a>
     </div>
   
@@ -379,7 +379,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h4 id="XSS介绍"><a href="#XSS介绍" class="headerlink" title="XSS介绍"></a>XSS介绍</h4><p>跨站脚本(Cross-Site Scripting跨域脚本攻击，简称为XSS)是一种针对网站应用程序的安全漏洞攻击技术，是代码注入的一种。他允许恶意用户将代码注入网页，其他用户在浏览网页时就会受到影响。恶意用户利用XSS代码攻击成功后，可能得到很高的权限(如执行一些操作)、私密网页内容、会话和cookie等各种内容</p>
+        <p>[TOC]</p>
+<h4 id="XSS介绍"><a href="#XSS介绍" class="headerlink" title="XSS介绍"></a>XSS介绍</h4><p>跨站脚本(Cross-Site Scripting跨域脚本攻击，简称为XSS)是一种针对网站应用程序的安全漏洞攻击技术，是代码注入的一种。他允许恶意用户将代码注入网页，其他用户在浏览网页时就会受到影响。恶意用户利用XSS代码攻击成功后，可能得到很高的权限(如执行一些操作)、私密网页内容、会话和cookie等各种内容</p>
 <h5 id="XSS原因："><a href="#XSS原因：" class="headerlink" title="XSS原因："></a>XSS原因：</h5><p>过于信任客户端提交的数据</p>
 <ul>
 <li><h5 id="XSS攻击可分为三种：反射性，存储型，DOM型"><a href="#XSS攻击可分为三种：反射性，存储型，DOM型" class="headerlink" title="XSS攻击可分为三种：反射性，存储型，DOM型"></a>XSS攻击可分为三种：反射性，存储型，DOM型</h5></li>
@@ -794,7 +795,7 @@
 <p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200416101257277.png" alt="image-20200416101257277"></p>
 <h5 id="3、清除cookie"><a href="#3、清除cookie" class="headerlink" title="3、清除cookie"></a>3、清除cookie</h5><ul>
 <li>通过浏览器工具清除cookie，打开Internet选项</li>
-<li><img src="/2020/04/20/XSS/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200416101920286.png" alt="image-20200416101920286"></li>
+<li><img src="/2020/07/20/XSS/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200416101920286.png" alt="image-20200416101920286"></li>
 <li>通过设置cookie的有效期来清除cookie；删除cookie可能会导致某些页面不能用。</li>
 </ul>
 <p>可以通过一些就是360，电脑管家等杀毒软件清除cookie</p>
@@ -943,18 +944,18 @@
     
 <nav id="article-nav">
   
-    <a href="/2020/04/22/xss-labs/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2020/07/20/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">&lt;</strong>
       <div class="article-nav-title">
         
-          xss-labs
+          文件上传
         
       </div>
     </a>
   
   
-    <a href="/2020/04/12/Html/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Html</div>
+    <a href="/2020/07/20/xss-labs/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">xss-labs</div>
       <strong class="article-nav-caption">&gt;</strong>
     </a>
   
@@ -964,7 +965,7 @@
 </article>
 
 
-<div class="ds-share share" data-thread-key="XSS" data-title="XSS" data-url="https://zhanqiaozai.github.io/2020/04/20/XSS/"  data-images="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg" data-content="XSS">
+<div class="ds-share share" data-thread-key="XSS" data-title="XSS" data-url="https://zhanqiaozai.github.io/2020/07/20/XSS/"  data-images="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg" data-content="XSS">
     <div class="ds-share-inline">
       <ul  class="ds-share-icons-16">
       	<li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>

@@ -9,12 +9,12 @@
   
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Response响应状态200代表成功、301表示跳转、404找不到页面、502服务器错误 响应头如内容类型、内容长度、服务器信息、设置Cookie等 响应体主要部分，包含了请求资源的内容、如网页HTML、图片二进制数据等 我们在做爬虫时可以用一些HTTP请求库，然后向服务器发送一个请求，得到这个Response,然后把这个响应体里面的内容拿下来，这个实际上就是网页的源代码，然后我们再把这个网页的">
+  <meta name="description" content="[TOC] Response响应状态200代表成功、301表示跳转、404找不到页面、502服务器错误 响应头如内容类型、内容长度、服务器信息、设置Cookie等 响应体主要部分，包含了请求资源的内容、如网页HTML、图片二进制数据等 我们在做爬虫时可以用一些HTTP请求库，然后向服务器发送一个请求，得到这个Response,然后把这个响应体里面的内容拿下来，这个实际上就是网页的源代码，然后我们再">
 <meta property="og:type" content="article">
 <meta property="og:title" content="python爬虫">
-<meta property="og:url" content="https://zhanqiaozai.github.io/2020/04/03/python%E7%88%AC%E8%99%AB/index.html">
+<meta property="og:url" content="https://zhanqiaozai.github.io/2020/07/20/python%E7%88%AC%E8%99%AB/index.html">
 <meta property="og:site_name" content="栈桥仔">
-<meta property="og:description" content="Response响应状态200代表成功、301表示跳转、404找不到页面、502服务器错误 响应头如内容类型、内容长度、服务器信息、设置Cookie等 响应体主要部分，包含了请求资源的内容、如网页HTML、图片二进制数据等 我们在做爬虫时可以用一些HTTP请求库，然后向服务器发送一个请求，得到这个Response,然后把这个响应体里面的内容拿下来，这个实际上就是网页的源代码，然后我们再把这个网页的">
+<meta property="og:description" content="[TOC] Response响应状态200代表成功、301表示跳转、404找不到页面、502服务器错误 响应头如内容类型、内容长度、服务器信息、设置Cookie等 响应体主要部分，包含了请求资源的内容、如网页HTML、图片二进制数据等 我们在做爬虫时可以用一些HTTP请求库，然后向服务器发送一个请求，得到这个Response,然后把这个响应体里面的内容拿下来，这个实际上就是网页的源代码，然后我们再">
 <meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/1580132124441.png">
 <meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/1580206554561.png">
 <meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/1580206474221.png">
@@ -24,8 +24,8 @@
 <meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/1580223107107.png">
 <meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/1580206689321.png">
 <meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/1580229349011.png">
-<meta property="article:published_time" content="2020-04-03T06:36:06.840Z">
-<meta property="article:modified_time" content="2020-04-03T09:16:15.826Z">
+<meta property="article:published_time" content="2020-07-20T05:09:29.626Z">
+<meta property="article:modified_time" content="2020-07-25T01:59:14.398Z">
 <meta property="article:author" content="zhanqiaozai">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/1580132124441.png">
@@ -183,8 +183,8 @@
       <div class="body-wrap"><article id="post-python爬虫" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2020/04/03/python%E7%88%AC%E8%99%AB/" class="article-date">
-  	<time datetime="2020-04-03T06:36:06.840Z" itemprop="datePublished">2020-04-03</time>
+      <a href="/2020/07/20/python%E7%88%AC%E8%99%AB/" class="article-date">
+  	<time datetime="2020-07-20T05:09:29.626Z" itemprop="datePublished">2020-07-20</time>
 </a>
     </div>
   
@@ -215,7 +215,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h5 id="Response"><a href="#Response" class="headerlink" title="Response"></a>Response</h5><h5 id="响应状态"><a href="#响应状态" class="headerlink" title="响应状态"></a>响应状态</h5><p>200代表成功、301表示跳转、404找不到页面、502服务器错误</p>
+        <p>[TOC]</p>
+<h5 id="Response"><a href="#Response" class="headerlink" title="Response"></a>Response</h5><h5 id="响应状态"><a href="#响应状态" class="headerlink" title="响应状态"></a>响应状态</h5><p>200代表成功、301表示跳转、404找不到页面、502服务器错误</p>
 <h5 id="响应头"><a href="#响应头" class="headerlink" title="响应头"></a>响应头</h5><p>如内容类型、内容长度、服务器信息、设置Cookie等</p>
 <h5 id="响应体"><a href="#响应体" class="headerlink" title="响应体"></a>响应体</h5><p>主要部分，包含了请求资源的内容、如网页HTML、图片二进制数据等</p>
 <h5 id="我们在做爬虫时"><a href="#我们在做爬虫时" class="headerlink" title="我们在做爬虫时"></a>我们在做爬虫时</h5><h5 id="可以用一些HTTP请求库，然后向服务器发送一个请求，得到这个Response-然后把这个响应体里面的内容拿下来，这个实际上就是网页的源代码，然后我们再把这个网页的源代码，进行解析，就可以拿到我们的数据了，"><a href="#可以用一些HTTP请求库，然后向服务器发送一个请求，得到这个Response-然后把这个响应体里面的内容拿下来，这个实际上就是网页的源代码，然后我们再把这个网页的源代码，进行解析，就可以拿到我们的数据了，" class="headerlink" title="可以用一些HTTP请求库，然后向服务器发送一个请求，得到这个Response,然后把这个响应体里面的内容拿下来，这个实际上就是网页的源代码，然后我们再把这个网页的源代码，进行解析，就可以拿到我们的数据了，"></a>可以用一些HTTP请求库，然后向服务器发送一个请求，得到这个Response,然后把这个响应体里面的内容拿下来，这个实际上就是网页的源代码，然后我们再把这个网页的源代码，进行解析，就可以拿到我们的数据了，</h5><p>模拟请求</p>
@@ -327,18 +328,18 @@
     
 <nav id="article-nav">
   
-    <a href="/2020/04/07/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2020/07/20/upload-labs%E5%85%B3%E5%8D%A1/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">&lt;</strong>
       <div class="article-nav-title">
         
-          文件上传
+          upload-labs关卡
         
       </div>
     </a>
   
   
-    <a href="/2020/04/03/php/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">php</div>
+    <a href="/2020/07/20/linux%E7%AC%94%E8%AE%B0%20/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">linux笔记 </div>
       <strong class="article-nav-caption">&gt;</strong>
     </a>
   
@@ -348,7 +349,7 @@
 </article>
 
 
-<div class="ds-share share" data-thread-key="python爬虫" data-title="python爬虫" data-url="https://zhanqiaozai.github.io/2020/04/03/python%E7%88%AC%E8%99%AB/"  data-images="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg" data-content="python爬虫">
+<div class="ds-share share" data-thread-key="python爬虫" data-title="python爬虫" data-url="https://zhanqiaozai.github.io/2020/07/20/python%E7%88%AC%E8%99%AB/"  data-images="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg" data-content="python爬虫">
     <div class="ds-share-inline">
       <ul  class="ds-share-icons-16">
       	<li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>

@@ -9,12 +9,12 @@
   
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="CSRF漏洞1、CSRF漏洞定义跨站请求伪造（英语：Cross-site request forgery），也被称为 one-click attack 或者 session riding，通常缩写为 CSRF 或者 XSRF， 是一种挟制用户在当前已登录的Web应用程序上执行非本意的操作的攻击方法。 它与XSS非常不同，XSS是利用站点内的信任用户，而CSRF则通过伪装成信任用户请求受信任网站。与">
+  <meta name="description" content="[TOC] CSRF漏洞1、CSRF漏洞定义跨站请求伪造（英语：Cross-site request forgery），也被称为 one-click attack 或者 session riding，通常缩写为 CSRF 或者 XSRF， 是一种挟制用户在当前已登录的Web应用程序上执行非本意的操作的攻击方法。 它与XSS非常不同，XSS是利用站点内的信任用户，而CSRF则通过伪装成信任用户请求受">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CSRF_SSRF">
-<meta property="og:url" content="https://zhanqiaozai.github.io/2020/05/03/CSRF_SSRF/index.html">
+<meta property="og:url" content="https://zhanqiaozai.github.io/2020/07/20/CSRF_SSRF/index.html">
 <meta property="og:site_name" content="栈桥仔">
-<meta property="og:description" content="CSRF漏洞1、CSRF漏洞定义跨站请求伪造（英语：Cross-site request forgery），也被称为 one-click attack 或者 session riding，通常缩写为 CSRF 或者 XSRF， 是一种挟制用户在当前已登录的Web应用程序上执行非本意的操作的攻击方法。 它与XSS非常不同，XSS是利用站点内的信任用户，而CSRF则通过伪装成信任用户请求受信任网站。与">
+<meta property="og:description" content="[TOC] CSRF漏洞1、CSRF漏洞定义跨站请求伪造（英语：Cross-site request forgery），也被称为 one-click attack 或者 session riding，通常缩写为 CSRF 或者 XSRF， 是一种挟制用户在当前已登录的Web应用程序上执行非本意的操作的攻击方法。 它与XSS非常不同，XSS是利用站点内的信任用户，而CSRF则通过伪装成信任用户请求受">
 <meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200430105902911.png">
 <meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200430110119970.png">
 <meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200430113712776.png">
@@ -51,7 +51,7 @@
 <meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200430155213159.png">
 <meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200430155222841.png">
 <meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200430155235926.png">
-<meta property="og:image" content="https://zhanqiaozai.github.io/2020/05/03/CSRF_SSRF/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200430161915623.png">
+<meta property="og:image" content="https://zhanqiaozai.github.io/2020/07/20/CSRF_SSRF/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200430161915623.png">
 <meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200430162134971.png">
 <meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200430162202451.png">
 <meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200430162220524.png">
@@ -79,8 +79,8 @@
 <meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200503155403764.png">
 <meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200503155448181.png">
 <meta property="og:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200503155657246.png">
-<meta property="article:published_time" content="2020-05-03T07:59:26.635Z">
-<meta property="article:modified_time" content="2020-05-03T07:58:14.000Z">
+<meta property="article:published_time" content="2020-07-20T05:09:29.610Z">
+<meta property="article:modified_time" content="2020-07-25T01:38:17.190Z">
 <meta property="article:author" content="zhanqiaozai">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200430105902911.png">
@@ -238,8 +238,8 @@
       <div class="body-wrap"><article id="post-CSRF_SSRF" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2020/05/03/CSRF_SSRF/" class="article-date">
-  	<time datetime="2020-05-03T07:59:26.635Z" itemprop="datePublished">2020-05-03</time>
+      <a href="/2020/07/20/CSRF_SSRF/" class="article-date">
+  	<time datetime="2020-07-20T05:09:29.610Z" itemprop="datePublished">2020-07-20</time>
 </a>
     </div>
   
@@ -270,7 +270,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h4 id="CSRF漏洞"><a href="#CSRF漏洞" class="headerlink" title="CSRF漏洞"></a>CSRF漏洞</h4><h5 id="1、CSRF漏洞定义"><a href="#1、CSRF漏洞定义" class="headerlink" title="1、CSRF漏洞定义"></a>1、CSRF漏洞定义</h5><p>跨站请求伪造（英语：Cross-site request forgery），也被称为 one-click attack 或者 session riding，通常缩写为 <em>CSRF</em> 或者 XSRF， 是一种挟制用户在当前已登录的Web应用程序上执行非本意的操作的攻击方法。</p>
+        <p>[TOC]</p>
+<h4 id="CSRF漏洞"><a href="#CSRF漏洞" class="headerlink" title="CSRF漏洞"></a>CSRF漏洞</h4><h5 id="1、CSRF漏洞定义"><a href="#1、CSRF漏洞定义" class="headerlink" title="1、CSRF漏洞定义"></a>1、CSRF漏洞定义</h5><p>跨站请求伪造（英语：Cross-site request forgery），也被称为 one-click attack 或者 session riding，通常缩写为 <em>CSRF</em> 或者 XSRF， 是一种挟制用户在当前已登录的Web应用程序上执行非本意的操作的攻击方法。</p>
 <p>它与XSS非常不同，XSS是利用站点内的信任用户，而CSRF则通过伪装成信任用户请求受信任网站。与XSS相比，CSRF攻击往往不大流行(因此对其进行防御资源也相对较少)也难以防范，所以被认为比XSS更具危害性。</p>
 <p>XSS与CSRF区别：</p>
 <p>1、XSS利用站点内的信任用户，盗取cookie；</p>
@@ -378,7 +379,7 @@
 <p>代码分析</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">	session_start();</span><br><span class="line">	function token_generate()&#123;</span><br><span class="line">		$salt&#x3D;&quot;test&quot;.date(&quot;h:i:s&quot;);</span><br><span class="line">		$token&#x3D;md5($salt);</span><br><span class="line">		return $token;</span><br><span class="line">	&#125;</span><br><span class="line">	$token&#x3D;token_generate();</span><br><span class="line">	$_SESSION[&quot;USER_TOKEN&quot;]&#x3D;$token;</span><br><span class="line">?&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">	&lt;head&gt;</span><br><span class="line">		&lt;meta charset&#x3D;&quot;utf-8&quot;&gt;</span><br><span class="line">		&lt;title&gt;CSRF_Token&lt;&#x2F;title&gt;</span><br><span class="line">	&lt;&#x2F;head&gt;</span><br><span class="line">	&lt;body&gt;</span><br><span class="line">		&lt;h1&gt;CSRF_Token&lt;&#x2F;h1&gt;</span><br><span class="line">			&lt;form action&#x3D;&quot;check.php&quot; method&#x3D;&quot;post&quot;&gt;</span><br><span class="line">				&lt;input type&#x3D;&quot;text&quot; value&#x3D;&quot;我提交了&quot; &#x2F;&gt;</span><br><span class="line">				&lt;input type&#x3D;&quot;hidden&quot; name&#x3D;&quot;user_token&quot; value&#x3D;&quot;&lt;?php echo $token;?&gt;&quot; &#x2F;&gt;</span><br><span class="line">				&lt;input type&#x3D;&quot;submit&quot; name&#x3D;&quot;submit&quot; value&#x3D;&quot;提交&quot; &#x2F;&gt;</span><br><span class="line">			&lt;&#x2F;form&gt;</span><br><span class="line">	&lt;&#x2F;body&gt;</span><br><span class="line">&lt;&#x2F;html&gt;</span><br></pre></td></tr></table></figure>
 
-<p><img src="/2020/05/03/CSRF_SSRF/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200430161915623.png" alt="image-20200430161915623"></p>
+<p><img src="/2020/07/20/CSRF_SSRF/C:%5CUsers%5C%E7%8A%B6%E5%85%83%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200430161915623.png" alt="image-20200430161915623"></p>
 <p>查看页面</p>
 <p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200430162134971.png" alt="image-20200430162134971"></p>
 <p>F12查看Ntwork</p>
@@ -471,20 +472,15 @@
     
 <nav id="article-nav">
   
-    <a href="/2020/07/25/docker/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2020/07/20/Html/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">&lt;</strong>
       <div class="article-nav-title">
         
-          docker
+          Html
         
       </div>
     </a>
   
-  
-    <a href="/2020/04/22/xss-labs/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">xss-labs</div>
-      <strong class="article-nav-caption">&gt;</strong>
-    </a>
   
 </nav>
 
@@ -492,7 +488,7 @@
 </article>
 
 
-<div class="ds-share share" data-thread-key="CSRF_SSRF" data-title="CSRF_SSRF" data-url="https://zhanqiaozai.github.io/2020/05/03/CSRF_SSRF/"  data-images="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg" data-content="CSRF_SSRF">
+<div class="ds-share share" data-thread-key="CSRF_SSRF" data-title="CSRF_SSRF" data-url="https://zhanqiaozai.github.io/2020/07/20/CSRF_SSRF/"  data-images="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg" data-content="CSRF_SSRF">
     <div class="ds-share-inline">
       <ul  class="ds-share-icons-16">
       	<li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
